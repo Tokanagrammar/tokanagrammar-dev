@@ -4,12 +4,12 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>cs.umb.edu</groupId>
-  <artifactId>tokanagrammar</artifactId>
+  <artifactId>code-jigsaw</artifactId>
   <packaging>jar</packaging>
   <url>http://maven.apache.org</url>
 
   <properties>
-	<GIT_VERSION>0.1</GIT_VERSION>
+	<BZR_VERSION>1.0.0</BZR_VERSION>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- place holder -->
   </properties>
