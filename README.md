@@ -17,3 +17,6 @@ This is a `maven` project, and  build phase requires every source file to have a
 
 `mvn license:check`
 
+3) To run all unit tests
+
+`mvn clean test`
