@@ -7,13 +7,13 @@ This is a jigsaw-like puzzle game, except each piece is token from a source file
 CHEATSHEET
 =============
 
-This is a `maven` project, and the build phase requires every source files to have a header.
+This is a `maven` project, and  build phase requires every source file to have a header.
 
-<1> To automatically prepend a header:
+1) To automatically prepend a header:
 
 `mvn license:format`
 
-<2> To check for missing headers:
+2) To check for missing headers:
 
 `mvn license:check`
 
