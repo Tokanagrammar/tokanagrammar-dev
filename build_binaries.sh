@@ -20,8 +20,8 @@
 
 # if target is macosx
 #      build an OSX app (.app) file
-#      TODO: build a DMG file
-#else 
+#
+# else 
 #      build tar.gz package
 
 
@@ -64,8 +64,10 @@ if [ "${platform}" = "unix" ]; then
     popd
 elif [ ${platform} == "macosx" ]; then
     pushd macosx
-    ant -Dapp.name=${project_name} -Dapp.version=${version} -Dapp.jar=target/packages/${platform}/${bin_name}.jar -Dapp.outdir='target/packages/${platform}'
+    outdir="target/packages/${platform}"
+    ant -Dapp.name=${project_name} -Dapp.version=${version} -Dapp.jar=target/packages/${platform}/${bin_name}.jar -Dapp.outdir=${outdir}
     popd
+    cp -r docs ${outdir}/*.app/Contents/Resources/.
 else
     echo "Unknown platform: ${platform}"
     echo "$usage"
