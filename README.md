@@ -4,7 +4,7 @@ tokanagrammar
 This is a jigsaw-like puzzle game, except each piece is token from a source file, and the 'complete picture' is the program.
 
 `tokanagrammar/docs/*` contains source files that could be used for the puzzles
-=============
+
 CHEATSHEET
 =============
 
