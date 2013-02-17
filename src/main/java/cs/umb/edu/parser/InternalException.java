@@ -28,4 +28,5 @@ package cs.umb.edu.parser;
 public class InternalException
 {
     
+    
 }

@@ -54,6 +54,28 @@
                     </execution>
                 </executions>
             </plugin>
+        <!-- Build runnable jar -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>cs.umb.edu.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         <!-- JavaCC plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -94,6 +116,7 @@
                     </execution>
                 </executions>
             </plugin>
+        <!-- Check for headers and/or prepend headers -->
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
@@ -111,7 +134,10 @@
                         <exclude>.gitignore</exclude>
                         <exclude>.idea/**</exclude>
                         <exclude>LICENSE.txt</exclude>
-                        <exclude>target/generated-sources/javacc/GrammarParser/*.java</exclude>
+                        <exclude>*.xml</exclude>
+                        <exclude>*.cmd</exclude>
+                        <exclude>*.sh</exclude>
+                        <exclude>docs/**</exclude>
                         <exclude>target/**</exclude>
                     </excludes>
                     <mapping>
@@ -129,5 +155,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
