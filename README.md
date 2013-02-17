@@ -26,3 +26,12 @@ This is a `maven` project, and  build phase requires every source file to have a
 
 `mvn clean test`
 
+5) To build b tar.gz package (containing executable)
+
+`./build_binaries.sh`
+
+6) To build Apple OSX executable app
+
+`./build_binaries.sh macosx`
+  
+
