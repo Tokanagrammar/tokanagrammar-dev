@@ -18,28 +18,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cs.umb.edu.gui;
+package cs.umb.edu;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import cs.umb.edu.gui.MainWindow;
 
 /**
- * Place holder
+ * Place Holder
  * @author Vy Thao Nguyen
  */
-public class MainWindow extends JFrame
+public class Main
 {
-    public MainWindow()
+    public static void main(String args[])
     {
-        super("Tokanagrammar Dummy");
-        
-        this.setSize(350, 350);
-        JPanel body = new JPanel();
-        body.add(new JLabel("Place Holder! -- DUMMY GAME"));
-        this.add(body);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
+        new MainWindow();
     }
 }

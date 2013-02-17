@@ -43,7 +43,7 @@ class GrammarParser
     private static final char NOT_SET = 0;
     // TODO
 }
-PARSER_END(CFGGrammar)
+PARSER_END(GrammarParser)
 
 /**
  *
@@ -56,5 +56,17 @@ start():
 }
 {
     // TODO:
+    [<UPPER_CHAR>]
+    {
+        return;
+    }
+}
 
+
+////////////////// TOKENS definition////////////////////////
+
+SKIP: {" " | "\t"}
+TOKEN:
+{
+ <UPPER_CHAR: (["A"-"Z"])>
 }
