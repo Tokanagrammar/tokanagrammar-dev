@@ -3,10 +3,6 @@ This is a jigsaw-like puzzle game, except each piece is token from a source file
 
 tokanagrammar/docs/* contains source files that could be used for the puzzles
 
-IMPORTANT
-1) Push code to `develop`
-2) Leave `master` for website code
-3) `release` is for code that has been fully tested
 
 CHEATSHEET
 This is a maven project, and build phase requires every source file to have a header.
