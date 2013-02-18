@@ -1,2 +1,5 @@
-code for project website.
-For project's actual code, see `code` repo
+Important!
+==========
+
+This is code for the project's website.
+For project's actual code, see `Tokanagrammar/tokanagrammar` repo
