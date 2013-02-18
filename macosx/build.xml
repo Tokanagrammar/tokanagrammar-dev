@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="App Builder" default="build_app" basedir="..">
+  <!-- check for required argument -->
+  <fail unless="app.version" message="app.version property required" />
+  <fail unless="app.name" message="app.name property required" />
+  <fail unless="app.jar" message="app.jar property required" />
+  <fail unless="app.outdir" message="app.outdir property required" />
+  
+  <echo message="app.verions: ${app.version}" />
+  <echo message="app.name: ${app.name}" />
+  <echo message="app.jar: ${app.jar}" />
+  <echo message="app.outdir: ${app.outdir}" />
+  
+  <property environment="env" />
+  <taskdef name="bundleapp"
+           classname="com.oracle.appbundler.AppBundlerTask"
+           classpath="macosx/appbundler-1.0.jar" />
+  
+    <!-- Usage -->
+    <target name="usage">
+      <fail message="Call with target target build_app or no argument and with the following  options" />
+      <echo message="-Dapp.version='some version'" />
+      <echo message="-Dapp.name='some name'" />
+      <echo message="-Dapp.jar='path to executable jar'" />
+      <echo message="-Dapp.outdir='path to output directory'" />
+    </target>
+
+    <!-- goal to bundle app -->
+    <target name="build_app">
+      <!-- TODO: find an icon and add it to icon="images/icon.icns" -->
+      <bundleapp outputdirectory="${app.outdir}" 
+                 name="${app.name}"
+                 displayname="${app.name}"
+                 shortversion="${app.version}"
+                 signature="????"
+                 copyright="© 2013 UMassBoston's Tokanagrammar "
+                 applicationCategory="public.app-category.education"
+                 identifier="cs.umb.edu"
+                 mainclassname="cs.umb.edu.Main">
+        <runtime dir="${env.JAVA_HOME}" />  
+        <!-- Files are copied into bundle and set as classpath -->
+        <classpath file="${app.jar}" />
+	<!-- Name in the About menu-->
+        <option value="-Xdock:name=Hello World" />
+      </bundleapp>    
+    </target>
+</project>
