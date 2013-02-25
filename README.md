@@ -1,6 +1,7 @@
-tokanagrammar- Stable Branch.
+tokanagrammar- Development Branch.
 =============
-(This is a stable, well tested branch of `Tokanagrammar`. See Tokanagrammar/tokagrammar-dev for lastest features)
+
+This is the development branch of `tokanagrammar`. For stable, well tested code, see `tokanagrammar/tokanagrammar`
 
 This is a jigsaw-like puzzle game, except each piece is token from a source file, and the 'complete picture' is the program.
 
