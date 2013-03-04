@@ -1,0 +1,136 @@
+/**
+ * Define a simple grammar for scanning Java source files
+ * (Derived from the J--'s Scanner)
+ *
+ * This will scan, and record the tokens to build a <code>SourceFile</code>
+ * object. All strings in a comment block/line  will count as one token.
+ *
+ * Note: As of this release (post-0.5), the class does NOT perform grammar checking.
+ * The compilability of the source file will be checked by delagating to the
+ * `javac`
+ *
+ * @author Vy Thao Nguyen
+ */
+
+options 
+{
+    // multiple instances are allowed
+    STATIC = false ;
+}
+
+PARSER_BEGIN(JavaParser)
+
+package cs.umb.edu.parser;
+
+import cs.umb.edu.source.SourceFile;
+
+public class JavaParser
+{
+    private static final char NOT_SET = 0;
+    // TODO
+}
+PARSER_END(JavaParser)
+
+/**
+ *
+ * Mostly placeholder
+ *
+ */
+SourceFile
+start():
+{
+}
+{
+    // TODO: Define rule here
+    [<IDENTIFIER>]
+    {
+        return null;
+    }
+}
+
+
+////////////////// TOKENS definition////////////////////////
+
+// Whitespace -- ignored
+SKIP: {" "|"\t"|"\n"|"\r"|"\f"}
+
+// Single line comment -- ignored
+SKIP: {<SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>}
+
+// Reserved words
+TOKEN:
+{
+  < ABSTRACT: "abstract" >
+| < BOOLEAN: "boolean" >
+| < CHAR: "char" >
+| < CLASS: "class" >
+| < ELSE: "else" >
+| < EXTENDS: "extends" >
+| < FALSE: "false" >
+| < IF: "if" >
+| < IMPORT: "import" >
+| < INSTANCEOF: "instanceof" >
+| < INT: "int" >
+| < NEW: "new" >
+| < NULL: "null" >
+| < PACKAGE: "package">
+| < PRIVATE: "private" >
+| < PROTECTED: "protected" >
+| < PUBLIC: "public" >
+| < RETURN: "return" >
+| < STATIC: "static" >
+| < SUPER: "super" >
+| < THIS: "this" >
+| < TRUE: "true" >
+| < VOID: "void" >
+| < WHILE: "while" >
+}
+
+// Operators (these could be combined with the reserved words)
+TOKEN:
+{
+  < PLUS: "+" >
+| < ASSIGN: "=" >
+| < DEC: "--" >
+| < EQUAL: "==" >
+| < GT: ">" >
+| < INC: "++" >
+| < LAND: "&&" >
+| < LE: "<=" >
+| < LNOT: "!" >
+| < MINUS: "-" >
+| < PLUS_ASSIGN: "+=" >
+| < STAR: "*" >
+}
+
+// Separators (these could be combined with the reserved words)
+TOKEN:
+{
+  < LPAREN: "(" >
+| < RPAREN: ")" >
+| < LCURLY: "{" >
+| < RCURLY: "}" >
+| < LBRACK: "[" >
+| < RBRACK: "]" >
+| < SEMI: ";" >
+| < COMMA: "," >
+| < DOT: "." >
+}
+
+// Identifiers
+TOKEN:
+{
+  < IDENTIFIER: (<LETTER>|"_"|"$") (<LETTER>|<DIGIT>|"_"|"$")* >
+| < #LETTER: ["a"-"z","A"-"Z"] >
+| < #DIGIT: ["0"-"9"] >
+| < #NON_ZERO_DIGIT: ["1"-"9"] >
+}
+
+// Literals
+TOKEN:
+{
+  < INT_LITERAL: ("0" | <NON_ZERO_DIGIT> (<DIGIT>)*) >
+| < CHAR_LITERAL: "'" (<ESC> | ~["'","\\","\n","\r"]) "'" >
+| < STRING_LITERAL: "\"" (<ESC> | ~["\"","\\","\n","\r"])* "\"" >   
+| < #ESC: "\\" ["n","t","b","r","f","\\","'","\""] >
+}
