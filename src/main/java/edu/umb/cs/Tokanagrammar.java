@@ -22,7 +22,6 @@ package edu.umb.cs;
 
 /**
  * Entry point of the program
- * @author Vy Thao Nguyen
  */
 public class Tokanagrammar
 {
