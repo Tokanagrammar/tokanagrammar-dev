@@ -3,7 +3,6 @@ Volume serial number is E297-6759
 ./tokanagrammar-dev
 │
 ├───docs             ==> contain source files (to be used as puzzles)
-├───lib              ==> Deprecated! (Will be removed soon)
 ├───macosx           ==> Small Ant project, needed to build OSX's app
 ├───src            
 │   ├───etc
@@ -12,6 +11,7 @@ Volume serial number is E297-6759
 │   │   │   └───edu
 │   │   │       └───umb
 │   │   │           └───cs
+│   │   │               ├────Tokanagrammar.java   ==> Entry point of the program 
 │   │   │               ├───api
 │   │   │               ├───gui
 │   │   │               ├───parser
