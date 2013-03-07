@@ -1,5 +1,4 @@
 Folder PATH listing
-Volume serial number is E297-6759
 ./tokanagrammar-dev
 │
 ├───docs             ==> contain source files (to be used as puzzles)
