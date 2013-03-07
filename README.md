@@ -41,6 +41,6 @@ This is a `maven` project, and  build phase requires every source file to have a
 Directory Structures
 ====================
 Please follow the conventions and put things in the right place.
-(`TODO: more to come`)
+See <a href="https://github.com/Tokanagrammar/tokanagrammar-dev/blob/master/README.txt">this</a>
 
 
