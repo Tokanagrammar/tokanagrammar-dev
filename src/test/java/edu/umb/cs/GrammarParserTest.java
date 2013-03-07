@@ -18,14 +18,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cs.umb.edu.parser;
+package edu.umb.cs;
 
 /**
- * API class, provide static methods to obtain a particular kind of parser
- * (Only support JavaScanner for now)
+ * 
  * @author Vy Thao Nguyen
  */
-public final class Parsers
+public class GrammarParserTest
 {
-
+    
 }

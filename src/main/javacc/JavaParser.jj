@@ -20,9 +20,9 @@ options
 
 PARSER_BEGIN(JavaParser)
 
-package cs.umb.edu.parser;
+package edu.umb.cs.parser;
 
-import cs.umb.edu.source.SourceFile;
+import edu.umb.cs.source.SourceFile;
 
 public class JavaParser
 {

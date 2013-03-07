@@ -19,14 +19,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cs.umb.edu.parser;
+package edu.umb.cs.api;
 
-/**
- * Place holder 
- * @author Vy Thao Nguyen
- */
-public class InternalException
+public class Foo
 {
-    
     
 }

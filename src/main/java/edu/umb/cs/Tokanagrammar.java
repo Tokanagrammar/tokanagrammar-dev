@@ -18,18 +18,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cs.umb.edu;
-
-import cs.umb.edu.gui.MainWindow;
+package edu.umb.cs;
 
 /**
- * Place Holder
+ * Entry point of the program
  * @author Vy Thao Nguyen
  */
-public class Main
+public class Tokanagrammar
 {
     public static void main(String args[])
     {
-        new MainWindow();
+        
     }
 }

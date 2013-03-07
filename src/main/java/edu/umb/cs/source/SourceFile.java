@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cs.umb.edu.source;
+package edu.umb.cs.source;
 
 import java.util.Map;
 

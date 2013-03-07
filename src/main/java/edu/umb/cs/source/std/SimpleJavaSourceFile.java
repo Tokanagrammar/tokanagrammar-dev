@@ -18,35 +18,62 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cs.umb.edu.source.std;
+package edu.umb.cs.source.std;
 
-import cs.umb.edu.source.SourceFile;
+import edu.umb.cs.source.SourceFile;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
- * Simple representation of a Java Source File
+ * This represents a Java source file in a very naive way,
+ * that is, 'token' is defined as a list of characters not separated by any 
+ * whitespace.
+ * 
+ * 
  * @author Vy Thao Nguyen
  */
-public class JavaSourceFile implements SourceFile
+public class SimpleJavaSourceFile implements SourceFile
 {
-
     private final String path;
     private final ArrayList<ArrayList<String>> srcFile;
     private final int tokenCount;
     private final Map<String, Integer> stats;
+    private final String rep;
     
-    public JavaSourceFile(String path,
-                          ArrayList<ArrayList<String>> tokens,
-                          int tokenCount)
-            throws FileNotFoundException
+    public SimpleJavaSourceFile(String path) throws FileNotFoundException
     {
         this.path = path;
-        this.srcFile = tokens;
-        this.tokenCount = tokenCount;
-        stats = buildStats(srcFile);
+        stats = new HashMap<String, Integer>();
+        
+        FileReader inFile = new FileReader(path);
+        Scanner in = new Scanner(inFile);
+        
+        int c = 0;
+        srcFile = new ArrayList<ArrayList<String>>();
+        ArrayList<String> lines;
+        String line;
+        while (in.hasNextLine())
+        {
+            line = in.nextLine();
+            lines = new ArrayList<String>();
+            for (String tk : line.split("\\s++"))
+            {
+                if (stats.containsKey(tk))
+                    stats.put(tk, stats.get(tk) + 1);
+                lines.add(tk);
+            }
+            c += lines.size();
+            srcFile.add(lines);
+        }
+        tokenCount = c;
+        rep = buildRep(srcFile);
     }
+    
+    // --- SourceFile states ---
     
     @Override
     public String getLine(int line)
@@ -89,9 +116,24 @@ public class JavaSourceFile implements SourceFile
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    private static Map<String, Integer> buildStats(ArrayList<ArrayList<String>> srcFile)
+    
+    @Override
+    public String toString()
     {
-        throw new UnsupportedOperationException();
+        return rep;
+    }
+    
+    // ---- private helpers -----------
+    
+    private static String buildRep(ArrayList<ArrayList<String>> srcFile)
+    {
+        StringBuilder rep = new StringBuilder();
+        for (ArrayList<String> line : srcFile)
+        {
+            for (String tk : line)
+                rep.append(tk).append(' ');
+            rep.append('\n');
+        }
+        return rep.toString();
     }
 }

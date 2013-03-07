@@ -19,9 +19,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cs.umb.edu.api;
+package edu.umb.cs.api;
 
-public class Foo
+/**
+ * Place holder for APIs/Helpers
+ * @author Vy Thao Nguyen
+ */
+public class APIs
 {
     
 }
