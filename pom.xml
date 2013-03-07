@@ -4,7 +4,7 @@
 	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cs.umb.edu</groupId>
+    <groupId>edu.umb.cs</groupId>
     <artifactId>tokanagrammar</artifactId>
     <version>0.1-SNAPSHOT</version>
     <name>tokanagrammar</name>
@@ -42,6 +42,7 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
         <!-- Build source jar -->
@@ -68,7 +69,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>cs.umb.edu.Main</mainClass>
+                            <mainClass>edu.umb.cs.Tokanagrammar</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -139,11 +140,15 @@
                         <exclude>.gitignore</exclude>
                         <exclude>.idea/**</exclude>
                         <exclude>LICENSE.txt</exclude>
+                        <exclude>README.txt</exclude>
+                        <exclude>README.md</exclude>
                         <exclude>*.xml</exclude>
                         <exclude>*.cmd</exclude>
                         <exclude>*.sh</exclude>
                         <exclude>docs/**</exclude>
 			<exclude>macosx/**</exclude>
+                        <exclude>**/*.css</exclude>
+                        <exclude>**/*.fxml</exclude>
                         <exclude>target/generated-sources/javacc/GrammarParser/*.java</exclude>
                         <exclude>target/**</exclude>
                     </excludes>
