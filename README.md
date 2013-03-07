@@ -11,6 +11,8 @@ CHEATSHEET
 =============
 
 This is a `maven` project, and  build phase requires every source file to have a header.
+0) Java Requirement
+The project uses `javafx`, hence you want to make sure you have `jdk.1.7.0-u14` (or higher)
 
 1) To automatically prepend a header:
 
