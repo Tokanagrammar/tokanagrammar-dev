@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.umb.cs</groupId>
     <artifactId>tokanagrammar</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <name>tokanagrammar</name>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
