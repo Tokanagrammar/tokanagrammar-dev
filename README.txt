@@ -1,7 +1,7 @@
-Folder PATH listing
+﻿Folder PATH listing
 ./tokanagrammar-dev
 │
-├───docs             ==> contain source files (to be used as puzzles)
+├───puzzles          ==> contain source files (to be used as puzzles)
 ├───macosx           ==> Small Ant project, needed to build OSX's app
 ├───src            
 │   ├───etc
