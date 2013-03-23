@@ -9,7 +9,27 @@
     <version>0.2-SNAPSHOT</version>
     <name>tokanagrammar</name>
     <packaging>jar</packaging>
-    <url>http://maven.apache.org</url>
+    <url>http://tokanagrammar.github.com/</url>
+	<developers>
+		<developer>
+			<id>oontvoo</id>
+			<name>Vy Thao Nguyen</name>
+			<email>oontvoo@hotmail.com</email>
+		</developer>
+		<developer>
+			<id>vytng</id>
+			<name>Vy Thuy Nguyen</name>
+			<email>vythuy.n@gmail.com</email>
+		</developer>
+	<developers>
+	
+	<repositories>
+        <repository>
+            <id>objectdb</id>
+            <name>ObjectDB Repository</name>
+            <url>http://m2.objectdb.com</url>
+        </repository>
+    </repositories>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,7 +49,12 @@
             <artifactId>javafx</artifactId>
             <version>2.2.7</version>
         </dependency>
-    </dependencies>
+		<dependency>
+            <groupId>com.objectdb</groupId>
+            <artifactId>objectdb</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+	</dependencies>
 
   <!-- rules for build -->
     <build>
