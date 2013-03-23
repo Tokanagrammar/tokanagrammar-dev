@@ -10,26 +10,7 @@
     <name>tokanagrammar</name>
     <packaging>jar</packaging>
     <url>http://tokanagrammar.github.com/</url>
-	<developers>
-		<developer>
-			<id>oontvoo</id>
-			<name>Vy Thao Nguyen</name>
-			<email>oontvoo@hotmail.com</email>
-		</developer>
-		<developer>
-			<id>vytng</id>
-			<name>Vy Thuy Nguyen</name>
-			<email>vythuy.n@gmail.com</email>
-		</developer>
-		<developer>
-			<id>matt8541</id>
-			<name>Matthew</name>
-		</developer>
-		<developer>
-			<id>lamdersar</id>
-			<name>Kai Lam</name>
-		</developer>
-	<developers>
+	
 	
 	<repositories>
         <repository>
