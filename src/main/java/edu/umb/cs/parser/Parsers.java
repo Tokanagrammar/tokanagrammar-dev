@@ -22,10 +22,10 @@ package edu.umb.cs.parser;
 
 /**
  * API class, provide static methods to obtain a particular kind of parser
- * (Only support JavaScanner for now)
+ * (Only support Parser for Java for now)
  * @author Vy Thao Nguyen
  */
 public final class Parsers
 {
-
+    private static final JavaParser defaultJavaParser = null;
 }

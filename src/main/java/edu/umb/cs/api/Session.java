@@ -19,17 +19,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.parser;
+package edu.umb.cs.api;
+
+import edu.umb.cs.entity.Game;
+import edu.umb.cs.entity.Puzzle;
+import edu.umb.cs.entity.User;
 
 /**
- * Place holder 
+ * Whenever the application (window) is opened, that is a session.
+ * Right now, we only have/support one window being opened at a time.
+ * But presumably, we can support multiple sessions.
  * @author Vy Thao Nguyen
  */
-public class InternalException extends RuntimeException
+public final class Session 
 {
-    
-    public InternalException(String msg)
+    private final User user;
+
+    // package private, must be created through APIs.newSession
+    Session (User user)
     {
-        super(msg);
+        this.user = user;
+    }
+    
+    public User getCurrentUser()
+    {
+        return user;
+    }
+
+    public Game newGame(Puzzle puzzle)
+    {
+        Game game = new Game (user, puzzle);
+        user.addGame(game);
+        puzzle.addGame(game);   
+        return game;
     }
 }

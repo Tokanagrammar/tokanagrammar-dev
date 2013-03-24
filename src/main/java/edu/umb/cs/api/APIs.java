@@ -21,11 +21,56 @@
 
 package edu.umb.cs.api;
 
+import edu.umb.cs.entity.Game;
+import edu.umb.cs.entity.Puzzle;
+import edu.umb.cs.entity.User;
+import edu.umb.cs.service.DatabaseService;
+import java.util.List;
+
 /**
- * Place holder for APIs/Helpers
+ * APIs for interacting with the backend
  * @author Vy Thao Nguyen
  */
 public class APIs
-{
+{   
+    /**
+     * start a new session with a new generated username
+     * @return 
+     */
+    public static Session newSession()
+    {
+        // TODO:
+        // create new user
+        throw new UnsupportedOperationException("not supported yet");
+    }
+    
+    /**
+     * start a new session with an existing user
+     * @param user
+     * @return a new session
+     */
+    public static Session newSession(User user)
+    {
+        return new Session(user);
+    }
+    
+    /**
+     * 
+     * @return a list of existing users
+     */
+    public static List<User> getUsers()
+    {
+        return DatabaseService.getAllUsers();
+    }
+    
+    /**
+     * 
+     * @return a list of available puzzles
+     */
+    public static List<Puzzle> getPuzzles()
+    {
+        return DatabaseService.getAllPuzzles();
+    }
+    
     
 }
