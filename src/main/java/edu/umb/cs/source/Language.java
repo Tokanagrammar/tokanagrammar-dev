@@ -19,9 +19,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.api;
+package edu.umb.cs.source;
 
-public class Foo
+/**
+ * supported langauges
+ * @author Vy Thao Nguyen
+ */
+public enum Language 
 {
-    
+    JAVA
 }

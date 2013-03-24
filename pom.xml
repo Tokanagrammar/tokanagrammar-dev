@@ -11,30 +11,30 @@
     <packaging>jar</packaging>
     <url>http://tokanagrammar.github.com/</url>
 
-	<developers>
-		<developer>
-			<id>oontvoo</id>
-			<name>Vy Thao</name>
-			<email>oontvoo@hotmail.com</email>
-			<url>http://www.cs.umb.edu/~vngu0510</url>
-		</developer>
-		<developer>
-			<id>vytng</id>
-			<name>Vy Thuy</name>
-			<email>vythuy.n@gmail.com</email>
-			<url>http://www.cs.umb.edu/~vytng91</url>
-		</developer>
-		<developer>
-			<id>matt8541</id>
-			<name>Mathew</name>
-		</developer>
-		<developer>
-			<id>lamdersar</id>
-			<name>Kai</name>
-		</developer>
-  </developers>
+    <developers>
+        <developer>
+            <id>oontvoo</id>
+            <name>Vy Thao</name>
+            <email>oontvoo@hotmail.com</email>
+            <url>http://www.cs.umb.edu/~vngu0510</url>
+        </developer>
+        <developer>
+            <id>vytng</id>
+            <name>Vy Thuy</name>
+            <email>vythuy.n@gmail.com</email>
+            <url>http://www.cs.umb.edu/~vytng91</url>
+        </developer>
+        <developer>
+            <id>matt8541</id>
+            <name>Mathew</name>
+        </developer>
+        <developer>
+            <id>lamdersar</id>
+            <name>Kai</name>
+        </developer>
+    </developers>
 	
-	<repositories>
+    <repositories>
         <repository>
             <id>objectdb</id>
             <name>ObjectDB Repository</name>
@@ -187,6 +187,7 @@
                         <exclude>**/*.fxml</exclude>
                         <exclude>target/generated-sources/javacc/GrammarParser/*.java</exclude>
                         <exclude>target/**</exclude>
+                        <exclude>puzzles/**</exclude>
                     </excludes>
                     <mapping>
                         <g>JAVADOC_STYLE</g>
