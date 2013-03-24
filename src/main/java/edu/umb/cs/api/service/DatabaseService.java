@@ -63,7 +63,7 @@ public class DatabaseService
         em = emf.createEntityManager();
         em.getTransaction().begin();
     }
-    
+
     /**
      * Start database connection with given settings
      * Call this when program starts.
@@ -89,12 +89,19 @@ public class DatabaseService
      * Call this upon exiting the program
      */
     public static void closeConnection()
-    {
+    {   
         em.getTransaction().commit();
         em.close();
         emf.close();
     }
     
+    public static void deleteAll()
+    {
+        em.createQuery("DELETE FROM User u").executeUpdate();
+        em.createQuery("DELETE FROM Puzzle p").executeUpdate();
+        em.createQuery("DELETE FROM Game g").executeUpdate();
+    }
+
     /**
      * 
      * @return a list of all puzzles in the database

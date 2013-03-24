@@ -32,7 +32,7 @@ import javax.persistence.*;
  * Last modified:       
  */
 @Entity
-public class User implements Serializable 
+public class User   implements Serializable 
 {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
@@ -93,6 +93,13 @@ public class User implements Serializable
         return points;
     }
 
+    public String getUsername()
+    {
+        return username;
+    }
+    
+    // Object interface 
+    
     @Override
     public boolean equals(Object obj)
     {
@@ -108,11 +115,10 @@ public class User implements Serializable
         }
         return true;
     }
-    
+
+    @Override
     public int hashCode()
     {
         return username.hashCode();
     }
-    
-    
 }
