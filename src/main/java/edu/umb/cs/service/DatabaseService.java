@@ -51,10 +51,13 @@ public class DatabaseService
      * 
      * dbName = Tokanagrammar
      * partialURL = "$objectdb/db/"
+     * 
+     * @param String newName
      */
-    public static void openConnection()
+    public static void openConnection(String newName)
     {
-        dbName = "Tokanagrammar.odb";
+        //dbName = "Tokanagrammar.odb";
+        dbName = newName + ".odb";
         partialURL = "$objectdb/db/";
         emf = Persistence.createEntityManagerFactory(partialURL + dbName, properties);
         em = emf.createEntityManager();
@@ -149,6 +152,7 @@ public class DatabaseService
     public static void persistPuzzle(Puzzle p)
     {
         em.persist(p);
+        em.getTransaction().commit();
     }
     
     /**
@@ -194,6 +198,11 @@ public class DatabaseService
     public static void persistUser(User u)
     {
         em.persist(u);
+        em.getTransaction().commit();
     }
     
+    public static void dropDatabase(String name)
+    {
+        
+    }
 }
