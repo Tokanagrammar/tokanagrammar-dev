@@ -52,7 +52,7 @@ public class DatabaseService
      * dbName = Tokanagrammar
      * partialURL = "$objectdb/db/"
      */
-    public void openConnection()
+    public static void openConnection()
     {
         dbName = "Tokanagrammar.odb";
         partialURL = "$objectdb/db/";
@@ -85,7 +85,7 @@ public class DatabaseService
      * Commit all everything and close connection
      * Call this upon exiting the program
      */
-    public void closeConnection()
+    public static void closeConnection()
     {
         em.getTransaction().commit();
         em.close();
@@ -158,11 +158,11 @@ public class DatabaseService
      */
     public static boolean usernameExists(String username)
     {
-        int exist = em.createQuery("SELECT count(u.id) FROM User u WHERE u.username = :username", Integer.class)
+        List<User> exist = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
                        .setParameter("username", username)
-                       .getSingleResult();
+                       .getResultList();
         
-        if (exist > 0)
+        if (exist.size() > 0)
             return true;
         else 
             return false;
