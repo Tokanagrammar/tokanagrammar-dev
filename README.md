@@ -30,11 +30,16 @@ The project uses `javafx`, hence you want to make sure you have `jdk.1.7.0-u14` 
 
 `mvn clean test`
 
-5) To build b tar.gz package (containing executable)
+5) To build binary tar.gz package (containing executable)
 
 `./build_binaries.sh`
 
-6) To build Apple OSX executable app
+6) To build binary zip package (on Windows)
+  *Note* This script requires <a href="www.7-zip.org">`7z`</a> to be already installed.
+
+`build_binaries.cmd`
+
+7) To build Apple OSX executable app
 
 `./build_binaries.sh macosx`
   
