@@ -21,27 +21,16 @@
 
 package edu.umb.cs.source;
 
-import edu.umb.cs.parser.InternalException;
-import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile;
-import java.io.FileNotFoundException;
-
 /**
- *
+ * 
  * @author Vy Thao Nguyen
  */
-public class SourceFiles 
+public interface Token 
 {
-    public static SourceFile getSourceFile(String path,
-                                           Language languageType)
-                             throws FileNotFoundException
-    {
-        switch(languageType)
-        {
-            case JAVA:
-                // TODO: REplace this code to use the 'smarter' java parser.
-                return new AutomaticallyParsedJavaSourceFile(path);
-            default:
-                throw new InternalException("Unsupported Language: " + languageType);
-        }
-    }
+    String image();
+    boolean isKeyWord();
+    boolean isLiteral();
+    boolean isIdentifier();
+    boolean isQuotedString();
+    boolean isEmpty();
 }

@@ -19,29 +19,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 package edu.umb.cs.source;
 
-import edu.umb.cs.parser.InternalException;
-import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile;
-import java.io.FileNotFoundException;
+import edu.umb.cs.source.std.SimpleShuffler;
 
 /**
- *
+ * Each member represents a different algorithm of shuffling
  * @author Vy Thao Nguyen
  */
-public class SourceFiles 
+public enum ShufflerKind 
 {
-    public static SourceFile getSourceFile(String path,
-                                           Language languageType)
-                             throws FileNotFoundException
+    SIMPLE_SHUFFLER
     {
-        switch(languageType)
+        @Override
+        public Shuffler getShuffler()
         {
-            case JAVA:
-                // TODO: REplace this code to use the 'smarter' java parser.
-                return new AutomaticallyParsedJavaSourceFile(path);
-            default:
-                throw new InternalException("Unsupported Language: " + languageType);
+            return SimpleShuffler.INSTANCE;
+        }
+        
+        @Override
+        public String toString()
+        {
+            return "This implements a simple shuffling method, in which, some"
+                    + "number of tokens are removed randomly. There are weights"
+                    + "on any token";
         }
     }
+    ;
+
+    // TODO: add more here
+    // k-group
+    // ...
+    public abstract Shuffler getShuffler();
+    public abstract String toString();
 }

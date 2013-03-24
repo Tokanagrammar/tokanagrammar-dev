@@ -25,6 +25,10 @@ import edu.umb.cs.entity.User;
 import edu.umb.cs.api.service.DatabaseService;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.parser.InternalException;
+import edu.umb.cs.source.ShuffledSource;
+import edu.umb.cs.source.Shuffler;
+import edu.umb.cs.source.ShufflerKind;
+import edu.umb.cs.source.SourceFile;
 import java.util.List;
 
 /**
@@ -149,5 +153,23 @@ public class APIs
     {
         if (!started && !testStarted)
             throw new InternalException("Service must be started before being used");
+    }
+    
+    public static ShufflerKind getDefaultShuffler()
+    {
+        return ShufflerKind.SIMPLE_SHUFFLER;
+    }
+    
+    public static ShuffledSource shuffle (Puzzle puzzle)
+    {
+        SourceFile src = puzzle.getSourceFile();
+        return getDefaultShuffler().getShuffler().shuffle(src,
+                                                          defaultNToks(src.tokenCount()));
+    }
+
+    private static int defaultNToks(int total)
+    {
+        // remove 2% of the total tokens
+        return total * 5 / 100;
     }
 }
