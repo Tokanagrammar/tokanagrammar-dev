@@ -21,10 +21,13 @@
 
 package edu.umb.cs.service;
 
+import edu.umb.cs.entity.Puzzle;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  * @author              Vy Thuy Nguyen
@@ -38,4 +41,73 @@ public class DatabaseService
     private static String partialURL = "$objectdb/db/";
     private static EntityManagerFactory emf;
     private static EntityManager em;
+    
+    /**
+     * Start database connection with default settings
+     * dbName = Tokanagrammar
+     * partialURL = "$objectdb/db/"
+     */
+    public void openConnection()
+    {
+        dbName = "Tokanagrammar.odb";
+        partialURL = "$objectdb/db/";
+        emf = Persistence.createEntityManagerFactory(partialURL + dbName, properties);
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+    }
+    
+    public static void openConnection(String newDbName, String newPartialURL, String user, String password)
+    {
+        dbName = newDbName;
+        partialURL = newPartialURL;
+        properties.put("javax.persistence.jdbc.user", user);
+        properties.put("javax.persistence.jdbc.password", password);
+        emf = Persistence.createEntityManagerFactory(partialURL + dbName, properties);
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+    }
+    
+    public void closeConnection()
+    {
+        em.getTransaction().commit();
+        em.close();
+        emf.close();;
+    }
+
+    
+    //List of avail. puzzles
+    
+    //List of users
+    
+    //Given user_id, return points (all timem)
+    
+    //Given user_id, return games
+    
+    //Given user_id and puzzle_id, return points of prev games with this puzzle
+    
+    //====SETTERS===
+    
+    /**
+     * 
+     * @param filePath the path to the source file (relative to execution directory)
+     * @param expResult expected result of the program
+     * @param metaData meta data
+     * @return true if the source file can be found and added correctly
+     */
+    public boolean addPuzzle(String filePath, String expResult, String metaData)
+    {
+        try
+        {
+            Puzzle p = new Puzzle(filePath, expResult, metaData);
+            
+        }
+        catch (IOException exc)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
 }

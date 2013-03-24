@@ -21,6 +21,8 @@
 
 package edu.umb.cs.entity;
 
+import java.util.Calendar;
+import java.util.TimeZone;
 import javax.persistence.*;
 
 /**
@@ -33,15 +35,20 @@ public class Game
 {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
     
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
     
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Puzzle puzzle;
     
     private int point;
+    
+    /**
+     * Number of seconds since epoch
+     */
+    private long timestamp;
     
     public Game()
     {
@@ -52,6 +59,12 @@ public class Game
     {
         user = u;
         puzzle = p;
+        point = 0;
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        calendar.clear();
+        calendar.set(2011, Calendar.OCTOBER, 1);
+        timestamp = calendar.getTimeInMillis() / 1000L;
+        
     }
     
     public User getUser()
@@ -62,5 +75,26 @@ public class Game
     public Puzzle getPuzzle()
     {
         return puzzle;
+    }
+    
+    public int hashCode()
+    {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null || !(obj instanceof Game))
+        {
+            return false;
+        }
+        
+        Game other = (Game) obj;
+        if (this.id != other.id)
+        {
+            return false;
+        }
+        return true;
     }
 }

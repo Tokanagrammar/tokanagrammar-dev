@@ -23,6 +23,9 @@ package edu.umb.cs.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 
@@ -42,7 +45,26 @@ public class User implements Serializable
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST}, 
                           fetch = FetchType.EAGER, mappedBy = "user")
-    private ArrayList<Game> games;
+    private HashSet<Game> games;
     
+    public User()
+    {
+        
+    }
     
+    public User(String name)
+    {
+        this.name = name;
+        games = new HashSet<Game>();
+    }
+    
+    public void addGame(Game g)
+    {
+        games.add(g);
+    }
+    
+    public Set<Game> getGames()
+    {
+        return Collections.unmodifiableSet(games);
+    }
 }

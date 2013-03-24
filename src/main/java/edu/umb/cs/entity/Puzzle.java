@@ -21,8 +21,14 @@
 
 package edu.umb.cs.entity;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -41,9 +47,11 @@ public class Puzzle implements Serializable
     private long id;
     
     /**
-     * Relative path to file name
+     * Relative path to file 
      */
-    private String fileName;
+    private String filePath;
+    
+    private String prettyName;
     
     private String expectedResult;
     
@@ -51,19 +59,62 @@ public class Puzzle implements Serializable
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST}, 
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
-    private ArrayList<Game> games;
+    private HashSet<Game> games;
  
     public Puzzle()
     {
         
     }
     
-    public Puzzle (String fname, String expRes, String mdata)
+    public Puzzle (String path, String expRes, String mdata) throws IOException
     {
-        fileName = fname;
+        File file = new File(path);
+        if (!file.exists())
+            throw new IOException("File Not Found");
+        
+        prettyName = file.getName();
+        filePath = path;
         expectedResult = expRes;
         metaData = mdata;
+        games = new HashSet<Game>();
     }
     
+    public void addGame(Game g)
+    {
+        games.add(g);
+    }
     
+    public Set<Game> getGames()
+    {
+        return Collections.unmodifiableSet(games);
+    }
+    
+    @Override
+    public String toString()
+    {
+        return prettyName;
+    }
+    
+    @Override
+    public int hashCode()
+    {
+        return filePath.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null || !(obj instanceof Puzzle))
+        {
+            return false;
+        }
+        
+        Puzzle other = (Puzzle) obj;
+        if (this.filePath.equals(other.filePath))
+        {
+            return true;
+        }
+        
+        return false;
+    }
 }
