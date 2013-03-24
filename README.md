@@ -11,6 +11,7 @@ Set up Development Environment
 =============
 
 0) Install Maven (3.0.4 or later)
+(See instructions on their site)
 
 1) You want to make sure you have `jdk 1.7.0_u14` (or later, the current version (as of March, 22, 2013) is `jdk 1.7.0_u17`)
 
@@ -22,7 +23,9 @@ Set up Development Environment
 
 `mvn install:install-file -Dfile=jfxrt.jar -DgroupId=com.oracle -DartifactId=javafx -Dpackaging=jar -Dversion=2.2.7`
 
-**Note** `2.2.7` should be replaced with whatever version your `C:\Program Files\Java\jre7\lib\javafx.properties` says the version is.
+**Note #1** `2.2.7` should be replaced with whatever your `C:\Program Files\Java\jre7\lib\javafx.properties` says the version is.
+**Note #2** If you are on a Unix/Linux environment, copy the jar to `~/` (ie., your `home` directory)
+
 
 CHEATSHEET
 =============
