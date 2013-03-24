@@ -24,6 +24,7 @@ Set up Development Environment
 `mvn install:install-file -Dfile=jfxrt.jar -DgroupId=com.oracle -DartifactId=javafx -Dpackaging=jar -Dversion=2.2.7`
 
 **Note #1** `2.2.7` should be replaced with whatever your `C:\Program Files\Java\jre7\lib\javafx.properties` says the version is.
+
 **Note #2** If you are on a Unix/Linux environment, copy the jar to `~/` (ie., your `home` directory)
 
 
