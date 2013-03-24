@@ -21,12 +21,10 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.Token;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This represents a Java source file in a very naive way,
@@ -38,39 +36,114 @@ import java.util.Scanner;
  */
 public class AutomaticallyParsedJavaSourceFile implements SourceFile
 {
+    /**
+     * Simple representation of a token.
+     * Everything is treated as an identifer
+     * (hence, they will be 'painted' with the same shade!)
+     */
+    static class SimpleToken implements Token
+    {
+        private final String image;
+        SimpleToken(String img)
+        {
+            image = img;
+        }
+        
+        // SourceFile interface 
+        
+        @Override
+        public String image()
+        {
+            return image;
+        }
+
+        @Override
+        public boolean isKeyWord()
+        {
+            return false;
+        }
+
+        @Override
+        public boolean isLiteral()
+        {
+            return false;
+        }
+
+        @Override
+        public boolean isIdentifier()
+        {
+            return true;
+        }
+
+        @Override
+        public boolean isQuotedString()
+        {
+            return false;
+        }
+ 
+        @Override
+        public boolean isEmpty()
+        {
+            return false;
+        }
+        // Object interface
+        
+        @Override
+        public boolean equals(Object other)
+        {
+            if (other == null || !(other instanceof Token))
+                return false;
+            return image.equals(((Token)other).image());
+        }
+        
+        @Override
+        public int hashCode()
+        {
+            return image.hashCode();
+        }
+        
+        @Override
+        public String toString()
+        {
+            return image;
+        }
+    }
+    
     private final String path;
-    private final ArrayList<ArrayList<String>> srcFile;
+    private final List<List<Token>> srcFile;
+    private final List<String> lines;
     private final int tokenCount;
-    private final Map<String, Integer> stats;
-    private final String rep;
+    private final Map<Token, Integer> stats;
+    private String rep = null;
     
     public AutomaticallyParsedJavaSourceFile(String path) throws FileNotFoundException
     {
         this.path = path;
-        stats = new HashMap<String, Integer>();
+        stats = new HashMap<>();
         
         FileReader inFile = new FileReader(path);
         Scanner in = new Scanner(inFile);
-        
+
         int c = 0;
-        srcFile = new ArrayList<ArrayList<String>>();
-        ArrayList<String> lines;
+        srcFile = new ArrayList<>();
         String line;
+        lines = new ArrayList<>();
         while (in.hasNextLine())
         {
             line = in.nextLine();
-            lines = new ArrayList<String>();
+            List<Token> wholeLine = new ArrayList<>();
             for (String tk : line.split("\\s++"))
             {
-                if (stats.containsKey(tk))
-                    stats.put(tk, stats.get(tk) + 1);
-                lines.add(tk);
+                Token tok = new SimpleToken(tk);
+                if (stats.containsKey(tok))
+                    stats.put(tok, stats.get(tok) + 1);
+                wholeLine.add(tok);
             }
-            c += lines.size();
-            srcFile.add(lines);
+            c += wholeLine.size();
+            srcFile.add(wholeLine);
+            lines.add(line);
         }
         tokenCount = c;
-        rep = buildRep(srcFile);
     }
     
     // --- SourceFile states ---
@@ -78,11 +151,11 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     @Override
     public String getLine(int line)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return lines.get(line);
     }
 
     @Override
-    public String getToken(int line, int position)
+    public Token getToken(int line, int position)
     {
         return srcFile.get(line).get(position);
     }
@@ -106,7 +179,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     }
 
     @Override
-    public Map<String, Integer> getStatistic()
+    public Map<Token, Integer> getStatistic()
     {
         return stats;
     }
@@ -120,20 +193,34 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     @Override
     public String toString()
     {
+        if (rep == null)
+            rep = buildRep();
         return rep;
+    }
+    
+    // for testing
+    String buildFromSrc()
+    {
+        StringBuilder bd = new StringBuilder();
+        for (List<Token> line : srcFile)
+        {
+            for(Token tk : line)
+                bd.append(tk.image()).append(' ');
+            bd.append('\n');
+        }
+        return bd.toString();
     }
     
     // ---- private helpers -----------
     
-    private static String buildRep(ArrayList<ArrayList<String>> srcFile)
+    private String buildRep()
     {
-        StringBuilder rep = new StringBuilder();
-        for (ArrayList<String> line : srcFile)
+        StringBuilder ret = new StringBuilder();
+        for (String line : lines)
         {
-            for (String tk : line)
-                rep.append(tk).append(' ');
-            rep.append('\n');
+            ret.append(line);
+            ret.append('\n');
         }
-        return rep.toString();
+        return ret.toString();
     }
 }

@@ -27,14 +27,16 @@ package edu.umb.cs.source;
 public interface Shuffler
 {
     /**
-     * Remove <code>toRemove</code> number of tokens from <code>src</code>
+     * Remove <pre>toRemove</pre> number of tokens from <pre>src</pre>
      * Any token has the same probability of being removed.
      * 
      * Note: Two tokens that *look* the same are still counted as two.
      * For instance, if src hypothetically looks like this:
      * 
+     * <pre>
      * public int public void
      * private int main
+     * </pre>
      * 
      * There are two 'public' tokens, but these still counts as two different tokens.
      * 
@@ -44,7 +46,7 @@ public interface Shuffler
      * @param src
      * @return 
      */
-    public SourceFile shuffle(SourceFile src, int toRemove);
+    public ShuffledSource shuffle(SourceFile src, int toRemove);
     
     /**
      * Similar to shuffle(SourceFile, int), but this places more weights
@@ -55,5 +57,5 @@ public interface Shuffler
      * @param toks
      * @return 
      */
-    public SourceFile shuffle(SourceFile src, int toRemove, String...toks);
+    public ShuffledSource shuffle(SourceFile src, int toRemove, String...toks);
 }

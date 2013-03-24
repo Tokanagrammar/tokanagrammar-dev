@@ -18,41 +18,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.Token;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Simple representation of a Java Source File
+ * A SourceFile built from a list of tokens (not really parsed from a real
+ * source file)
  * @author Vy Thao Nguyen
  */
-public class JavaSourceFile implements SourceFile
+class ArtificialSourceFile implements SourceFile
 {
-
-    private final String path;
-    private final ArrayList<ArrayList<Token>> srcFile;
+    private final int lineCount;
     private final int tokenCount;
-    private final Map<Token, Integer> stats;
-    
-    public JavaSourceFile(String path,
-                          ArrayList<ArrayList<Token>> tokens,
-                          int tokenCount)
-            throws FileNotFoundException
+    private final List<List<Token>> srcFile;
+    private final List<String> lines;
+    ArtificialSourceFile(int lineCount, int tokenCount, List<List<Token>> src)
     {
-        this.path = path;
-        this.srcFile = tokens;
+        this.lineCount = lineCount;
         this.tokenCount = tokenCount;
-        stats = buildStats(srcFile);
+        this.srcFile = src;
+        lines = new ArrayList<>(lineCount);
+        for (List<Token> line : src)
+        {
+            StringBuilder bd = new StringBuilder();
+            for (Token tk : line)
+                bd.append(tk.image()).append(' ');
+            lines.add(bd.toString());
+        }
     }
-    
+
     @Override
     public String getLine(int line)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return lines.get(line);
     }
 
     @Override
@@ -76,13 +80,13 @@ public class JavaSourceFile implements SourceFile
     @Override
     public int lineCount()
     {
-        return srcFile.size();
+        return lineCount;
     }
 
     @Override
     public Map<Token, Integer> getStatistic()
     {
-        return stats;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -91,8 +95,4 @@ public class JavaSourceFile implements SourceFile
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private static Map<Token, Integer> buildStats(ArrayList<ArrayList<Token>> srcFile)
-    {
-        throw new UnsupportedOperationException();
-    }
 }

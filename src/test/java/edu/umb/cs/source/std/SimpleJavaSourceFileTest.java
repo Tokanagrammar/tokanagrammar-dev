@@ -18,57 +18,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.source;
+package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
 
 /**
  * @author Vy Thao Nguyen
  */
-public class SimpleJavaSourceFileTest
+public class SimpleJavaSourceFileTest extends SourceTestBase
 {
-    private static final File TESTS_PATH = new File("src/test/resources/sources");
+    private static final File TESTS_PATH = new File("src/test/resources/sources/parse");
 
-    @Test
-    public void doTest() throws FileNotFoundException, IOException
+    @Override
+    void doTest(File expFile, File inFile) throws FileNotFoundException
     {
-        // collect all test cases in the test directories
-        // (ie., all input and expected files)
-        File[] files = TESTS_PATH.listFiles();
-        Arrays.sort(files,
-                    new Comparator<File>()
-                    {
-                        @Override
-                        public int compare(File t, File t1)
-                        {
-                            return t.getName().compareTo(t1.getName());
-                        }
-                    });
+        AutomaticallyParsedJavaSourceFile srcFile 
+            = new AutomaticallyParsedJavaSourceFile(inFile.getAbsolutePath());
 
-        for (int n = 0; n < files.length; n += 2)
-        {
-            // input file ends with '.java'
-            // expected file ends with '.expected'
-            // Hence, input files always come AFTER its expected file
-            AutomaticallyParsedJavaSourceFile srcFile 
-                = new AutomaticallyParsedJavaSourceFile(files[n + 1].getAbsolutePath());
+        // build expected
+        Scanner expected = new Scanner(expFile);
+        StringBuilder expectedStr = new StringBuilder();
+        while (expected.hasNextLine())
+            expectedStr.append(expected.nextLine()).append('\n');                    
 
-            // build expected
-            Scanner expected = new Scanner(files[n]);
-            StringBuilder expectedStr = new StringBuilder();
-            while (expected.hasNextLine())
-                expectedStr.append(expected.nextLine()).append('\n');                    
-  
-            // check scanned file against the expected
-            assertEquals(expectedStr.toString(), srcFile.toString());
-        }
+        // check scanned file against the expected
+        assertEquals(expectedStr.toString(), srcFile.buildFromSrc());
+    }
+
+    @Override
+    File getPath()
+    {
+        return TESTS_PATH;
     }
 }
