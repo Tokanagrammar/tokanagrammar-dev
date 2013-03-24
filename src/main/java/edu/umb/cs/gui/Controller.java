@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.gui;
+package main.java.edu.umb.cs.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;

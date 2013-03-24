@@ -1,0 +1,2 @@
+jfx.build.stagingdir = ${workspace}/tokanagrammar/build
+jfx.build.apptitle = tokanagrammar

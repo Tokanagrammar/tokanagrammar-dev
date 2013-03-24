@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.parser;
+package main.java.edu.umb.cs.parser;
 
 /**
  * API class, provide static methods to obtain a particular kind of parser
