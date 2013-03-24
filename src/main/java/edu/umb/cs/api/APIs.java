@@ -23,7 +23,7 @@ package edu.umb.cs.api;
 
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
-import edu.umb.cs.service.DatabaseService;
+import edu.umb.cs.api.service.DatabaseService;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
