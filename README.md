@@ -7,6 +7,23 @@ This is a jigsaw-like puzzle game, except each piece is token from a source file
 
 `tokanagrammar/docs/*` contains source files that could be used for the puzzles
 
+Set up Development Environment
+=============
+
+0) Install Maven (3.0.4 or later)
+
+1) You want to make sure you have `jdk 1.7.0_u14` (or later, the current version (as of March, 22, 2013) is `jdk 1.7.0_u17`)
+
+2) Install `JavaFx`
+
+- Copy `C:\Program Files\Java\jre7\lib\jfxrt.jar` to your `C:\Users\Your_User\jfxrt.jar`
+- Then `cd C:\Users\Your_User\`
+- And execute this command 
+
+`mvn install:install-file -Dfile=jfxrt.jar -DgroupId=com.oracle -DartifactId=javafx -Dpackaging=jar -Dversion=2.2.7`
+
+**Note** `2.2.7` should be replaced with whatever version your `C:\Program Files\Java\jre7\lib\javafx.properties` says the version is.
+
 CHEATSHEET
 =============
 
