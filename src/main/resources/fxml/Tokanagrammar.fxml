@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 
 <AnchorPane id="AnchorPane" fx:id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass=", uiBG" xmlns:fx="http://javafx.com/fxml" 
-fx:controller="edu.umb.cs.Controller">
+fx:controller="main.java.edu.umb.cs.gui.Controller">
   
   <children>
     <Pane id="LEGAL_DRAG_ZONE" fx:id="legal_drag_zone" layoutX="103.0" layoutY="120.0" prefHeight="488.0" prefWidth="896.0" />
@@ -28,7 +28,7 @@ fx:controller="edu.umb.cs.Controller">
   </children>
   
   <stylesheets>
-    <URL value="@tokanagrammar.css" />
+    <URL value="@../styles/tokanagrammar.css" />
   </stylesheets>
   
 </AnchorPane>
