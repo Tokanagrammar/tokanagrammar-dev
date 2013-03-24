@@ -183,7 +183,7 @@ public class DatabaseService
      * Add a new user to the database
      * Will throw exception if user
      * 
-     * @param name 
+     * @param username 
      * @return the user just got created
      * @throws Exception if username is not available
      */
