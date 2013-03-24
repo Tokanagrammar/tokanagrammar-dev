@@ -19,17 +19,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.parser;
+package edu.umb.cs.source;
+
+import edu.umb.cs.parser.InternalException;
+import edu.umb.cs.source.std.SimpleJavaSourceFile;
+import java.io.FileNotFoundException;
 
 /**
- * Place holder 
+ *
  * @author Vy Thao Nguyen
  */
-public class InternalException extends RuntimeException
+public class SourceFiles 
 {
-    
-    public InternalException(String msg)
+    public static SourceFile getSourceFile(String path,
+                                           Language languageType)
+                             throws FileNotFoundException
     {
-        super(msg);
+        switch(languageType)
+        {
+            case JAVA:
+                // TODO: REplace this code to use the 'smarter' java parser.
+                return new SimpleJavaSourceFile(path);
+            default:
+                throw new InternalException("Unsupported Language: " + languageType);
+        }
     }
 }

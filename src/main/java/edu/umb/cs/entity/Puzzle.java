@@ -21,6 +21,9 @@
 
 package edu.umb.cs.entity;
 
+import edu.umb.cs.source.Language;
+import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.SourceFiles;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -46,6 +49,11 @@ public class Puzzle implements Serializable
     @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
     
+    private transient SourceFile srcFile;
+    private final Language langType = Language.JAVA;  //TODO: Only support JAVA for now
+                                                      // This should be settable later
+                                                      // when we do support other languages
+    
     /**
      * Relative path to file 
      */
@@ -56,6 +64,8 @@ public class Puzzle implements Serializable
     private String expectedResult;
     
     private String metaData;
+    
+    private int lang = langType.ordinal();
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, 
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
@@ -82,8 +92,14 @@ public class Puzzle implements Serializable
         metaData = mdata;
         games = new HashSet<Game>();
         hints = new HashSet<Hint>();
+        srcFile = SourceFiles.getSourceFile(path, langType);
     }
     
+    public SourceFile getSourceFile()
+    {
+        return srcFile;
+    }
+
     public void addGame(Game g)
     {
         games.add(g);
