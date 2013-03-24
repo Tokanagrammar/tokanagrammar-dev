@@ -20,7 +20,7 @@
  */
 package edu.umb.cs.source;
 
-import edu.umb.cs.source.std.SimpleJavaSourceFile;
+import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -58,8 +58,8 @@ public class SimpleJavaSourceFileTest
             // input file ends with '.java'
             // expected file ends with '.expected'
             // Hence, input files always come AFTER its expected file
-            SimpleJavaSourceFile srcFile 
-                = new SimpleJavaSourceFile(files[n + 1].getAbsolutePath());
+            AutomaticallyParsedJavaSourceFile srcFile 
+                = new AutomaticallyParsedJavaSourceFile(files[n + 1].getAbsolutePath());
 
             // build expected
             Scanner expected = new Scanner(files[n]);

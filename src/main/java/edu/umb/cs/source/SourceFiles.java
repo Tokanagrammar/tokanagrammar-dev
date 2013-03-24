@@ -22,7 +22,7 @@
 package edu.umb.cs.source;
 
 import edu.umb.cs.parser.InternalException;
-import edu.umb.cs.source.std.SimpleJavaSourceFile;
+import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile;
 import java.io.FileNotFoundException;
 
 /**
@@ -39,7 +39,7 @@ public class SourceFiles
         {
             case JAVA:
                 // TODO: REplace this code to use the 'smarter' java parser.
-                return new SimpleJavaSourceFile(path);
+                return new AutomaticallyParsedJavaSourceFile(path);
             default:
                 throw new InternalException("Unsupported Language: " + languageType);
         }

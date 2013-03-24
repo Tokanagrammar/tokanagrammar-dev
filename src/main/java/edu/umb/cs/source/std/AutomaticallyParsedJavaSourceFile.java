@@ -36,7 +36,7 @@ import java.util.Scanner;
  * 
  * @author Vy Thao Nguyen
  */
-public class SimpleJavaSourceFile implements SourceFile
+public class AutomaticallyParsedJavaSourceFile implements SourceFile
 {
     private final String path;
     private final ArrayList<ArrayList<String>> srcFile;
@@ -44,7 +44,7 @@ public class SimpleJavaSourceFile implements SourceFile
     private final Map<String, Integer> stats;
     private final String rep;
     
-    public SimpleJavaSourceFile(String path) throws FileNotFoundException
+    public AutomaticallyParsedJavaSourceFile(String path) throws FileNotFoundException
     {
         this.path = path;
         stats = new HashMap<String, Integer>();
