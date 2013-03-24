@@ -22,10 +22,7 @@
 package edu.umb.cs.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 
 
@@ -39,9 +36,9 @@ public class User implements Serializable
 {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
     
-    private String name;
+    private String username;
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST}, 
                           fetch = FetchType.EAGER, mappedBy = "user")
@@ -52,9 +49,9 @@ public class User implements Serializable
         
     }
     
-    public User(String name)
+    public User(String uname)
     {
-        this.name = name;
+        this.username = uname;
         games = new HashSet<Game>();
     }
     
@@ -67,4 +64,55 @@ public class User implements Serializable
     {
         return Collections.unmodifiableSet(games);
     }
+    
+    /**
+     * 
+     * @return total points this user has earned so far
+     */
+    public long getPoints()
+    {
+        long points = 0;
+        for (Game g : games)
+            points += g.getPoint();
+        return points;
+    }
+    
+    /**
+     * 
+     * @param p
+     * @return the total points the user have earned when playing with given puzzle
+     */
+    public long getPointsForPuzzle(Puzzle puzzle)
+    {
+        long points = 0;
+        for (Game g : games)
+        {
+            if (g.getPuzzle().equals(puzzle))
+                points += g.getPoint();
+        }
+        return points;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null || !(obj instanceof User))
+        {
+            return false;
+        }
+        
+        User other = (User) obj;
+        if (this.username.compareTo(other.username) != 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    public int hashCode()
+    {
+        return username.hashCode();
+    }
+    
+    
 }
