@@ -19,29 +19,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.source;
+package edu.umb.cs.source.std;
 
-import edu.umb.cs.parser.InternalException;
-import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile;
-import java.io.FileNotFoundException;
+import edu.umb.cs.source.ShuffledSource;
+import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.Token;
+import java.util.List;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class SourceFiles 
+public class ShuffledSourceImpl implements ShuffledSource
 {
-    public static SourceFile getSourceFile(String path,
-                                           Language languageType)
-                             throws FileNotFoundException
+    private final SourceFile original;
+    private final SourceFile shuffled;
+    private final List<Token> removed;
+    
+    public ShuffledSourceImpl(SourceFile original, SourceFile shuffled, List<Token> removed)
     {
-        switch(languageType)
-        {
-            case JAVA:
-                // TODO: REplace this code to use the 'smarter' java parser.
-                return new AutomaticallyParsedJavaSourceFile(path);
-            default:
-                throw new InternalException("Unsupported Language: " + languageType);
-        }
+        this.original = original;
+        this.shuffled = shuffled;
+        this.removed = removed;
+    }
+
+    @Override
+    public SourceFile getOrinalSource()
+    {
+        return original;
+    }
+
+    @Override
+    public SourceFile getShuffledSource()
+    {
+        return shuffled;
+    }
+
+    @Override
+    public List<Token> getRemovedTokens()
+    {
+        return removed;
     }
 }

@@ -18,30 +18,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package edu.umb.cs.source.std;
 
-package edu.umb.cs.source;
-
-import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
+import static org.junit.Assert.assertEquals;
 
 /**
- *
  * @author Vy Thao Nguyen
  */
-public class SourceFiles 
+public class SimpleJavaSourceFileTest extends SourceTestBase
 {
-    public static SourceFile getSourceFile(String path,
-                                           Language languageType)
-                             throws FileNotFoundException
+    private static final File TESTS_PATH = new File("src/test/resources/sources/parse");
+
+    @Override
+    void doTest(File expFile, File inFile) throws FileNotFoundException
     {
-        switch(languageType)
-        {
-            case JAVA:
-                // TODO: REplace this code to use the 'smarter' java parser.
-                return new AutomaticallyParsedJavaSourceFile(path);
-            default:
-                throw new InternalException("Unsupported Language: " + languageType);
-        }
+        AutomaticallyParsedJavaSourceFile srcFile 
+            = new AutomaticallyParsedJavaSourceFile(inFile.getAbsolutePath());
+
+        // build expected
+        Scanner expected = new Scanner(expFile);
+        StringBuilder expectedStr = new StringBuilder();
+        while (expected.hasNextLine())
+            expectedStr.append(expected.nextLine()).append('\n');                    
+
+        // check scanned file against the expected
+        assertEquals(expectedStr.toString(), srcFile.buildFromSrc());
+    }
+
+    @Override
+    File getPath()
+    {
+        return TESTS_PATH;
     }
 }

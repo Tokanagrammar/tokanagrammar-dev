@@ -18,31 +18,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.source;
+package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.std.SimpleJavaSourceFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
+ *
  * @author Vy Thao Nguyen
  */
-public class SimpleJavaSourceFileTest
+public abstract class SourceTestBase 
 {
-    private static final File TESTS_PATH = new File("src/test/resources/sources");
-
+    abstract void doTest(File expted, File in) throws FileNotFoundException, IOException;
+    abstract File getPath();
+    
     @Test
-    public void doTest() throws FileNotFoundException, IOException
+    public void test() throws FileNotFoundException, IOException
     {
         // collect all test cases in the test directories
         // (ie., all input and expected files)
-        File[] files = TESTS_PATH.listFiles();
+        File[] files = getPath().listFiles();
         Arrays.sort(files,
                     new Comparator<File>()
                     {
@@ -58,17 +59,7 @@ public class SimpleJavaSourceFileTest
             // input file ends with '.java'
             // expected file ends with '.expected'
             // Hence, input files always come AFTER its expected file
-            SimpleJavaSourceFile srcFile 
-                = new SimpleJavaSourceFile(files[n + 1].getAbsolutePath());
-
-            // build expected
-            Scanner expected = new Scanner(files[n]);
-            StringBuilder expectedStr = new StringBuilder();
-            while (expected.hasNextLine())
-                expectedStr.append(expected.nextLine()).append('\n');                    
-  
-            // check scanned file against the expected
-            assertEquals(expectedStr.toString(), srcFile.toString());
+            doTest(files[n], files[n + 1]);
         }
     }
 }
