@@ -21,7 +21,6 @@
 
 package edu.umb.cs.api;
 
-import edu.umb.cs.entity.Game;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.service.DatabaseService;
@@ -33,6 +32,19 @@ import java.util.List;
  */
 public class APIs
 {   
+    private static boolean started = false;
+    private static boolean end = false;
+    public static void start()
+    {
+        if (started)
+            return;
+        
+    }
+    
+    public static void stop()
+    {
+        
+    }
     /**
      * start a new session with a new generated username
      * @return 
