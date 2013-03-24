@@ -60,7 +60,7 @@ public class DatabaseService
         em = emf.createEntityManager();
         em.getTransaction().begin();
     }
-    
+
     /**
      * Start database connection with given settings
      * Call this when program starts.

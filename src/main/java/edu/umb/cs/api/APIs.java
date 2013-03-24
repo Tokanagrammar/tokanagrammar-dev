@@ -25,6 +25,8 @@ import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.service.DatabaseService;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * APIs for interacting with the backend
@@ -33,17 +35,35 @@ import java.util.List;
 public class APIs
 {   
     private static boolean started = false;
-    private static boolean end = false;
+    private static boolean stopped = false;
     public static void start()
     {
         if (started)
             return;
-        
+        DatabaseService.openConnection();
     }
     
     public static void stop()
     {
-        
+        if (stopped)
+            return;
+        DatabaseService.closeConnection();
+    }
+    
+    public static User newUser(String username)
+    {
+        // TODO: implement the warning mechnism
+        // ie., generate a unique username to use
+        // and issue a warning if the given username already exists
+        try
+        {
+            return DatabaseService.addUser(username);
+        }
+        catch (Exception ex)
+        {
+            
+            return null;
+        }
     }
     /**
      * start a new session with a new generated username
