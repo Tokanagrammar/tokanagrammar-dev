@@ -32,10 +32,6 @@ SET OUT_DIR="%ABS_PATH%%OUT_REL_PATH%"
 
 call mvn -Dmaven.test.skip clean package 
 
-ECHO OUTPUT DIRECTORIES
-ECHO %OUT_DIR%
-ECHO %OUTZIP_DIR%
-
 REM get jar 
 MD target\tokanagrammar
 REM workaround here! cannot rename while copying. That will corrupt the file
