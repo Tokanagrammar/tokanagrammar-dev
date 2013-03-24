@@ -21,9 +21,11 @@
 
 package edu.umb.cs.api;
 
+import edu.umb.cs.api.service.DatabaseService;
 import edu.umb.cs.entity.User;
 import java.util.List;
-import org.junit.Assert.*;
+import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -32,10 +34,20 @@ import org.junit.Test;
  */
 public class APITest 
 {
+    @Before
+    public void init()
+    {
+        APIs.startTest();
+        
+    }
+    
     @Test
     public void testNewUser()
     {
         User user = APIs.newUser("vynguyen");
         List<User> users = APIs.getUsers();
+        
+        assertEquals(1, users.size());
+        assertEquals("vynguyen", user.getUsername());
     }
 }

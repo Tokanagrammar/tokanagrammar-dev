@@ -21,12 +21,11 @@
 
 package edu.umb.cs.api;
 
-import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.api.service.DatabaseService;
+import edu.umb.cs.entity.Puzzle;
+import edu.umb.cs.parser.InternalException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * APIs for interacting with the backend
@@ -34,30 +33,69 @@ import java.util.logging.Logger;
  */
 public class APIs
 {   
+    private static final String PRODUCTION_DB = "tokanagrammar";
     private static boolean started = false;
     private static boolean stopped = false;
+    
+    private static final String TEST_DB = "test";
+    private static boolean testStarted = false;
+    private static boolean testStopped = false;
+
     public static void start()
     {
         if (started)
             return;
-        DatabaseService.openConnection();
+        started = true;
+        DatabaseService.openConnection(PRODUCTION_DB);
     }
     
     public static void stop()
     {
         if (stopped)
             return;
+        stopped = true;
         DatabaseService.closeConnection();
     }
     
+    // for testing
+    static void startTest()
+    {
+        if (testStarted)
+            return;
+        
+        testStarted = true;
+        DatabaseService.openConnection(TEST_DB);
+        removeAllRecords();
+    }
+
+    static void stopTest()
+    {
+        if (testStopped)
+            return;
+        
+        testStopped = true;
+        DatabaseService.closeConnection();
+    }
+
+    public static void removeAllRecords()
+    {
+        checkStarted();
+        DatabaseService.deleteAll();
+    }
+
+    
     public static User newUser(String username)
     {
+        checkStarted();
+        
         // TODO: implement the warning mechnism
         // ie., generate a unique username to use
         // and issue a warning if the given username already exists
         try
         {
-            return DatabaseService.addUser(username);
+            User user = DatabaseService.addUser(username);
+            DatabaseService.persistUser(user);
+            return user;
         }
         catch (Exception ex)
         {
@@ -71,6 +109,7 @@ public class APIs
      */
     public static Session newSession()
     {
+        checkStarted();
         // TODO:
         // create new user
         throw new UnsupportedOperationException("not supported yet");
@@ -92,6 +131,7 @@ public class APIs
      */
     public static List<User> getUsers()
     {
+        checkStarted();
         return DatabaseService.getAllUsers();
     }
     
@@ -101,8 +141,13 @@ public class APIs
      */
     public static List<Puzzle> getPuzzles()
     {
+        checkStarted();
         return DatabaseService.getAllPuzzles();
     }
     
-    
+    private static void checkStarted()
+    {
+        if (!started && !testStarted)
+            throw new InternalException("Service must be started before being used");
+    }
 }
