@@ -77,7 +77,7 @@ public class Game
         return puzzle;
     }
     
-    public int getPoint()
+    public long getPoint()
     {
         return point;
     }
