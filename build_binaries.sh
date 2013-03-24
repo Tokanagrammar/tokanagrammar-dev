@@ -50,7 +50,7 @@ cp -p target/${project_name}*jar-with-dependencies.jar target/packages/${platfor
 cp ${license} target/packages/${platform}/LICENSE.txt
 
 # get the puzzle files
-cp -r docs target/packages/${platform}/.
+cp -r puzzles target/packages/${platform}/.
 
 # timestamp
 #epoch=`date +%s`
