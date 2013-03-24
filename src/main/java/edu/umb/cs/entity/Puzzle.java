@@ -57,11 +57,11 @@ public class Puzzle implements Serializable
     
     private String metaData;
     
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST}, 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, 
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
     private HashSet<Game> games;
  
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST}, 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, 
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
     private HashSet<Hint> hints;
  
@@ -94,9 +94,22 @@ public class Puzzle implements Serializable
         return Collections.unmodifiableSet(games);
     }
     
+    /**
+     * After done adding all the hints call DatabaseService.persistPuzzle(<the puzzle>);
+     * @param h 
+     */
     public void addHint(Hint h)
     {
         hints.add(h);
+    }
+    
+    /**
+     * Same as add
+     * @param h 
+     */
+    public void removeHint(Hint h)
+    {
+        hints.remove(h);
     }
     
     public Set<Hint> getHints()

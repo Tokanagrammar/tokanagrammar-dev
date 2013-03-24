@@ -144,6 +144,12 @@ public class DatabaseService
         return true;
     }
     
+    /**
+     * Remove the puzzle with given name from db
+     * 
+     * @param filePath
+     * @return true if there is such puzzle, false otherwise; 
+     */
     public boolean removePuzzle(String filePath)
     {
         int count = em.createQuery("DELETE FROM Puzzle p WHERE p.filePath = :filePath", Puzzle.class)
@@ -152,4 +158,8 @@ public class DatabaseService
         return (count == 0 ? false : true);
     }
     
+    public void persistPuzzle(Puzzle p)
+    {
+        em.persist(p);
+    }
 }
