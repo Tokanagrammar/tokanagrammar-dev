@@ -27,7 +27,7 @@ Set up Development Environment
 
 **Note #2** If you are on a Unix/Linux environment, copy the jar to `~/` (ie., your `home` directory)
 
-This step is sort of a 'workaround' to some bug. Once Oracle fix this (hopefully in Java8, which is released this summer), we should be able to skip this test, because, as they promised, `JavaFX` will be included natively in `Java` (just like `Swing` or other built-in APIs)
+This step is sort of a 'workaround' to some bug. Once Oracle fixes this (hopefully in Java8, which is released this summer), we should be able to skip this test, because, as they promised, `JavaFX` will be included natively in `Java` (just like `Swing` or other built-in APIs)
 
 CHEATSHEET
 =============
