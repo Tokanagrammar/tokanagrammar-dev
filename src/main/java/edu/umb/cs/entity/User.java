@@ -67,4 +67,33 @@ public class User implements Serializable
     {
         return Collections.unmodifiableSet(games);
     }
+    
+    /**
+     * 
+     * @return total points this user has earned so far
+     */
+    public long getPoints()
+    {
+        long points = 0;
+        for (Game g : games)
+            points += g.getPoint();
+        return points;
+    }
+    
+    /**
+     * 
+     * @param p
+     * @return the total points the user have earned when playing with given puzzle
+     */
+    public long getPointsForPuzzle(Puzzle puzzle)
+    {
+        long points = 0;
+        for (Game g : games)
+        {
+            if (g.getPuzzle().equals(puzzle))
+                points += g.getPoint();
+        }
+        return points;
+    }
+    
 }

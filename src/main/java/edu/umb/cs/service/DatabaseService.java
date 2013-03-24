@@ -107,17 +107,6 @@ public class DatabaseService
         return em.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
     
-    //Given user_id, return points (all time)
-    public long getPointsForUser(int userId)
-    {
-        
-        return 0;
-    }
-    
-    //Given user_id, return games
-    
-    //Given user_id and puzzle_id, return points of prev games with this puzzle
-    
     //====SETTERS===
     
     /**

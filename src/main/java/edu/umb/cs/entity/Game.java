@@ -43,7 +43,7 @@ public class Game
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Puzzle puzzle;
     
-    private int point;
+    private long point;
     
     /**
      * Number of seconds since epoch
@@ -75,6 +75,16 @@ public class Game
     public Puzzle getPuzzle()
     {
         return puzzle;
+    }
+    
+    public int getPoint()
+    {
+        return point;
+    }
+    
+    public void setPoint(int p)
+    {
+        point = p;
     }
     
     public int hashCode()
