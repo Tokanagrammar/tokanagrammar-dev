@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.service;
+package edu.umb.cs.api.service;
 
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
