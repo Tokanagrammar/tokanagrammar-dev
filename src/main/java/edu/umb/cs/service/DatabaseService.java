@@ -107,27 +107,15 @@ public class DatabaseService
         return em.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
     
-    //Given user_id, return points (all time)
-    public long getPointsForUser(int userId)
-    {
-        
-        return 0;
-    }
-    
-    //Given user_id, return games
-    
-    //Given user_id and puzzle_id, return points of prev games with this puzzle
-    
-    //====SETTERS===
-    
     /**
+     * Add a new puzzle to the database
      * 
      * @param filePath the path to the source file (relative to execution directory)
      * @param expResult expected result of the program
      * @param metaData meta data
      * @return true if the source file can be found and added correctly
      */
-    public boolean addPuzzle(String filePath, String expResult, String metaData, Hint... hints)
+    public static boolean addPuzzle(String filePath, String expResult, String metaData, Hint... hints)
     {
         try
         {
@@ -150,7 +138,7 @@ public class DatabaseService
      * @param filePath
      * @return true if there is such puzzle, false otherwise; 
      */
-    public boolean removePuzzle(String filePath)
+    public static boolean removePuzzle(String filePath)
     {
         int count = em.createQuery("DELETE FROM Puzzle p WHERE p.filePath = :filePath", Puzzle.class)
                      .setParameter("filePath", filePath)
@@ -158,8 +146,54 @@ public class DatabaseService
         return (count == 0 ? false : true);
     }
     
-    public void persistPuzzle(Puzzle p)
+    public static void persistPuzzle(Puzzle p)
     {
         em.persist(p);
     }
+    
+    /**
+     * 
+     * @param username
+     * @return true if the username has already existed
+     */
+    public static boolean usernameExists(String username)
+    {
+        int exist = em.createQuery("SELECT count(u.id) FROM User u WHERE u.username = :username", Integer.class)
+                       .setParameter("username", username)
+                       .getSingleResult();
+        
+        if (exist > 0)
+            return true;
+        else 
+            return false;
+    }
+    
+    /**
+     * Add a new user to the database
+     * Will throw exception if user
+     * 
+     * @param name 
+     * @return the user just got created
+     * @throws Exception if username is not available
+     */
+    public static User addUser(String username) throws Exception
+    {
+        if (usernameExists(username))
+            throw new Exception("Username has already existed");
+        
+        User u = new User(username);
+        em.persist(u);
+        return u;
+    }
+    
+    public static void removeUser(User u)
+    {
+        
+    }
+    
+    public static void persistUser(User u)
+    {
+        em.persist(u);
+    }
+    
 }
