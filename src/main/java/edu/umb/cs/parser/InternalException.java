@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.parser;
+package main.java.edu.umb.cs.parser;
 
 /**
  * Place holder 

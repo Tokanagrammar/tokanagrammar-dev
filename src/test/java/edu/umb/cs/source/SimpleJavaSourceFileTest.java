@@ -18,9 +18,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.source;
+package test.java.edu.umb.cs.source;
 
-import edu.umb.cs.source.std.SimpleJavaSourceFile;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,6 +27,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
+import main.java.edu.umb.cs.source.std.SimpleJavaSourceFile;
 import org.junit.Test;
 
 /**

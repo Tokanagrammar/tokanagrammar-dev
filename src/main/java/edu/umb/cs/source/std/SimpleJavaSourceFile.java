@@ -18,15 +18,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.source.std;
+package main.java.edu.umb.cs.source.std;
 
-import edu.umb.cs.source.SourceFile;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import main.java.edu.umb.cs.source.SourceFile;
 
 /**
  * This represents a Java source file in a very naive way,
