@@ -21,9 +21,12 @@
 
 package edu.umb.cs.service;
 
+import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
+import edu.umb.cs.entity.User;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,6 +47,8 @@ public class DatabaseService
     
     /**
      * Start database connection with default settings
+     * Call this when program starts
+     * 
      * dbName = Tokanagrammar
      * partialURL = "$objectdb/db/"
      */
@@ -56,6 +61,15 @@ public class DatabaseService
         em.getTransaction().begin();
     }
     
+    /**
+     * Start database connection with given settings
+     * Call this when program starts.
+     * 
+     * @param newDbName
+     * @param newPartialURL
+     * @param user
+     * @param password 
+     */
     public static void openConnection(String newDbName, String newPartialURL, String user, String password)
     {
         dbName = newDbName;
@@ -67,19 +81,38 @@ public class DatabaseService
         em.getTransaction().begin();
     }
     
+    /**
+     * Commit all everything and close connection
+     * Call this upon exiting the program
+     */
     public void closeConnection()
     {
         em.getTransaction().commit();
         em.close();
-        emf.close();;
+        emf.close();
     }
-
     
-    //List of avail. puzzles
+    /**
+     * 
+     * @return a list of all puzzles in the database
+     */
+    public static List<Puzzle> getAllPuzzles()
+    {
+        return em.createQuery("SELECT p FROM Puzzle p", Puzzle.class).getResultList();
+    }
     
     //List of users
+    public static List<User> getAllUsers()
+    {
+        return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+    }
     
-    //Given user_id, return points (all timem)
+    //Given user_id, return points (all time)
+    public long getPointsForUser(int userId)
+    {
+        
+        return 0;
+    }
     
     //Given user_id, return games
     
@@ -94,12 +127,14 @@ public class DatabaseService
      * @param metaData meta data
      * @return true if the source file can be found and added correctly
      */
-    public boolean addPuzzle(String filePath, String expResult, String metaData)
+    public boolean addPuzzle(String filePath, String expResult, String metaData, Hint... hints)
     {
         try
         {
             Puzzle p = new Puzzle(filePath, expResult, metaData);
-            
+            for (Hint h : hints)
+                p.addHint(h);
+            em.persist(p);
         }
         catch (IOException exc)
         {
@@ -109,5 +144,12 @@ public class DatabaseService
         return true;
     }
     
+    public boolean removePuzzle(String filePath)
+    {
+        int count = em.createQuery("DELETE FROM Puzzle p WHERE p.filePath = :filePath", Puzzle.class)
+                     .setParameter("filePath", filePath)
+                     .executeUpdate();
+        return (count == 0 ? false : true);
+    }
     
 }

@@ -61,6 +61,10 @@ public class Puzzle implements Serializable
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
     private HashSet<Game> games;
  
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST}, 
+                          fetch = FetchType.EAGER, mappedBy = "puzzle")
+    private HashSet<Hint> hints;
+ 
     public Puzzle()
     {
         
@@ -77,6 +81,7 @@ public class Puzzle implements Serializable
         expectedResult = expRes;
         metaData = mdata;
         games = new HashSet<Game>();
+        hints = new HashSet<Hint>();
     }
     
     public void addGame(Game g)
@@ -87,6 +92,16 @@ public class Puzzle implements Serializable
     public Set<Game> getGames()
     {
         return Collections.unmodifiableSet(games);
+    }
+    
+    public void addHint(Hint h)
+    {
+        hints.add(h);
+    }
+    
+    public Set<Hint> getHints()
+    {
+        return Collections.unmodifiableSet(hints);
     }
     
     @Override
