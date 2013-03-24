@@ -35,7 +35,7 @@ The project uses `javafx`, hence you want to make sure you have `jdk.1.7.0-u14` 
 `./build_binaries.sh`
 
 6) To build binary zip package (on Windows)
-  *Note* This script requires <a href="www.7-zip.org">`7z`</a> to be already installed.
+  *Note* This script requires <a href="http://www.7-zip.org">`7z`</a> to be already installed.
 
 `build_binaries.cmd`
 
