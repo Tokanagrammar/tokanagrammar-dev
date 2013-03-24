@@ -10,6 +10,7 @@
     <name>tokanagrammar</name>
     <packaging>jar</packaging>
     <url>http://tokanagrammar.github.com/</url>
+
 	<developers>
 		<developer>
 			<id>oontvoo</id>
@@ -62,7 +63,7 @@
 		<dependency>
             <groupId>com.objectdb</groupId>
             <artifactId>objectdb</artifactId>
-            <version>2.4.0</version>
+            <version>2.4.7</version>
         </dependency>
 	</dependencies>
 
