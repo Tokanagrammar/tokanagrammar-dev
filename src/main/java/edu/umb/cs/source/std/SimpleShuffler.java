@@ -56,7 +56,7 @@ public class SimpleShuffler implements Shuffler
         int hasRemoved = 0;
 
         List<List<Token>>  newSrc = buildList(src);
-        List<Token> removed = new ArrayList<>(toRemove);
+        List<Token> removed = new ArrayList<Token>(toRemove);
         
         while (hasRemoved != toRemove)
         {
@@ -91,12 +91,12 @@ public class SimpleShuffler implements Shuffler
     static List<List<Token>> buildList(SourceFile src)
     {
         int lineC = src.lineCount();
-        ArrayList<List<Token>> ret = new ArrayList<>(lineC);
+        ArrayList<List<Token>> ret = new ArrayList<List<Token>>(lineC);
         
         for (int n = 0; n < lineC; ++n)
         {
             int tkCount = src.tokenCount(n);
-            ArrayList<Token> line = new ArrayList<>(tkCount);
+            ArrayList<Token> line = new ArrayList<Token>(tkCount);
             for (int m = 0; m < tkCount; ++m)
                 line.add((src.getToken(n, m)));
             ret.add(line);

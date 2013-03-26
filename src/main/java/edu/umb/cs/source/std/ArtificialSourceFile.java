@@ -43,7 +43,7 @@ class ArtificialSourceFile implements SourceFile
         this.lineCount = lineCount;
         this.tokenCount = tokenCount;
         this.srcFile = src;
-        lines = new ArrayList<>(lineCount);
+        lines = new ArrayList<String>(lineCount);
         for (List<Token> line : src)
         {
             StringBuilder bd = new StringBuilder();

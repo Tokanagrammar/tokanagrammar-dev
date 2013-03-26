@@ -119,19 +119,19 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     public AutomaticallyParsedJavaSourceFile(String path) throws FileNotFoundException
     {
         this.path = path;
-        stats = new HashMap<>();
+        stats = new HashMap<Token, Integer>();
         
         FileReader inFile = new FileReader(path);
         Scanner in = new Scanner(inFile);
 
         int c = 0;
-        srcFile = new ArrayList<>();
+        srcFile = new ArrayList<List<Token>>();
         String line;
-        lines = new ArrayList<>();
+        lines = new ArrayList<String>();
         while (in.hasNextLine())
         {
             line = in.nextLine();
-            List<Token> wholeLine = new ArrayList<>();
+            List<Token> wholeLine = new ArrayList<Token>();
             for (String tk : line.split("\\s++"))
             {
                 Token tok = new SimpleToken(tk);
