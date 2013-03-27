@@ -161,15 +161,15 @@ public class APIs
             throw new InternalException("Service must be started before being used");
     }
     
-    public static ShufflerKind getDefaultShuffler()
-    {
-        return ShufflerKind.SIMPLE_SHUFFLER;
-    }
-    
     public static ShuffledSource shuffle (Puzzle puzzle)
     {
         SourceFile src = puzzle.getSourceFile();
         return getDefaultShuffler().getShuffler().shuffle(src, defaultNToks(src.tokenCount()));
+    }
+    
+    public static ShufflerKind getDefaultShuffler()
+    {
+        return ShufflerKind.SIMPLE_SHUFFLER;
     }
 
     private static int defaultNToks(int total)
