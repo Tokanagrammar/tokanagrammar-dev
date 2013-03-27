@@ -157,6 +157,10 @@ public class DatabaseService
         return (count == 0 ? false : true);
     }
     
+    /**
+     * 
+     * @deprecated
+     */
     private static void persistPuzzle(Puzzle p)
     {
         em.persist(p);
