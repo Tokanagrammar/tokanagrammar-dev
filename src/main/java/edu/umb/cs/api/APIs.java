@@ -87,7 +87,12 @@ public class APIs
         DatabaseService.deleteAll();
     }
 
-    
+
+    public static void addPuzzle(String filePath, String expResult, Hint...hints)
+    {
+	DatabaseService.addPuzzle(filePath, expResult, hints);
+    }
+
     public static User newUser(String username)
     {
         checkStarted();
