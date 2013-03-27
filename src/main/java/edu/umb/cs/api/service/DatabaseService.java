@@ -90,7 +90,7 @@ public class DatabaseService
      */
     public static void closeConnection()
     {   
-        em.getTransaction().commit();
+        //em.getTransaction().commit();
         em.close();
         emf.close();
     }
