@@ -91,7 +91,7 @@ public class APIs
 
     public static void addPuzzle(String filePath, String expResult, Hint...hints)
     {
-	DatabaseService.addPuzzle(filePath, expResult, hints);
+    	DatabaseService.addPuzzle(filePath, expResult, expResult, hints);
     }
 
     public static User newUser(String username)
