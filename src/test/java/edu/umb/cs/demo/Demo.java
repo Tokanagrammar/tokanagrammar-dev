@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.umb.cs.api.APIs;
 import edu.umb.cs.api.Session;
+import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.source.ShufflerKind;
@@ -18,8 +19,11 @@ public class Demo {
 		//start the db service
 		APIs.start();
 		
-		User testUser = APIs.newUser("testUser");
-		Session session = APIs.newSession(testUser);
+		//User testUser = APIs.newUser("testUser");
+		//Session session = APIs.newSession(testUser);
+		
+		APIs.addPuzzle("C:\\Users\\Matt\\git\\tokanagrammar-dev\\puzzles\\HelloWorld.java", "Hello, world", "", (Hint) null);
+		
 		List<Puzzle> puzzles = APIs.getPuzzles();
 		
 		System.out.println(puzzles.size());
@@ -28,19 +32,7 @@ public class Demo {
 		
 		SourceFile sourceFile = demoPuzzle.getSourceFile();
 		
-		System.out.println(sourceFile.getStatistic());
-		
-//		for(Token token : ne){
-//			
-//		}
-//		
-//		ShufflerKind shuffler = APIs.getDefaultShuffler();
-//		
-//		
-		
-		
-		
-		APIs.stop();
+		//APIs.stop();
 	}
 
 }
