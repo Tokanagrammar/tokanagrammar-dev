@@ -27,5 +27,5 @@ package edu.umb.cs.parser;
  */
 public final class Parsers
 {
-    private static final JavaParser defaultJavaParser = null;
+    //private static final JavaParser defaultJavaParser = null;
 }

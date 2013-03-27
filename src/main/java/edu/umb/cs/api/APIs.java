@@ -163,8 +163,7 @@ public class APIs
     public static ShuffledSource shuffle (Puzzle puzzle)
     {
         SourceFile src = puzzle.getSourceFile();
-        return getDefaultShuffler().getShuffler().shuffle(src,
-                                                          defaultNToks(src.tokenCount()));
+        return getDefaultShuffler().getShuffler().shuffle(src, defaultNToks(src.tokenCount()));
     }
 
     private static int defaultNToks(int total)
