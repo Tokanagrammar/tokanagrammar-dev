@@ -1,0 +1,159 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 21:30:49 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\test.odb' is opened by 6080@Matt-Desktop
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 21:32:35 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\test.odb' has been recovered (tr. 1-2)
+
+[2013-03-26 21:32:35 #2 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\test.odb' is opened by 6304@Matt-Desktop
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 22:02:14 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' is opened by 7600@Matt-Desktop
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 22:02:22 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' has been recovered (tr. 1-2)
+
+[2013-03-26 22:02:22 #2 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' is opened by 180@Matt-Desktop
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 22:06:15 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' is opened by 7644@Matt-Desktop
+
+[2013-03-26 22:06:15 #2 type] 
+Type edu.umb.cs.entity.Puzzle is not enhanced.
+
+[2013-03-26 22:06:15 #3 type] 
+Type edu.umb.cs.entity.Hint is not enhanced.
+
+[2013-03-26 22:06:15 #4 type] 
+Type edu.umb.cs.entity.Game is not enhanced.
+
+[2013-03-26 22:06:15 #5 type] 
+Type edu.umb.cs.entity.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 22:15:44 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' has been recovered (tr. 3-3)
+
+[2013-03-26 22:15:44 #2 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' is opened by 4340@Matt-Desktop
+
+[2013-03-26 22:15:45 #3 type] 
+Type edu.umb.cs.entity.Puzzle is not enhanced.
+
+[2013-03-26 22:15:45 #4 type] 
+Type edu.umb.cs.entity.Hint is not enhanced.
+
+[2013-03-26 22:15:45 #5 type] 
+Type edu.umb.cs.entity.Game is not enhanced.
+
+[2013-03-26 22:15:45 #6 type] 
+Type edu.umb.cs.entity.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 22:16:21 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' is opened by 6932@Matt-Desktop
+
+[2013-03-26 22:16:21 #2 type] 
+Type edu.umb.cs.entity.Puzzle is not enhanced.
+
+[2013-03-26 22:16:21 #3 type] 
+Type edu.umb.cs.entity.Hint is not enhanced.
+
+[2013-03-26 22:16:21 #4 type] 
+Type edu.umb.cs.entity.Game is not enhanced.
+
+[2013-03-26 22:16:21 #5 type] 
+Type edu.umb.cs.entity.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 22:16:47 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\Tokanagrammar.odb' is opened by 3216@Matt-Desktop
+
+[2013-03-26 22:16:47 #2 type] 
+Type edu.umb.cs.entity.Puzzle is not enhanced.
+
+[2013-03-26 22:16:47 #3 type] 
+Type edu.umb.cs.entity.Hint is not enhanced.
+
+[2013-03-26 22:16:47 #4 type] 
+Type edu.umb.cs.entity.Game is not enhanced.
+
+[2013-03-26 22:16:47 #5 type] 
+Type edu.umb.cs.entity.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 23:26:54 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\tokanagrammar.odb' is opened by 4180@Matt-Desktop
+
+[2013-03-26 23:26:54 #2 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\tokanagrammar.odb' is closed by 4180@Matt-Desktop
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 23:40:27 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\tokanagrammar.odb' is opened by 356@Matt-Desktop
+
+[2013-03-26 23:40:28 #2 type] 
+Type edu.umb.cs.entity.Puzzle is not enhanced.
+
+[2013-03-26 23:40:28 #3 type] 
+Type edu.umb.cs.entity.Hint is not enhanced.
+
+[2013-03-26 23:40:28 #4 type] 
+Type edu.umb.cs.entity.Game is not enhanced.
+
+[2013-03-26 23:40:28 #5 type] 
+Type edu.umb.cs.entity.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 23:40:36 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\tokanagrammar.odb' has been recovered (tr. 3-3)
+
+[2013-03-26 23:40:36 #2 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\tokanagrammar.odb' is opened by 7864@Matt-Desktop
+
+[2013-03-26 23:40:36 #3 type] 
+Type edu.umb.cs.entity.Puzzle is not enhanced.
+
+[2013-03-26 23:40:36 #4 type] 
+Type edu.umb.cs.entity.Hint is not enhanced.
+
+[2013-03-26 23:40:36 #5 type] 
+Type edu.umb.cs.entity.Game is not enhanced.
+
+[2013-03-26 23:40:36 #6 type] 
+Type edu.umb.cs.entity.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2013-03-26 23:42:02 #1 store] 
+Database 'C:\Users\Matt\git\tokanagrammar-dev\db\tokanagrammar.odb' is opened by 60@Matt-Desktop
+
+[2013-03-26 23:42:02 #2 type] 
+Type edu.umb.cs.entity.Puzzle is not enhanced.
+
+[2013-03-26 23:42:02 #3 type] 
+Type edu.umb.cs.entity.Hint is not enhanced.
+
+[2013-03-26 23:42:02 #4 type] 
+Type edu.umb.cs.entity.Game is not enhanced.
+
+[2013-03-26 23:42:02 #5 type] 
+Type edu.umb.cs.entity.User is not enhanced.
+
