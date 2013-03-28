@@ -25,15 +25,15 @@ public class Demo {
 		//		    }
 		//		}
 		demoTokens.add(new DemoToken("keyword", "public"));
-		demoTokens.add(new DemoToken("keyword", "class"));							//removedTokens
-		demoTokens.add(new DemoToken("identifier", "HelloWorld"));				//removedTokens
+		demoTokens.add(new DemoToken("keyword", "class"));									//removedTokens
+		demoTokens.add(new DemoToken("identifier", "HelloWorld"));							//removedTokens
 		demoTokens.add(new DemoToken("delimiter", "{"));
 		demoTokens.add(new DemoToken("keyword", "public"));
 		demoTokens.add(new DemoToken("keyword", "static"));
-		demoTokens.add(new DemoToken("keyword", "void"));								//removedTokens
+		demoTokens.add(new DemoToken("keyword", "void"));									//removedTokens
 		demoTokens.add(new DemoToken("identifier", "main"));
 		demoTokens.add(new DemoToken("delimiter", "("));
-		demoTokens.add(new DemoToken("refType", "String"));							//removedTokens
+		demoTokens.add(new DemoToken("refType", "String"));									//removedTokens
 		demoTokens.add(new DemoToken("identifier", "args[]"));
 		demoTokens.add(new DemoToken("delimiter", ")"));									//removedTokens
 		demoTokens.add(new DemoToken("delimiter", "{"));
