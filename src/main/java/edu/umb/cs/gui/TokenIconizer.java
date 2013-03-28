@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
+
 import javax.imageio.ImageIO;
 
 import edu.umb.cs.demo.DemoToken;
@@ -32,13 +35,15 @@ public class TokenIconizer {
 		Font font = new Font("Courier New", Font.PLAIN, 16);
 		
 		try{
-			if(tokenType.equals("keyword")){	//actual api wants to use isKeyword etc
+			if(tokenType.equals("keyword")){	//actual api wants to use isKeyword etc once i get used to the real api
 				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png"));
 			}else if(tokenType.equals("literal")){
 				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png"));
 			}else if(tokenType.equals("identifier")){
 				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
 			}else if(tokenType.equals("quotedString")){
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
+			}else if(tokenType.equals("refType")){
 				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
 			}else if(tokenType.equals("delimiter")){
 				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_yellow.fw.png"));
@@ -50,8 +55,6 @@ public class TokenIconizer {
 		} catch(IOException e){
 			e.printStackTrace();
 		}
-		
-
 		
 		graphics = image.getGraphics();
 		FontMetrics fm = graphics.getFontMetrics();
@@ -67,7 +70,10 @@ public class TokenIconizer {
 		centerText(token.getImage(), graphics);
 		
 		graphics.dispose();
-		return new IconizedToken(resizedImage, token);
+		
+		WritableImage writableImage = SwingFXUtils.toFXImage(resizedImage, null);
+		
+		return new IconizedToken(writableImage, token);
 	}
 	
 	/**
@@ -107,21 +113,21 @@ public class TokenIconizer {
 	/*
 	 * TEST! ---> uncomment the test above to send the image somewhere.
 	 */
-	public static void main(String[] args){
-		IconizedToken test1 = iconizeToken(new DemoToken("keyword", "public"));
-		IconizedToken test2 = iconizeToken(new DemoToken("identifier", "Hello, world"));
-		IconizedToken test3 = iconizeToken(new DemoToken("delimiter", "{"));
-		//IconizedToken test4 = iconizeToken(new DemoToken("stringLit", "\"Hello, world\""));
-		
-		//test
-		try {
-			ImageIO.write(test1.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test1.png")); //test the image
-			ImageIO.write(test2.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test2.png")); //test the image
-			ImageIO.write(test3.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test3.png")); //test the image
-			//ImageIO.write(test4.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test4.png")); //test the image
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args){
+//		IconizedToken test1 = iconizeToken(new DemoToken("keyword", "public"));
+//		IconizedToken test2 = iconizeToken(new DemoToken("identifier", "Hello, world"));
+//		IconizedToken test3 = iconizeToken(new DemoToken("delimiter", "{"));
+//		//IconizedToken test4 = iconizeToken(new DemoToken("stringLit", "\"Hello, world\""));
+//		
+//		//test
+//		try {
+//			ImageIO.write(test1.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test1.png")); //test the image
+//			ImageIO.write(test2.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test2.png")); //test the image
+//			ImageIO.write(test3.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test3.png")); //test the image
+//			//ImageIO.write(test4.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test4.png")); //test the image
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 }

@@ -21,7 +21,12 @@
 package edu.umb.cs.gui;
 
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import edu.umb.cs.demo.Demo;
+import edu.umb.cs.demo.DemoToken;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +49,9 @@ public class Controller implements Initializable{
 	
 	//panels
 	@FXML
-	private TextArea board;
+	private Pane tokenBoard;
+	@FXML
+	private static Pane tokenBay;
 	@FXML
 	private TextArea outputPane;
 	
@@ -77,6 +84,11 @@ public class Controller implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize"); //See javadoc as this probably isn't necessary.
 		outputPane.appendText("Welcome to Tokanagrammar!\n");
+	}
+	
+	//try to access the tokenBay from outside
+	public static Pane getTokenBay(){
+		return tokenBay;
 	}
 
 	
@@ -151,7 +163,6 @@ public class Controller implements Initializable{
      */
 	public void resetBoardFired(ActionEvent event){
 		System.out.println("resetBoardFired");
-		//test reset output pane
 	}
 	
     /**
@@ -162,12 +173,22 @@ public class Controller implements Initializable{
 	public void logoFired(ActionEvent event){
 		System.out.println("logoFired");
 		
-		demoStart = !demoStart;
+		demoStart = !demoStart; //toggle
 		
 		if(demoStart){
 			outputPane.appendText("Starting 0.5 Demo\n");
+			
+			Demo demo = new Demo();
+			LinkedList<DemoToken> rhsTokens = demo.getRemovedTokens();
+			
+			//populate our demo tokens in the tokenBay
+			TokenSettler tokenSettler = new TokenSettler();
+			
+			tokenSettler.settleRHSTokens(rhsTokens);
+			
+			
 		}else{
-			outputPane.appendText("Demo 0.5 Stopped\n");
+			outputPane.appendText("Stopping 0.5 Demo\n");
 			//outputPane.clear();
 		}
 	}

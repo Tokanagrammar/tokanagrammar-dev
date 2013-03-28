@@ -1,23 +1,24 @@
 package edu.umb.cs.gui;
 
-import java.awt.image.BufferedImage;
-
+import javafx.scene.image.Image;
+//import javafx.scene.image.WritableImage;
 import edu.umb.cs.demo.DemoToken;
 
 public class IconizedToken {
 	
-	/**The dynamically created image represention of a token**/
-	private BufferedImage bufferedImage;
+	/**The dynamically created image representation of a token**/
+	private Image image;
 	/**The original token**/
 	private DemoToken token;
 
-	public IconizedToken(BufferedImage bufferedImage, DemoToken token) {
-		this.bufferedImage = bufferedImage;
+	public IconizedToken(Image image, DemoToken token) {
+		this.image = image;
 		this.token = token;
 	}
+
 	
-	public BufferedImage getBufferedImage(){
-		return bufferedImage;
+	public Image getImage(){
+		return image;
 	}
 	
 	public DemoToken getDemoToken(){

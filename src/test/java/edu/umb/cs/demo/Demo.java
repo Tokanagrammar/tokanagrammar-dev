@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class Demo {
 	
-	static List<DemoToken> demoTokens = new LinkedList<DemoToken>();
-	static List<DemoToken> removedTokens = new LinkedList<DemoToken>();
-	static List<DemoToken> remainingTokens = new LinkedList<DemoToken>();
+	static LinkedList<DemoToken> demoTokens = new LinkedList<DemoToken>();
+	static LinkedList<DemoToken> removedTokens = new LinkedList<DemoToken>();
+	static LinkedList<DemoToken> remainingTokens = new LinkedList<DemoToken>();
 	
 	public Demo(){
 		//the demo uses the following faux class
@@ -80,11 +80,11 @@ public class Demo {
 	
 	
 	//getTokens
-	public List<DemoToken> getRemovedTokens(){
+	public LinkedList<DemoToken> getRemovedTokens(){
 		return removedTokens;
 	}
 	
-	public List<DemoToken> getRemainingTokens(){
+	public LinkedList<DemoToken> getRemainingTokens(){
 		return remainingTokens;
 	}
 	
