@@ -36,18 +36,19 @@ public class Tokanagrammar extends Application{
 	//static Group root = new Group();		//fix this to keep track of everything needing blurring! -mhs
 	
     public static void main(String[] args) {
+        APIs.start();
         Application.launch(Tokanagrammar.class, (java.lang.String[]) null);
+        APIs.stop();
     }
 
     @Override
     public void start(Stage primaryStage) {
-    	
         try {
             //AnchorPane page = (AnchorPane) FXMLLoader.load(Tokanagrammar.class.getResource("../../../../resources/fxml/Tokanagrammar.fxml"));
         	AnchorPane page = (AnchorPane) FXMLLoader.load(Thread.currentThread().getContextClassLoader().getResource("fxml/Tokanagrammar.fxml"));
         	Scene scene = new Scene(page);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Tokanagrammar" + APIs.getVersion());
+            primaryStage.setTitle("Tokanagrammar " + APIs.getVersion());
             primaryStage.show();
             
             //root.getChildren().add(page);	// -mhs this is causing roll-overs to stop working, but I'd like to save all layers here.
