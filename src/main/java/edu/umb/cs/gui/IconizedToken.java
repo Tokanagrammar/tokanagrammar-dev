@@ -18,14 +18,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.parser;
+package edu.umb.cs.gui;
 
-/**
- * API class, provide static methods to obtain a particular kind of parser
- * (Only support Parser for Java for now)
- * @author Vy Thao Nguyen
- */
-public final class Parsers
-{
-    //private static final JavaParser defaultJavaParser = null;
+import javafx.scene.image.Image;
+//import javafx.scene.image.WritableImage;
+import edu.umb.cs.demo.DemoToken;
+
+public class IconizedToken {
+
+	/**The dynamically created image representation of a token**/
+	private Image image;
+	/**The original token**/
+	private DemoToken token;
+
+	public IconizedToken(Image image, DemoToken token) {
+		this.image = image;
+		this.token = token;
+	}
+
+
+	public Image getImage(){
+		return image;
+	}
+
+	public DemoToken getDemoToken(){
+		return token;
+	}
+
 }
