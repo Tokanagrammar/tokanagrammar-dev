@@ -44,9 +44,11 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     static class SimpleToken implements Token
     {
         private final String image;
+        private final boolean isKeyword;
         SimpleToken(String img)
         {
             image = img;
+            isKeyword = keywords.contains(img);
         }
         
         // SourceFile interface 
@@ -60,7 +62,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         @Override
         public boolean isKeyWord()
         {
-            return false;
+            return isKeyword;
         }
 
         @Override
@@ -72,7 +74,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         @Override
         public boolean isIdentifier()
         {
-            return true;
+            return !isKeyword;
         }
 
         @Override
@@ -222,5 +224,29 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
             ret.append('\n');
         }
         return ret.toString();
+    }
+    
+    private static final Set<String> keywords;
+    static
+    {
+        keywords = new HashSet<>();
+        keywords.addAll(
+                    Arrays.asList(
+                        "abstract", "assert",
+                        "boolean", "break", "byte",
+                        "case", "catch", "char", "const","continue",
+                        "do", "double",
+                        "else", "enum", "extends",
+                        "final", "finally", "float", "for",
+                        "goto",
+                        "if", "implements", "import", "instanceof", "int", "interface",
+                        "long",
+                        "native", "new",
+                        "package", "private", "protected", "public",
+                        "return",
+                        "short", "static", "strictfp", "super", "switch", "synchronized",
+                        "this", "throw", "throws", "transient", "try",
+                        "void", "volatile",
+                        "while"));
     }
 }
