@@ -46,7 +46,7 @@ public class Tokanagrammar extends Application{
         	AnchorPane page = (AnchorPane) FXMLLoader.load(Thread.currentThread().getContextClassLoader().getResource("fxml/Tokanagrammar.fxml"));
         	Scene scene = new Scene(page);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Tokanagrammar 0.1");
+            primaryStage.setTitle("Tokanagrammar 0.5");
             primaryStage.show();
             
             //root.getChildren().add(page);	// -mhs this is causing roll-overs to stop working, but I'd like to save all layers here.
@@ -67,5 +67,4 @@ public class Tokanagrammar extends Application{
     	return null;
     	//return root; //-mhs
     }
-
 }
