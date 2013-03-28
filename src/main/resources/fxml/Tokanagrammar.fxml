@@ -54,6 +54,7 @@
     </Button>
     <Button fx:id="logoButton" layoutX="792.0" layoutY="685.0" maxHeight="40.0" maxWidth="166.0" minHeight="40.0" minWidth="166.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="50.0" prefWidth="50.0" styleClass="logoButton" />
     <TextArea id="output_pane" fx:id="outputPane" editable="false" layoutX="64.0" layoutY="624.0" prefHeight="95.0" prefWidth="640.0" styleClass="outputPane" wrapText="true" />
+    <Pane fx:id="timer" layoutX="745.0" layoutY="618.0" prefHeight="60.0" prefWidth="255.0" />
   </children>
   <stylesheets>
     <URL value="@../styles/backgroundAndButtons.css" />

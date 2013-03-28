@@ -95,7 +95,7 @@ public class TokenSettler {
 			imgView.setLayoutX(rhsStartPosition);
 			imgView.setLayoutY(rhsCurrentRow * rhsRowHeight);
 			tokenBay.getChildren().add(imgView);
-			//still need to add the current iToken to the next row
+			rhsStartPosition += (tokenWidth + rhsBufferSize);
 		}
 
 	}
@@ -103,7 +103,7 @@ public class TokenSettler {
 	
 	
 	
-	//also remove rhs tokens when they are placed...
+	//also remove rhs tokens when they are placed on lhs
 	
 
 }

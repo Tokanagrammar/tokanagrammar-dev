@@ -22,11 +22,7 @@ package edu.umb.cs.gui;
 
 import java.net.URL;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import edu.umb.cs.demo.Demo;
-import edu.umb.cs.demo.DemoToken;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +31,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import edu.umb.cs.demo.Demo;
+import edu.umb.cs.demo.DemoToken;
 
 /**
  * Merge model and View Here
@@ -55,6 +53,10 @@ public class Controller implements Initializable{
 	@FXML
 	private TextArea outputPane;
 	
+	//timer
+	@FXML
+	private static Pane timer;
+	
 	//buttons
 	@FXML
 	private Button runButton;
@@ -74,34 +76,34 @@ public class Controller implements Initializable{
 	private Button logoButton;
 	
 	
-	static boolean demoStart = false;		//DEMO remove for real implementation
+	static boolean demoStart = false;		//DEMO 0.5 remove for real implementation
 	
 	
-	/**
-	 * mhs to look into-- this may not be needed.  See initialize interface documentation.
-	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println(this.getClass().getSimpleName() + ".initialize"); //See javadoc as this probably isn't necessary.
+		System.out.println(this.getClass().getSimpleName() + ".initialize");
 		outputPane.appendText("Welcome to Tokanagrammar!\n");
 	}
 	
-	//try to access the tokenBay from outside
+	/**
+	 * 
+	 * @return
+	 */
 	public static Pane getTokenBay(){
 		return tokenBay;
 	}
 
 	
-	//--------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------
 	//GUI BUTTONS
-	//--------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------
     /**
      * Called when the run button is fired.
      *
      * @param event the action event.
      */
 	public void runFired(ActionEvent event){
-		System.out.println("runFired");
+		outputPane.appendText("runFired\n");
 	}
 	
     /**
@@ -110,7 +112,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void stopFired(ActionEvent event){
-		System.out.println("stopFired");
+		outputPane.appendText("stopFired\n");
 	}
 	
     /**
@@ -119,7 +121,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void pauseFired(ActionEvent event){
-		System.out.println("pauseFired");
+		outputPane.appendText("pauseFired\n");
 		
 		//stop the timer if it's running
 		
@@ -135,7 +137,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void skipFired(ActionEvent event){
-		System.out.println("skipFired");
+		outputPane.appendText("skipFired\n");
 	}
 	
     /**
@@ -144,7 +146,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void categoryFired(ActionEvent event){
-		System.out.println("catalogFired");
+		outputPane.appendText("catalogFired\n");
 	}
 	
     /**
@@ -153,7 +155,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void difficultyFired(ActionEvent event){
-		System.out.println("difficultyFired");
+		outputPane.appendText("difficultyFired\n");
 	}
 	
     /**
@@ -162,7 +164,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void resetBoardFired(ActionEvent event){
-		System.out.println("resetBoardFired");
+		outputPane.appendText("resetBoardFired\n");
 	}
 	
     /**
@@ -171,7 +173,6 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void logoFired(ActionEvent event){
-		System.out.println("logoFired");
 		
 		demoStart = !demoStart; //toggle
 		
@@ -186,9 +187,10 @@ public class Controller implements Initializable{
 			
 			tokenSettler.settleRHSTokens(rhsTokens);
 			
-			
 		}else{
 			outputPane.appendText("Stopping 0.5 Demo\n");
+			//clear tokens
+			tokenBay.getChildren().clear();
 			//outputPane.clear();
 		}
 	}

@@ -32,7 +32,7 @@ public class TokenIconizer {
 		BufferedImage image = null; 
 		BufferedImage resizedImage = null;
 		Graphics graphics = null;
-		Font font = new Font("Courier New", Font.PLAIN, 16);
+		Font font = new Font("Courier New", Font.PLAIN, 12);
 		
 		try{
 			if(tokenType.equals("keyword")){	//actual api wants to use isKeyword etc once i get used to the real api
@@ -48,7 +48,7 @@ public class TokenIconizer {
 			}else if(tokenType.equals("delimiter")){
 				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_yellow.fw.png"));
 			}else if(tokenType.equals("operator")){
-				ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_purple.fw.png"));
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_purple.fw.png"));
 			}else if(tokenType.equals(null)){
 				//report problems
 			}
@@ -59,10 +59,10 @@ public class TokenIconizer {
 		graphics = image.getGraphics();
 		FontMetrics fm = graphics.getFontMetrics();
 		
-		if(fm.stringWidth(token.getImage()) < 32){
+		if(fm.stringWidth(token.getImage()) < 16){
 			resizedImage = resizeImage(image, TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
 		}else
-			resizedImage = resizeImage(image, TOKEN_HEIGHT, fm.stringWidth(token.getImage()) * 3, Image.SCALE_DEFAULT);
+			resizedImage = resizeImage(image, TOKEN_HEIGHT, fm.stringWidth(token.getImage()) * 2, Image.SCALE_DEFAULT);
 		
 		graphics = resizedImage.getGraphics();
 		graphics.setColor(Color.black);	//change the color later

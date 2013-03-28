@@ -75,6 +75,16 @@ public class Demo {
 		removedTokens.add(new DemoToken("delimiter", ")"));
 		removedTokens.add(new DemoToken("delimiter", "("));
 		removedTokens.add(new DemoToken("delimiter", ";"));
+		
+		//these below are just to test that the rhs handles many more tokens
+		removedTokens.add(new DemoToken("keyword", "class"));
+		removedTokens.add(new DemoToken("identifier", "TestAToken"));
+		removedTokens.add(new DemoToken("keyword", "void"));
+		removedTokens.add(new DemoToken("operator", "%="));
+		removedTokens.add(new DemoToken("refType", "String"));
+		removedTokens.add(new DemoToken("delimiter", ")"));
+		removedTokens.add(new DemoToken("identifier", "Tokanagrammar!"));
+		removedTokens.add(new DemoToken("operator", "++"));
 	}
 
 	
