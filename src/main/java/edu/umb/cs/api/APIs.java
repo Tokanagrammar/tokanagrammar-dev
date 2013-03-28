@@ -23,6 +23,7 @@ package edu.umb.cs.api;
 
 import edu.umb.cs.entity.User;
 import edu.umb.cs.api.service.DatabaseService;
+import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.source.ShuffledSource;
