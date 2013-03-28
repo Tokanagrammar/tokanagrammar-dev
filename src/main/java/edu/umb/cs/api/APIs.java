@@ -200,3 +200,4 @@ public class APIs
     
     private static final int DEFAULT_PERCENT = 5;
 }
+

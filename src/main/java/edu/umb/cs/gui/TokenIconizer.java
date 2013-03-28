@@ -20,98 +20,134 @@
  */
 package edu.umb.cs.gui;
 
-import edu.umb.cs.source.Token;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
-//import edu.umb.cs.demo.DemoToken;
-//import edu.umb.cs.source.Token;
+import edu.umb.cs.demo.DemoToken;
 
 public class TokenIconizer {
-	
-	final static int TOKEN_HEIGHT = 32;
-//	
-//	public static void main(String[] args){
-//		IconizedToken iconizedToken = iconizeToken(new DemoToken("keyword", "public"));
-//	}
-//	
+
+	final static int TOKEN_HEIGHT = 32; //token height is always the same
+	final static int MIN_WIDTH = 32;
+
 	/**
-	 * Take a token and make a graphic representation of it.
+	 * Take a token and makes a graphic representation of it.
 	 * @param token
 	 * @return an IconizedToken
 	 */
-//	public static IconizedToken iconizeToken(Token token){
+	public static IconizedToken iconizeToken(DemoToken token){
+
+		String tokenType = token.getType();
+		BufferedImage image = null; 
+		BufferedImage resizedImage = null;
+		Graphics graphics = null;
+		Font font = new Font("Courier New", Font.PLAIN, 16);
+
+		try{
+			if(tokenType.equals("keyword")){	//actual api wants to use isKeyword etc once i get used to the real api
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png"));
+			}else if(tokenType.equals("literal")){
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png"));
+			}else if(tokenType.equals("identifier")){
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
+			}else if(tokenType.equals("quotedString")){
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
+			}else if(tokenType.equals("refType")){
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
+			}else if(tokenType.equals("delimiter")){
+				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_yellow.fw.png"));
+			}else if(tokenType.equals("operator")){
+				ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_purple.fw.png"));
+			}else if(tokenType.equals(null)){
+				//report problems
+			}
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+
+		graphics = image.getGraphics();
+		FontMetrics fm = graphics.getFontMetrics();
+
+		if(fm.stringWidth(token.getImage()) < 32){
+			resizedImage = resizeImage(image, TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
+		}else
+			resizedImage = resizeImage(image, TOKEN_HEIGHT, fm.stringWidth(token.getImage()) * 3, Image.SCALE_DEFAULT);
+
+		graphics = resizedImage.getGraphics();
+		graphics.setColor(Color.black);	//change the color later
+		graphics.setFont(font);
+		centerText(token.getImage(), graphics);
+
+		graphics.dispose();
+
+		WritableImage writableImage = SwingFXUtils.toFXImage(resizedImage, null);
+
+		return new IconizedToken(writableImage, token);
+	}
+
+	/**
+	 * Center the text on the image
+	 * @param image
+	 * @param graphics
+	 */
+	private static void centerText(String image, Graphics graphics){
+	    FontMetrics fm = graphics.getFontMetrics();
+	    int width = (fm.stringWidth(image))/3;
+
+	    if(width < 16)
+	    	width = 10;
+
+	    int height = (fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2);
+	    graphics.drawString(image, width, height);
+	}
+
+	/**
+	 * Resizes an image
+	 * @param originalImage
+	 * @param height
+	 * @param width
+	 * @param type
+	 * @return
+	 */
+    private static BufferedImage resizeImage(BufferedImage originalImage, int height, int width, int type){
+		BufferedImage resizedImage = new BufferedImage(width, height, type);
+		Graphics g = resizedImage.createGraphics();
+		g.drawImage(originalImage, 0, 0, width, height, null);
+		g.dispose();
+
+		return resizedImage;
+    }
+    
+
+	/*
+	 * TEST! ---> uncomment the test above to send the image somewhere.
+	 */
+//	public static void main(String[] args){
+//		IconizedToken test1 = iconizeToken(new DemoToken("keyword", "public"));
+//		IconizedToken test2 = iconizeToken(new DemoToken("identifier", "Hello, world"));
+//		IconizedToken test3 = iconizeToken(new DemoToken("delimiter", "{"));
+//		//IconizedToken test4 = iconizeToken(new DemoToken("stringLit", "\"Hello, world\""));
 //		
-//		int tokenSize = token.getImage().length();
-//		String tokenType = token.getType();
-//		String tokenColor = null;
-//		String textColor = null;
-//		short howMany = 0;
-//		BufferedImage image = null;
-//		Graphics graphics = null;
-//		Font font = new Font("Courier New", Font.PLAIN, 16);
-//		
-//		try{
-//			if(tokenType.equals("keyword")){	//actual api wants to use isKeyword etc
-//				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png"));
-//				graphics = image.getGraphics();
-//				graphics.setColor(Color.blue);
-//				System.out.println("got here");
-//			}else if(tokenType.equals("literal")){
-//				image = ImageIO.read(new URL("images/ui/tokens/ui_token_pink.fw.png"));
-//				graphics = image.getGraphics();
-//				graphics.setColor(Color.blue);
-//			}else if(tokenType.equals("identifier")){
-//				image = ImageIO.read(new URL("images/ui/tokens/ui_token_green.fw.png"));
-//				graphics = image.getGraphics();
-//				graphics.setColor(Color.blue);
-//			}else if(tokenType.equals("quotedString")){
-//				image = ImageIO.read(new URL("images/ui/tokens/ui_token_green.fw.png"));
-//				graphics = image.getGraphics();
-//				graphics.setColor(Color.blue);
-//			}else if(tokenType.equals("delimiter")){
-//				image = ImageIO.read(new URL("images/ui/tokens/ui_token_yellow.fw.png"));
-//				graphics = image.getGraphics();
-//				graphics.setColor(Color.blue);
-//			}else if(tokenType.equals("operator")){
-//				image = ImageIO.read(new URL("images/ui/tokens/ui_token_purple.fw.png"));
-//				graphics = image.getGraphics();
-//				graphics.setColor(Color.blue);
-//			}else if(tokenType.equals(null)){
-//				//report problems
-//			}
-//		} catch(IOException e){
-//			e.printStackTrace();
-//		}
-//
-//		graphics.setFont(font);
-//		centerText(token.getImage(), token.getImage().length(), graphics);
-//		graphics.dispose();
+//		//test
 //		try {
-//			ImageIO.write(image, "png", new File("C:\\Users\\Matt\\Desktop\\test.png"));
+//			ImageIO.write(test1.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test1.png")); //test the image
+//			ImageIO.write(test2.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test2.png")); //test the image
+//			ImageIO.write(test3.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test3.png")); //test the image
+//			//ImageIO.write(test4.getBufferedImage(), "png", new File("C:\\Users\\Matt\\Desktop\\test4.png")); //test the image
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		
-//		return null;
 //	}
-//	
-//	private static void centerText(String image, int tokenLen, Graphics graphics){
-//	    FontMetrics fm = graphics.getFontMetrics();
-//	    int x = (fm.stringWidth(image)) / 2;
-//	    int y = (fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2);
-//	    graphics.drawString(image, x, y);
-//	}
-//	
 
 }

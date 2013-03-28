@@ -42,7 +42,8 @@ REM get license.txt
 COPY LICENSE.txt target\tokanagrammar\.
 
 REM get puzzles
-COPY puzzles target\tokanagrammar\.
+MD target\tokanagrammar\puzzles
+COPY puzzles target\tokanagrammar\puzzles\.
 
 REM zip them up!
 call 7z a -tzip target\tokanagrammar.zip %OUT_DIR%
