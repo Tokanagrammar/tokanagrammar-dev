@@ -37,33 +37,38 @@ import javafx.scene.layout.Pane;
  */
 public class Controller implements Initializable{
 	
-	//global
 	@FXML
-	AnchorPane mainFrame;
+	private AnchorPane mainFrame;
 	@FXML 
-	Pane legal_drag_zone;	//global
+	private Pane legal_drag_zone;
 	
-	//control panels
+	//panels
 	@FXML
-	Button runButton;
+	private TextArea board;
 	@FXML
-	Button stopButton;
-	@FXML
-	Button pauseButton;
-	@FXML
-	Button skipButton;
-	@FXML
-	Button catalogButton;
-	@FXML
-	Button difficultyButton;
-	@FXML
-	Button resetBoardButton;
-	@FXML
-	Button logoButton;	//control panels
+	private TextArea outputPane;
 	
-	//board
+	//buttons
 	@FXML
-	TextArea board;	//board
+	private Button runButton;
+	@FXML
+	private Button stopButton;
+	@FXML
+	private Button pauseButton;
+	@FXML
+	private Button skipButton;
+	@FXML
+	private Button catalogButton;
+	@FXML
+	private Button difficultyButton;
+	@FXML
+	private Button resetBoardButton;
+	@FXML
+	private Button logoButton;
+	
+	
+	static boolean demoStart = false;		//DEMO remove for real implementation
+	
 	
 	/**
 	 * mhs to look into-- this may not be needed.  See initialize interface documentation.
@@ -71,11 +76,9 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize"); //See javadoc as this probably isn't necessary.
+		outputPane.appendText("Welcome to Tokanagrammar!\n");
 	}
 
-	
-	
-	
 	
 	//--------------------------------------------------------------------------------
 	//GUI BUTTONS
@@ -148,6 +151,7 @@ public class Controller implements Initializable{
      */
 	public void resetBoardFired(ActionEvent event){
 		System.out.println("resetBoardFired");
+		//test reset output pane
 	}
 	
     /**
@@ -157,6 +161,15 @@ public class Controller implements Initializable{
      */
 	public void logoFired(ActionEvent event){
 		System.out.println("logoFired");
+		
+		demoStart = !demoStart;
+		
+		if(demoStart){
+			outputPane.appendText("Starting 0.5 Demo\n");
+		}else{
+			outputPane.appendText("Demo 0.5 Stopped\n");
+			//outputPane.clear();
+		}
 	}
 	//--------------------------------------------------------------------------------
 	//END GUI BUTTONS

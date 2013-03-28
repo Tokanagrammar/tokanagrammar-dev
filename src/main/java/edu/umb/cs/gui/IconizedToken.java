@@ -18,14 +18,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.parser;
+package edu.umb.cs.gui;
 
-/**
- * API class, provide static methods to obtain a particular kind of parser
- * (Only support Parser for Java for now)
- * @author Vy Thao Nguyen
- */
-public final class Parsers
-{
-    //private static final JavaParser defaultJavaParser = null;
+public class IconizedToken {
+
 }

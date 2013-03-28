@@ -1,0 +1,160 @@
+/*Tokanagrammar background and buttons css*/
+
+
+.uiBG {
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/ui_background.fw.png");
+}
+
+/*runButton */
+.runButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/runButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.runButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/runButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.runButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/runButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*stopButton */
+.stopButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/stopButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.stopButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/stopButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.stopButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/stopButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*pauseButton */
+.pauseButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/pauseButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.pauseButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/pauseButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.pauseButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/pauseButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*skipButton */
+.skipButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/skipButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.skipButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/skipButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.skipButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/skipButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
+
+
+/*categoryButton */
+.categoryButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/categoryButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.categoryButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/categoryButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.categoryButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/categoryButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*difficulty_easyButton */
+.difficulty_easyButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/difficulty_easyButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.difficulty_easyButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/difficulty_easyButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.difficulty_easyButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/difficulty_easyButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*resetBoardButton */
+.resetBoardButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/resetBoardButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.resetBoardButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/resetBoardButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.resetBoardButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/resetBoardButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*logoButton */
+.logoButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/logoButton.fw.png");
+	-fx-background-color: transparent;
+}
+
+.logoButton:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/logoButton_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.logoButton:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/logoButton_PRESSED.fw.png");
+	-fx-background-color: transparent;
+}
