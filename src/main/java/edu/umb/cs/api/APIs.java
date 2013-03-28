@@ -166,16 +166,28 @@ public class APIs
         return ShufflerKind.SIMPLE_SHUFFLER;
     }
     
+    /**
+     * Remove some <pre>DEFAULT_PERCENT</pre> of tokens.
+     * @param puzzle
+     * @return 
+     */
     public static ShuffledSource shuffle (Puzzle puzzle)
+    {
+        return shuffle(puzzle, DEFAULT_PERCENT);
+    }
+
+    /**
+     * 
+     * @param puzzle
+     * @param percentToRemove
+     * @return 
+     */
+    public static ShuffledSource shuffle (Puzzle puzzle, int percentToRemove)
     {
         SourceFile src = puzzle.getSourceFile();
         return getDefaultShuffler().getShuffler().shuffle(src,
-                                                          defaultNToks(src.tokenCount()));
+                                                          percentToRemove / 100 * src.tokenCount());
     }
-
-    private static int defaultNToks(int total)
-    {
-        // remove 2% of the total tokens
-        return total * 5 / 100;
-    }
+    
+    private static final int DEFAULT_PERCENT = 5;
 }
