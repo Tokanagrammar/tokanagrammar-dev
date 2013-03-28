@@ -21,13 +21,12 @@
 
 package edu.umb.cs.api;
 
-import edu.umb.cs.entity.User;
 import edu.umb.cs.api.service.DatabaseService;
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
+import edu.umb.cs.entity.User;
 import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.Shuffler;
 import edu.umb.cs.source.ShufflerKind;
 import edu.umb.cs.source.SourceFile;
 import java.util.List;
@@ -46,6 +45,8 @@ public class APIs
     private static boolean testStarted = false;
     private static boolean testStopped = false;
 
+    private static final String VERSION = "0.5"; // TODO: get this from config file
+
     public static void start()
     {
         if (started)
@@ -61,25 +62,10 @@ public class APIs
         stopped = true;
         DatabaseService.closeConnection();
     }
-    
-    // for testing
-    static void startTest()
-    {
-        if (testStarted)
-            return;
-        
-        testStarted = true;
-        DatabaseService.openConnection(TEST_DB);
-        removeAllRecords();
-    }
 
-    static void stopTest()
+    public static String getVersion()
     {
-        if (testStopped)
-            return;
-        
-        testStopped = true;
-        DatabaseService.closeConnection();
+        return VERSION;
     }
 
     public static void removeAllRecords()
@@ -154,13 +140,7 @@ public class APIs
         checkStarted();
         return DatabaseService.getAllPuzzles();
     }
-    
-    private static void checkStarted()
-    {
-        if (!started && !testStarted)
-            throw new InternalException("Service must be started before being used");
-    }
-    
+
     public static ShufflerKind getDefaultShuffler()
     {
         return ShufflerKind.SIMPLE_SHUFFLER;
@@ -189,5 +169,35 @@ public class APIs
                                                           percentToRemove / 100 * src.tokenCount());
     }
     
+     // for testing
+    
+    static void startTest()
+    {
+        if (testStarted)
+            return;
+        
+        testStarted = true;
+        DatabaseService.openConnection(TEST_DB);
+        removeAllRecords();
+    }
+
+    static void stopTest()
+    {
+        if (testStopped)
+            return;
+        
+        testStopped = true;
+        DatabaseService.closeConnection();
+    }
+
+    // private helpres 
+        
+    private static void checkStarted()
+    {
+        if (!started && !testStarted)
+            throw new InternalException("Service must be started before being used");
+    }
+    
     private static final int DEFAULT_PERCENT = 5;
 }
+
