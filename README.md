@@ -60,9 +60,10 @@ This is a `maven` project, and  build phase requires every source file to have a
 `./build_binaries.sh`
 
 6) To build binary zip package (on Windows)
-  *Note* This script requires <a href="http://www.7-zip.org">`7z`</a> to be already installed.
 
 `build_binaries.cmd`
+
+*Note* This script requires <a href="http://www.7-zip.org">`7z`</a> to be already installed.
 
 7) To build Apple OSX executable app
 
