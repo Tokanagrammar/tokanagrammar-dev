@@ -26,37 +26,43 @@ REM Requirements: 7z has to be installed
 
 SETLOCAL
 
-SET ABS_PATH=%~dp0
-SET OUT_REL_PATH=target\tokanagrammar
-SET OUT_DIR="%ABS_PATH%%OUT_REL_PATH%"
+REM get the version
+call cmd.exe /c  "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version"  | grep --extended-regexp "^[0-9.]" > tempFile.txt
+set /p version=<tempFile.txt
+del tempFile.txt
 
-call mvn -Dmaven.test.skip clean package 
+REM  run all available tests and build the distributable jar  
+call mvn clean package 
 
-REM get jar 
+REM prepare directory for packaging
 MD target\tokanagrammar
-REM workaround here! cannot rename while copying. That will corrupt the file
-COPY target\tokanagrammar*-with-dependencies.jar target\tokanagrammar\.
-REN target\tokanagrammar\*.jar tokanagrammar.jar
+
+REM get the jar to the dir, and rename to tokanagrammar-<version>.jar
+COPY target\tokanagrammar*-with-dependencies.jar target\tokanagrammar\tokanagrammar-%version%.jar
 
 REM get license.txt
 COPY LICENSE.txt target\tokanagrammar\.
 
 REM get puzzles
 MD target\tokanagrammar\puzzles
-COPY puzzles target\tokanagrammar\puzzles\.
+COPY puzzles\* target\tokanagrammar\puzzles\.
 
 REM zip them up!
-call 7z a -tzip target\tokanagrammar.zip %OUT_DIR%
+call 7z a -tzip target\tokanagrammar.zip target\tokanagrammar
 
 REM push  distributable file to website
+IF DEFINED DRY_RUN GOTO EOF
 call git clone git@github.com:Tokanagrammar/tokanagrammar.github.com.git
 cd tokanagrammar.github.com
-call git checkout -b new_version
+call git checkout -b %version%
 cd ..
 COPY target\tokanagrammar.zip tokanagrammar.github.com\downloads\.
 cd tokanagrammar.github.com
 call git add .
-call git commit -am "add upload downloadable"
-call git push origin new_version
+call git commit -am "upload downloadable for %version%"
+call git push origin %version%
 
+:EOF
 echo ALL SET
+ENDLOCAL
+
