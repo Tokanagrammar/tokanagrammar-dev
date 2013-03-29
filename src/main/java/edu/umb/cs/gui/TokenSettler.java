@@ -84,7 +84,7 @@ public class TokenSettler {
 			tokenBay.getChildren().add(imgView);
 			
 			rhsStartPosition += (tokenWidth + rhsBufferSize);
-
+			
 		}else{
 			//start a new row
 			rhsStartPosition = 0;
