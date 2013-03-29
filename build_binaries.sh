@@ -18,6 +18,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Author: Vy Thao Nguyen
+# Usage: "./build_biaries.sh [macosx]"
+#
 # if target is macosx
 #      build an OSX app (.app) file
 #
