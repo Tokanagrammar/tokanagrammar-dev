@@ -21,7 +21,11 @@ REM along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 REM author Vy Thao Nguyen
 REM Usage: ./build_binaries.cmd
-REM This will build a distribuatble zip package on windows
+REM This will build a distribuatble zip package for windows,
+REM and , 
+REM if DRY_RUN is NOT defined, upload it to tokanagrammar.github.com
+REM otherwise, the package can be found at .\target\tokanagrammar.zip
+REM
 REM Requirements: 7z has to be installed
 
 SETLOCAL
