@@ -23,7 +23,6 @@ package edu.umb.cs;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -47,7 +46,7 @@ public class Tokanagrammar extends Application{
         	AnchorPane page = (AnchorPane) FXMLLoader.load(Thread.currentThread().getContextClassLoader().getResource("fxml/Tokanagrammar.fxml"));
         	Scene scene = new Scene(page);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Tokanagrammar 0.5");
+            primaryStage.setTitle("Tokanagrammar 0.5x");
             primaryStage.show();
             
             //root.getChildren().add(page);	// -mhs this is causing roll-overs to stop working, but I'd like to save all layers here.

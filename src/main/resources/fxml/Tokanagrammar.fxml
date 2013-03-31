@@ -8,53 +8,54 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass=", uiBG" xmlns:fx="http://javafx.com/fxml" fx:controller="edu.umb.cs.gui.Controller">
+<AnchorPane id="AnchorPane" fx:id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="880.0" styleClass=", uiBG" xmlns:fx="http://javafx.com/fxml" fx:controller="edu.umb.cs.gui.Controller">
   <children>
-    <Pane id="LEGAL_DRAG_ZONE" fx:id="legal_drag_zone" layoutX="103.0" layoutY="120.0" prefHeight="488.0" prefWidth="896.0">
+    <Pane id="LEGAL_DRAG_ZONE" fx:id="legal_drag_zone" layoutX="87.0" layoutY="98.0" prefHeight="433.0" prefWidth="779.0">
       <children>
-        <Pane fx:id="tokenBay" layoutX="634.0" prefHeight="474.0" prefWidth="263.0" />
-        <Pane fx:id="tokenBoard" prefHeight="488.0" prefWidth="590.0" />
+        <Pane fx:id="tokenBay" layoutX="544.0" layoutY="3.0" prefHeight="433.0" prefWidth="232.0" />
+        <Pane fx:id="tokenBoard" layoutY="3.0" prefHeight="433.0" prefWidth="510.0" />
       </children>
     </Pane>
     <HBox id="HBox" alignment="CENTER" spacing="15.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="22.0" />
-    <Button fx:id="runButton" layoutX="107.0" layoutY="51.0" maxHeight="60.0" maxWidth="55.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#runFired" prefHeight="50.0" prefWidth="50.0" styleClass="runButton">
+    <Button fx:id="runButton" layoutX="85.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#runFired" prefHeight="50.0" prefWidth="50.0" styleClass="runButton">
       <tooltip>
         <Tooltip text="Run Source" fx:id="run_toolTip" />
       </tooltip>
     </Button>
-    <Button fx:id="stopButton" layoutX="179.0" layoutY="51.0" maxHeight="60.0" maxWidth="55.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#stopFired" prefHeight="50.0" prefWidth="50.0" styleClass="stopButton">
+    <Button fx:id="stopButton" layoutX="145.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#stopFired" prefHeight="50.0" prefWidth="50.0" styleClass="stopButton">
       <tooltip>
         <Tooltip text="Stop Compilation" fx:id="stop_tooltip" />
       </tooltip>
     </Button>
-    <Button fx:id="pauseButton" layoutX="571.0" layoutY="51.0" maxHeight="60.0" maxWidth="55.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#pauseFired" prefHeight="50.0" prefWidth="50.0" styleClass="pauseButton">
+    <Button fx:id="pauseButton" layoutX="489.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#pauseFired" prefHeight="50.0" prefWidth="50.0" styleClass="pauseButton">
       <tooltip>
         <Tooltip text="Pause Game" fx:id="pause_tooltip" />
       </tooltip>
     </Button>
-    <Button fx:id="skipButton" layoutX="643.0" layoutY="51.0" maxHeight="60.0" maxWidth="55.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#skipFired" prefHeight="50.0" prefWidth="50.0" styleClass="skipButton">
+    <Button fx:id="skipButton" layoutX="548.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#skipFired" prefHeight="50.0" prefWidth="50.0" styleClass="skipButton">
       <tooltip>
-        <Tooltip text="Skip Board" fx:id="skip_tooltip" />
+        <Tooltip text="Skip Puzzle" fx:id="skip_tooltip" />
       </tooltip>
     </Button>
-    <Button fx:id="categoryButton" layoutX="761.0" layoutY="55.0" maxHeight="60.0" maxWidth="55.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#categoryFired" prefHeight="50.0" prefWidth="50.0" styleClass="categoryButton">
+    <Button fx:id="categoryButton" layoutX="653.0" layoutY="43.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#categoryFired" prefHeight="50.0" prefWidth="50.0" styleClass="categoryButton">
       <tooltip>
         <Tooltip text="Select Category" fx:id="categrory_tooltip" />
       </tooltip>
     </Button>
-    <Button fx:id="difficulty_easyButton" layoutX="833.0" layoutY="55.0" maxHeight="60.0" maxWidth="85.0" minHeight="60.0" minWidth="85.0" mnemonicParsing="false" onAction="#difficultyFired" prefHeight="50.0" prefWidth="50.0" styleClass="difficulty_easyButton">
+    <Button fx:id="difficulty_easyButton" layoutX="718.0" layoutY="45.0" maxHeight="40.0" maxWidth="65.0" minHeight="40.0" minWidth="65.0" mnemonicParsing="false" onAction="#difficultyFired" prefHeight="50.0" prefWidth="40.0" styleClass="difficulty_easyButton">
       <tooltip>
         <Tooltip text="Select Difficulty" fx:id="difficulty_tooltip" />
       </tooltip>
     </Button>
-    <Button fx:id="resetBoardButton" layoutX="924.0" layoutY="55.0" maxHeight="60.0" maxWidth="55.0" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#resetBoardFired" prefHeight="50.0" prefWidth="50.0" styleClass="resetBoardButton">
+    <Button fx:id="resetBoardButton" layoutX="799.0" layoutY="43.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#resetBoardFired" prefHeight="50.0" prefWidth="50.0" styleClass="resetBoardButton">
       <tooltip>
         <Tooltip text="Reset Board" fx:id="reset_tooltip" />
       </tooltip>
     </Button>
-    <Button fx:id="logoButton" layoutX="792.0" layoutY="685.0" maxHeight="40.0" maxWidth="166.0" minHeight="40.0" minWidth="166.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="50.0" prefWidth="50.0" styleClass="logoButton" />
-    <TextArea id="output_pane" fx:id="outputPane" editable="false" layoutX="64.0" layoutY="624.0" prefHeight="95.0" prefWidth="640.0" styleClass="outputPane" wrapText="true" />
-    <Pane fx:id="timer" layoutX="745.0" layoutY="618.0" prefHeight="60.0" prefWidth="255.0" />
+    <TextArea id="output_pane" fx:id="outputPane" editable="false" layoutX="53.0" layoutY="533.0" prefHeight="84.0" prefWidth="550.0" styleClass="outputPane" wrapText="true" />
+    <Button fx:id="logoButton" layoutX="663.0" layoutY="597.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="40.0" prefWidth="166.0" styleClass="logoButton" />
+    <Accordion layoutX="107.0" layoutY="50.0" />
+    <Pane fx:id="timer" layoutX="639.0" layoutY="529.0" prefHeight="56.0" prefWidth="218.0" />
   </children>
   <stylesheets>
     <URL value="@../styles/backgroundAndButtons.css" />

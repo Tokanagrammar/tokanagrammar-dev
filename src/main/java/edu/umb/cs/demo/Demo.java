@@ -67,23 +67,38 @@ public class Demo {
 		remainingTokens.add(new DemoToken("delimiter", "}"));
 		
 		//7 removed tokens
-		removedTokens.add(new DemoToken("keyword", "class"));
-		removedTokens.add(new DemoToken("identifier", "HelloWorld"));
-		removedTokens.add(new DemoToken("keyword", "void"));
-		removedTokens.add(new DemoToken("refType", "String"));
-		removedTokens.add(new DemoToken("delimiter", ")"));
-		removedTokens.add(new DemoToken("delimiter", "("));
-		removedTokens.add(new DemoToken("delimiter", ";"));
+//		removedTokens.add(new DemoToken("keyword", "class"));
+//		removedTokens.add(new DemoToken("identifier", "HelloWorld"));
+//		removedTokens.add(new DemoToken("keyword", "void"));
+//		removedTokens.add(new DemoToken("refType", "String"));
+//		removedTokens.add(new DemoToken("delimiter", ")"));
+//		removedTokens.add(new DemoToken("delimiter", "("));
+//		removedTokens.add(new DemoToken("delimiter", ";"));
 		
-		//these below are just to test that the rhs handles many more tokens
-		removedTokens.add(new DemoToken("keyword", "class"));
-		removedTokens.add(new DemoToken("identifier", "TestAToken"));
-		removedTokens.add(new DemoToken("keyword", "void"));
-		removedTokens.add(new DemoToken("operator", "%="));
-		removedTokens.add(new DemoToken("refType", "String"));
+
+		removedTokens.add(new DemoToken("keyword", "public"));
+		removedTokens.add(new DemoToken("keyword", "class"));									//removedTokens
+		removedTokens.add(new DemoToken("identifier", "HelloWorld"));							//removedTokens
+		removedTokens.add(new DemoToken("delimiter", "{"));
+		removedTokens.add(new DemoToken("operator", ">>>"));
+		removedTokens.add(new DemoToken("keyword", "public"));
+		removedTokens.add(new DemoToken("keyword", "static"));
+		removedTokens.add(new DemoToken("keyword", "void"));									//removedTokens
+		removedTokens.add(new DemoToken("identifier", "main"));
+		removedTokens.add(new DemoToken("operator", "=="));
+		removedTokens.add(new DemoToken("delimiter", "("));
+		removedTokens.add(new DemoToken("refType", "String"));									//removedTokens
+		removedTokens.add(new DemoToken("identifier", "args[]"));
+		removedTokens.add(new DemoToken("delimiter", ")"));									//removedTokens
+		//removedTokens.add(new DemoToken("delimiter", "{"));
+		removedTokens.add(new DemoToken("refType", "System.out.println"));
+		removedTokens.add(new DemoToken("delimiter", "("));									//removedTokens
+		//removedTokens.add(new DemoToken("stringLit", "\"Hello, world\""));
 		removedTokens.add(new DemoToken("delimiter", ")"));
-		removedTokens.add(new DemoToken("identifier", "Tokanagrammar!"));
-		removedTokens.add(new DemoToken("operator", "++"));
+		removedTokens.add(new DemoToken("delimiter", ";"));									//removedTokens
+		removedTokens.add(new DemoToken("delimiter",  "}"));
+		removedTokens.add(new DemoToken("delimiter", "}"));
+		removedTokens.add(new DemoToken("delimiter", "}"));
 	}
 
 	//getTokens

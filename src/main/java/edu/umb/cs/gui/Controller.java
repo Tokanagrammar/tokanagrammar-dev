@@ -22,6 +22,8 @@ package edu.umb.cs.gui;
 
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -31,8 +33,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import edu.umb.cs.api.APIs;
 import edu.umb.cs.demo.Demo;
 import edu.umb.cs.demo.DemoToken;
+import edu.umb.cs.entity.Hint;
+import edu.umb.cs.entity.Puzzle;
+import edu.umb.cs.gui.util.TokenIconizer;
+import edu.umb.cs.gui.util.TokenSettler;
+import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.Token;
 
 /**
  * Merge model and View Here
@@ -83,6 +92,7 @@ public class Controller implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
 		outputPane.appendText("Welcome to Tokanagrammar!\n");
+		outputPane.appendText("Click Our Logo to Start the Demo.\n");
 	}
 	
 	/**
@@ -172,6 +182,28 @@ public class Controller implements Initializable{
      *
      * @param event the action event.
      */
+//	public void logoFired(ActionEvent event){
+//		
+//		demoStart = !demoStart; //toggle
+//		
+//		if(demoStart){
+//			
+//			APIs.start();
+//			APIs.addPuzzle("puzzles/HelloWorld.java", "Hello, world", "meta", (Hint) null);
+//			List<Puzzle> puzzles = APIs.getPuzzles();
+//			Puzzle testPuzzle = puzzles.get(0);
+//			SourceFile source = testPuzzle.getSourceFile();
+//			
+//			
+//		}else{
+//			outputPane.appendText("Stopping 0.5 Demo\n");
+//			//clear tokens
+//			tokenBay.getChildren().clear();
+//			//outputPane.clear();
+//		}
+//	}
+	
+//	API-less DEMO
 	public void logoFired(ActionEvent event){
 		
 		demoStart = !demoStart; //toggle
@@ -182,11 +214,10 @@ public class Controller implements Initializable{
 			Demo demo = new Demo();
 			LinkedList<DemoToken> rhsTokens = demo.getRemovedTokens();
 			
-			//populate our demo tokens in the tokenBay
+			LinkedList<IconizedToken> rhsIconizedTokens = TokenIconizer.iconizeTokens(rhsTokens);
+			
 			TokenSettler tokenSettler = new TokenSettler();
-			
-			tokenSettler.settleRHSTokens(rhsTokens);
-			
+			tokenSettler.settleRHSTokens(rhsIconizedTokens);
 		}else{
 			outputPane.appendText("Stopping 0.5 Demo\n");
 			//clear tokens
