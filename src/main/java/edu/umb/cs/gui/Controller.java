@@ -21,11 +21,7 @@
 package edu.umb.cs.gui;
 
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,15 +29,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import edu.umb.cs.api.APIs;
 import edu.umb.cs.demo.Demo;
-import edu.umb.cs.demo.DemoToken;
-import edu.umb.cs.entity.Hint;
-import edu.umb.cs.entity.Puzzle;
-import edu.umb.cs.gui.util.TokenIconizer;
-import edu.umb.cs.gui.util.TokenSettler;
-import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.Token;
 
 /**
  * Merge model and View Here
@@ -52,19 +40,19 @@ public class Controller implements Initializable{
 	@FXML
 	private AnchorPane mainFrame;
 	@FXML 
-	private Pane legal_drag_zone;
+	private static Pane legalDragZone;
 	
 	//panels
 	@FXML
-	private Pane tokenBoard;
+	private static Pane tokenBoard;
 	@FXML
 	private static Pane tokenBay;
 	@FXML
-	private TextArea outputPane;
+	private static TextArea outputPanel;
 	
 	//timer
 	@FXML
-	private static Pane timer;
+	private Pane timer;
 	
 	//buttons
 	@FXML
@@ -91,8 +79,8 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
-		outputPane.appendText("Welcome to Tokanagrammar!\n");
-		outputPane.appendText("Click Our Logo to Start the Demo.\n");
+		outputPanel.appendText("Welcome to Tokanagrammar!\n");
+		outputPanel.appendText("Click Our Logo to Start the Demo.\n");
 	}
 	
 	/**
@@ -101,6 +89,18 @@ public class Controller implements Initializable{
 	 */
 	public static Pane getTokenBay(){
 		return tokenBay;
+	}
+	
+	public static TextArea getOutputPane(){
+		return outputPanel;
+	}
+	
+	public static Pane getTokenBoard(){
+		return tokenBoard;
+	}
+	
+	public static Pane getLegalDragZone(){
+		return legalDragZone;
 	}
 
 	
@@ -113,7 +113,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void runFired(ActionEvent event){
-		outputPane.appendText("runFired\n");
+		outputPanel.appendText("runFired\n");
 	}
 	
     /**
@@ -122,7 +122,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void stopFired(ActionEvent event){
-		outputPane.appendText("stopFired\n");
+		outputPanel.appendText("stopFired\n");
 	}
 	
     /**
@@ -131,7 +131,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void pauseFired(ActionEvent event){
-		outputPane.appendText("pauseFired\n");
+		outputPanel.appendText("pauseFired\n");
 		
 		//stop the timer if it's running
 		
@@ -147,7 +147,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void skipFired(ActionEvent event){
-		outputPane.appendText("skipFired\n");
+		outputPanel.appendText("skipFired\n");
 	}
 	
     /**
@@ -156,7 +156,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void categoryFired(ActionEvent event){
-		outputPane.appendText("catalogFired\n");
+		outputPanel.appendText("catalogFired\n");
 	}
 	
     /**
@@ -165,7 +165,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void difficultyFired(ActionEvent event){
-		outputPane.appendText("difficultyFired\n");
+		outputPanel.appendText("difficultyFired\n");
 	}
 	
     /**
@@ -174,7 +174,7 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void resetBoardFired(ActionEvent event){
-		outputPane.appendText("resetBoardFired\n");
+		outputPanel.appendText("resetBoardFired\n");
 	}
 	
     /**
@@ -209,20 +209,14 @@ public class Controller implements Initializable{
 		demoStart = !demoStart; //toggle
 		
 		if(demoStart){
-			outputPane.appendText("Starting 0.5 Demo\n");
+			outputPanel.appendText("Starting 0.5 Demo\n");
 			
 			Demo demo = new Demo();
-			LinkedList<DemoToken> rhsTokens = demo.getRemovedTokens();
 			
-			LinkedList<IconizedToken> rhsIconizedTokens = TokenIconizer.iconizeTokens(rhsTokens);
-			
-			TokenSettler tokenSettler = new TokenSettler();
-			tokenSettler.settleRHSTokens(rhsIconizedTokens);
 		}else{
-			outputPane.appendText("Stopping 0.5 Demo\n");
+			outputPanel.appendText("Stopping 0.5 Demo\n");
 			//clear tokens
 			tokenBay.getChildren().clear();
-			//outputPane.clear();
 		}
 	}
 	//--------------------------------------------------------------------------------

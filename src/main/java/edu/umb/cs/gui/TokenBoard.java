@@ -21,13 +21,32 @@
 
 package edu.umb.cs.gui;
 
-public class OutputPane {
-	
-	//clear the outputPane
-	
-	//write to the outputPane 
-	//- enable write of small icons to the outputPane 
-	
-	//getOutputPane
+import java.util.LinkedList;
 
+import javafx.scene.layout.Pane;
+
+public class TokenBoard {
+	
+	//getBoard
+	
+	//getAllTokens (children of board)
+	
+	//checkInToBoard(iconizedToken) at such and such position
+	
+	//checkOutOfBoard(iconizedToken)
+	
+	//probably will have to get the ParentBoard (LegalDragZone) to check bounds etc.
+	private Pane pane;
+	
+	public TokenBoard(){
+		this.pane = Controller.getTokenBoard();
+	}
+	
+	/**
+	 * 
+	 * @param lhsTokens
+	 */
+	public void settleTokenBoard(LinkedList<IconizedToken> lhsTokens){
+		
+	}
 }

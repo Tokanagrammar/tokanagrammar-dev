@@ -21,16 +21,28 @@
 
 package edu.umb.cs.gui;
 
-public class Board {
-	
-	//getBoard
-	
-	//getAllTokens (children of board)
-	
-	//checkInToBoard(iconizedToken) at such and such position
-	
-	//checkOutOfBoard(iconizedToken)
-	
-	//
+import javafx.scene.control.TextArea;
 
+/**
+ * Gets the controller's outputPane (the console in the gui-- TextArea)
+ * @author Matt
+ *
+ */
+public class OutputPanel{
+
+	private TextArea textArea;
+	
+	public OutputPanel(){
+		this.textArea = Controller.getOutputPane();
+	}
+	
+	public void clear(){
+		textArea.clear();
+	}
+	
+	public void write(String text){
+		textArea.appendText(text + "\n");
+	}
+	
+	
 }

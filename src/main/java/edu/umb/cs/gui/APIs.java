@@ -10,8 +10,6 @@ public class APIs {
 	
 	//getOutputPane
 	
-	//use static utilities (TokenIconizer, TokenSettler)  <--- TokenSettler's settlerRHS should be moved to a method in TokenBay
-	
 	//display screens
 
 }
