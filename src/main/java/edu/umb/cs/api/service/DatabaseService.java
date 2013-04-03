@@ -95,6 +95,9 @@ public class DatabaseService
         emf.close();
     }
     
+    /**
+     * Delete everything from db.
+     */
     public static void deleteAll()
     {
         em.createQuery("DELETE FROM User u").executeUpdate();
@@ -186,7 +189,7 @@ public class DatabaseService
     
     /**
      * Add a new user to the database
-     * Will throw exception if user
+     * Will throw exception if username has already been used.
      * 
      * @param username 
      * @return the user just got created
@@ -199,6 +202,7 @@ public class DatabaseService
         
         User u = new User(username);
         em.persist(u);
+        em.getTransaction().commit();
         return u;
     }
     
@@ -207,6 +211,10 @@ public class DatabaseService
         
     }
     
+    /**
+     * 
+     * @deprecated 
+     */
     public static void persistUser(User u)
     {
         em.persist(u);
