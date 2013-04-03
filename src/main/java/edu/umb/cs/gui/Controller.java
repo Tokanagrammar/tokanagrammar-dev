@@ -209,7 +209,7 @@ public class Controller implements Initializable{
 		demoStart = !demoStart; //toggle
 		
 		if(demoStart){
-			outputPanel.appendText("Starting 0.5 Demo\n");
+			outputPanel.appendText("Starting 0.5x Demo\n");
 			
 			Demo demo = new Demo();
 			
