@@ -159,9 +159,6 @@ public class TokenIconizer {
 	 * @return
 	 */
     private static BufferedImage finalizeImage(BufferedImage originalImage, DemoToken token, Integer occurrences, int height, int width, int type){
-    	
-    	//TODO fix issue that causes left and right border of wider tokens to
-    	//be thicker than the top and bottom border
 
     	String tokenImage = token.getImage();
     	String tokenType = token.getType();
