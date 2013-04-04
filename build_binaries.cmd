@@ -1,4 +1,4 @@
-REM @ECHO OFF
+@ECHO OFF
 
 REM Copyright (C) 2013 Tokanagrammar Team
 REM 
@@ -38,17 +38,19 @@ REM get the version
 call cmd.exe /c  "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version"  | grep --extended-regexp "^[0-9.]" > tempFile.txt
 set /p version=<tempFile.txt
 del tempFile.txt
+IF ERRORLEVEL 1 GOTO EOF
 
 REM  run all available tests and build the distributable jar  
 call mvn clean package 
+IF ERRORLEVEL 1 GOTO EOF
 
 REM prepare directory for packaging
 MD %OUT_REL_PATH%
 
-echo JUST create directory
-
 REM get the jar to the dir, and rename to tokanagrammar-<version>.jar
-COPY target\tokanagrammar*-with-dependencies.jar %OUTDIR%\tokanagrammar-%version%.jar
+REM Cannot rename while copying because that would corrupt the file, for some reason
+COPY target\tokanagrammar*-with-dependencies.jar %OUTDIR%\.
+call RENAME %OUTDIR%\*.jar tokanagrammar-%version%.jar
 
 REM get license.txt
 COPY LICENSE.txt %OUTDIR%\.
@@ -64,6 +66,7 @@ echo [ ] ON DATE: %date% TIME: %time%>> %OUTDIR%\build_notes.txt
 
 REM zip them up!
 call 7z a -tzip target\tokanagrammar.zip %OUTDIR%
+IF ERRORLEVEL 1 GOTO EOF
 
 REM push  distributable file to website
 IF DEFINED DRY_RUN GOTO EOF
