@@ -18,46 +18,69 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
-import java.util.List;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class ShuffledSourceImpl implements ShuffledSource
+public class IdentifierToken implements SourceToken
 {
-    private final SourceFile original;
-    private final SourceFile shuffled;
-    private final List<SourceToken> removed;
+    private final String image;
     
-    public ShuffledSourceImpl(SourceFile original, SourceFile shuffled, List<SourceToken> removed)
+    public IdentifierToken (String img)
     {
-        this.original = original;
-        this.shuffled = shuffled;
-        this.removed = removed;
+        image = img;
     }
 
     @Override
-    public SourceFile getOrinalSource()
+    public String image()
     {
-        return original;
+        return image;
     }
 
     @Override
-    public SourceFile getShuffledSource()
+    public boolean isKeyWord()
     {
-        return shuffled;
+        return false;
     }
 
     @Override
-    public List<SourceToken> getRemovedTokens()
+    public boolean isLiteral()
     {
-        return removed;
+        return false;
     }
+
+    @Override
+    public boolean isIdentifier()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isQuotedString()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isTab()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isSpace()
+    {
+        return false;
+    }
+    
+    @Override
+    public boolean isEmpty()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

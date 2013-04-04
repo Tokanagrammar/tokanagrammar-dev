@@ -18,36 +18,68 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package edu.umb.cs.source.std;
 
-package edu.umb.cs.api;
-
-import edu.umb.cs.api.service.DatabaseService;
-import edu.umb.cs.entity.User;
-import java.util.List;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+import edu.umb.cs.source.SourceToken;
 
 /**
- * Simple test on some of the API methods
+ *
  * @author Vy Thao Nguyen
  */
-public class APITest 
+public class KeywordToken implements SourceToken
 {
-    @Before
-    public void init()
+    private final String image;
+    public KeywordToken(String img)
     {
-        APIs.startTest();
-        APIs.removeAllRecords();
+        image = img;
     }
-    
-    @Test
-    public void testNewUser()
+
+    @Override
+    public String image()
     {
-        User user = APIs.newUser("vynguyen");
-        List<User> users = APIs.getUsers();
-        
-        assertEquals(1, users.size());
-        assertEquals("vynguyen", user.getUsername());
+        return image;
     }
+
+    @Override
+    public boolean isKeyWord()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isLiteral()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isIdentifier()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isQuotedString()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isTab()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isSpace()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return false;
+    }
+
 }

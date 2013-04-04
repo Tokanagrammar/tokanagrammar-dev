@@ -37,7 +37,7 @@ public interface SourceFile
      * @param position
      * @return the token at the given line and position
      */
-    Token getToken(int line, int position);
+    SourceToken getToken(int line, int position);
     
     /**
      * 
@@ -58,10 +58,10 @@ public interface SourceFile
     int lineCount();
     
     /**
-     * Each entry == [Token --> Number of occurrences ]
-     * @return a Token-to-Occurrences mapping
+     * Each entry == [SourceToken --> Number of occurrences ]
+     * @return a SourceToken-to-Occurrences mapping
      */
-    Map<Token, Integer> getStatistic();
+    Map<SourceToken, Integer> getStatistic();
     
     /**
      * compile the source, execute and return the output

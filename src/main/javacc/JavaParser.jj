@@ -1,12 +1,33 @@
 /**
+ * Copyright (C) 2013 Tokanagrammar Team
+ *
+ * This is a jigsaw-like puzzle game,
+ * except each piece is token from a source file,
+ * and the 'complete picture' is the program.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * Define a simple grammar for scanning Java source files
- * (Derived from the J--'s Scanner)
+ * (Derived from the J--'s parser)
  *
  * This will scan, and record the tokens to build a <code>SourceFile</code>
- * object. All strings in a comment block/line  will count as one token.
+ * object.
  *
- * Note: As of this release (post-0.5), the class does NOT perform grammar checking.
- * The compilability of the source file will be checked by delagating to the
+ * Note: As of this release (post-1.0), the class does NOT perform grammar checking.
+ * The compilability of the source file will be checked by delegating to the
  * `javac`
  *
  * @author Vy Thao Nguyen
@@ -23,30 +44,48 @@ PARSER_BEGIN(JavaParser)
 package edu.umb.cs.parser;
 
 import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.std.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class JavaParser
 {
     private static final char NOT_SET = 0;
     // TODO
-}
-PARSER_END(JavaParser)
 
-/**
- *
- * Mostly placeholder
- *
- */
-SourceFile
-start():
-{
-}
-{
-    // TODO: Define rule here
-    [<IDENTIFIER>]
+
+    private SourceToken keyword(String img)
     {
-        return null;
+        // TODO: cache keywords and reuse them
+        return new KeywordToken(img);
+    }
+
+    private SourceToken bracket(String img)
+    {
+        // TODO cache brackets and reuse them
+        // might not be identifier
+        return new IdentifierToken(img);
+    }
+
+    private SourceToken tab()
+    {
+        return TabToken.INSTANCE;
+    }
+
+    private SourceToken space()
+    {
+        return SpaceToken.INSTANCE;
+    }
+
+    private SourceToken identifier(String img)
+    {
+        return new IdentifierToken(img);
     }
 }
+PARSER_END(JavaParser)
 
 
 ////////////////// TOKENS definition////////////////////////
@@ -133,4 +172,250 @@ TOKEN:
 | < CHAR_LITERAL: "'" (<ESC> | ~["'","\\","\n","\r"]) "'" >
 | < STRING_LITERAL: "\"" (<ESC> | ~["\"","\\","\n","\r"])* "\"" >   
 | < #ESC: "\\" ["n","t","b","r","f","\\","'","\""] >
+}
+
+////////////////////////////////////////////////////////
+//   Grammar starts here
+///////////////////////////////////////////////////////
+
+/**
+ *
+ * <pre>
+ *   compilationUnit ::= [PACKAGE qualifiedIdentifier SEMI]
+ *                       {IMPORT  qualifiedIdentifier SEMI}
+ *                       {typeDeclaration}
+ *                       EOF 
+ * </pre>
+ */
+SourceFile
+parseJava():
+{
+    int tkCount[] = new int[] {0};
+    int line = 0;
+    List<List<SourceToken>> srcFile = new ArrayList<List<SourceToken>>();
+    List<SourceToken> curLine = null;
+}
+{
+    [
+        <PACKAGE>
+        {
+            tkCount[0] += 2;
+            curLine = new ArrayList<SourceToken>();
+            curLine.add(keyword("package"));
+            curLine.add(space());
+            srcFile.add(curLine);
+        }
+        qualifiedIdentifier (srcFile.get(line), tkCount)
+        <SEMI>
+        {
+            ++tkCount[0];
+            ++line;
+        }
+    ]
+    (
+        <IMPORT>
+        {
+            tkCount[0] += 2;
+            curLine = new ArrayList<SourceToken>();
+            curLine.add(keyword("import"));
+            curLine.add(space());
+            srcFile.add(curLine);    
+        }
+        qualifiedIdentifier(srcFile.get(line), tkCount)
+        <SEMI>
+        {
+            ++tkCount[0];
+            ++line;
+        }
+    )*
+    (
+          line = typeDeclaration(srcFile, line, tkCount)
+    )*
+    <EOF>
+    {
+        return new JavaSourceFile("TODO", srcFile, tkCount[0]);
+    }
+}
+
+private
+void
+qualifiedIdentifier (List<SourceToken> srcLine, int tkCount[]) :
+{
+}
+{
+    <IDENTIFIER>
+    {
+        ++tkCount[0];
+        srcLine.add(identifier(token.image));
+    }
+    (LOOKAHEAD ( { getToken(1).kind == DOT } )
+        <DOT><IDENTIFIER>
+        {
+            tkCount[0] += 2;
+            srcLine.add(identifier("."));
+            srcLine.add(identifier(token.image));
+        }
+    )*
+}
+
+/**
+ * Parse a type declaration.
+ * 
+ * <pre>
+ *   typeDeclaration ::= modifiers classDeclaration
+ * </pre>
+ * 
+ */
+private
+int
+typeDeclaration(List<List<SourceToken>> src, int line, int count[]) :
+{
+}
+{
+    modifiers(src.get(line), count)
+    line = classDeclaration(src, line, count)
+    {
+        return line;
+    }
+}
+
+/**
+ * Parse modifiers.
+ * 
+ * <pre>
+ *   modifiers ::= {PUBLIC | PROTECTED | PRIVATE | STATIC | ABSTRACT}
+ * </pre>
+ * 
+ * 
+ */
+
+private
+void
+modifiers(List<SourceToken> curLine, int count[]) :
+{
+}
+{   
+    (
+        <PUBLIC> | <PROTECTED>  | <PRIVATE>  | <STATIC> | <ABSTRACT> 
+        { 
+            count[0] += 2;
+            curLine.add(keyword(token.image));
+            curLine.add(space());
+        }
+    )*
+}
+
+/**
+ * Parse a class declaration
+ *
+ * <pre>
+ *   classDeclaration ::= CLASS IDENTIFIER 
+ *                        [EXTENDS qualifiedIdentifier] 
+ *                        classBody
+ * </pre>
+ *
+ */
+private
+int
+classDeclaration(List<List<SourceToken>> src, int line, int count[]) :
+{
+    List<SourceToken> curLine = null;
+}
+{
+    <CLASS>
+    {
+        count[0] += 2;
+        curLine = src.get(line);
+        curLine.add(keyword("class"));
+        curLine.add(space());
+    }
+    <IDENTIFIER>
+    {
+        ++count[0];
+        src.get(line).add(identifier(token.image));
+    }
+    [
+        <EXTENDS>
+        {
+            count[0] += 3;
+            curLine = src.get(line);
+            curLine.add(space());
+            curLine.add(keyword("extends"));
+            curLine.add(space());
+        }
+        qualifiedIdentifier(src.get(line), count)
+    ]
+    {
+        ++line;
+    }
+    line = classBody(src, line, count)
+    {
+        return line;
+    }
+}
+
+/**
+ * Parse a class body.
+ * 
+ * <pre>
+ *   classBody ::= LCURLY
+ *                   {modifiers memberDecl}
+ *                 RCURLY
+ * </pre>
+ * 
+ * @return list of members in the class body.
+ */
+private
+int
+classBody (List<List<SourceToken>> src, int line, int count[]) :
+{
+}
+{
+    <LCURLY>
+    {
+        count[0] += 2;
+        src.get(line).add(bracket("{"));
+        ++line;
+        src.get(line).add(tab());
+    }
+    (
+        modifiers(src.get(line), count)
+        line = memberDecl(src, line, count, 1)
+    )*
+    <RCURLY>
+    {
+        src.get(line).add(bracket("}"));
+        ++line;
+    }
+    {
+        return line;
+    }
+        
+}
+
+/**
+ * Parse a member declaration.
+ * 
+ * <pre>
+ *   memberDecl ::= IDENTIFIER            // constructor
+ *                    formalParameters
+ *                    block
+ *                | (VOID | type) IDENTIFIER  // method
+ *                    formalParameters
+ *                    (block | SEMI)
+ *                | type variableDeclarators SEMI 
+ * </pre>
+ *
+ */
+private
+int
+memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
+{
+}
+{
+    <SEMI>
+    {
+        // TODO
+        return line;
+    }
 }

@@ -18,19 +18,65 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package edu.umb.cs.source.std;
 
-package edu.umb.cs.source;
+import edu.umb.cs.source.SourceToken;
 
 /**
- * 
+ *
  * @author Vy Thao Nguyen
  */
-public interface Token 
+public class TabToken implements SourceToken
 {
-    String image();
-    boolean isKeyWord();
-    boolean isLiteral();
-    boolean isIdentifier();
-    boolean isQuotedString();
-    boolean isEmpty();
+    public static final TabToken INSTANCE = new TabToken();
+    
+    private TabToken() {}
+    
+    @Override
+    public String image()
+    {
+        return "    ";
+    }
+
+    @Override
+    public boolean isKeyWord()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isLiteral()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isIdentifier()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isQuotedString()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isTab()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isSpace()
+    {
+        return false;
+    }
+    
+    @Override
+    public boolean isEmpty()
+    {
+        return false;
+    }
 }

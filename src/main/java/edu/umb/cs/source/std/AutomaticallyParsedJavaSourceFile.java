@@ -21,7 +21,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.Token;
+import edu.umb.cs.source.SourceToken;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
@@ -41,7 +41,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
      * Everything is treated as an identifer
      * (hence, they will be 'painted' with the same shade!)
      */
-    static class SimpleToken implements Token
+    static class SimpleToken implements SourceToken
     {
         private final String image;
         private final boolean isKeyword;
@@ -93,9 +93,9 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         @Override
         public boolean equals(Object other)
         {
-            if (other == null || !(other instanceof Token))
+            if (other == null || !(other instanceof SourceToken))
                 return false;
-            return image.equals(((Token)other).image());
+            return image.equals(((SourceToken)other).image());
         }
         
         @Override
@@ -109,13 +109,25 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         {
             return image;
         }
+
+        @Override
+        public boolean isTab()
+        {
+            return false;
+        }
+
+        @Override
+        public boolean isSpace()
+        {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
     }
     
     private final String path;
-    private final List<List<Token>> srcFile;
+    private final List<List<SourceToken>> srcFile;
     private final List<String> lines;
     private final int tokenCount;
-    private final Map<Token, Integer> stats;
+    private final Map<SourceToken, Integer> stats;
     private String rep = null;
     
     public AutomaticallyParsedJavaSourceFile(String path) throws FileNotFoundException
@@ -133,10 +145,10 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         while (in.hasNextLine())
         {
             line = in.nextLine();
-            List<Token> wholeLine = new ArrayList<>();
+            List<SourceToken> wholeLine = new ArrayList<>();
             for (String tk : line.split("\\s++"))
             {
-                Token tok = new SimpleToken(tk);
+                SourceToken tok = new SimpleToken(tk);
                 if (stats.containsKey(tok))
                     stats.put(tok, stats.get(tok) + 1);
                 wholeLine.add(tok);
@@ -157,7 +169,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     }
 
     @Override
-    public Token getToken(int line, int position)
+    public SourceToken getToken(int line, int position)
     {
         return srcFile.get(line).get(position);
     }
@@ -181,7 +193,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     }
 
     @Override
-    public Map<Token, Integer> getStatistic()
+    public Map<SourceToken, Integer> getStatistic()
     {
         return stats;
     }
@@ -204,9 +216,9 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     String buildFromSrc()
     {
         StringBuilder bd = new StringBuilder();
-        for (List<Token> line : srcFile)
+        for (List<SourceToken> line : srcFile)
         {
-            for(Token tk : line)
+            for(SourceToken tk : line)
                 bd.append(tk.image()).append(' ');
             bd.append('\n');
         }
