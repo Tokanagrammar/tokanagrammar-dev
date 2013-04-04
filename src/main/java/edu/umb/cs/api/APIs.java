@@ -83,7 +83,6 @@ public class APIs
     public static User newUser(String username)
     {
         checkStarted();
-        
         try
         {
             User user = DatabaseService.addUser(username);
