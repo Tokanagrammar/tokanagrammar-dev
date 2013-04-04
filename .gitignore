@@ -18,3 +18,5 @@ tmp/**/*
 local.properties
 .classpath
 .settings/
+/backEnd.png
+/*.ucls
