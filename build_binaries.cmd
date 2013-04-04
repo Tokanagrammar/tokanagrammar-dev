@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 REM Copyright (C) 2013 Tokanagrammar Team
 REM 
@@ -32,7 +32,7 @@ SETLOCAL
 
 SET ABS_PATH=%~dp0
 SET OUT_REL_PATH=target\tokanagrammar
-SET OUT_DIR="%ABS_PATH%%OUT_REL_PATH%"
+SET OUTDIR="%ABS_PATH%%OUT_REL_PATH%"
 
 REM get the version
 call cmd.exe /c  "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version"  | grep --extended-regexp "^[0-9.]" > tempFile.txt
@@ -43,7 +43,9 @@ REM  run all available tests and build the distributable jar
 call mvn clean package 
 
 REM prepare directory for packaging
-MD %OUTDIR%
+MD %OUT_REL_PATH%
+
+echo JUST create directory
 
 REM get the jar to the dir, and rename to tokanagrammar-<version>.jar
 COPY target\tokanagrammar*-with-dependencies.jar %OUTDIR%\tokanagrammar-%version%.jar
@@ -61,7 +63,7 @@ call git var GIT_COMMITTER_IDENT >> %OUTDIR%\build_notes.txt
 echo [ ] ON DATE: %date% TIME: %time%>> %OUTDIR%\build_notes.txt 
 
 REM zip them up!
-call 7z a -tzip target\tokanagrammar.zip %OUT_DIR%
+call 7z a -tzip target\tokanagrammar.zip %OUTDIR%
 
 REM push  distributable file to website
 IF DEFINED DRY_RUN GOTO EOF
