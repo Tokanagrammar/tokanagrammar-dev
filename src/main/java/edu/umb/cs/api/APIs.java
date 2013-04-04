@@ -83,19 +83,17 @@ public class APIs
     public static User newUser(String username)
     {
         checkStarted();
-        
-        // TODO: implement the warning mechnism
-        // ie., generate a unique username to use
-        // and issue a warning if the given username already exists
+
         try
         {
             User user = DatabaseService.addUser(username);
-            DatabaseService.persistUser(user);
             return user;
         }
         catch (Exception ex)
         {
-            
+            // TODO: implement the warning mechnism
+            // ie., generate a unique username to use
+            // and issue a warning if the given username already exists
             return null;
         }
     }
