@@ -38,7 +38,7 @@ public class APITest
     public void init()
     {
         APIs.startTest();
-        
+        APIs.removeAllRecords();
     }
     
     @Test
