@@ -23,12 +23,18 @@ package edu.umb.cs;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JDialog;
+
+import edu.umb.cs.gui.GUI;
 import javafx.application.Application;
+import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Tokanagrammar extends Application{
 	
@@ -39,21 +45,47 @@ public class Tokanagrammar extends Application{
     }
     
     static Scene scene;
-    
+
+	static final JDialog jDialog = new JDialog();
+	
     public static Scene getScene(){
     	return scene;
+    }
+    
+    static public JDialog getJDialog(){
+    	return jDialog;
     }
 
     @Override
     public void start(Stage primaryStage) {
     	
         try {
-            //AnchorPane page = (AnchorPane) FXMLLoader.load(Tokanagrammar.class.getResource("../../../../resources/fxml/Tokanagrammar.fxml"));
+        	//wrapping in a JDialog is kind of a hack...  JavaFX does not 
+        	//support the kind of windowing we want, so this is a work-around.
+        	//ie can't open centered, always on top of parent.
+			//jDialog.setUndecorated(true);
+			//jDialog.setSize(886, 689);				//no hard-coded numbers
+			//jDialog.setResizable(false);
+			//jDialog.setLocationRelativeTo(null);	//to center in the screen
+			
         	AnchorPane page = (AnchorPane) FXMLLoader.load(Thread.currentThread().getContextClassLoader().getResource("fxml/Tokanagrammar.fxml"));
         	this.scene = new Scene(page);
+        	
             primaryStage.setScene(scene);
+            //primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.setResizable(false);
             primaryStage.setTitle("Tokanagrammar 0.5x");
+            
+            //JFXPanel fxPanel = new JFXPanel();
+            //fxPanel.setScene(scene);
+            
+            //jDialog.add(fxPanel);
+            //jDialog.setVisible(true);
+            
             primaryStage.show();
+            
+            GUI gui = new GUI();
+            gui.initGUI();
             
             //root.getChildren().add(page);	// -mhs this is causing roll-overs to stop working, but I'd like to save all layers here.
             //ref BUG --- -mhs experimenting with pause blur here seems to work here, but not in controller where I want it.
