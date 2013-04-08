@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="528.0" styleClass="difficultyBg" xmlns:fx="http://javafx.com/fxml" fx:controller="edu.umb.cs.gui.screens.DifficultyScreenController">
+  <children>
+    <Pane fx:id="titlePane" layoutX="13.0" layoutY="22.0" prefHeight="30.0" prefWidth="314.0" styleClass="difficultyText" />
+    <Pane fx:id="leftPane" layoutX="20.0" layoutY="73.0" maxHeight="295.0" maxWidth="490.0" minHeight="295.0" minWidth="490.0" prefHeight="295.0" prefWidth="490.0">
+      <children>
+        <Pane fx:id="imgDisplay" layoutX="152.0" layoutY="14.0" prefHeight="116.0" prefWidth="185.0" />
+        <Pane fx:id="textPane" layoutX="7.0" layoutY="164.0" prefHeight="97.0" prefWidth="474.0">
+          <children>
+            <Button fx:id="setBtn"  layoutX="366.0" layoutY="90.0" maxHeight="34.0" maxWidth="92.0" minHeight="34.0" minWidth="92.0" mnemonicParsing="false" onAction="#setBtnFired" prefHeight="34.0" prefWidth="92.0" styleClass="setBtn" />
+          </children>
+        </Pane>
+        <Slider fx:id="slider" layoutX="95.0" layoutY="138.0" majorTickUnit="10.0" prefWidth="300.0" showTickLabels="true" />
+      </children>
+    </Pane>
+    <Button fx:id="closeBtn" layoutX="480.0" layoutY="20.0" mnemonicParsing="false" onAction="#closeBtnFired" prefHeight="34.0" prefWidth="35.0" styleClass="closeBtn" />
+  </children>
+  <stylesheets>
+    <URL value="@../styles/secondary.css" />
+  </stylesheets>
+</AnchorPane>

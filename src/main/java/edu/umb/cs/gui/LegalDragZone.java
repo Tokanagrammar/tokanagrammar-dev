@@ -18,37 +18,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package edu.umb.cs.gui;
 
-import java.util.LinkedList;
-
+import javafx.geometry.Bounds;
 import javafx.scene.layout.Pane;
 
-public class TokenBoard {
-	
+public class LegalDragZone {
+
 	private static Pane pane;
-	
-	private static final TokenBoard tokenBoard = new TokenBoard();
-	
-	private TokenBoard(){}
+	private static final LegalDragZone ldz = new LegalDragZone();
+	private LegalDragZone(){}
 	
 	/**
-	 * There can only be one instance of the TokenBoard
+	 * There can only be one instance of the LegalDragZone
 	 * at any time.  This uses the Singleton pattern to ensure this.
 	 * @return
 	 */
-	public static TokenBoard getInstance(){
-		pane = Controller.getTokenBoard();
-		return tokenBoard;
+	public static LegalDragZone getInstance(){
+		pane = Controller.getLegalDragZone();
+		return ldz;
 	}
-		
+
+	public Pane getPane(){
+		return pane;
+	}
 	
-	/**
-	 * 
-	 * @param lhsTokens
-	 */
-	public void settleTokenBoard(LinkedList<IconizedToken> lhsTokens){
-		
+	public Bounds getBounds(){
+		return pane.getBoundsInLocal();
 	}
+	
+	public double getHeight(){
+		return pane.getBoundsInLocal().getHeight();
+	}
+	
+	public double getWidth(){
+		return pane.getBoundsInLocal().getWidth();
+	}
+	
 }
