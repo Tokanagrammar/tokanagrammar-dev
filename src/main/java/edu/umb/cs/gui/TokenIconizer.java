@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.gui.util;
+package edu.umb.cs.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -41,7 +41,6 @@ import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
 
 import edu.umb.cs.demo.DemoToken;
-import edu.umb.cs.gui.IconizedToken;
 
 /**
  * 

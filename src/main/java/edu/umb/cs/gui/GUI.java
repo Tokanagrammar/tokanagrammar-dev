@@ -35,7 +35,6 @@ import javafx.scene.text.Text;
 import edu.umb.cs.demo.DemoSource;
 import edu.umb.cs.demo.DemoTokens;
 import edu.umb.cs.gui.screens.CategoriesScreen;
-import edu.umb.cs.gui.util.TokenIconizer;
 
 /**
  * Handle game states and also work as a main GUI API.
