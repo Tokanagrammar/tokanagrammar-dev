@@ -799,6 +799,7 @@ variableInitializer (List<SourceToken> curLine, int count[]) :
 {
 }
 {
+    // TODO: expression() not implemented
     arrayInitializer(curLine, count) | expression(curLine, count)
 }
 
@@ -893,4 +894,183 @@ block (List<List<SourceToken>> src, int line, int count[], int level) :
         ++line; 
         return line;
      }
+}
+
+
+/**
+ * Parse a block statement.
+ * 
+ * <pre>
+ *   blockStatement ::= localVariableDeclarationStatement
+ *                    | statement
+ * </pre>
+ * 
+ * @return the last line of the statement
+ */
+private
+int
+blockStatement (List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> cur;
+}
+{
+    (
+        LOOKAHEAD ( (<PRIMATIVE> | <REFERENCE> ) <IDENTIFIER> )
+        localVariableDeclarationStatement (cur = new ArrayList<SourceToken>(), count, level)
+        {
+            src.add(cur);
+            ++line;
+        }
+    |
+        line = statement(src, line, count, level)
+    )
+    {
+        return line;
+    }
+}
+
+/**
+ * Parse a statement.
+ * 
+ * <pre>
+ *   statement ::= block
+ *               | IF parExpression statement [ELSE statement]
+ *               | WHILE parExpression statement 
+ *               | RETURN [expression] SEMI
+ *               | SEMI 
+ *               | statementExpression SEMI
+ * </pre>
+ * 
+ * @return an AST for a statement.
+ */
+
+private
+int
+statement (List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> curLine;
+    int n;
+}
+{
+    (
+        line = block (src, line, count, level)
+    |
+        <IF>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("if"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        parExpression(curLine, count)                 // condition
+        line = statement(src, line, count, level + 1) // consequence
+
+        // alternative
+        [
+            LOOKAHEAD( <ELSE> )
+            <ELSE>
+            {
+                curLine = new ArrayList<SourceToken>();
+                src.add(curLine);
+
+                n = 0;
+                while (n++ < level)
+                    curLine.add(tab());
+                count[0] += level;
+
+                curLine.add(keyword("else"));
+                ++count[0];
+                ++line;
+            }
+            line = statement(src, line, count, level + 1)
+        ]
+    |
+        <WHILE>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("while"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        parExpression(curLine, count)                 // condition
+        line = statement(src, line, count, level + 1) // consequence
+    |
+        <DO>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("do"));
+            ++count[0];
+            ++line;
+        }
+        line = statement(src, line, count, level + 1) // body
+        <WHILE>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("while"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        parExpression(curLine, count)                 // condition
+        <SEMI>
+        {
+            curLine.add(semi());
+            ++count[0];
+            ++line;
+        }
+    |
+        <RETURN>
+        {
+            // TODO
+            curLine = 
+        }
+        [
+            expr(curLine, count)
+        ]
+        <SEMI>
+        {
+        }
+    |
+        <SEMI> // empty statementS
+        {
+            // TODO
+        }
+    |
+        statementExpression (curLine = new ArrayList<SourceToken>(), count, level)
+        {
+            //TODO
+            src.add(curLine);
+        }
+        <SEMI>
+        {
+            // TODO
+        }
+    )    
 }
