@@ -1641,34 +1641,35 @@ creator(List<SourceToken> curLine, int count[]):
  *                            {LBRACK RBRACK}
  * </pre>
  */
-
-private JNewArrayOp newArrayDeclarator( Type type ): {
-    int line = 0;
-    ArrayList<JExpression> dimensions = new ArrayList<JExpression>();
-    JExpression expr = null;
+private
+void
+newArrayDeclarator(List<SourceToken> curLine, int count[]) :
+{
 }
 {
-    try {
-        <LBRACK> { line = token.beginLine; } 
-        expr = expression() 
-        { dimensions.add( expr ); type = new ArrayTypeName( type ); }
-        <RBRACK>
-        ( 
-            LOOKAHEAD( <LBRACK> expression() <RBRACK> )
-            <LBRACK> 
-            expr = expression() 
-            { dimensions.add( expr); type = new ArrayTypeName( type ); } 
-            <RBRACK> 
-        )*
-        (
-            LOOKAHEAD( <LBRACK> <RBRACK> )
-            <LBRACK> <RBRACK> { type = new ArrayTypeName( type ); }
-        )*
-    } 
-    catch ( ParseException e ) {
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    <LBRACK>
+    {
     }
-    { return new JNewArrayOp( line, type, dimensions ); }
+    expression(curLine, count)
+    <RBRACK>
+    {
+    }
+    ( 
+        LOOKAHEAD( <LBRACK> scanExpression() <RBRACK> )
+        <LBRACK> 
+        {
+        }
+        expression(curLine, count)
+        <RBRACK> 
+        {
+        }
+    )*
+    (
+        LOOKAHEAD( <LBRACK> <RBRACK> )
+        <LBRACK> <RBRACK>
+        {
+        }
+    )*
 }
 
 /**
@@ -1682,46 +1683,33 @@ private JNewArrayOp newArrayDeclarator( Type type ): {
  * @return an AST for a literal.
  */
 
-private JExpression literal(): {
-    JExpression expr = null;
-    String img;
-    int postfixKind = -1;
-    int base = 10;
+private
+void
+literal(List<SourceToken> curLine, int count[]) :
+{
 }
-{       
-    try {
-        expr = wholeNumLiteral()
-    |
-        <CHAR_LITERAL> 
-        { expr = new JLiteralChar( token.beginLine, token.image ); }
-    |
-        <STRING_LITERAL> 
-        { expr = 
-              new JLiteralString( token.beginLine, token.image ); }
-    | 
-        <TRUE> 
-        { expr = new JLiteralTrue( token.beginLine ); }
-    | 
-        <FALSE> 
-        { expr = new JLiteralFalse( token.beginLine ); }
-    |
-        <NULL> 
-        { expr = new JLiteralNull( token.beginLine ); }
-    } 
-    catch ( ParseException e ) { 
-        expr = new JWildExpression( token.beginLine ); 
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
+{
+    wholeNumLiteral(curLine, count)
+|
+    <CHAR_LITERAL>
+    {
     }
-    { return expr; }
+|
+    <STRING_LITERAL>
+    {
+    }
+|
+    (<TRUE> | <FALSE> | <NULL>)
+    {
+        curLine.add(keyword(token.image));
+        ++count[0];
+    }
 }
 
 private
-JExpression wholeNumLiteral() :
+void
+wholeNumLiteral(List<SourceToken> curLine, int count[]) :
 {
-    char postfix = 0;
-    int base = 10;
-    JExpression expr;
-    String img;
 }
 {
     (
@@ -1742,15 +1730,7 @@ JExpression wholeNumLiteral() :
         <BIN_LONG_LITERAL> {postfix = 'L'; base = 2;}
     )
     {
-        img = removeUnderScores(token.image);
-        switch(postfix)
-        {
-            case 'L' : 
-                expr = new JLiteralLong (token.beginLine, img, base);
-                break;
-            default:
-                expr = new JLiteralInt(token.beginLine, img, base);
-        }
-        return expr;
+        curLine.add(literal(token.image));
+        ++count[0];
     }
 }
