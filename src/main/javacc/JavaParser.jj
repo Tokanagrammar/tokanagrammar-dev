@@ -54,7 +54,11 @@ import java.util.List;
 public class JavaParser
 {
     private static final char NOT_SET = 0;
-
+    private static final List<SourceToken> emptyLine = new ArrayList<SourceToken>();
+    static
+    {
+        emptyLine.add(SpaceToken.INSTANCE);
+    }
 
     private SourceToken keyword(String img)
     {
@@ -95,45 +99,9 @@ public class JavaParser
         return new IdentifierToken(img);
     }
 
-    private boolean basicTypeFollows()
+    private List<SourceToken> emptyLine()
     {
-        switch(getToken(1).kind)
-        {
-            case VOID:
-            case BOOLEAN:
-            case CHAR:
-            case BYTE:
-            case SHORT:
-            case INT:
-            case LONG:
-            case FLOAT:
-            case DOUBLE:
-                return true;
-             default:
-                return false;
-        }
-    }
-
-    private boolean referenceTypeFollows()
-    {
-        if (basicTypeFollows())
-            return getToken(2).kind == LBRACK;
-            
-        return getToken(2).kind == IDENTIFIER;
-    }
-
-    private boolean typeFollows()
-    {
-        return basicTypeFollows() || referenceTypeFollows();
-    }
-
-    private boolean methodDeclFollows()
-    {
-        if (!typeFollows())
-            return false;
-
-        return getToken(2).kind == IDENTIFIER
-                    && getToken(3).kind == LPAREN;
+        return emptyLine;
     }
 
 }
@@ -250,12 +218,6 @@ TOKEN:
 | < #BIN_DIGIT: ["0"-"1"] >
 }
 
-// types
-TOKEN:
-{
-    < PRIMATIVE: ( <VOID> | <CHAR> | <BOOLEAN> | <BYTE> | <SHORT> | <INT> | <LONG> | <DOUBLE> | <FLOAT> ) >
-|   < REFERENCE: ( <PRIMATIVE> (<LBRACK> <RBRACK>)+ | <IDENTIFIER> (<LBRACK> <RBRACK>)* ) >    
-}
 
 // For anything else, we return an ERROR token. Without this 
 // definition the TokenManager will throw an Error when a lexical 
@@ -346,7 +308,7 @@ qualifiedIdentifier (List<SourceToken> srcLine, int tkCount[]) :
         <DOT><IDENTIFIER>
         {
             tkCount[0] += 2;
-            srcLine.add(seperator("."));
+            srcLine.add(separator("."));
             srcLine.add(identifier(token.image));
         }
     )*
@@ -537,7 +499,7 @@ classBody (List<List<SourceToken>> src, int line, int count[], int level) :
  *   memberDecl ::= IDENTIFIER            // constructor
  *                    formalParameters
  *                    block
- *                | (PRIMATIVE | REFERENCE) IDENTIFIER  // method
+ *                | (PRIMITIVE | REFERENCE) IDENTIFIER  // method
  *                    formalParameters
  *                    (block | SEMI)
  *                | type variableDeclarators SEMI 
@@ -570,7 +532,7 @@ memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
             line = block(src, line, count, level)
         )
     |
-        LOOKAHEAD ( (<PRIMATIVE> | <REFERENCE>) <IDENTIFIER> <LPAREN>)
+        LOOKAHEAD ( (scanBasicType() | scanReferenceType()) <IDENTIFIER> <LPAREN>)
         (
             type(src.get(line), count)
             {
@@ -674,7 +636,6 @@ formalParameters(List<SourceToken> curLine, int count[]) :
  * 
  */
 private
-int
 void
 formalParameter(List<SourceToken> curLine, int count[]) :
 {
@@ -697,7 +658,7 @@ formalParameter(List<SourceToken> curLine, int count[]) :
  * Parse a type.
  * 
  * <pre>
- *   type ::= PRIMATIVE 
+ *   type ::= PRIMITIVE 
  *          | REFERENCE
  * </pre>
  * 
@@ -708,17 +669,71 @@ type(List<SourceToken> curLine, int count[]) :
 {
 }
 {
-    <PRIMATIVE>
-    {
-        curLine.add(keywords(token.image));
-        ++count[0];
-    }
+    LOOKAHEAD ( scanReferenceType() )
+    referenceType(curLine, count)
 |
-    <REFERENCE>
+    basicType(curLine, count)
+}
+
+private
+void
+basicType(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    scanBasicType()
     {
-        curLine.add(identifier(token.image));
+        curLine.add(keyword(token.image));
         ++count[0];
     }
+}
+
+private
+void
+scanBasicType () :
+{
+}
+{
+    ( <VOID> | <CHAR> | <BOOLEAN> | <BYTE> | <SHORT> | <INT> | <LONG> | <DOUBLE> | <FLOAT> )
+}
+
+private
+void
+scanReferenceType () :
+{
+}
+{
+    scanBasicType() (<LBRACK> <RBRACK>)+
+|
+    <IDENTIFIER> (<DOT> <IDENTIFIER>)*
+}
+
+private
+void
+referenceType(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    basicType(curLine, count)
+    (
+        <LBRACK> <RBRACK>
+        {
+            curLine.add(separator("["));
+            curLine.add(separator("]"));
+            count[0] += 2;
+        }
+    )+
+|
+    qualifiedIdentifier(curLine, count)
+    (
+        <LBRACK> <RBRACK>
+        {
+            curLine.add(separator("["));
+            curLine.add(separator("]"));
+            count[0] += 2;
+        }
+    )*
+    
 }
 
 /**
@@ -742,7 +757,7 @@ variableDeclarators (List<SourceToken> curLine, int count[]) :
     (
         <COMMA>
         {
-            curLine.add(seperator(","));
+            curLine.add(separator(","));
             ++count[0];
             curLine.add(space());
             ++count[0];
@@ -769,7 +784,7 @@ variableDeclarator (List<SourceToken> curLine, int count[]) :
 {
     <IDENTIFIER>
     {
-        curLine.add(identifer(token.image));
+        curLine.add(identifier(token.image));
         ++count[0];
     }
     [
@@ -823,7 +838,7 @@ arrayInitializer(List<SourceToken> curLine, int count[]) :
 {
     <LCURLY>
     {
-        curLine.add(seperator("{"));
+        curLine.add(separator("{"));
         ++count[0];
     }
     [
@@ -831,7 +846,7 @@ arrayInitializer(List<SourceToken> curLine, int count[]) :
         (
             <COMMA>
             {
-                curLine.add(seperator(","));
+                curLine.add(separator(","));
                 curLine.add(space());
                 count[0] += 2;
             }
@@ -840,7 +855,7 @@ arrayInitializer(List<SourceToken> curLine, int count[]) :
     ]
     <RCURLY>
     {
-        curLine.add(seperator("}"));
+        curLine.add(separator("}"));
         ++count[0];
     }
 }
@@ -871,7 +886,7 @@ block (List<List<SourceToken>> src, int line, int count[], int level) :
             cur.add(tab());
         count[0] += level;
         
-        cur.add(seperator("{"));
+        cur.add(separator("{"));
         ++count[0];
         ++line;
         ++level;
@@ -889,9 +904,13 @@ block (List<List<SourceToken>> src, int line, int count[], int level) :
             cur.add(tab());
         count[0] += level;
 
-        cur.add(separator("{"));
+        cur.add(separator("}"));
         ++count[0];
         ++line; 
+
+        src.add(emptyLine());
+        ++line;
+        
         return line;
      }
 }
@@ -915,7 +934,7 @@ blockStatement (List<List<SourceToken>> src, int line, int count[], int level) :
 }
 {
     (
-        LOOKAHEAD ( (<PRIMATIVE> | <REFERENCE> ) <IDENTIFIER> )
+        LOOKAHEAD ( (scanBasicType() | scanReferenceType() ) <IDENTIFIER> )
         localVariableDeclarationStatement (cur = new ArrayList<SourceToken>(), count, level)
         {
             src.add(cur);
@@ -1049,28 +1068,126 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
         <RETURN>
         {
             // TODO
-            curLine = 
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("return"));
+            // TODO: what if SEMI follows? (shouldn't need the space)
+            curLine.add(space());
+            count[0] += 2; 
         }
         [
-            expr(curLine, count)
+            expression(curLine, count)
         ]
         <SEMI>
         {
+            curLine.add(semi());
+            ++count[0];
+            ++line;
         }
     |
         <SEMI> // empty statementS
         {
-            // TODO
+            // TODO (maybe just skip empty statement)
         }
     |
         statementExpression (curLine = new ArrayList<SourceToken>(), count, level)
         {
-            //TODO
             src.add(curLine);
+            ++line;
         }
         <SEMI>
         {
-            // TODO
+            curLine.add(semi());
         }
-    )    
+    )
+    {
+        return line;
+    }
+}
+
+private
+void
+statementExpression (List<SourceToken> curLine, int count[], int level) :
+{
+    // TODO
+    int n = 0;
+    while (n++ < level)
+        curLine.add(tab());
+    count[0] += level;
+}
+{
+    expression(curLine, count)
+}
+
+private
+void
+expression (List<SourceToken> curLine, int count[]) :
+{
+    // TODO
+}
+{
+    <INT_LITERAL>
+    <PLUS>
+    <INT_LITERAL>
+}
+
+private
+void
+parExpression (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    expression(curLine,count)
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+    }
+}
+
+
+/**
+ * Parse a local variable declaration statement.
+ * 
+ * <pre>
+ *   localVariableDeclarationStatement ::= type 
+ *                                           variableDeclarators 
+ *                                             SEMI
+ * </pre>
+ * 
+ * @return an AST for a variableDeclaration.
+ */
+
+private
+void
+localVariableDeclarationStatement(List<SourceToken> curLine, int count[], int level) :
+{
+    int n = 0;
+    while(n++ < level)
+        curLine.add(tab());
+    count[0] += level;
+}
+{
+    type(curLine, count)
+    {
+        curLine.add(space());
+        ++count[0];
+    }
+    variableDeclarators(curLine, count)
+    <SEMI>
+    {
+        curLine.add(semi());
+        ++count[0];
+    }
 }

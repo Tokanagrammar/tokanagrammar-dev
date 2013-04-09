@@ -6,4 +6,17 @@ public class Foo
     private Foo()
     {
     }
+
+    Foo(int x)
+    {
+    }
+
+    void bar()
+    {
+    
+}
+
+    public static bar2(double y)
+    {
+    }
 }
