@@ -23,22 +23,12 @@ package edu.umb.cs.gui;
 
 import java.util.LinkedList;
 
-import com.sun.glass.ui.Robot;
-
-import edu.umb.cs.Tokanagrammar;
-
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+
+
 /**
  * Controls, harbors tokens on the RHS.
  * 
@@ -48,50 +38,83 @@ import javafx.scene.layout.Pane;
 public class TokenBay {
 
 	/**the width and height of the tokenBay**/
-	private int tokenBayWidth;
-	private int tokenBayHeight;
-	
-	/**where to start placing the rhs tokens --first one starts as buffer**/
-	private static int startPosition = 5;
-	
-	/**the current row to be added to on the rhs**/
-	private static int currentRow = 0;
-	
-	/**spacing between a placed token on the rhs**/
-	final int bufferSize = 5;
+	private static int tokenBayWidth;
+	private static int tokenBayHeight;
 	
 	/**row height is 32 per token + 3 for a buffer**/
-	private static int rhsRowHeight = 35;
+	static final int RHSROWHEIGHT = 35;
 	
-	private Pane pane;
+	/**spacing between a placed token on the rhs**/
+	static final int BUFFERSIZE = 5;
+	
+	/**where to start placing the rhs tokens --first one starts as buffer**/
+	private static int startPosition = BUFFERSIZE;
+	
+	/**the current row to be added to on the rhs**/
+	private static int currentRow;
+	
+	/**TokenBay pane uses Controller.getTokenBay()**/
+	private static Pane pane;
+	
 	/**An image's base class is a Node**/
 	private ObservableList<Node> images;
 	
+	/**The current tokens contained in tokenBay**/
 	private LinkedList<IconizedToken> iTokens;
-	/**initTokenBay can only be called once*/
-	static boolean called = false;
 	
-	public TokenBay(LinkedList<IconizedToken> iTokens){
-		this.iTokens = iTokens;
-		this.pane = Controller.getTokenBay();
-		/**The images corresponding to the IconizedTokens**/
-		this.images = pane.getChildren();
+	private TokenBay(){ }
+	
+	private static final TokenBay tokenBay = new TokenBay();
+	
+	public static TokenBay getInstance(){
+		pane = Controller.getTokenBay();
+		tokenBayWidth = (int) pane.getBoundsInLocal().getWidth();
+		tokenBayHeight = (int) pane.getBoundsInLocal().getHeight();
+		return tokenBay;
+	}
 
+	
+	/**Places the tokens in the tokenBay by calling settleTokenBay**/
+	public void initTokenBay(LinkedList<IconizedToken> iTokens){
+		this.iTokens = iTokens;
+		this.images = pane.getChildren();
 		
-		
-		
-		
-		this.tokenBayWidth = (int) pane.getBoundsInLocal().getWidth();
-		this.tokenBayHeight = (int) pane.getBoundsInLocal().getHeight();
+		//make sure tokenbay is cleared before calling settleTokenBay
+		currentRow = 0;
+		startPosition = BUFFERSIZE;
+		images.removeAll(images);
+		iTokens.removeAll(iTokens);
+		//ready to place tokens!
+		settleTokenBay(iTokens);
 	}
 	
-	/**Called once and only once. Places the tokens in the tokenBay**/
-	public boolean initTokenBay(){
-		if(!called){
-			settleTokenBay(iTokens);
-			called = true;
+	/**
+	 * All IconizedTokens in TokenBay.
+	 * @return
+	 */
+	public LinkedList<IconizedToken> getITokens(){
+		return iTokens;
+	}
+	/**
+	 * Take a token out of the tokenBay.
+	 * @param iToken the removed IconizedToken
+	 * @return
+	 */
+	public IconizedToken remove(IconizedToken iToken){
+		IconizedToken copy = iToken;
+		images.remove(iToken.getImage());
+		iTokens.remove(iToken);
+		pane.getChildren().remove(iToken);
+		return copy;
+	}
+	/**
+	 * Place a token into tokenBay.
+	 * @param iToken
+	 * @return true if successfully added
+	 */
+	public boolean add(IconizedToken iToken){
+		if(iTokens.add(iToken))
 			return true;
-		}
 		return false;
 	}
 	
@@ -109,21 +132,14 @@ public class TokenBay {
 			IconizedToken curToken = rhsTokens.get(i);
 			double tokenWidth = curToken.getImage().getWidth();
 			
-			if(tokenBayWidth < (startPosition + tokenWidth + bufferSize) ){
+			if(tokenBayWidth < (startPosition + tokenWidth + BUFFERSIZE) )
 				tooLargeForLine.add(curToken);
-			}else{
-				Image img = curToken.getImage();
-				ImageView imgView = curToken.getImgView();//new ImageView(img);
+			else{
+				ImageView imgView = curToken.getImgView(); //comes with actions
 				imgView.setLayoutX(startPosition);
-				imgView.setLayoutY(currentRow * rhsRowHeight);
+				imgView.setLayoutY(currentRow * RHSROWHEIGHT);
 				images.add(imgView);
-
-				
-				
-				
-				
-				
-				startPosition += (tokenWidth + bufferSize);
+				startPosition += (tokenWidth + BUFFERSIZE);
 				
 				//TODO would like to play sound and then populate a token
 				//once every 150ms but thread or any kind of loop crashes
@@ -131,32 +147,10 @@ public class TokenBay {
 			}
 		}
 		if(!tooLargeForLine.isEmpty()){
-			startPosition = bufferSize;
+			startPosition = BUFFERSIZE;
 			currentRow++;
 			settleTokenBay(tooLargeForLine);
 		}
 	}
-	
-	
-	/**
-	 * All of this token bay's iTokens
-	 * @return
-	 */
-	public LinkedList<IconizedToken> getITokens(){
-		return iTokens;
-	}
-	
-	//checkInToTokenBay
-	
-	/**
-	 * Take a token out of the tokenBay (often to transfer it elsewhere).
-	 * @param iToken
-	 * @return
-	 */
-	public IconizedToken checkOutOfTokenBay(IconizedToken iToken){
-		IconizedToken copy = iToken;
-		images.remove(iToken.getImage());
-		iTokens.remove(iToken);
-		return copy;
-	}
+
 }

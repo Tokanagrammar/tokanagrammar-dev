@@ -42,20 +42,16 @@
         <Tooltip text="Select Category" fx:id="categrory_tooltip" />
       </tooltip>
     </Button>
-    <Button fx:id="difficulty_easyButton" layoutX="718.0" layoutY="45.0" maxHeight="40.0" maxWidth="65.0" minHeight="40.0" minWidth="65.0" mnemonicParsing="false" onAction="#difficultyFired" prefHeight="50.0" prefWidth="40.0" styleClass="difficulty_easyButton">
-      <tooltip>
-        <Tooltip text="Select Difficulty" fx:id="difficulty_tooltip" />
-      </tooltip>
-    </Button>
     <Button fx:id="resetBoardButton" layoutX="799.0" layoutY="43.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#resetBoardFired" prefHeight="50.0" prefWidth="50.0" styleClass="resetBoardButton">
       <tooltip>
         <Tooltip text="Reset Board" fx:id="reset_tooltip" />
       </tooltip>
     </Button>
-    <TextArea id="output_pane" fx:id="outputPanel" editable="false" layoutX="53.0" layoutY="533.0" prefHeight="84.0" prefWidth="550.0" styleClass="outputPane" wrapText="true" />
-    <Button fx:id="logoButton" layoutX="663.0" layoutY="597.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="40.0" prefWidth="166.0" styleClass="logoButton" />
+    <Pane id="outputPane" fx:id="outputPanel" layoutX="53.0" layoutY="533.0" maxHeight="84.0" maxWidth="550.0" minHeight="84.0" minWidth="550.0" prefHeight="84.0" prefWidth="550.0" styleClass="outputPane" />
+    <Button fx:id="logoButton" layoutX="663.0" layoutY="591.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="40.0" prefWidth="166.0" styleClass="logoButton" />
     <Accordion layoutX="107.0" layoutY="50.0" />
     <Pane fx:id="timer" layoutX="639.0" layoutY="529.0" prefHeight="56.0" prefWidth="218.0" />
+    <Pane fx:id="difficultyPane" layoutX="717.0" layoutY="45.0" maxHeight="40.0" maxWidth="64.0" minHeight="40.0" minWidth="64.0" prefHeight="40.0" prefWidth="64.0" />
   </children>
   <stylesheets>
     <URL value="@../styles/backgroundAndButtons.css" />

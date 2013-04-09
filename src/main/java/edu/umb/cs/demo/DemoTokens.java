@@ -1,26 +1,22 @@
+
 package edu.umb.cs.demo;
 
 import java.util.LinkedList;
 
-import edu.umb.cs.gui.IconizedToken;
-import edu.umb.cs.gui.OutputPanel;
-import edu.umb.cs.gui.TokenBay;
-import edu.umb.cs.gui.util.TokenIconizer;
 
-
-/**
- * This is the demo for release 0.5
+/*
+ * Demo tokens for release 0.8:::
+ * For testing only.
  * @author Matt
  *
  */
-public class Demo {
+public class DemoTokens {
 	
-	static LinkedList<DemoToken> demoTokens = new LinkedList<DemoToken>();
-	static LinkedList<DemoToken> removedTokens = new LinkedList<DemoToken>();
-	static LinkedList<DemoToken> remainingTokens = new LinkedList<DemoToken>();
+	private LinkedList<DemoToken> demoTokens = new LinkedList<DemoToken>();
+	private LinkedList<DemoToken> removedTokens = new LinkedList<DemoToken>();
+	private LinkedList<DemoToken> remainingTokens = new LinkedList<DemoToken>();
 	
-	public Demo(){
-
+	public DemoTokens(){
 		removedTokens.add(new DemoToken("keyword", "public"));
 		removedTokens.add(new DemoToken("keyword", "class"));									//removedTokens
 		removedTokens.add(new DemoToken("identifier", "HelloWorld"));							//removedTokens
@@ -44,12 +40,6 @@ public class Demo {
 		removedTokens.add(new DemoToken("delimiter",  "}"));
 		removedTokens.add(new DemoToken("delimiter", "}"));
 		removedTokens.add(new DemoToken("delimiter", "}"));
-		
-
-		
-		LinkedList<IconizedToken> rhsIconizedTokens = TokenIconizer.iconizeTokens(removedTokens);
-		TokenBay tokenBay = new TokenBay(rhsIconizedTokens);
-		tokenBay.initTokenBay();
 	}
 
 	//getTokens
