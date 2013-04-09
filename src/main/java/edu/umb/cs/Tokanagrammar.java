@@ -60,7 +60,7 @@ public class Tokanagrammar extends Application{
             primaryStage.setScene(scene);
             primaryStage.centerOnScreen();
             primaryStage.getIcons().add(new Image(Tokanagrammar.class.
-            		getResourceAsStream("tokanagrammarIcon.fw.png")));
+            		getResourceAsStream("/images/ui/tokanagrammarIcon.fw.png")));
             primaryStage.setTitle("Tokanagrammar 0.8");
             primaryStage.setResizable(false);
             primaryStage.sizeToScene();
@@ -75,7 +75,6 @@ public class Tokanagrammar extends Application{
             });
             
             primaryStage.show();
-            
             
             GUI.getInstance().gameState_initGUI();
             

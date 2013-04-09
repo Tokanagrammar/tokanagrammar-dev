@@ -112,14 +112,14 @@ public class Controller implements Initializable{
 		
 		
 		//The default difficulty icon is a little less than "50"
-		Image defaultDiffImg = new Image(getClass().getResourceAsStream("screens/difficulty4.fw.png"));		//TODO
+		Image defaultDiffImg = new Image(getClass().getResourceAsStream("/images/ui/secondaryScreens/difficulty4.fw.png"));		//TODO
 		final ImageView imgView = new ImageView(defaultDiffImg);
 		setCurDifficultyIcon(imgView);
 		
 		imgViewTable = new HashMap<Integer, ImageView>();
 		imgViewTable.put(1, new ImageView());
 		for(int i=0; i < 10; i++){
-			Image img = new Image(DifficultyScreen.class.getResourceAsStream("difficulty" + i + ".fw.png"));
+			Image img = new Image(DifficultyScreen.class.getResourceAsStream("/images/ui/secondaryScreens/difficulty" + i + ".fw.png"));
 			imgViewTable.put(i, new ImageView(img));
 		}
 

@@ -103,7 +103,7 @@ public class GUI {
 		Text categoryText = new Text("Please select a category ");
 		categoryText.setFont(new Font(14));
 		Image img = new Image(OutputPanel.class.
-				getResourceAsStream("categoryButton_console_display_size.fw.png"));
+				getResourceAsStream("/images/ui/categoryButton_console_display_size.fw.png"));
 		ImageView imgView = new ImageView(img);
 		Text text = new Text(" to continue.");
 		text.setFont(new Font(14));
