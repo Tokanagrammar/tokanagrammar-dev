@@ -49,6 +49,27 @@ public class JavaSourceFile implements SourceFile
         stats = buildStats(srcFile);
     }
     
+    // Object interface
+    @Override
+    public String toString()
+    {
+        StringBuilder bd = new StringBuilder();
+        bd.append("PATH = " ).append(path).append('\n');
+        bd.append("SOURCE starts here: \n--------------\n");
+        for (List<SourceToken> line : srcFile)
+        {
+            for (SourceToken tk : line)
+            {
+                bd.append(tk.image());
+            }
+            bd.append('\n');
+        }
+        
+        return bd.toString();
+    }
+    
+    // SourceFile interface
+    
     @Override
     public String getLine(int line)
     {
@@ -93,6 +114,7 @@ public class JavaSourceFile implements SourceFile
 
     private static Map<SourceToken, Integer> buildStats(List<List<SourceToken>> srcFile)
     {
-        throw new UnsupportedOperationException();
+        return null;
+        //throw new UnsupportedOperationException();
     }
 }

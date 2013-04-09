@@ -1,0 +1,9 @@
+package testing;
+import java.lang.System;
+
+public class Foo
+{
+    private Foo()
+    {
+    }
+}

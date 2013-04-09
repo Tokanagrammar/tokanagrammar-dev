@@ -54,7 +54,6 @@ import java.util.List;
 public class JavaParser
 {
     private static final char NOT_SET = 0;
-    // TODO
 
 
     private SourceToken keyword(String img)
@@ -63,11 +62,22 @@ public class JavaParser
         return new KeywordToken(img);
     }
 
-    private SourceToken bracket(String img)
+    private SourceToken separator(String img)
     {
         // TODO cache brackets and reuse them
         // might not be identifier
         return new IdentifierToken(img);
+    }
+
+    private SourceToken semi()
+    {
+        return OperatorToken.getOperator(";");
+    }
+
+    private SourceToken operator(String img)
+    {
+        // TODO validate?
+        return OperatorToken.getOperator(img);
     }
 
     private SourceToken tab()
@@ -84,6 +94,48 @@ public class JavaParser
     {
         return new IdentifierToken(img);
     }
+
+    private boolean basicTypeFollows()
+    {
+        switch(getToken(1).kind)
+        {
+            case VOID:
+            case BOOLEAN:
+            case CHAR:
+            case BYTE:
+            case SHORT:
+            case INT:
+            case LONG:
+            case FLOAT:
+            case DOUBLE:
+                return true;
+             default:
+                return false;
+        }
+    }
+
+    private boolean referenceTypeFollows()
+    {
+        if (basicTypeFollows())
+            return getToken(2).kind == LBRACK;
+            
+        return getToken(2).kind == IDENTIFIER;
+    }
+
+    private boolean typeFollows()
+    {
+        return basicTypeFollows() || referenceTypeFollows();
+    }
+
+    private boolean methodDeclFollows()
+    {
+        if (!typeFollows())
+            return false;
+
+        return getToken(2).kind == IDENTIFIER
+                    && getToken(3).kind == LPAREN;
+    }
+
 }
 PARSER_END(JavaParser)
 
@@ -96,20 +148,26 @@ SKIP: {" "|"\t"|"\n"|"\r"|"\f"}
 // Single line comment -- ignored
 SKIP: {<SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>}
 
+
 // Reserved words
 TOKEN:
 {
   < ABSTRACT: "abstract" >
 | < BOOLEAN: "boolean" >
+| < BYTE: "byte" >
 | < CHAR: "char" >
 | < CLASS: "class" >
+| < DO : "do" >
+| < DOUBLE : "double" >
 | < ELSE: "else" >
 | < EXTENDS: "extends" >
 | < FALSE: "false" >
+| < FLOAT: "float" >
 | < IF: "if" >
 | < IMPORT: "import" >
 | < INSTANCEOF: "instanceof" >
 | < INT: "int" >
+| < LONG: "long" >
 | < NEW: "new" >
 | < NULL: "null" >
 | < PACKAGE: "package">
@@ -117,9 +175,11 @@ TOKEN:
 | < PROTECTED: "protected" >
 | < PUBLIC: "public" >
 | < RETURN: "return" >
+| < SHORT: "short" >
 | < STATIC: "static" >
 | < SUPER: "super" >
 | < THIS: "this" >
+| < THROWS: "throws" >
 | < TRUE: "true" >
 | < VOID: "void" >
 | < WHILE: "while" >
@@ -130,6 +190,7 @@ TOKEN:
 {
   < PLUS: "+" >
 | < ASSIGN: "=" >
+| < DIV: "/" >
 | < DEC: "--" >
 | < EQUAL: "==" >
 | < GT: ">" >
@@ -138,6 +199,7 @@ TOKEN:
 | < LE: "<=" >
 | < LNOT: "!" >
 | < MINUS: "-" >
+| < PERCENT: "%" >
 | < PLUS_ASSIGN: "+=" >
 | < STAR: "*" >
 }
@@ -168,10 +230,40 @@ TOKEN:
 // Literals
 TOKEN:
 {
-  < INT_LITERAL: ("0" | <NON_ZERO_DIGIT> (<DIGIT>)*) >
+  < INT_LITERAL: ("0" | <NON_ZERO_DIGIT> ((<UNDERSCORE>)* <DIGIT>)*) >
+| < LONG_LITERAL: <INT_LITERAL> <L> >
+| < HEX_INT_LITERAL: ("0x" | "0X") (<HEX_DIGIT>  ((<UNDERSCORE>)+ <HEX_DIGIT>)* )+ >
+| < HEX_LONG_LITERAL: <HEX_INT_LITERAL> <L> >
+| < OCT_INT_LITERAL: "0" (<OCT_DIGIT> ((<UNDERSCORE>)+ <HEX_DIGIT>)* )+ >
+| < OCT_LONG_LITERAL: <OCT_INT_LITERAL> <L> >
+| < BIN_INT_LITERAL: "0b" (<BIN_DIGIT> ((<UNDERSCORE>)+ <BIN_DIGIT>)* )+ >
+| < BIN_LONG_LITERAL: <BIN_INT_LITERAL> <L> >
 | < CHAR_LITERAL: "'" (<ESC> | ~["'","\\","\n","\r"]) "'" >
 | < STRING_LITERAL: "\"" (<ESC> | ~["\"","\\","\n","\r"])* "\"" >   
+| < #UNDERSCORE: "_" >
+| < #L: ("l"| "L") >
+| < #D: ("d" | "D") >
+| < #F: ("f" | "F" ) >
 | < #ESC: "\\" ["n","t","b","r","f","\\","'","\""] >
+| < #HEX_DIGIT: ["a"-"f", "A"-"F", "0"-"9"] >
+| < #OCT_DIGIT: ["0"-"7"] >
+| < #BIN_DIGIT: ["0"-"1"] >
+}
+
+// types
+TOKEN:
+{
+    < PRIMATIVE: ( <VOID> | <CHAR> | <BOOLEAN> | <BYTE> | <SHORT> | <INT> | <LONG> | <DOUBLE> | <FLOAT> ) >
+|   < REFERENCE: ( <PRIMATIVE> (<LBRACK> <RBRACK>)+ | <IDENTIFIER> (<LBRACK> <RBRACK>)* ) >    
+}
+
+// For anything else, we return an ERROR token. Without this 
+// definition the TokenManager will throw an Error when a lexical 
+// error occurs, making it impossible to recover from it. So we 
+// define this ERROR token. 
+TOKEN:
+{
+ < ERROR: ~[] >
 }
 
 ////////////////////////////////////////////////////////
@@ -209,6 +301,7 @@ parseJava():
         <SEMI>
         {
             ++tkCount[0];
+            srcFile.get(line).add(semi());
             ++line;
         }
     ]
@@ -225,6 +318,7 @@ parseJava():
         <SEMI>
         {
             ++tkCount[0];
+            srcFile.get(line).add(semi());
             ++line;
         }
     )*
@@ -252,7 +346,7 @@ qualifiedIdentifier (List<SourceToken> srcLine, int tkCount[]) :
         <DOT><IDENTIFIER>
         {
             tkCount[0] += 2;
-            srcLine.add(identifier("."));
+            srcLine.add(seperator("."));
             srcLine.add(identifier(token.image));
         }
     )*
@@ -270,10 +364,12 @@ private
 int
 typeDeclaration(List<List<SourceToken>> src, int line, int count[]) :
 {
+    List<SourceToken> curLine = new ArrayList<SourceToken>();
+    src.add(curLine);
 }
 {
-    modifiers(src.get(line), count)
-    line = classDeclaration(src, line, count)
+    modifiers(curLine, count)
+    line = classDeclaration(src, line, count, 0)
     {
         return line;
     }
@@ -295,14 +391,18 @@ modifiers(List<SourceToken> curLine, int count[]) :
 {
 }
 {   
+    
     (
-        <PUBLIC> | <PROTECTED>  | <PRIVATE>  | <STATIC> | <ABSTRACT> 
+        ( <PUBLIC> | <PROTECTED> | <PRIVATE> | <STATIC> | <ABSTRACT> )
         { 
             count[0] += 2;
             curLine.add(keyword(token.image));
             curLine.add(space());
         }
     )*
+    {
+        return;
+    }
 }
 
 /**
@@ -317,7 +417,7 @@ modifiers(List<SourceToken> curLine, int count[]) :
  */
 private
 int
-classDeclaration(List<List<SourceToken>> src, int line, int count[]) :
+classDeclaration(List<List<SourceToken>> src, int line, int count[], int level) :
 {
     List<SourceToken> curLine = null;
 }
@@ -332,7 +432,7 @@ classDeclaration(List<List<SourceToken>> src, int line, int count[]) :
     <IDENTIFIER>
     {
         ++count[0];
-        src.get(line).add(identifier(token.image));
+        curLine.add(identifier(token.image));
     }
     [
         <EXTENDS>
@@ -348,7 +448,7 @@ classDeclaration(List<List<SourceToken>> src, int line, int count[]) :
     {
         ++line;
     }
-    line = classBody(src, line, count)
+    line = classBody(src, line, count, level)
     {
         return line;
     }
@@ -367,26 +467,63 @@ classDeclaration(List<List<SourceToken>> src, int line, int count[]) :
  */
 private
 int
-classBody (List<List<SourceToken>> src, int line, int count[]) :
+classBody (List<List<SourceToken>> src, int line, int count[], int level) :
 {
+    int n = 0;
+    List<SourceToken> curLine = new ArrayList<SourceToken>();
+    while (n++ < level)
+    {
+        ++count[0];
+        curLine.add(tab());
+    }
 }
 {
-    <LCURLY>
-    {
-        count[0] += 2;
-        src.get(line).add(bracket("{"));
-        ++line;
-        src.get(line).add(tab());
-    }
     (
-        modifiers(src.get(line), count)
-        line = memberDecl(src, line, count, 1)
-    )*
-    <RCURLY>
-    {
-        src.get(line).add(bracket("}"));
-        ++line;
-    }
+        <LCURLY>
+        {
+            count[0] += 2;
+            curLine.add(separator("{"));
+            src.add(curLine);
+            ++line;
+            curLine = new ArrayList<SourceToken>();
+            ++level;
+            n = 0;
+            while (n++ < level)
+            {
+                ++count[0];
+                curLine.add(tab());
+            }
+            src.add(curLine);
+        }
+        (
+            modifiers(src.get(line), count)
+            line = memberDecl(src, line, count, level)
+            {
+                curLine = new ArrayList<SourceToken>();
+                n = 0;
+                while (n++ < level)
+                {
+                    ++count[0];
+                    curLine.add(tab());
+                }
+                src.add(curLine);
+            }
+        )*
+        <RCURLY>
+        {
+            --level;
+            n = 0;
+            curLine = new ArrayList<SourceToken>();
+            while (n++ < level)
+            {
+                ++count[0];
+                curLine.add(tab());
+            }
+            curLine.add(separator("}"));
+            src.add(curLine);
+            ++line;
+        }
+    )
     {
         return line;
     }
@@ -400,7 +537,7 @@ classBody (List<List<SourceToken>> src, int line, int count[]) :
  *   memberDecl ::= IDENTIFIER            // constructor
  *                    formalParameters
  *                    block
- *                | (VOID | type) IDENTIFIER  // method
+ *                | (PRIMATIVE | REFERENCE) IDENTIFIER  // method
  *                    formalParameters
  *                    (block | SEMI)
  *                | type variableDeclarators SEMI 
@@ -411,11 +548,328 @@ private
 int
 memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
 {
+    List<SourceToken> curLine = null;
+    int n = 0;
 }
 {
-    <SEMI>
+    ( 
+        LOOKAHEAD ( <IDENTIFIER> <LPAREN> )
+        (
+            <IDENTIFIER>
+            {
+                ++count[0];
+                curLine = src.get(line);
+                curLine.add(identifier(token.image));
+                curLine.add(space());
+                ++count[0];
+            }
+            formalParameters(curLine, count)
+            {
+                ++line;
+            }
+            line = block(src, line, count, level)
+        )
+        |
+        LOOKAHEAD ( (<PRIMATIVE> | <REFERENCE>) <IDENTIFIER> <LPAREN>)
+        (
+            type(src.get(line), count)
+            {
+                src.get(line).add(space());
+                ++count[0];
+            }
+            <IDENTIFIER>
+            {
+                ++count[0];
+                curLine = src.get(line);
+                curLine.add(identifier(token.image));
+                curLine.add(space());
+                ++count[0];
+            }
+            formalParameters(curLine, count)
+            // TODO add declared exceptions HERE
+            {
+                ++line;
+            }
+            (
+                <SEMI>
+                {
+                    // put SEMI on previous line
+                    --line;
+                    src.get(line).add(semi());
+                    ++count[0];
+                }
+            |  
+                line = block(src, line, count, level)
+            )
+        )
+    |
+        (
+            type(curLine = src.get(line), count)
+            {
+                curLine.add(space());
+                ++count[0];
+            }
+            variableDeclarators(curLine, count)
+            <SEMI>
+            {
+                curLine.add(semi());
+                ++count[0];
+            }
+        )
+    )
     {
-        // TODO
         return line;
     }
+}
+
+/**
+ * parse formal parameters
+ * 
+ * <pre>
+ *   formalParameters ::= LPAREN 
+ *                          [formalParameter 
+ *                            {COMMA  formalParameter}]
+ *                        RPAREN
+ * </pre>
+ * 
+ */
+private
+void
+formalParameters(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    [
+        formalParameter(curLine, count)
+        (
+            <COMMA>
+            {
+                curLine.add(separator(","));
+                ++count[0];
+                curLine.add(space());
+                ++count[0];
+            }
+            formalParameter(curLine, count)
+        )*
+    ]
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+        return;
+    }
+}
+
+/**
+ * Parse a formal parameter.
+ * 
+ * <pre>
+ *   formalParameter ::= type IDENTIFIER
+ * </pre>
+ * 
+ */
+private
+int
+void
+formalParameter(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    type(curLine, count)
+    {
+        curLine.add(space());
+        ++count[0];
+    }
+    <IDENTIFIER>
+    {
+        curLine.add(identifier(token.image));
+        ++count[0];
+    }
+}
+
+
+/**
+ * Parse a type.
+ * 
+ * <pre>
+ *   type ::= PRIMATIVE 
+ *          | REFERENCE
+ * </pre>
+ * 
+ */
+private
+void
+type(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <PRIMATIVE>
+    {
+        curLine.add(keywords(token.image));
+        ++count[0];
+    }
+|
+    <REFERENCE>
+    {
+        curLine.add(identifier(token.image));
+        ++count[0];
+    }
+}
+
+/**
+ * Parse variable declarators.
+ * 
+ * <pre>
+ *   variableDeclarators ::= variableDeclarator 
+ *                             {COMMA variableDeclarator}
+ * </pre>
+ * 
+ * @param current line, token count
+ */
+
+private
+void
+variableDeclarators (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    variableDeclarator(curLine, count)
+    (
+        <COMMA>
+        {
+            curLine.add(seperator(","));
+            ++count[0];
+            curLine.add(space());
+            ++count[0];
+        }
+        variableDeclarator(curLine, count)
+    )*
+}
+
+/**
+ * Parse a variable declarator.
+ * 
+ * <pre>
+ *   variableDeclarator ::= IDENTIFIER
+ *                          [ASSIGN variableInitializer]
+ * </pre>
+ * 
+ */
+
+private
+void
+variableDeclarator (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <IDENTIFIER>
+    {
+        curLine.add(identifer(token.image));
+        ++count[0];
+    }
+    [
+        <ASSIGN>
+        {
+            curLine.add(space());
+            curLine.add(operator("="));
+            curLine.add(space());
+            count[0] += 3;
+        }
+        variableInitializer(curLine, count)
+    ]
+}
+
+/**
+ * Parse a variable initializer.
+ * 
+ * <pre>
+ *   variableInitializer ::= arrayInitializer
+ *                         | expression
+ * </pre>
+ *
+ */
+private
+void
+variableInitializer (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    arrayInitializer(curLine, count) | expression(curLine, count)
+}
+
+/**
+ * Parse an array initializer.
+ * 
+ * <pre>
+ *   arrayInitializer ::= LCURLY 
+ *                          [variableInitializer 
+ *                            {COMMA variableInitializer} [COMMA]]
+ *                        RCURLY 
+ * </pre>
+ * 
+ */
+
+private
+void
+arrayInitializer(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    try {
+        <LCURLY> { line = token.beginLine; }
+        [ 
+            anInitializer = 
+              variableInitializer( expected.componentType() ) 
+            { initials.add( anInitializer ); }
+            ( 
+                <COMMA> anInitializer = 
+                    variableInitializer( expected.componentType() ) 
+                { initials.add( anInitializer ); } 
+            )* 
+        ] 
+        <RCURLY>
+    } 
+    catch ( ParseException e ) { 
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return new JArrayInitializer( line, expected, initials ); }
+}
+
+private
+int
+block (List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> cur;
+    int n;
+}
+{
+     (<LCURLY>
+     <RCURLY>)
+     {
+        cur = new ArrayList<SourceToken>();
+        n = 0;
+        while (n++ < level)
+            cur.add(tab());
+        cur.add(separator("{"));
+        ++count[0];
+        src.add(cur);
+        ++line;
+        
+
+        cur = new ArrayList<SourceToken>();
+        n = 0;
+        while (n++ < level)
+            cur.add(tab());
+        cur.add(separator("}"));
+        ++count[0];
+        src.add(cur);
+        ++line;
+        
+        return line;
+     }
 }
