@@ -92,6 +92,7 @@ public class GUI {
 		tokenBoard = TokenBoard.getInstance();
 		legalDragZone = LegalDragZone.getInstance();
 		outputPanel = OutputPanel.getInstance();
+		timer = Timer.getInstance();
 		
 		if(showTutorial){ }														//not implemented.
 		
@@ -124,6 +125,8 @@ public class GUI {
 		//close the categories screen and begin the game
 		CategoriesScreen.tearDownScreen();
 		
+
+		timer.start();
 		//get the output panel and announce the puzzle and the hint(s)
 		outputPanel.clear();
 		

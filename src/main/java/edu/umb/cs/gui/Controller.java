@@ -33,8 +33,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.Glow;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -62,14 +60,13 @@ public class Controller implements Initializable{
 	@FXML
 	private static Pane outputPanel;
 	
-
 	@FXML
 	private static Pane difficultyPane;			//this is being added to allow dynamic change of this button
 	private static ImageView curDifficultyIcon;
 	
 	//timer
 	@FXML
-	private Pane timer;
+	private static Pane timer;
 	
 	//buttons
 	@FXML
@@ -196,7 +193,9 @@ public class Controller implements Initializable{
 	public static Pane getLegalDragZone(){
 		return legalDragZone;
 	}
-	
+	public static Pane getTimer(){
+		return timer;
+	}
 	
 	//this is being updated to allow dynamic change of this button
 	//note this feature is more unique than a regular button
