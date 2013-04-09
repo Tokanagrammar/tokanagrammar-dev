@@ -21,8 +21,6 @@ public class Demo {
 	
 	public Demo(){
 
-
-
 		removedTokens.add(new DemoToken("keyword", "public"));
 		removedTokens.add(new DemoToken("keyword", "class"));									//removedTokens
 		removedTokens.add(new DemoToken("identifier", "HelloWorld"));							//removedTokens
@@ -52,10 +50,6 @@ public class Demo {
 		LinkedList<IconizedToken> rhsIconizedTokens = TokenIconizer.iconizeTokens(removedTokens);
 		TokenBay tokenBay = new TokenBay(rhsIconizedTokens);
 		tokenBay.initTokenBay();
-		
-		OutputPanel outputPanel = new OutputPanel();
-		outputPanel.clear();
-		
 	}
 
 	//getTokens
