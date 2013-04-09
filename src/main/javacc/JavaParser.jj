@@ -1127,18 +1127,6 @@ statementExpression (List<SourceToken> curLine, int count[], int level) :
 
 private
 void
-expression (List<SourceToken> curLine, int count[]) :
-{
-    // TODO
-}
-{
-    <INT_LITERAL>
-    <PLUS>
-    <INT_LITERAL>
-}
-
-private
-void
 parExpression (List<SourceToken> curLine, int count[]) :
 {
 }
@@ -1189,5 +1177,607 @@ localVariableDeclarationStatement(List<SourceToken> curLine, int count[], int le
     {
         curLine.add(semi());
         ++count[0];
+    }
+}
+
+
+/**
+ * An expression.
+ * 
+ * <pre>
+ *   expression ::= assignmentExpression 
+ * </pre>
+ * 
+ */
+
+private
+void
+expression (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    assignmentExpression(curLine, count)
+}
+
+/**
+ * Parse an assignment expression.
+ * 
+ * <pre>
+ *   assignmentExpression ::= 
+ *       conditionalAndExpression // level 13
+ *           [( ASSIGN  // conditionalExpression
+ *            | PLUS_ASSIGN // must be valid lhs
+ *            )
+ *            assignmentExpression]
+ * </pre>
+ * 
+ */
+
+private
+void
+assignmentExpression(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    conditionalAndExpression (curLine, count)
+    [
+        (<ASSIGN> | <PLUS_ASSIGN>)
+        {
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        assignmentExpression(curLine, count)
+    ]
+}
+
+
+/**
+ * Parse a conditional-and expression.
+ * 
+ * <pre>
+ *   conditionalAndExpression ::= equalityExpression // level 10
+ *                                  {LAND equalityExpression}
+ * </pre>
+ * 
+ */
+
+private 
+void
+conditionalAndExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    equalityExpression(curLine, count)
+    <LAND>
+    {
+        curLine.add(operator("&&"));
+        curLine.add(space());
+        count[0] += 2;
+    }
+    equalityExpression(curLine, count)
+}
+
+/**
+ * Parse an equality expression.
+ * 
+ * <pre>
+ *   equalityExpression ::= relationalExpression  // level 6
+ *                            {EQUAL relationalExpression}
+ * </pre>
+ * 
+ */
+
+private
+void
+equalityExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    equalityExpression(curLine, count)
+    (
+        <EQUAL>
+        {
+            curLine.add(operator("=="));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        relationalExpression(curLine, count)
+    )*
+}
+
+/**
+ * Parse a relational expression.
+ * 
+ * <pre>
+ *   relationalExpression ::= additiveExpression  // level 5
+ *                              [(GT | LE) additiveExpression 
+ *                              | INSTANCEOF referenceType]
+ * </pre>
+ * 
+ */
+
+private
+void
+relationalExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    additiveExpression(curLine, count)
+    [
+        (<GT> | <LE> )
+        {
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+    |
+        <INSTANCEOF>
+        {
+            curLine.add(keyword("instanceof"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        referenceType(curLine, count)
+    ]
+}
+
+/**
+ * Parse an additive expression.
+ * 
+ * <pre>
+ *   additiveExpression ::= multiplicativeExpression // level 3
+ *                            {(MINUS | PLUS)
+ *                                  multiplicativeExpression}
+ * </pre>
+ * 
+ */
+
+private
+void
+additiveExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    multiplicativeExpression(curLine, count)
+    (
+        (<PLUS> | <MINUS>)
+        {
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        multiplicativeExpression(curLine, count)
+    )*
+}
+
+/**
+ * Parse a multiplicative expression.
+ * 
+ * <pre>
+ *   multiplicativeExpression ::= unaryExpression  // level 2
+ *                                  {(STAR | DIV | PERCENt)
+                                           unaryExpression}
+ * </pre>
+ * 
+ */
+
+private
+void
+multiplicativeExpression(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+
+    unaryExpression(curLine, count)
+    (
+        (<STAR> | <DIV> | <PERCENT>)
+        {
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        unaryExpression(curLine, count)
+    )*
+}
+
+/**
+ * Parse an unary expression.
+ * 
+ * <pre>
+ *   unaryExpression ::= INC unaryExpression // level 1
+ *                     | MINUS unaryExpression
+ *                     | simpleUnaryExpression
+ * </pre>
+ * 
+ */
+
+private
+void
+unaryExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    (<INC> | <MINUS>)
+    {
+        curLine.add(operator(token.image));
+        ++count[0];
+        // no space
+    }
+    unaryExpression(curLine, count)
+|
+    simpleUnaryExpression(curLine, count)
+}
+
+/**
+ * Parse a simple unary expression.
+ * 
+ * <pre>
+ *   simpleUnaryExpression ::= LNOT unaryExpression
+ *                           | LPAREN basicType RPAREN 
+ *                               unaryExpression
+ *                           | LPAREN         
+ *                               referenceType
+ *                             RPAREN simpleUnaryExpression
+ *                           | postfixExpression
+ * </pre>
+ * 
+ * @return an AST for a simpleUnaryExpression.
+ */
+
+private JExpression simpleUnaryExpression(): {
+    int line = 0;
+    Type type = null;
+    JExpression expr = null, unaryExpr = null, simpleUnaryExpr = null;
+}
+{
+    try {
+        <LNOT> { line = token.beginLine; }
+        unaryExpr = unaryExpression()
+        { expr = new JLogicalNotOp( line, unaryExpr ); } |
+        LOOKAHEAD( <LPAREN> basicType() <RPAREN> )
+        <LPAREN> { line = token.beginLine; }
+        type = basicType() 
+        <RPAREN>
+        unaryExpr = unaryExpression()
+        { expr = new JCastOp( line, type, unaryExpr ); } |
+        LOOKAHEAD( <LPAREN> referenceType() <RPAREN> )
+        <LPAREN> { line = token.beginLine; }
+        type = referenceType() 
+        <RPAREN>
+        simpleUnaryExpr = simpleUnaryExpression()
+        { expr = new JCastOp( line, type, simpleUnaryExpr ); } | 
+        expr = postfixExpression() 
+    } 
+    catch ( ParseException e ) { 
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return expr ; }
+}
+
+/**
+ * Parse a postfix expression.
+ * 
+ * <pre>
+ *   postfixExpression ::= primary {selector} {DEC}
+ * </pre>
+ * 
+ * @return an AST for a postfixExpression.
+ */
+
+private JExpression postfixExpression(): {
+    int line = 0; 
+    JExpression primaryExpr = null;
+}
+{
+    try {
+        primaryExpr = primary() { line = primaryExpr.line(); } 
+        (
+            primaryExpr = selector( primaryExpr ) 
+        )*
+        ( 
+            <DEC> 
+            { primaryExpr = 
+                new JPostDecrementOp( line, primaryExpr ); } 
+        )*
+    } 
+    catch ( ParseException e ) {
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return primaryExpr; }
+}
+
+/**
+ * Parse a selector.
+ * 
+ * <pre>
+ *   selector ::= DOT qualifiedIdentifier [arguments]
+ *              | LBRACK expression RBRACK
+ * </pre>
+ * 
+ * @param target the target expression for this selector.
+ * @return an AST for a selector.
+ */
+
+private JExpression selector( JExpression target ): {       
+    int line = 0;
+    ArrayList<JExpression> args = null;
+    TypeName id = null;
+    JExpression expr = null;
+}
+{
+    try {
+        <DOT> { line = token.beginLine; } 
+        id = qualifiedIdentifier()
+        { expr = 
+              new JFieldSelection( line, ambiguousPart( id ),
+                                   target, id.simpleName() ); }
+        [ 
+            args = arguments() 
+            { expr = new JMessageExpression( line, target, 
+                  ambiguousPart( id ), id.simpleName(), args ); 
+            } 
+        ] |
+        <LBRACK> { line = token.beginLine; }
+        { expr = new JArrayExpression( line, target, expression() ); } 
+        <RBRACK> 
+    } 
+    catch ( ParseException e ) { 
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return expr; }
+}
+
+/**
+ * Parse a primary expression.
+ * 
+ * <pre>
+ *   primary ::= parExpression
+ *             | THIS [arguments]
+ *             | SUPER ( arguments 
+ *                     | DOT IDENTIFIER [arguments] 
+ *                     )
+ *             | literal
+ *             | NEW creator
+ *             | qualifiedIdentifier [arguments]
+ * </pre>
+ * 
+ * @return an AST for a primary.
+ */
+
+private JExpression primary(): {
+    int line = 0;
+    JExpression expr = null;
+    JExpression newTarget = null;
+    ArrayList<JExpression> args = null;
+    TypeName id = null;
+}
+{
+    try {
+        expr = parExpression() |
+        <THIS> { line = token.beginLine; expr = new JThis( line ); }
+        [ 
+            args = arguments() 
+            { expr = new JThisConstruction( line, args ); } 
+        ] |
+        <SUPER> { line = token.beginLine; }
+        ( 
+            args = arguments() 
+            { expr = new JSuperConstruction( line, args ); } | 
+            <DOT> <IDENTIFIER> 
+            { 
+                newTarget = new JSuper( line );
+                expr = new JFieldSelection( line, newTarget, 
+                                            token.image );
+            }
+            [ 
+                args = arguments() 
+                { expr = new JMessageExpression( line, newTarget, 
+                      null, token.image, args ); }
+            ] 
+        ) |
+        expr = literal() |
+        <NEW> expr = creator() |
+
+        // Language is ambiguous here. JavaCC warns about not being 
+        // able to choose between qualifiedIdentifier and selector. 
+        // Semantic analysis will sort it out.
+        id = qualifiedIdentifier() 
+        { 
+            line = id.line(); 
+            if ( ambiguousPart( id ) == null ) {
+                expr = new JVariable( line, id.simpleName() );
+            }
+            else {
+                expr = new JFieldSelection( line, ambiguousPart( id ), 
+                                            null, id.simpleName() );             
+            }
+        } 
+        [
+            args = arguments()
+            { expr = new JMessageExpression( line, null, 
+                  ambiguousPart( id ), id.simpleName(), args ); }
+        ]
+    } 
+    catch ( ParseException e ) { 
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return expr; }
+}
+
+/**
+ * Parse a creator.
+ * 
+ * <pre>
+ *   creator ::= (basicType | qualifiedIdentifier) 
+ *                 ( arguments
+ *                 | LBRACK RBRACK {LBRACK RBRACK} 
+ *                     [arrayInitializer]
+ *                 | newArrayDeclarator
+ *                 )
+ * </pre>
+ * 
+ * @return an AST for a creator.
+ */
+
+private JExpression creator(): {
+    int line = 0;
+    Type type = null;
+    ArrayList<JExpression> args = null;
+    ArrayList<JExpression> dims = null;
+    JArrayInitializer init =  null;
+    JExpression expr = null;
+    Type expected = null;
+}
+{
+    try {
+        ( type = basicType() | 
+          type = qualifiedIdentifier() )     
+        { line = token.beginLine; expected = type; }
+        args = arguments() 
+        { expr = new JNewOp( line, type, args ); } |
+        LOOKAHEAD( <LBRACK> expression() <RBRACK> )             
+        expr = newArrayDeclarator( type ) | 
+        <LBRACK> <RBRACK> { expected = new ArrayTypeName( expected ); }
+        (
+            LOOKAHEAD( <LBRACK> <RBRACK> )
+            <LBRACK> <RBRACK> 
+            { expected = new ArrayTypeName( expected ); } 
+        )*
+        [ 
+           expr = arrayInitializer( expected ) 
+        ]
+    } 
+    catch ( ParseException e ) { 
+        expr = new JWildExpression( token.beginLine ); 
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return expr; }
+}
+
+/**
+ * Parse a new array declarator.
+ * 
+ * <pre>
+ *   newArrayDeclarator ::= LBRACK expression RBRACK 
+ *                            {LBRACK expression RBRACK}
+ *                            {LBRACK RBRACK}
+ * </pre>
+ * 
+ * @param line line in which the declarator occurred.
+ * @param type type of the array.
+ * @return an AST for a newArrayDeclarator.
+ */
+
+private JNewArrayOp newArrayDeclarator( Type type ): {
+    int line = 0;
+    ArrayList<JExpression> dimensions = new ArrayList<JExpression>();
+    JExpression expr = null;
+}
+{
+    try {
+        <LBRACK> { line = token.beginLine; } 
+        expr = expression() 
+        { dimensions.add( expr ); type = new ArrayTypeName( type ); }
+        <RBRACK>
+        ( 
+            LOOKAHEAD( <LBRACK> expression() <RBRACK> )
+            <LBRACK> 
+            expr = expression() 
+            { dimensions.add( expr); type = new ArrayTypeName( type ); } 
+            <RBRACK> 
+        )*
+        (
+            LOOKAHEAD( <LBRACK> <RBRACK> )
+            <LBRACK> <RBRACK> { type = new ArrayTypeName( type ); }
+        )*
+    } 
+    catch ( ParseException e ) {
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return new JNewArrayOp( line, type, dimensions ); }
+}
+
+/**
+ * Parse a literal.
+ * 
+ * <pre>
+ *   literal ::= INT_LITERAL    | LONG_INTERAL | CHAR_LITERAL
+ *             | STRING_LITERAL | TRUE         | FALSE        | NULL
+ * </pre>
+ * 
+ * @return an AST for a literal.
+ */
+
+private JExpression literal(): {
+    JExpression expr = null;
+    String img;
+    int postfixKind = -1;
+    int base = 10;
+}
+{       
+    try {
+        expr = wholeNumLiteral()
+    |
+        <CHAR_LITERAL> 
+        { expr = new JLiteralChar( token.beginLine, token.image ); }
+    |
+        <STRING_LITERAL> 
+        { expr = 
+              new JLiteralString( token.beginLine, token.image ); }
+    | 
+        <TRUE> 
+        { expr = new JLiteralTrue( token.beginLine ); }
+    | 
+        <FALSE> 
+        { expr = new JLiteralFalse( token.beginLine ); }
+    |
+        <NULL> 
+        { expr = new JLiteralNull( token.beginLine ); }
+    } 
+    catch ( ParseException e ) { 
+        expr = new JWildExpression( token.beginLine ); 
+        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    }
+    { return expr; }
+}
+
+private
+JExpression wholeNumLiteral() :
+{
+    char postfix = 0;
+    int base = 10;
+    JExpression expr;
+    String img;
+}
+{
+    (
+        <INT_LITERAL>
+    |
+        <LONG_LITERAL> {postfix = 'L';}
+    |
+        <HEX_INT_LITERAL> {base = 16;}
+    |
+        <HEX_LONG_LITERAL> {postfix = 'L'; base = 16;}
+    |
+        <OCT_INT_LITERAL> {base = 8;}
+    |
+        <OCT_LONG_LITERAL> {postfix = 'L'; base = 8;}
+    |
+        <BIN_INT_LITERAL> {base = 2;}
+    |
+        <BIN_LONG_LITERAL> {postfix = 'L'; base = 2;}
+    )
+    {
+        img = removeUnderScores(token.image);
+        switch(postfix)
+        {
+            case 'L' : 
+                expr = new JLiteralLong (token.beginLine, img, base);
+                break;
+            default:
+                expr = new JLiteralInt(token.beginLine, img, base);
+        }
+        return expr;
     }
 }
