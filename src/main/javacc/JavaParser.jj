@@ -569,7 +569,7 @@ memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
             }
             line = block(src, line, count, level)
         )
-        |
+    |
         LOOKAHEAD ( (<PRIMATIVE> | <REFERENCE>) <IDENTIFIER> <LPAREN>)
         (
             type(src.get(line), count)
@@ -820,26 +820,39 @@ arrayInitializer(List<SourceToken> curLine, int count[]) :
 {
 }
 {
-    try {
-        <LCURLY> { line = token.beginLine; }
-        [ 
-            anInitializer = 
-              variableInitializer( expected.componentType() ) 
-            { initials.add( anInitializer ); }
-            ( 
-                <COMMA> anInitializer = 
-                    variableInitializer( expected.componentType() ) 
-                { initials.add( anInitializer ); } 
-            )* 
-        ] 
-        <RCURLY>
-    } 
-    catch ( ParseException e ) { 
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    <LCURLY>
+    {
+        curLine.add(seperator("{"));
+        ++count[0];
     }
-    { return new JArrayInitializer( line, expected, initials ); }
+    [
+        variableInitializer(curLine, count)
+        (
+            <COMMA>
+            {
+                curLine.add(seperator(","));
+                curLine.add(space());
+                count[0] += 2;
+            }
+            variableInitializer(curLine, count)
+        )*
+    ]
+    <RCURLY>
+    {
+        curLine.add(seperator("}"));
+        ++count[0];
+    }
 }
 
+/**
+ * Parse a block.
+ * 
+ * <pre>
+ *   block ::= LCURLY {blockStatement} RCURLY 
+ * </pre>
+ * 
+ * @return the last line of the block
+ */
 private
 int
 block (List<List<SourceToken>> src, int line, int count[], int level) :
@@ -848,28 +861,36 @@ block (List<List<SourceToken>> src, int line, int count[], int level) :
     int n;
 }
 {
-     (<LCURLY>
-     <RCURLY>)
+     <LCURLY>
      {
         cur = new ArrayList<SourceToken>();
+        src.add(cur);
         n = 0;
         while (n++ < level)
             cur.add(tab());
+        count[0] += level;
+        
+        cur.add(seperator("{"));
+        ++count[0];
+        ++line;
+        ++level;
+     }
+     (
+        line = blockStatement(src, line, count, level)
+     )*
+     <RCURLY>
+     {
+        --level;
+        cur = new ArrayList<SourceToken>();
+        src.add(cur);
+        n = 0;
+        while (n++ < level)
+            cur.add(tab());
+        count[0] += level;
+
         cur.add(separator("{"));
         ++count[0];
-        src.add(cur);
-        ++line;
-        
-
-        cur = new ArrayList<SourceToken>();
-        n = 0;
-        while (n++ < level)
-            cur.add(tab());
-        cur.add(separator("}"));
-        ++count[0];
-        src.add(cur);
-        ++line;
-        
+        ++line; 
         return line;
      }
 }
