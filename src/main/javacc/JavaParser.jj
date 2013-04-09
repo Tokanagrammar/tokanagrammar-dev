@@ -1649,25 +1649,36 @@ newArrayDeclarator(List<SourceToken> curLine, int count[]) :
 {
     <LBRACK>
     {
+        curLine.add(separator("["));
+        ++count[0];
     }
     expression(curLine, count)
     <RBRACK>
     {
+        curLine.add(separator("]"));
+        ++count[0];
     }
     ( 
         LOOKAHEAD( <LBRACK> scanExpression() <RBRACK> )
-        <LBRACK> 
+        <LBRACK>
         {
+            curLine.add(separator("["));
+            ++count[0];
         }
         expression(curLine, count)
-        <RBRACK> 
+        <RBRACK>
         {
+            curLine.add(separator("]"));
+            ++count[0];
         }
     )*
     (
         LOOKAHEAD( <LBRACK> <RBRACK> )
         <LBRACK> <RBRACK>
         {
+            curLine.add(separator("["));
+            curLine.add(separator("]"));
+            count[0] += 2;
         }
     )*
 }
