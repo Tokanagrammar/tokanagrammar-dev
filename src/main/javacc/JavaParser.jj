@@ -1274,7 +1274,7 @@ equalityExpression(List<SourceToken> curLine, int count[]):
 {
 }
 {
-    equalityExpression(curLine, count)
+    relationalExpression(curLine, count)
     (
         <EQUAL>
         {
@@ -1311,6 +1311,7 @@ relationalExpression(List<SourceToken> curLine, int count[]):
             curLine.add(space());
             count[0] += 2;
         }
+        additiveExpression(curLine, count)
     |
         <INSTANCEOF>
         {
@@ -1320,6 +1321,10 @@ relationalExpression(List<SourceToken> curLine, int count[]):
         }
         referenceType(curLine, count)
     ]
+    {
+        curLine.add(space());
+        ++count[0];
+    }
 }
 
 /**
@@ -1425,34 +1430,34 @@ unaryExpression(List<SourceToken> curLine, int count[]):
  * @return an AST for a simpleUnaryExpression.
  */
 
-private JExpression simpleUnaryExpression(): {
-    int line = 0;
-    Type type = null;
-    JExpression expr = null, unaryExpr = null, simpleUnaryExpr = null;
+private
+void
+simpleUnaryExpression(List<SourceToken> curLine, int count[]) :
+{
 }
 {
-    try {
-        <LNOT> { line = token.beginLine; }
-        unaryExpr = unaryExpression()
-        { expr = new JLogicalNotOp( line, unaryExpr ); } |
-        LOOKAHEAD( <LPAREN> basicType() <RPAREN> )
-        <LPAREN> { line = token.beginLine; }
-        type = basicType() 
-        <RPAREN>
-        unaryExpr = unaryExpression()
-        { expr = new JCastOp( line, type, unaryExpr ); } |
-        LOOKAHEAD( <LPAREN> referenceType() <RPAREN> )
-        <LPAREN> { line = token.beginLine; }
-        type = referenceType() 
-        <RPAREN>
-        simpleUnaryExpr = simpleUnaryExpression()
-        { expr = new JCastOp( line, type, simpleUnaryExpr ); } | 
-        expr = postfixExpression() 
-    } 
-    catch ( ParseException e ) { 
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    <LNOT>
+    {
+        curLine.add(operator("!"));
+        ++count[0];
     }
-    { return expr ; }
+    unaryExpression(curLine, count)
+|
+    LOOKAHEAD ( <LPAREN> (scanBasicType() | scanReferenceType()) <RPAREN> )
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    type(curLine, count)
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+    }
+    unaryExpression(curLine, count)
+|
+    postfixExpression(curLine, count)
 }
 
 /**
@@ -1462,29 +1467,24 @@ private JExpression simpleUnaryExpression(): {
  *   postfixExpression ::= primary {selector} {DEC}
  * </pre>
  * 
- * @return an AST for a postfixExpression.
  */
 
-private JExpression postfixExpression(): {
-    int line = 0; 
-    JExpression primaryExpr = null;
+private
+void
+postfixExpression(List<SourceToken> curLine, int count[]) :
+{
 }
 {
-    try {
-        primaryExpr = primary() { line = primaryExpr.line(); } 
-        (
-            primaryExpr = selector( primaryExpr ) 
-        )*
-        ( 
-            <DEC> 
-            { primaryExpr = 
-                new JPostDecrementOp( line, primaryExpr ); } 
-        )*
-    } 
-    catch ( ParseException e ) {
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
-    }
-    { return primaryExpr; }
+    primary(curLine, count)
+    (selector(curLine, count))*
+    (
+        <DEC>
+        {
+            // No space before DEC (eg., foo--)
+            curLine.add(operator(token.image));
+            ++count[0];
+        }
+     )*
 }
 
 /**
@@ -1495,37 +1495,33 @@ private JExpression postfixExpression(): {
  *              | LBRACK expression RBRACK
  * </pre>
  * 
- * @param target the target expression for this selector.
- * @return an AST for a selector.
  */
 
-private JExpression selector( JExpression target ): {       
-    int line = 0;
-    ArrayList<JExpression> args = null;
-    TypeName id = null;
-    JExpression expr = null;
+private
+void
+selector(List<SourceToken> curLine, int count[]) :
+{       
 }
 {
-    try {
-        <DOT> { line = token.beginLine; } 
-        id = qualifiedIdentifier()
-        { expr = 
-              new JFieldSelection( line, ambiguousPart( id ),
-                                   target, id.simpleName() ); }
-        [ 
-            args = arguments() 
-            { expr = new JMessageExpression( line, target, 
-                  ambiguousPart( id ), id.simpleName(), args ); 
-            } 
-        ] |
-        <LBRACK> { line = token.beginLine; }
-        { expr = new JArrayExpression( line, target, expression() ); } 
-        <RBRACK> 
-    } 
-    catch ( ParseException e ) { 
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    <DOT>
+    {
+        curLine.add(operator("."));
+        ++count[0];
     }
-    { return expr; }
+    qualifiedIdentifier(curLine, count)
+    [arguments(curLine, count)] 
+|
+    <LBRACK>
+    {
+        curLine.add(separator("["));
+        ++count[0];
+    }
+    expression(curLine, count)
+    <RBRACK>
+    {
+        curLine.add(separator("]"));
+        ++count[0];
+    }
 }
 
 /**
@@ -1542,67 +1538,55 @@ private JExpression selector( JExpression target ): {
  *             | qualifiedIdentifier [arguments]
  * </pre>
  * 
- * @return an AST for a primary.
  */
 
-private JExpression primary(): {
-    int line = 0;
-    JExpression expr = null;
-    JExpression newTarget = null;
-    ArrayList<JExpression> args = null;
-    TypeName id = null;
+private
+void
+primary(List<SourceToken> curLine, int count[]) :
+{
 }
 {
-    try {
-        expr = parExpression() |
-        <THIS> { line = token.beginLine; expr = new JThis( line ); }
-        [ 
-            args = arguments() 
-            { expr = new JThisConstruction( line, args ); } 
-        ] |
-        <SUPER> { line = token.beginLine; }
-        ( 
-            args = arguments() 
-            { expr = new JSuperConstruction( line, args ); } | 
-            <DOT> <IDENTIFIER> 
-            { 
-                newTarget = new JSuper( line );
-                expr = new JFieldSelection( line, newTarget, 
-                                            token.image );
-            }
-            [ 
-                args = arguments() 
-                { expr = new JMessageExpression( line, newTarget, 
-                      null, token.image, args ); }
-            ] 
-        ) |
-        expr = literal() |
-        <NEW> expr = creator() |
-
-        // Language is ambiguous here. JavaCC warns about not being 
-        // able to choose between qualifiedIdentifier and selector. 
-        // Semantic analysis will sort it out.
-        id = qualifiedIdentifier() 
-        { 
-            line = id.line(); 
-            if ( ambiguousPart( id ) == null ) {
-                expr = new JVariable( line, id.simpleName() );
-            }
-            else {
-                expr = new JFieldSelection( line, ambiguousPart( id ), 
-                                            null, id.simpleName() );             
-            }
-        } 
-        [
-            args = arguments()
-            { expr = new JMessageExpression( line, null, 
-                  ambiguousPart( id ), id.simpleName(), args ); }
-        ]
-    } 
-    catch ( ParseException e ) { 
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
+    parExpression(curLine, count)
+|
+    <THIS>
+    {
+        curLine.add(keyword("this"));
+        ++count[0];
     }
-    { return expr; }
+    [arguments(curLine, count)]
+|
+    <SUPER>
+    {
+        curLine.add(keyword("super"));
+        ++count[0];
+    }
+    (
+        arguments(curLine, count)
+    |
+        <DOT>
+        {
+            curLine.add(separator("."));
+            ++count[0];
+        }
+        <IDENTIFIER>
+        {
+            curLine.add(identifier(token.image));
+            ++count[0];
+        }
+        [arguments(curLine, count)]
+    )
+|
+    literal(curLine, count)
+|
+    <NEW>
+    {
+        curLine.add(keyword("new"));
+        ++count[0];
+    }
+    creator(curLine, count)
+|
+    qualifiedIdentifier(curLine, count)
+    [arguments(curLine, count)]
 }
 
 /**
@@ -1617,42 +1601,35 @@ private JExpression primary(): {
  *                 )
  * </pre>
  * 
- * @return an AST for a creator.
  */
 
-private JExpression creator(): {
-    int line = 0;
-    Type type = null;
-    ArrayList<JExpression> args = null;
-    ArrayList<JExpression> dims = null;
-    JArrayInitializer init =  null;
-    JExpression expr = null;
-    Type expected = null;
+private
+void
+creator(List<SourceToken> curLine, int count[]):
+{
 }
 {
-    try {
-        ( type = basicType() | 
-          type = qualifiedIdentifier() )     
-        { line = token.beginLine; expected = type; }
-        args = arguments() 
-        { expr = new JNewOp( line, type, args ); } |
-        LOOKAHEAD( <LBRACK> expression() <RBRACK> )             
-        expr = newArrayDeclarator( type ) | 
-        <LBRACK> <RBRACK> { expected = new ArrayTypeName( expected ); }
+
+    (basicType(curLine, count) | qualifiedIdentifier(curLine, count))
+    (
+        arguments(curLine, count)
+    |
+        LOOKAHEAD ( <LBRACK> scanExpression() <RBRACK> )
+        newArrayDeclarator(curLine, count)
+    |
+        <LBRACK> <RBRACK>
+        {
+        }
         (
             LOOKAHEAD( <LBRACK> <RBRACK> )
             <LBRACK> <RBRACK> 
-            { expected = new ArrayTypeName( expected ); } 
+            {
+            } 
         )*
-        [ 
-           expr = arrayInitializer( expected ) 
+        [
+            arrayInitializer(curLine, count)
         ]
-    } 
-    catch ( ParseException e ) { 
-        expr = new JWildExpression( token.beginLine ); 
-        recoverFromError( new int[] { SEMI, EOF }, e ); 
-    }
-    { return expr; }
+    )
 }
 
 /**
@@ -1663,10 +1640,6 @@ private JExpression creator(): {
  *                            {LBRACK expression RBRACK}
  *                            {LBRACK RBRACK}
  * </pre>
- * 
- * @param line line in which the declarator occurred.
- * @param type type of the array.
- * @return an AST for a newArrayDeclarator.
  */
 
 private JNewArrayOp newArrayDeclarator( Type type ): {
