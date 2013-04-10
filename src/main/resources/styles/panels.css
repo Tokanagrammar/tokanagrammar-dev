@@ -2,4 +2,6 @@
 
 
 .outputPane {
+	-fx-background-color: #EEEEEE;
+	-fx-font-family: "Georgia";
 }

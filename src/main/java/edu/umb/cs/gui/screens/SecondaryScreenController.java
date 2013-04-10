@@ -19,36 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.gui;
+package edu.umb.cs.gui.screens;
 
-import java.util.LinkedList;
+import javafx.fxml.Initializable;
 
-import javafx.scene.layout.Pane;
-
-public class TokenBoard {
+public interface SecondaryScreenController extends Initializable {
 	
-	private static Pane pane;
-	
-	private static final TokenBoard tokenBoard = new TokenBoard();
-	
-	private TokenBoard(){}
-	
-	/**
-	 * There can only be one instance of the TokenBoard
-	 * at any time.  This uses the Singleton pattern to ensure this.
-	 * @return
-	 */
-	public static TokenBoard getInstance(){
-		pane = Controller.getTokenBoard();
-		return tokenBoard;
-	}
-		
-	
-	/**
-	 * 
-	 * @param lhsTokens
-	 */
-	public void settleTokenBoard(LinkedList<IconizedToken> lhsTokens){
-		
-	}
 }

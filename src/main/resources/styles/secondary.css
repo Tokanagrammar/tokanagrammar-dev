@@ -1,0 +1,84 @@
+
+/*Tokanagrammar secondary css*/
+
+
+
+
+/*-------------------------------START DIFFICULTY  WINDOW CSS--------------------- */
+.difficultyBg{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/simpleOnePanel.fw.png");
+}
+
+.categoriesText{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/categoriesText.fw.png");
+}
+.setBtn{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/setBtn.fw.png");
+	-fx-background-color: transparent;
+}
+.setBtn:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/setBtn_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+.setBtn:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/setBtn.fw.png");
+	-fx-background-color: transparent;
+}
+
+.difficultyText{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/difficultyText.fw.png");
+}
+
+/*-------------------------------END DIFFICULTY WINDOW CSS------------------------ */
+
+
+
+
+/*-------------------------------START CATEGORIES WINDOW CSS--------------------- */
+.bg {
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/simpleTwoPanel.fw.png");
+}
+
+.startBtn{
+	-fx-text-decoration: none;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/startBtn.fw.png");
+	-fx-background-color: transparent;
+}
+.startBtn:hover{
+	-fx-text-decoration: none;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/startBtn_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+.startBtn:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/startBtn.fw.png");
+	-fx-background-color: transparent;
+}
+
+.closeBtn{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/closeBtn_sm.fw.png");
+	-fx-background-color: transparent;
+}
+
+.closeBtn:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/closeBtn_sm_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+
+.closeBtn:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/closeBtn_sm.fw.png");
+	-fx-background-color: transparent;
+}
+/*-------------------------------END CATEGORIES WINDOW CSS------------------------ */
