@@ -21,10 +21,12 @@
 
 package edu.umb.cs.entity;
 
+import edu.umb.cs.parser.ParseException;
 import edu.umb.cs.source.Language;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceFiles;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -80,7 +82,8 @@ public class Puzzle implements Serializable
         
     }
     
-    public Puzzle (String path, String expRes, String mdata) throws IOException
+    public Puzzle (String path, String expRes, String mdata)
+            throws IOException, ParseException
     {
         File file = new File(path);
         if (!file.exists())
@@ -92,7 +95,7 @@ public class Puzzle implements Serializable
         metaData = mdata;
         games = new HashSet<Game>();
         hints = new HashSet<Hint>();
-        srcFile = SourceFiles.getSourceFile(path, langType);
+        srcFile = SourceFiles.getSourceFile(file, langType);
     }
     
     public SourceFile getSourceFile()

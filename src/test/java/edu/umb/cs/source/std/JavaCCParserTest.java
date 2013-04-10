@@ -18,46 +18,46 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.ShuffledSource;
+import edu.umb.cs.parser.JavaParser;
+import edu.umb.cs.parser.ParseException;
 import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceToken;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class ShuffledSourceImpl implements ShuffledSource
+public class JavaCCParserTest extends SourceTestBase
 {
-    private final SourceFile original;
-    private final SourceFile shuffled;
-    private final List<SourceToken> removed;
+    private static final File TESTS_PATH = new File("src/test/resources/sources/javaccparse");
     
-    public ShuffledSourceImpl(SourceFile original, SourceFile shuffled, List<SourceToken> removed)
+    @Override
+    void doTest(File expted, File in) throws FileNotFoundException, IOException
     {
-        this.original = original;
-        this.shuffled = shuffled;
-        this.removed = removed;
+        FileInputStream fin = new FileInputStream(in);
+        
+        JavaParser parser = new JavaParser(fin);
+        try
+        {
+            SourceFile inParsed = parser.parseJava();
+            System.out.println(inParsed);   
+        }
+        catch (ParseException ex)
+        {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
-    public SourceFile getOrinalSource()
+    File getPath()
     {
-        return original;
-    }
-
-    @Override
-    public SourceFile getShuffledSource()
-    {
-        return shuffled;
-    }
-
-    @Override
-    public List<SourceToken> getRemovedTokens()
-    {
-        return removed;
+        return TESTS_PATH;
     }
 }

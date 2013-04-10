@@ -19,35 +19,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.api;
-
-import edu.umb.cs.api.service.DatabaseService;
-import edu.umb.cs.entity.User;
-import java.util.List;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+package edu.umb.cs.source;
 
 /**
- * Simple test on some of the API methods
+ *  TODO: provide base implementation
+ *        whose ctor takes an image an a SourceTokenKind?
+ * 
  * @author Vy Thao Nguyen
  */
-public class APITest 
+public interface SourceToken 
 {
-    @Before
-    public void init()
-    {
-        APIs.startTest();
-        APIs.removeAllRecords();
-    }
-    
-    @Test
-    public void testNewUser()
-    {
-        User user = APIs.newUser("vynguyen");
-        List<User> users = APIs.getUsers();
-        
-        assertEquals(1, users.size());
-        assertEquals("vynguyen", user.getUsername());
-    }
+    String image();
+    SourceTokenKind getKind();
 }
