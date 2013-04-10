@@ -120,6 +120,14 @@ public class JavaParser
         return emptyLine;
     }
 
+    private void appendSemi(List<SourceToken> curLine)
+    {
+        int n = curLine.size() - 1;
+        if (n < 0 || curLine.get(n).getKind() != SourceTokenKind.SPACE)
+            curLine.add(semi());
+        else
+            curLine.set(n, semi());
+    }
 }
 PARSER_END(JavaParser)
 
@@ -146,6 +154,7 @@ TOKEN:
 | < ELSE: "else" >
 | < EXTENDS: "extends" >
 | < FALSE: "false" >
+| < FINAL: "final" >
 | < FLOAT: "float" >
 | < IF: "if" >
 | < IMPORT: "import" >
@@ -371,7 +380,7 @@ modifiers(List<SourceToken> curLine, int count[]) :
 {   
     
     (
-        ( <PUBLIC> | <PROTECTED> | <PRIVATE> | <STATIC> | <ABSTRACT> )
+        ( <PUBLIC> | <PROTECTED> | <PRIVATE> | <STATIC> | <ABSTRACT> | <FINAL> )
         { 
             count[0] += 2;
             curLine.add(keyword(token.image));
@@ -573,7 +582,7 @@ memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
                 {
                     // put SEMI on previous line
                     --line;
-                    src.get(line).add(semi());
+                    appendSemi(src.get(line));
                     ++count[0];
                 }
             |  
@@ -590,8 +599,9 @@ memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
             variableDeclarators(curLine, count)
             <SEMI>
             {
-                curLine.add(semi());
+                appendSemi(curLine);
                 ++count[0];
+                ++line;
             }
         )
     )
@@ -830,7 +840,6 @@ variableInitializer (List<SourceToken> curLine, int count[]) :
 {
 }
 {
-    // TODO: expression() not implemented
     arrayInitializer(curLine, count) | expression(curLine, count)
 }
 
@@ -1076,14 +1085,13 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
         parExpression(curLine, count)                 // condition
         <SEMI>
         {
-            curLine.add(semi());
+            appendSemi(curLine);
             ++count[0];
             ++line;
         }
     |
         <RETURN>
         {
-            System.out.println("going to expression()");
             curLine = new ArrayList<SourceToken>();
             src.add(curLine);
 
@@ -1102,13 +1110,7 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
         ]
         <SEMI>
         {
-            n = curLine.size() - 1;
-            if (curLine.get(n).getKind() == SourceTokenKind.SPACE)
-            {
-                curLine.set(n, semi());
-            }
-            else
-                curLine.add(semi());
+            appendSemi(curLine);
             ++count[0];
             ++line;
         }
@@ -1125,7 +1127,7 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
         }
         <SEMI>
         {
-            curLine.add(semi());
+            appendSemi(curLine);
         }
     )
     {
@@ -1197,7 +1199,7 @@ localVariableDeclarationStatement(List<SourceToken> curLine, int count[], int le
     variableDeclarators(curLine, count)
     <SEMI>
     {
-        curLine.add(semi());
+        appendSemi(curLine);
         ++count[0];
     }
 }
@@ -1239,7 +1241,6 @@ private
 void
 assignmentExpression(List<SourceToken> curLine, int count[]) :
 {
-    System.out.println("in expr");
 }
 {
     conditionalAndExpression (curLine, count)

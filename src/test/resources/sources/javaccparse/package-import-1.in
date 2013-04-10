@@ -3,8 +3,12 @@ import java.lang.System;
 
 public class Foo
 {
+    
+    static final double z = 3;
+
     private Foo()
     {
+        ++z;
     }
 
     Foo(int x)
