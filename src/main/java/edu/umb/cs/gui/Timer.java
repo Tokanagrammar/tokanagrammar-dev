@@ -36,11 +36,17 @@ public class Timer {
 	static Timeline digitalTime; 		//timer listener
 	static Pane pane;
 	
+	private String timerState = "";
+	
 	private static final Timer timer = new Timer();
 	
 	private Timer() {};
 
 	public static Timer getInstance(){
+		return timer;
+	}
+	
+	{
 		pane  = Controller.getTimer();
 		milliseconds = 0;
 		digitalTime = new Timeline(
@@ -71,11 +77,6 @@ public class Timer {
 			    				"-fx-text-fill: rgb(255, 255, 90);" );
 		
 		pane.getChildren().add(label);
-		return timer;
-	}
-	
-	{
-
 	}
 	
 	
@@ -89,14 +90,17 @@ public class Timer {
 			return sb.toString();
 	}
 	public void start(){
+		timerState = "running";
 		label.setVisible(true);
 		digitalTime.play();
 	}
 
 	public void stop(){
+		timerState = "stopped";
 		digitalTime.stop();
 	}
 	public void pause(){
+		timerState = "paused";
 		digitalTime.stop();
 	}
 	public void reset(){
@@ -108,5 +112,9 @@ public class Timer {
 	public void hideTimer()
 	{
 		label.setVisible(false);
+	}
+	
+	public String getTimerState(){
+		return timerState;
 	}
 }
