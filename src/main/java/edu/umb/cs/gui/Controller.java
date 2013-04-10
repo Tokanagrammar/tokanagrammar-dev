@@ -33,8 +33,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.Glow;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,7 +62,7 @@ public class Controller implements Initializable{
 	
 
 	@FXML
-	private static Pane difficultyPane;			//this is being added to allow dynamic change of this button
+	private static Pane difficultyPane;
 	private static ImageView curDifficultyIcon;
 	
 	//timer
@@ -82,8 +80,6 @@ public class Controller implements Initializable{
 	private Button skipButton;
 	@FXML
 	private Button categoryButton;
-	//@FXML
-	//private Button difficultyButton;		//BEING UPDATED
 	@FXML
 	private Button resetBoardButton;
 	@FXML
@@ -106,13 +102,12 @@ public class Controller implements Initializable{
 		buttons.add(pauseButton);
 		buttons.add(skipButton);
 		buttons.add(categoryButton);
-		//buttons.add(difficultyButton);	//this is being updated to allow dynamic change of this button
 		buttons.add(resetBoardButton);
 		buttons.add(logoButton);
 		
 		
 		//The default difficulty icon is a little less than "50"
-		Image defaultDiffImg = new Image(getClass().getResourceAsStream("screens/difficulty4.fw.png"));		//TODO
+		Image defaultDiffImg = new Image(getClass().getResourceAsStream("screens/difficulty4.fw.png"));
 		final ImageView imgView = new ImageView(defaultDiffImg);
 		setCurDifficultyIcon(imgView);
 		
@@ -282,19 +277,6 @@ public class Controller implements Initializable{
 			System.out.println("Pause Game Here.");//pause
 	}
 	
-    /**
-     * Called when the difficulty button is fired.
-     *
-     * @param event the action event.
-     */
-	public void difficultyFired(ActionEvent event){
-		String gameState = GUI.getGameState();
-		if(gameState.equals("initGUI") || gameState.equals("startGame")){
-			DifficultyScreen ds = new DifficultyScreen();
-		}	
-		else
-			System.out.println("Pause Game Here.");//pause
-	}
 	
     /**
      * Called when the resetBoard button is fired.
