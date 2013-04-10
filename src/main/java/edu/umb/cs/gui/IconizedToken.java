@@ -37,6 +37,9 @@ import edu.umb.cs.demo.DemoToken;
  */
 public class IconizedToken{
 	
+	
+	public enum Location {TOKENBAY, TOKENBOARD, LDZ, NOTPLACED};
+	
 	/**The dynamically created image representation of a token**/
 	private Image image;
 	/**The original token**/
@@ -46,12 +49,29 @@ public class IconizedToken{
 	
 	private ImageView imgView;
 	
+	/**broad location refers to where the token is in general: tokenBay, tokenBoard, or LDZ**/
+	private Location broadLocation;
+	
 	public IconizedToken(final Image image, DemoToken token, Integer occurrences) {
 		this.image = image;
 		this.token = token;
 		this.occurrences = occurrences;
+		this.broadLocation = Location.NOTPLACED; //initialize this as empty -- it's not been placed
 		this.imgView = new ImageViewFactory().createImageView(image);
 	}
+	
+	//
+	public Location getBroadLocation(){
+		return broadLocation;
+	}
+	
+	
+	public void setBroadLocation(Location loc){
+		this.broadLocation = loc;
+	}
+	
+	
+	
 	
 	public Image getImage(){
 		return image;
@@ -74,8 +94,9 @@ public class IconizedToken{
 	 * only it's internal standard token (as of now, the DemoToken).
 	 */
     public boolean equals(Object obj) {
-    	if(obj instanceof DemoToken)
-    		return 	token.equals(((DemoToken) obj).getType());
+    	if(obj instanceof IconizedToken){
+    		return 	token.equals(((IconizedToken) obj).getDemoToken());
+    	}
     	else return false;
     }
     
@@ -85,7 +106,7 @@ public class IconizedToken{
 
     @Override
     public String toString(){
-    	String string = "[image: " + image + " Token: " + token + " Occurrences: " + occurrences + "]";
+    	String string = "[image: " + image + " Token: " + token + " Occurrences: " + occurrences + "Location: " + broadLocation + "]";
     	
 		return string;
     }
@@ -94,6 +115,8 @@ public class IconizedToken{
 
 /**
  * IconizedToken comes pre-packaged with its mouse events.
+ * 
+ * 
  */
 class ImageViewFactory {
 	
@@ -131,7 +154,6 @@ class ImageViewFactory {
 		
 		imgView.setOnMouseEntered(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				System.out.println("onMouseEntered");
 				imgView.setEffect(new Glow(0.5));
 				event.consume();
 			}
@@ -139,7 +161,6 @@ class ImageViewFactory {
 		
 	    imgView.setOnMouseExited(new EventHandler <MouseEvent>() {
 	        public void handle(MouseEvent event) {
-	            System.out.println("onMouseExited");
 	            imgView.setEffect(new Glow(0.0));
 	            event.consume();
 	        }

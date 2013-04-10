@@ -67,7 +67,7 @@ public class Controller implements Initializable{
 	
 	//timer
 	@FXML
-	private Pane timer;
+	private static Pane timer;
 	
 	//buttons
 	@FXML
@@ -107,14 +107,14 @@ public class Controller implements Initializable{
 		
 		
 		//The default difficulty icon is a little less than "50"
-		Image defaultDiffImg = new Image(getClass().getResourceAsStream("screens/difficulty4.fw.png"));
+		Image defaultDiffImg = new Image(getClass().getResourceAsStream("/images/ui/secondaryScreens/difficulty4.fw.png"));		//TODO
 		final ImageView imgView = new ImageView(defaultDiffImg);
 		setCurDifficultyIcon(imgView);
 		
 		imgViewTable = new HashMap<Integer, ImageView>();
 		imgViewTable.put(1, new ImageView());
 		for(int i=0; i < 10; i++){
-			Image img = new Image(DifficultyScreen.class.getResourceAsStream("difficulty" + i + ".fw.png"));
+			Image img = new Image(DifficultyScreen.class.getResourceAsStream("/images/ui/secondaryScreens/difficulty" + i + ".fw.png"));
 			imgViewTable.put(i, new ImageView(img));
 		}
 
@@ -191,6 +191,9 @@ public class Controller implements Initializable{
 	public static Pane getLegalDragZone(){
 		return legalDragZone;
 	}
+	public static Pane getTimer(){
+		return timer;
+	}
 	
 	
 	//this is being updated to allow dynamic change of this button
@@ -245,6 +248,15 @@ public class Controller implements Initializable{
 	public void pauseFired(ActionEvent event){
 		Text text = new Text("pauseFired");
 		OutputPanel.getInstance().writeNodes(text);
+		
+		
+		//little pause demo only
+		if(Timer.getInstance().getTimerState().equals("running"))
+			Timer.getInstance().pause();
+		else if(Timer.getInstance().getTimerState().equals("paused"))
+			Timer.getInstance().start();
+		if(Timer.getInstance().getTimerState().equals("stopped"))
+			Timer.getInstance().start();
 		//put in another game state gameStatePauseGame
 		//stop the timer if it's running
 		
@@ -262,6 +274,10 @@ public class Controller implements Initializable{
 	public void skipFired(ActionEvent event){
 		Text text = new Text("skipFired");
 		OutputPanel.getInstance().writeNodes(text);
+		
+		//TEST remove an iToken
+		System.out.println("DEBUG::: " + TokenBay.getInstance().remove(TokenBay.getInstance().getITokens().getFirst()));
+		System.out.println(TokenBay.getInstance().getITokens());
 	}
 	
     /**

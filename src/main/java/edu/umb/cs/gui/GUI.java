@@ -24,13 +24,13 @@ package edu.umb.cs.gui;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import edu.umb.cs.demo.DemoSource;
 import edu.umb.cs.demo.DemoTokens;
@@ -61,6 +61,8 @@ public class GUI {
 	
 	private int curDifficulty;
 	
+	private List<String> curCategories;
+	
 	private GUI(){}
 	
 	/**
@@ -84,14 +86,18 @@ public class GUI {
 	 */
 	public void gameState_initGUI(){
 		
+		
+		
 		gameState = "initGUI";
 		System.out.println("GAMESTATE::: " + gameState);
 		this.curDifficulty = 50;
+		this.curCategories = new LinkedList<String>();
 		
 		tokenBay = TokenBay.getInstance();
 		tokenBoard = TokenBoard.getInstance();
 		legalDragZone = LegalDragZone.getInstance();
 		outputPanel = OutputPanel.getInstance();
+		timer = Timer.getInstance();
 		
 		if(showTutorial){ }														//not implemented.
 		
@@ -103,11 +109,26 @@ public class GUI {
 		Text categoryText = new Text("Please select a category ");
 		categoryText.setFont(new Font(14));
 		Image img = new Image(OutputPanel.class.
-				getResourceAsStream("categoryButton_console_display_size.fw.png"));
+				getResourceAsStream("/images/ui/categoryButton_console_display_size.fw.png"));
 		ImageView imgView = new ImageView(img);
 		Text text = new Text(" to continue.");
 		text.setFont(new Font(14));
 		outputPanel.writeNodes(categoryText, imgView, text);
+		
+		
+		
+		
+		
+
+		/*
+		 * TEST COMPILER MESSAGE
+		 */
+		outputPanel.compilerMessage("**TESTING COMPILER MESSAGE**This is a compiler message test it should be plenty wide to " +
+									"test that it wraps this is a compiler message test it should " + 
+									"be plenty wide to test that it wraps this is a compiler message " +
+									"test it should be plenty wide to test that it wraps");
+		
+		
 		
 		initButtons(activeButtons.get("initGUI"));
 	}
@@ -120,12 +141,8 @@ public class GUI {
 	 */
 	public void gameState_startGame(){
 		gameState = "startGame";
-		System.out.println("GAMESTATE::: " + gameState);
-		//close the categories screen and begin the game
-		CategoriesScreen.tearDownScreen();
-		
-		//get the output panel and announce the puzzle and the hint(s)
-		outputPanel.clear();
+		timer.start();
+		outputPanel.clear();  //start w/a clean outputPanel
 		
 		/*  TODO
 		 *  -- HERE ASSUME THAT THERE IS A CATEGORY SELECTED --
@@ -153,23 +170,26 @@ public class GUI {
 		
 		//tokenBoard.initTokenBoard(lhsIconizedTokens);
 		tokenBay.initTokenBay(rhsIconizedTokens);
+
+
+		String concatCategories = "";
+		Text text = new Text("Category " + "<");
+		for(int i=0; i< curCategories.size(); i++)
+			concatCategories += (curCategories.get(i) + " ");
 		
-		//announce category, difficulty, and hints
-		//for now announce that the demo has begun!
-		//TODO See what can be done about formating for output at a lower level than this.
-		Text text = new Text("Category ");
-		Text categoryText = new Text("<" + demoSource.getCategory() + ">");		//TODO should get from the submitted form
-		categoryText.setFill(Color.web("#9999FF"));
-		categoryText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-		Text text2 = new Text(" has been selected on difficulty ");
-		Text difficultyText = new Text(curDifficulty + "");						//TODO should get from the submitted form or use default
-		difficultyText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-		difficultyText.setFill(Color.web("#9999FF"));
+		System.out.println("DEBUG::: concatCategories " + concatCategories);
+		
+		Label categoryText = new Label(concatCategories);
+		categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+
+		Text text2 = new Text(">" + " has been selected on difficulty ");
+		
+		Label difficultyText = new Label(curDifficulty + "");
+		difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(153, 153, 50);" );
 		Text text3 = new Text("Hint: ");
-		//randomly grab one of the hints from the hints array (DemoSource)
-		Text hintText = new Text(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
-		hintText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-		hintText.setFill(Color.rgb(234, 175, 175));
+		Label hintText = new Label(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
+		hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+		
 		outputPanel.writeNodes(text, categoryText, text2, difficultyText);
 		outputPanel.writeNodes(text3, hintText);
 
@@ -195,6 +215,13 @@ public class GUI {
 	}
 	
 	/**
+	 * Get the current categories
+	 */
+	public List<String> getCurCategories(){
+		return curCategories;
+	}
+	
+	/**
 	 * Get the OutputPanel
 	 */
 	public static OutputPanel getOutputPanel(){
@@ -204,21 +231,21 @@ public class GUI {
 	/**
 	 * Get the TokenBay
 	 */
-	public static TokenBay getTokenBay(){
+	public TokenBay getTokenBay(){
 		return tokenBay;
 	}
 	
 	/**
 	 * Get the TokenBoard
 	 */
-	public static TokenBoard getTokenBoard(){
+	public TokenBoard getTokenBoard(){
 		return tokenBoard;
 	}
 	
 	/**
 	 * Get the LegalDropZone
 	 */
-	public static LegalDragZone getLegalDragZone(){
+	public LegalDragZone getLegalDragZone(){
 		return legalDragZone;
 	}
 	
@@ -227,6 +254,13 @@ public class GUI {
 	 */
 	public void setCurDifficulty(int curDifficulty){
 		this.curDifficulty = curDifficulty;
+	}
+	
+	/**
+	 * Set the current categories
+	 */
+	public void setCurCategories(List<String> categories){
+		this.curCategories = categories;
 	}
 	
 	
