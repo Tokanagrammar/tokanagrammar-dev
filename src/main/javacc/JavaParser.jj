@@ -1400,6 +1400,8 @@ multiplicativeExpression(List<SourceToken> curLine, int count[]) :
     (
         (<STAR> | <DIV> | <PERCENT>)
         {
+            curLine.add(space());
+            ++count[0];
             curLine.add(operator(token.image));
             curLine.add(space());
             count[0] += 2;
