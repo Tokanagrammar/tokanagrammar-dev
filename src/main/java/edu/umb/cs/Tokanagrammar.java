@@ -36,7 +36,11 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class Tokanagrammar extends Application{
-
+	
+	
+	private static final String CURRENT_VERSION = "Tokanagrammar 0.8";
+	private static final int FINAL_WIDTH = 886;
+	private static final int FINAL_HEIGHT = 689;
 	/**The main scene**/
     private static Scene scene;
 	/**We need access to primaryStage to assign parent to other stages**/
@@ -50,7 +54,11 @@ public class Tokanagrammar extends Application{
     public void start(Stage primaryStage) {
         try {
         	Tokanagrammar.primaryStage = primaryStage;
-			
+
+            primaryStage.initStyle(StageStyle.DECORATED);
+            primaryStage.setWidth(FINAL_WIDTH);
+            primaryStage.setHeight(FINAL_HEIGHT);
+            primaryStage.setResizable(false);	//CAUSING GAP IN MAIN FRAME
         	AnchorPane page = 	(AnchorPane) FXMLLoader.load(Thread.
         						currentThread().getContextClassLoader().
         						getResource("fxml/Tokanagrammar.fxml"));
@@ -60,6 +68,8 @@ public class Tokanagrammar extends Application{
             primaryStage.setScene(scene);
             primaryStage.getIcons().add(new Image(Tokanagrammar.class.
             		getResourceAsStream("/images/ui/tokanagrammarIcon.fw.png")));
+            primaryStage.setTitle(CURRENT_VERSION);
+
             primaryStage.setTitle("Tokanagrammar " + APIs.getVersion());
             primaryStage.setResizable(false);
             primaryStage.sizeToScene();

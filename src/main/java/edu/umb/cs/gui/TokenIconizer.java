@@ -110,7 +110,7 @@ public class TokenIconizer {
 	private static IconizedToken iconizeToken(DemoToken token, Integer occurrences){
 		
 		String tokenType = token.getType();
-		BufferedImage image = null; 
+		Image image = null; 
 		BufferedImage finalImage = null;
 		Graphics graphics = null;
 		int imagePadding = 20;
@@ -160,7 +160,7 @@ public class TokenIconizer {
 	 * @param type
 	 * @return
 	 */
-    private static BufferedImage finalizeImage(	BufferedImage originalImage, 
+    private static BufferedImage finalizeImage(	Image originalImage, 
     											DemoToken token, 
     											Integer occurrences, 
     											int height, 
@@ -169,6 +169,7 @@ public class TokenIconizer {
 
     	String tokenImage = token.getImage();
     	String tokenType = token.getType();
+    	
     	Font font = new Font("Arial", type, 11);
 		BufferedImage resizedImage = new BufferedImage(width, height, type);
 		Graphics2D g = resizedImage.createGraphics();
@@ -188,7 +189,7 @@ public class TokenIconizer {
     	//for multiple occurrences, draw subscript
 	    if(occurrences > 1){
 		    try {
-				BufferedImage numOnSubscript = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/subscript.fw.png"));
+				Image numOnSubscript = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/subscript.fw.png"));
 				g.drawImage(numOnSubscript, width - 20, height-20, 20, 20, null);
 				g.setColor(Color.white);
 				g.drawString(occurrences.toString(), width - 11, (height-20)*2 + 5);

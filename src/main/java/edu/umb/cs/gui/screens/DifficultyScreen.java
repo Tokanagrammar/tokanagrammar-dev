@@ -52,7 +52,6 @@ public class DifficultyScreen extends SecondaryScreen{
 	private static Slider slider;
 	
 	private static Pane textPane;
-	
 
 	/**the current image in the imgDisplay**/
 	static ImageView curImgInDisplay;

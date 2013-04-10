@@ -60,8 +60,9 @@ public class Controller implements Initializable{
 	@FXML
 	private static Pane outputPanel;
 	
+
 	@FXML
-	private static Pane difficultyPane;			//this is being added to allow dynamic change of this button
+	private static Pane difficultyPane;
 	private static ImageView curDifficultyIcon;
 	
 	//timer
@@ -79,8 +80,6 @@ public class Controller implements Initializable{
 	private Button skipButton;
 	@FXML
 	private Button categoryButton;
-	//@FXML
-	//private Button difficultyButton;		//BEING UPDATED
 	@FXML
 	private Button resetBoardButton;
 	@FXML
@@ -103,7 +102,6 @@ public class Controller implements Initializable{
 		buttons.add(pauseButton);
 		buttons.add(skipButton);
 		buttons.add(categoryButton);
-		//buttons.add(difficultyButton);	//this is being updated to allow dynamic change of this button
 		buttons.add(resetBoardButton);
 		buttons.add(logoButton);
 		
@@ -197,6 +195,7 @@ public class Controller implements Initializable{
 		return timer;
 	}
 	
+	
 	//this is being updated to allow dynamic change of this button
 	//note this feature is more unique than a regular button
 	//We can handle all changing here.
@@ -249,6 +248,15 @@ public class Controller implements Initializable{
 	public void pauseFired(ActionEvent event){
 		Text text = new Text("pauseFired");
 		OutputPanel.getInstance().writeNodes(text);
+		
+		
+		//little pause demo only
+		if(Timer.getInstance().getTimerState().equals("running"))
+			Timer.getInstance().pause();
+		else if(Timer.getInstance().getTimerState().equals("paused"))
+			Timer.getInstance().start();
+		if(Timer.getInstance().getTimerState().equals("stopped"))
+			Timer.getInstance().start();
 		//put in another game state gameStatePauseGame
 		//stop the timer if it's running
 		
@@ -266,6 +274,10 @@ public class Controller implements Initializable{
 	public void skipFired(ActionEvent event){
 		Text text = new Text("skipFired");
 		OutputPanel.getInstance().writeNodes(text);
+		
+		//TEST remove an iToken
+		System.out.println("DEBUG::: " + TokenBay.getInstance().remove(TokenBay.getInstance().getITokens().getFirst()));
+		System.out.println(TokenBay.getInstance().getITokens());
 	}
 	
     /**
@@ -281,19 +293,6 @@ public class Controller implements Initializable{
 			System.out.println("Pause Game Here.");//pause
 	}
 	
-    /**
-     * Called when the difficulty button is fired.
-     *
-     * @param event the action event.
-     */
-	public void difficultyFired(ActionEvent event){
-		String gameState = GUI.getGameState();
-		if(gameState.equals("initGUI") || gameState.equals("startGame")){
-			DifficultyScreen ds = new DifficultyScreen();
-		}	
-		else
-			System.out.println("Pause Game Here.");//pause
-	}
 	
     /**
      * Called when the resetBoard button is fired.
