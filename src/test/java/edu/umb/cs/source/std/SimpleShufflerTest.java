@@ -21,12 +21,14 @@
 
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.Token;
+import edu.umb.cs.parser.ParseException;
+import edu.umb.cs.source.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 
@@ -41,14 +43,20 @@ public class SimpleShufflerTest extends SourceTestBase
     @Override
     void doTest(File expted, File in) throws FileNotFoundException, IOException
     {
-        // parse source file
-        AutomaticallyParsedJavaSourceFile srcFile 
-            = new AutomaticallyParsedJavaSourceFile(in.getAbsolutePath());
-        
+        SourceFile srcFile;
+        try
+        {
+            srcFile = SourceFiles.getSourceFile(in, Language.JAVA);
+        }
+        catch (ParseException ex)
+        {
+            fail("parse error");
+            return;
+        }
         // remove a few tokens
         int toRemove = 6;
         ShuffledSource shuffled = SimpleShuffler.INSTANCE.shuffle(srcFile, toRemove);
-        List<Token> removed = shuffled.getRemovedTokens();
+        List<SourceToken> removed = shuffled.getRemovedTokens();
 
         assertEquals(toRemove, removed.size());
         // TODO: for now, just print out the removed tokens and the source
@@ -56,11 +64,11 @@ public class SimpleShufflerTest extends SourceTestBase
         System.out.println("removed tokens: " + removed);
         
         System.out.println("new source: \n");
-        List<List<Token>> newSrc = SimpleShuffler.buildList(shuffled.getShuffledSource());
-        for (List<Token> line : newSrc)
+        List<List<SourceToken>> newSrc = SimpleShuffler.buildList(shuffled.getShuffledSource());
+        for (List<SourceToken> line : newSrc)
         {
-            for (Token tk : line)
-                System.out.printf("%s ", tk.image());
+            for (SourceToken tk : line)
+                System.out.printf("%s", tk.image());
             System.out.println();
         }
     }

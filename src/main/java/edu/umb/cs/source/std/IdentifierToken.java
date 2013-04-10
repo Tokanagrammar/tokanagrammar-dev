@@ -18,46 +18,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceToken;
-import java.util.List;
+import edu.umb.cs.source.SourceTokenKind;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class ShuffledSourceImpl implements ShuffledSource
+public class IdentifierToken extends SourceTokenBase
 {
-    private final SourceFile original;
-    private final SourceFile shuffled;
-    private final List<SourceToken> removed;
-    
-    public ShuffledSourceImpl(SourceFile original, SourceFile shuffled, List<SourceToken> removed)
+    public IdentifierToken (String img)
     {
-        this.original = original;
-        this.shuffled = shuffled;
-        this.removed = removed;
-    }
-
-    @Override
-    public SourceFile getOrinalSource()
-    {
-        return original;
-    }
-
-    @Override
-    public SourceFile getShuffledSource()
-    {
-        return shuffled;
-    }
-
-    @Override
-    public List<SourceToken> getRemovedTokens()
-    {
-        return removed;
+        super(img, SourceTokenKind.IDENTIFIER);
     }
 }

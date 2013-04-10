@@ -19,18 +19,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.source;
+package edu.umb.cs.source.std;
+
+import edu.umb.cs.source.SourceTokenKind;
 
 /**
- * 
+ *
  * @author Vy Thao Nguyen
  */
-public interface Token 
+public class StringLiteralToken extends SourceTokenBase
 {
-    String image();
-    boolean isKeyWord();
-    boolean isLiteral();
-    boolean isIdentifier();
-    boolean isQuotedString();
-    boolean isEmpty();
+    public StringLiteralToken (String img)
+    {
+        super(img, SourceTokenKind.STRING_LITERAL);
+    }
 }
