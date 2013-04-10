@@ -34,13 +34,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import edu.umb.cs.demo.DemoSource;
 import edu.umb.cs.demo.DemoTokens;
-import edu.umb.cs.gui.screens.CategoriesScreen;
 
 /**
  * Handle game states and also work as a main GUI API.
  * @author Matt
  */
 public class GUI {
+	
+	public enum GameState {INIT_GUI, START_GAME, RESET_GAME};
 	
 	/**controller wrappers**/
 	private static TokenBay tokenBay;
@@ -50,18 +51,18 @@ public class GUI {
 	private static OutputPanel outputPanel;
 	
 	/**For now, gameState is a String -- might stay that way**/
-	private static String gameState;
+	private static GameState curGameState;
 	
 	/**maps the gameState to a list of active buttons while in this state**/
 	private static HashMap<String, ArrayList<String>> activeButtons;
 	
-	private static boolean showTutorial;										//not implemented.
-	
-	private static final GUI gui = new GUI();
-	
 	private int curDifficulty;
 	
 	private List<String> curCategories;
+	
+	private static boolean showTutorial;										//not implemented.
+	
+	private static final GUI gui = new GUI();
 	
 	private GUI(){}
 	
@@ -85,11 +86,8 @@ public class GUI {
 	 * Welcome the user and give prompt to choose category.
 	 */
 	public void gameState_initGUI(){
-		
-		
-		
-		gameState = "initGUI";
-		System.out.println("GAMESTATE::: " + gameState);
+		curGameState = GameState.INIT_GUI;
+		System.out.println("GAMESTATE::: " + curGameState);
 		this.curDifficulty = 50;
 		this.curCategories = new LinkedList<String>();
 		
@@ -115,11 +113,6 @@ public class GUI {
 		text.setFont(new Font(14));
 		outputPanel.writeNodes(categoryText, imgView, text);
 		
-		
-		
-		
-		
-
 		/*
 		 * TEST COMPILER MESSAGE
 		 */
@@ -127,8 +120,6 @@ public class GUI {
 									"test that it wraps this is a compiler message test it should " + 
 									"be plenty wide to test that it wraps this is a compiler message " +
 									"test it should be plenty wide to test that it wraps");
-		
-		
 		
 		initButtons(activeButtons.get("initGUI"));
 	}
@@ -140,7 +131,8 @@ public class GUI {
 	 * The user has selected a category (or categories) and pressed "start".
 	 */
 	public void gameState_startGame(){
-		gameState = "startGame";
+		curGameState = GameState.START_GAME;
+		System.out.println("GAMESTATE::: " + curGameState);
 		timer.start();
 		outputPanel.clear();  //start w/a clean outputPanel
 		
@@ -177,8 +169,6 @@ public class GUI {
 		for(int i=0; i< curCategories.size(); i++)
 			concatCategories += (curCategories.get(i) + " ");
 		
-		System.out.println("DEBUG::: concatCategories " + concatCategories);
-		
 		Label categoryText = new Label(concatCategories);
 		categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
 
@@ -196,6 +186,42 @@ public class GUI {
 		initButtons(activeButtons.get("startGame"));
 	}
 	
+	/**
+	 * Reset the Game
+	 * Warning: This reboots the game completely!
+	 * If you want to place the orig rhs and lhs tokens
+	 * back to their original state, use refresh.
+	 * 
+	 * GameState is Reset
+	 */
+	public void gameState_resetGame(){
+		curGameState = GameState.RESET_GAME;
+		tokenBay.resetTokenBay();
+		timer.reset();
+		outputPanel.clear();
+		
+		gameState_initGUI();
+	}
+	
+	/**
+	 * Refresh the Game
+	 * Places all original tokens back to their
+	 * original place.
+	 * 
+	 * GameState is Refresh
+	 */
+	public void gameState_refreshGame(){
+		
+		System.out.println("REFRESH STATE IS NOT IMPLEMENTED -- FULL RESET INSTEAD");
+		//not enough data to implement this now
+		//send to resetGame
+		gameState_resetGame();
+		
+		//should go back to state startGame
+		//gameState_startGame();
+		
+	}
+	
 	//--------------------------------------------------------------------------
 	//Getters / Setters
 	
@@ -203,8 +229,8 @@ public class GUI {
 	 * GameState is set by Controller or logic classes.
 	 * @return the current game state
 	 */
-	public static String getGameState(){
-		return gameState;
+	public static GameState getCurGameState(){
+		return curGameState;
 	}
 	
 	/**

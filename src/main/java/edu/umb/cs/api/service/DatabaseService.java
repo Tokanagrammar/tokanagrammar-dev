@@ -145,7 +145,7 @@ public class DatabaseService
             em.persist(p);
             em.getTransaction().commit();
         }
-        catch (IOException | ParseException exc)
+        catch (IOException exc)// | ParseException exc)
         {
             return false;
         }

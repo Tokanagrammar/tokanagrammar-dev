@@ -63,7 +63,6 @@ public class Timer {
 						label.setText(hourString + ":" + minuteString + ":" + secondString + ":" + msString);
 						
 						milliseconds++;
-
 					}
 				}
 						),
@@ -104,6 +103,7 @@ public class Timer {
 		digitalTime.stop();
 	}
 	public void reset(){
+		timerState = "stopped";
 		digitalTime.stop();
 		milliseconds = 0;
 		hideTimer();

@@ -88,6 +88,9 @@ public class OutputPanel{
 		return outputPanel;
 	}
 	
+	/**
+	 * Completely clears and forgets previous data displayed.
+	 */
 	public void clear(){
 		entries.removeAll(entries);
 	}

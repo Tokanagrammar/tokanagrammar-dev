@@ -41,6 +41,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import edu.umb.cs.gui.GUI.GameState;
 import edu.umb.cs.gui.screens.CategoriesScreen;
 import edu.umb.cs.gui.screens.DifficultyScreen;
 
@@ -117,7 +118,6 @@ public class Controller implements Initializable{
 			Image img = new Image(DifficultyScreen.class.getResourceAsStream("/images/ui/secondaryScreens/difficulty" + i + ".fw.png"));
 			imgViewTable.put(i, new ImageView(img));
 		}
-
 	}
 	
 	/**
@@ -155,8 +155,8 @@ public class Controller implements Initializable{
 		cdi.setOnMousePressed(new EventHandler <MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				String gameState = GUI.getGameState();
-				if(gameState.equals("initGUI") || gameState.equals("startGame")){
+				GameState gameState = GUI.getCurGameState();
+				if(gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME)){
 					DifficultyScreen ds = new DifficultyScreen();
 				}	
 				else
@@ -176,8 +176,6 @@ public class Controller implements Initializable{
 	public static HashMap<Integer, ImageView> getImgViewTable(){
 		return imgViewTable;
 	}
-	
-	
 	
 	public static Pane getTokenBay(){
 		return tokenBay;
@@ -286,8 +284,8 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void categoryFired(ActionEvent event){
-		String gameState = GUI.getGameState();
-		if(gameState.equals("initGUI") || gameState.equals("startGame")){
+		GameState gameState = GUI.getCurGameState();
+		if(	gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME)){
 			CategoriesScreen cs = new CategoriesScreen();
 		}else
 			System.out.println("Pause Game Here.");//pause
@@ -302,6 +300,9 @@ public class Controller implements Initializable{
 	public void resetBoardFired(ActionEvent event){
 		Text text = new Text("resetBoardFired");
 		GUI.getOutputPanel().writeNodes(text);
+		
+		//TEST ONLY
+		GUI.getInstance().gameState_resetGame();
 	}
 	
     /**

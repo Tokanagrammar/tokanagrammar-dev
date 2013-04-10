@@ -76,7 +76,7 @@ public class TokenBay {
 		return tokenBay;
 	}
 	
-	public static void resetTokenBay(){
+	public void resetTokenBay(){
 		currentRow = 0;
 		startPosition = BUFFERSIZE;
 		nodes.removeAll(nodes);
