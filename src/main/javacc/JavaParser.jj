@@ -45,6 +45,7 @@ package edu.umb.cs.parser;
 
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
 import edu.umb.cs.source.std.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,8 @@ public class JavaParser
 {
     private static final char NOT_SET = 0;
     private static final List<SourceToken> emptyLine = new ArrayList<SourceToken>();
+    private static List<SourceToken> draftLine = new ArrayList<SourceToken>();
+    int draft[] = new int[] {0};
     static
     {
         emptyLine.add(SpaceToken.INSTANCE);
@@ -66,16 +69,29 @@ public class JavaParser
         return new KeywordToken(img);
     }
 
+    private SourceToken numLiteral (String img)
+    {
+        return new NumLiteralToken(img);
+    }
+
+    private SourceToken quotedString (String img)
+    {
+        return new StringLiteralToken(img);
+    }
+
+    private SourceToken charLiteral (String img)
+    {
+        return new CharLiteralToken(img);
+    }
+
     private SourceToken separator(String img)
     {
-        // TODO cache brackets and reuse them
-        // might not be identifier
-        return new IdentifierToken(img);
+        return SeparatorToken.getSep(img);
     }
 
     private SourceToken semi()
     {
-        return OperatorToken.getOperator(";");
+        return SeparatorToken.getSep(";");
     }
 
     private SourceToken operator(String img)
@@ -1067,7 +1083,7 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
     |
         <RETURN>
         {
-            // TODO
+            System.out.println("going to expression()");
             curLine = new ArrayList<SourceToken>();
             src.add(curLine);
 
@@ -1086,7 +1102,13 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
         ]
         <SEMI>
         {
-            curLine.add(semi());
+            n = curLine.size() - 1;
+            if (curLine.get(n).getKind() == SourceTokenKind.SPACE)
+            {
+                curLine.set(n, semi());
+            }
+            else
+                curLine.add(semi());
             ++count[0];
             ++line;
         }
@@ -1217,6 +1239,7 @@ private
 void
 assignmentExpression(List<SourceToken> curLine, int count[]) :
 {
+    System.out.println("in expr");
 }
 {
     conditionalAndExpression (curLine, count)
@@ -1249,13 +1272,15 @@ conditionalAndExpression(List<SourceToken> curLine, int count[]):
 }
 {
     equalityExpression(curLine, count)
-    <LAND>
-    {
-        curLine.add(operator("&&"));
-        curLine.add(space());
-        count[0] += 2;
-    }
-    equalityExpression(curLine, count)
+    (
+        <LAND>
+        {
+            curLine.add(operator("&&"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        equalityExpression(curLine, count)
+    )*
 }
 
 /**
@@ -1321,10 +1346,6 @@ relationalExpression(List<SourceToken> curLine, int count[]):
         }
         referenceType(curLine, count)
     ]
-    {
-        curLine.add(space());
-        ++count[0];
-    }
 }
 
 /**
@@ -1384,6 +1405,10 @@ multiplicativeExpression(List<SourceToken> curLine, int count[]) :
         }
         unaryExpression(curLine, count)
     )*
+    {
+        curLine.add(space());
+        ++count[0];
+    }
 }
 
 /**
@@ -1485,6 +1510,45 @@ postfixExpression(List<SourceToken> curLine, int count[]) :
             ++count[0];
         }
      )*
+}
+
+/**
+ * Parse arguments.
+ * 
+ * <pre>
+ *   arguments ::= LPAREN [expression {COMMA expression}] RPAREN    
+ * </pre>
+ * 
+ */
+
+private
+void
+arguments(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    [
+        expression(curLine, count)
+        (
+            <COMMA>
+            {
+                curLine.add(separator(","));
+                curLine.add(space());
+                count[0] += 2;
+            }
+            expression(curLine, count)
+        )*
+    ]
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+    }
 }
 
 /**
@@ -1683,6 +1747,15 @@ newArrayDeclarator(List<SourceToken> curLine, int count[]) :
     )*
 }
 
+private
+void
+scanExpression() :
+{
+}
+{
+    expression(draftLine, draft)
+}
+
 /**
  * Parse a literal.
  * 
@@ -1721,6 +1794,8 @@ private
 void
 wholeNumLiteral(List<SourceToken> curLine, int count[]) :
 {
+    char postfix;
+    int base;
 }
 {
     (
@@ -1741,7 +1816,7 @@ wholeNumLiteral(List<SourceToken> curLine, int count[]) :
         <BIN_LONG_LITERAL> {postfix = 'L'; base = 2;}
     )
     {
-        curLine.add(literal(token.image));
+        curLine.add(numLiteral(token.image));
         ++count[0];
     }
 }

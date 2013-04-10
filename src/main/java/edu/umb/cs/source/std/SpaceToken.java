@@ -21,6 +21,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
 
 /**
  *
@@ -40,44 +41,8 @@ public class SpaceToken implements SourceToken
     }
 
     @Override
-    public boolean isKeyWord()
+    public SourceTokenKind getKind()
     {
-        return false;
-    }
-
-    @Override
-    public boolean isLiteral()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isIdentifier()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isQuotedString()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isTab()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isSpace()
-    {
-        return true;
-    }
-    
-    @Override
-    public boolean isEmpty()
-    {
-        return false;
+        return SourceTokenKind.SPACE;
     }
 }

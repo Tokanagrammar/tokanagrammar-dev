@@ -22,17 +22,13 @@
 package edu.umb.cs.source;
 
 /**
+ *  TODO: provide base implementation
+ *        whose ctor takes an image an a SourceTokenKind?
  * 
  * @author Vy Thao Nguyen
  */
 public interface SourceToken 
 {
     String image();
-    boolean isKeyWord();
-    boolean isLiteral();
-    boolean isIdentifier();
-    boolean isQuotedString();
-    boolean isTab();
-    boolean isSpace();
-    boolean isEmpty();
+    SourceTokenKind getKind();
 }

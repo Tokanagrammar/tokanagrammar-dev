@@ -21,6 +21,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,47 +54,10 @@ public class OperatorToken implements SourceToken
     {
         return image;
     }
-
+    
     @Override
-    public boolean isKeyWord()
+    public SourceTokenKind getKind()
     {
-        return false;
+        return SourceTokenKind.OPERATOR;
     }
-
-    @Override
-    public boolean isLiteral()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isIdentifier()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isQuotedString()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isTab()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isSpace()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isEmpty()
-    {
-        return false;
-    }
-
 }

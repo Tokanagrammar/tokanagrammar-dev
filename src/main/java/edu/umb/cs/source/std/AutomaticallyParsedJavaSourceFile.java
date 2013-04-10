@@ -22,6 +22,7 @@ package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
@@ -60,34 +61,11 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         }
 
         @Override
-        public boolean isKeyWord()
+        public SourceTokenKind getKind()
         {
-            return isKeyword;
+            return isKeyword ? SourceTokenKind.KEYWORD : SourceTokenKind.IDENTIFIER;
         }
 
-        @Override
-        public boolean isLiteral()
-        {
-            return false;
-        }
-
-        @Override
-        public boolean isIdentifier()
-        {
-            return !isKeyword;
-        }
-
-        @Override
-        public boolean isQuotedString()
-        {
-            return false;
-        }
- 
-        @Override
-        public boolean isEmpty()
-        {
-            return false;
-        }
         // Object interface
         
         @Override
@@ -108,18 +86,6 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         public String toString()
         {
             return image;
-        }
-
-        @Override
-        public boolean isTab()
-        {
-            return false;
-        }
-
-        @Override
-        public boolean isSpace()
-        {
-            throw new UnsupportedOperationException("Not supported yet.");
         }
     }
     

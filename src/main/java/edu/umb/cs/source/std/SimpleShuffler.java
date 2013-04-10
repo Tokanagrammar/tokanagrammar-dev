@@ -21,10 +21,7 @@
 
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.Shuffler;
-import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.*;
 import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile.SimpleToken;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +36,9 @@ public class SimpleShuffler implements Shuffler
     static final SourceToken EMPTY = new SimpleToken("<REMOVED>")
     {
         @Override
-        public boolean isEmpty()
+        public SourceTokenKind getKind()
         {
-            return true;
+            return SourceTokenKind.EMPTY;
         }
     };
     
@@ -67,7 +64,7 @@ public class SimpleShuffler implements Shuffler
             SourceToken token = line.get(tokenIndex);
             
             // already removed.
-            if (token.isEmpty())
+            if (token.getKind() == SourceTokenKind.EMPTY)
                 continue;
             
             removed.add(token);

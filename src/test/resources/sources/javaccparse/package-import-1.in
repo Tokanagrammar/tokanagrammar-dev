@@ -16,7 +16,8 @@ public class Foo
     
 }
 
-    public static bar2(double y)
+    public static int bar2(double y)
     {
+        return 2 + 3;
     }
 }

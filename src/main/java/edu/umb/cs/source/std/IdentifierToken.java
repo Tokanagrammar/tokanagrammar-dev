@@ -21,6 +21,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
 
 /**
  *
@@ -42,45 +43,8 @@ public class IdentifierToken implements SourceToken
     }
 
     @Override
-    public boolean isKeyWord()
+    public SourceTokenKind getKind()
     {
-        return false;
+        return SourceTokenKind.IDENTIFIER;
     }
-
-    @Override
-    public boolean isLiteral()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isIdentifier()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isQuotedString()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isTab()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isSpace()
-    {
-        return false;
-    }
-    
-    @Override
-    public boolean isEmpty()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }
