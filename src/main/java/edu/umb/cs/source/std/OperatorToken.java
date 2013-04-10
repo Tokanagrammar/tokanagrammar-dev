@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author Vy Thao Nguyen
  */
-public class OperatorToken implements SourceToken
+public class OperatorToken
 {
     private static final Map<String, SourceToken> instances
                 = new HashMap<String, SourceToken>();
@@ -38,26 +38,7 @@ public class OperatorToken implements SourceToken
     {
         SourceToken tk = instances.get(img);
         if (tk == null)
-            instances.put(img, tk = new OperatorToken(img));
+            instances.put(img, tk = new SourceTokenBase(img, SourceTokenKind.OPERATOR));
         return tk;
-    }
-
-    private final String image;
-    
-    private OperatorToken (String img)
-    {
-        image = img;
-    }
-
-    @Override
-    public String image()
-    {
-        return image;
-    }
-    
-    @Override
-    public SourceTokenKind getKind()
-    {
-        return SourceTokenKind.OPERATOR;
     }
 }

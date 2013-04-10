@@ -22,32 +22,16 @@
 
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class NumLiteralToken implements SourceToken
+public class NumLiteralToken extends SourceTokenBase
 {
-    private final String img;
-    
     public NumLiteralToken(String img)
     {
-        this.img = img;
+        super(img, SourceTokenKind.NUM_LITERAL);
     }
-    
-    @Override
-    public String image()
-    {
-        return img;
-    }
-
-    @Override
-    public SourceTokenKind getKind()
-    {
-        return SourceTokenKind.NUM_LITERAL;
-    }
-
 }

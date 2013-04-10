@@ -31,7 +31,7 @@ import java.util.Map;
  *
  * @author Vy Thao Nguyen
  */
-public class SeparatorToken  implements SourceToken
+public class SeparatorToken
 {
     private static final Map<String, SourceToken> seps = computeMap();
     private static Map<String, SourceToken> computeMap()
@@ -39,7 +39,7 @@ public class SeparatorToken  implements SourceToken
         Map<String, SourceToken> ret = new HashMap<>();
         
         for (String st : Arrays.asList("[", "]", "{", "}", "(", ")", ",", ";", "."))
-            ret.put(st, new SeparatorToken(st));
+            ret.put(st, new SourceTokenBase(st, SourceTokenKind.SEPARATOR));
         
         return ret;
     }
@@ -51,23 +51,4 @@ public class SeparatorToken  implements SourceToken
             throw new InternalException("no such seperator");
         return tk;
     }
-    private String img;
-    
-    SeparatorToken (String img)
-    {
-        this.img = img;
-    }
-
-    @Override
-    public String image()
-    {
-        return img;
-    }
-
-    @Override
-    public SourceTokenKind getKind()
-    {
-        return SourceTokenKind.SEPARATOR;
-    }
-
 }

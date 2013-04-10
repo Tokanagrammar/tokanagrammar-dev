@@ -27,21 +27,8 @@ import edu.umb.cs.source.SourceTokenKind;
  *
  * @author Vy Thao Nguyen
  */
-public class TabToken implements SourceToken
+public class TabToken 
 {
-    public static final TabToken INSTANCE = new TabToken();
-    
-    private TabToken() {}
-    
-    @Override
-    public String image()
-    {
-        return "    ";
-    }
-
-    @Override
-    public SourceTokenKind getKind()
-    {
-        return SourceTokenKind.TAB;
-    }
+    public static final SourceToken INSTANCE = new SourceTokenBase("    ",
+                                                                   SourceTokenKind.TAB);
 }

@@ -63,8 +63,12 @@ public class SimpleShuffler implements Shuffler
             ArrayList<SourceToken> line = (ArrayList<SourceToken>)newSrc.get(lineIndex);
             SourceToken token = line.get(tokenIndex);
             
-            // already removed.
-            if (token.getKind() == SourceTokenKind.EMPTY)
+            // already removed. or is quite spaces
+            // (it is not a good idea to remove white spaces)
+            SourceTokenKind kind = token.getKind();
+            if (kind == SourceTokenKind.EMPTY
+                    || kind == SourceTokenKind.SPACE
+                    || kind == SourceTokenKind.TAB)
                 continue;
             
             removed.add(token);

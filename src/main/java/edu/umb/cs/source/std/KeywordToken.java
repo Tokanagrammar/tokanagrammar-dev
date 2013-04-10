@@ -20,30 +20,16 @@
  */
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class KeywordToken implements SourceToken
+public class KeywordToken extends SourceTokenBase
 {
-    private final String image;
     public KeywordToken(String img)
     {
-        image = img;
-    }
-
-    @Override
-    public String image()
-    {
-        return image;
-    }
-
-    @Override
-    public SourceTokenKind getKind()
-    {
-        return SourceTokenKind.KEYWORD;
+        super(img, SourceTokenKind.KEYWORD);
     }
 }

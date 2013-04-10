@@ -20,31 +20,16 @@
  */
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class IdentifierToken implements SourceToken
+public class IdentifierToken extends SourceTokenBase
 {
-    private final String image;
-    
     public IdentifierToken (String img)
     {
-        image = img;
-    }
-
-    @Override
-    public String image()
-    {
-        return image;
-    }
-
-    @Override
-    public SourceTokenKind getKind()
-    {
-        return SourceTokenKind.IDENTIFIER;
+        super(img, SourceTokenKind.IDENTIFIER);
     }
 }
