@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.umb.cs.gui.util;
+package edu.umb.cs.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -41,7 +41,6 @@ import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
 
 import edu.umb.cs.demo.DemoToken;
-import edu.umb.cs.gui.IconizedToken;
 
 /**
  * 
@@ -53,9 +52,9 @@ public class TokenIconizer {
 	final static int TOKEN_HEIGHT = 32; //token height is always the same
 	final static int MIN_WIDTH = 32;	//the minimum token width
 	
-	private static HashMap<DemoToken, Integer> occurrenceTable = new HashMap<DemoToken, Integer>();
-	private static HashMap<String, Color> tokenFontColor = new HashMap<String, Color>();
+	private static HashMap<String, Color> tokenFontColor;
 	
+	private TokenIconizer(){}
 	
 	/**
 	 * The primary method of TokenIconizer does all iconizing at once, for the
@@ -65,8 +64,11 @@ public class TokenIconizer {
 	 */
 	public static LinkedList<IconizedToken> iconizeTokens(List<DemoToken> tokens){
 		
+		//store all the newly iconized tokens here
 		LinkedList<IconizedToken> iconizedTokens = new LinkedList<IconizedToken>();
-		Set<Entry<DemoToken, Integer>> entrySet;
+		
+		HashMap<DemoToken, Integer> occurrenceTable = new HashMap<DemoToken, Integer>();
+		tokenFontColor = new HashMap<String, Color>();
     	
     	tokenFontColor.put("keyword", Color.yellow);
     	tokenFontColor.put("literal", Color.white);
@@ -79,7 +81,7 @@ public class TokenIconizer {
 		//load the occurrence table with all 0's
 		for(int k=0; k< tokens.size(); k++)
 			//We know we have at least one of each that are passed to this method.
-			occurrenceTable.put(tokens.get(k), 1);  
+			occurrenceTable.put(tokens.get(k), 1);
 		
 		//mark the appropriate location in the occurrence table if we find a duplicate
 		for(int i=0; i< tokens.size(); i++){
@@ -91,7 +93,7 @@ public class TokenIconizer {
 			}
 		}
 		
-		entrySet = occurrenceTable.entrySet();
+		Set<Entry<DemoToken, Integer>> entrySet = occurrenceTable.entrySet();
 		
 		for(Entry<DemoToken, Integer> entry : entrySet)
 			iconizedTokens.add( iconizeToken((DemoToken) entry.getKey(), (Integer) entry.getValue()) );
@@ -158,7 +160,12 @@ public class TokenIconizer {
 	 * @param type
 	 * @return
 	 */
-    private static BufferedImage finalizeImage(BufferedImage originalImage, DemoToken token, Integer occurrences, int height, int width, int type){
+    private static BufferedImage finalizeImage(	BufferedImage originalImage, 
+    											DemoToken token, 
+    											Integer occurrences, 
+    											int height, 
+    											int width, 
+    											int type){
 
     	String tokenImage = token.getImage();
     	String tokenType = token.getType();

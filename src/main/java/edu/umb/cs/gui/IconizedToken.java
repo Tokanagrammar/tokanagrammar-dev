@@ -111,6 +111,7 @@ class ImageViewFactory {
 	            initX = imgView.getTranslateX();
 	            initY = imgView.getTranslateY();
 	        	dragAnchor = new Point2D(me.getSceneX(), me.getSceneY());
+	        	me.consume();
 	        }
 	    });
 		
@@ -124,14 +125,13 @@ class ImageViewFactory {
 	            
 	            imgView.setTranslateX(newXPosition);
 	            imgView.setTranslateY(newYPosition);
+	            me.consume();
 	        }
 	    });
 		
 		imgView.setOnMouseEntered(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				/* drag was detected, start drag-and-drop gesture*/
 				System.out.println("onMouseEntered");
-				//Effect effect = new Effect();
 				imgView.setEffect(new Glow(0.5));
 				event.consume();
 			}
@@ -139,9 +139,7 @@ class ImageViewFactory {
 		
 	    imgView.setOnMouseExited(new EventHandler <MouseEvent>() {
 	        public void handle(MouseEvent event) {
-	            /* drag was detected, start drag-and-drop gesture*/
 	            System.out.println("onMouseExited");
-	            //Effect effect = new Effect();
 	            imgView.setEffect(new Glow(0.0));
 	            event.consume();
 	        }
