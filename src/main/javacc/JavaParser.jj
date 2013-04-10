@@ -1,12 +1,33 @@
 /**
+ * Copyright (C) 2013 Tokanagrammar Team
+ *
+ * This is a jigsaw-like puzzle game,
+ * except each piece is token from a source file,
+ * and the 'complete picture' is the program.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * Define a simple grammar for scanning Java source files
- * (Derived from the J--'s Scanner)
+ * (Derived from the J--'s parser)
  *
  * This will scan, and record the tokens to build a <code>SourceFile</code>
- * object. All strings in a comment block/line  will count as one token.
+ * object.
  *
- * Note: As of this release (post-0.5), the class does NOT perform grammar checking.
- * The compilability of the source file will be checked by delagating to the
+ * Note: As of this release (post-1.0), the class does NOT perform grammar checking.
+ * The compilability of the source file will be checked by delegating to the
  * `javac`
  *
  * @author Vy Thao Nguyen
@@ -23,30 +44,92 @@ PARSER_BEGIN(JavaParser)
 package edu.umb.cs.parser;
 
 import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
+import edu.umb.cs.source.std.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class JavaParser
 {
     private static final char NOT_SET = 0;
-    // TODO
-}
-PARSER_END(JavaParser)
-
-/**
- *
- * Mostly placeholder
- *
- */
-SourceFile
-start():
-{
-}
-{
-    // TODO: Define rule here
-    [<IDENTIFIER>]
+    private static final List<SourceToken> emptyLine = new ArrayList<SourceToken>();
+    private static List<SourceToken> draftLine = new ArrayList<SourceToken>();
+    int draft[] = new int[] {0};
+    static
     {
-        return null;
+        emptyLine.add(SpaceToken.INSTANCE);
+    }
+
+    private SourceToken keyword(String img)
+    {
+        // TODO: cache keywords and reuse them
+        return new KeywordToken(img);
+    }
+
+    private SourceToken numLiteral (String img)
+    {
+        return new NumLiteralToken(img);
+    }
+
+    private SourceToken quotedString (String img)
+    {
+        return new StringLiteralToken(img);
+    }
+
+    private SourceToken charLiteral (String img)
+    {
+        return new CharLiteralToken(img);
+    }
+
+    private SourceToken separator(String img)
+    {
+        return SeparatorToken.getSep(img);
+    }
+
+    private SourceToken semi()
+    {
+        return SeparatorToken.getSep(";");
+    }
+
+    private SourceToken operator(String img)
+    {
+        // TODO validate?
+        return OperatorToken.getOperator(img);
+    }
+
+    private SourceToken tab()
+    {
+        return TabToken.INSTANCE;
+    }
+
+    private SourceToken space()
+    {
+        return SpaceToken.INSTANCE;
+    }
+
+    private SourceToken identifier(String img)
+    {
+        return new IdentifierToken(img);
+    }
+
+    private List<SourceToken> emptyLine()
+    {
+        return emptyLine;
+    }
+
+    private void appendSemi(List<SourceToken> curLine)
+    {
+        int n = curLine.size() - 1;
+        if (n < 0 || curLine.get(n).getKind() != SourceTokenKind.SPACE)
+            curLine.add(semi());
+        else
+            curLine.set(n, semi());
     }
 }
+PARSER_END(JavaParser)
 
 
 ////////////////// TOKENS definition////////////////////////
@@ -57,20 +140,27 @@ SKIP: {" "|"\t"|"\n"|"\r"|"\f"}
 // Single line comment -- ignored
 SKIP: {<SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>}
 
+
 // Reserved words
 TOKEN:
 {
   < ABSTRACT: "abstract" >
 | < BOOLEAN: "boolean" >
+| < BYTE: "byte" >
 | < CHAR: "char" >
 | < CLASS: "class" >
+| < DO : "do" >
+| < DOUBLE : "double" >
 | < ELSE: "else" >
 | < EXTENDS: "extends" >
 | < FALSE: "false" >
+| < FINAL: "final" >
+| < FLOAT: "float" >
 | < IF: "if" >
 | < IMPORT: "import" >
 | < INSTANCEOF: "instanceof" >
 | < INT: "int" >
+| < LONG: "long" >
 | < NEW: "new" >
 | < NULL: "null" >
 | < PACKAGE: "package">
@@ -78,9 +168,11 @@ TOKEN:
 | < PROTECTED: "protected" >
 | < PUBLIC: "public" >
 | < RETURN: "return" >
+| < SHORT: "short" >
 | < STATIC: "static" >
 | < SUPER: "super" >
 | < THIS: "this" >
+| < THROWS: "throws" >
 | < TRUE: "true" >
 | < VOID: "void" >
 | < WHILE: "while" >
@@ -91,6 +183,7 @@ TOKEN:
 {
   < PLUS: "+" >
 | < ASSIGN: "=" >
+| < DIV: "/" >
 | < DEC: "--" >
 | < EQUAL: "==" >
 | < GT: ">" >
@@ -99,6 +192,7 @@ TOKEN:
 | < LE: "<=" >
 | < LNOT: "!" >
 | < MINUS: "-" >
+| < PERCENT: "%" >
 | < PLUS_ASSIGN: "+=" >
 | < STAR: "*" >
 }
@@ -129,8 +223,1603 @@ TOKEN:
 // Literals
 TOKEN:
 {
-  < INT_LITERAL: ("0" | <NON_ZERO_DIGIT> (<DIGIT>)*) >
+  < INT_LITERAL: ("0" | <NON_ZERO_DIGIT> ((<UNDERSCORE>)* <DIGIT>)*) >
+| < LONG_LITERAL: <INT_LITERAL> <L> >
+| < HEX_INT_LITERAL: ("0x" | "0X") (<HEX_DIGIT>  ((<UNDERSCORE>)+ <HEX_DIGIT>)* )+ >
+| < HEX_LONG_LITERAL: <HEX_INT_LITERAL> <L> >
+| < OCT_INT_LITERAL: "0" (<OCT_DIGIT> ((<UNDERSCORE>)+ <HEX_DIGIT>)* )+ >
+| < OCT_LONG_LITERAL: <OCT_INT_LITERAL> <L> >
+| < BIN_INT_LITERAL: "0b" (<BIN_DIGIT> ((<UNDERSCORE>)+ <BIN_DIGIT>)* )+ >
+| < BIN_LONG_LITERAL: <BIN_INT_LITERAL> <L> >
 | < CHAR_LITERAL: "'" (<ESC> | ~["'","\\","\n","\r"]) "'" >
 | < STRING_LITERAL: "\"" (<ESC> | ~["\"","\\","\n","\r"])* "\"" >   
+| < #UNDERSCORE: "_" >
+| < #L: ("l"| "L") >
+| < #D: ("d" | "D") >
+| < #F: ("f" | "F" ) >
 | < #ESC: "\\" ["n","t","b","r","f","\\","'","\""] >
+| < #HEX_DIGIT: ["a"-"f", "A"-"F", "0"-"9"] >
+| < #OCT_DIGIT: ["0"-"7"] >
+| < #BIN_DIGIT: ["0"-"1"] >
+}
+
+
+// For anything else, we return an ERROR token. Without this 
+// definition the TokenManager will throw an Error when a lexical 
+// error occurs, making it impossible to recover from it. So we 
+// define this ERROR token. 
+TOKEN:
+{
+ < ERROR: ~[] >
+}
+
+////////////////////////////////////////////////////////
+//   Grammar starts here
+///////////////////////////////////////////////////////
+
+/**
+ *
+ * <pre>
+ *   compilationUnit ::= [PACKAGE qualifiedIdentifier SEMI]
+ *                       {IMPORT  qualifiedIdentifier SEMI}
+ *                       {typeDeclaration}
+ *                       EOF 
+ * </pre>
+ */
+SourceFile
+parseJava():
+{
+    int tkCount[] = new int[] {0};
+    int line = 0;
+    List<List<SourceToken>> srcFile = new ArrayList<List<SourceToken>>();
+    List<SourceToken> curLine = null;
+}
+{
+    [
+        <PACKAGE>
+        {
+            tkCount[0] += 2;
+            curLine = new ArrayList<SourceToken>();
+            curLine.add(keyword("package"));
+            curLine.add(space());
+            srcFile.add(curLine);
+        }
+        qualifiedIdentifier (srcFile.get(line), tkCount)
+        <SEMI>
+        {
+            ++tkCount[0];
+            srcFile.get(line).add(semi());
+            ++line;
+        }
+    ]
+    (
+        <IMPORT>
+        {
+            tkCount[0] += 2;
+            curLine = new ArrayList<SourceToken>();
+            curLine.add(keyword("import"));
+            curLine.add(space());
+            srcFile.add(curLine);    
+        }
+        qualifiedIdentifier(srcFile.get(line), tkCount)
+        <SEMI>
+        {
+            ++tkCount[0];
+            srcFile.get(line).add(semi());
+            ++line;
+        }
+    )*
+    (
+          line = typeDeclaration(srcFile, line, tkCount)
+    )*
+    <EOF>
+    {
+        return new JavaSourceFile("TODO", srcFile, tkCount[0]);
+    }
+}
+
+private
+void
+qualifiedIdentifier (List<SourceToken> srcLine, int tkCount[]) :
+{
+}
+{
+    <IDENTIFIER>
+    {
+        ++tkCount[0];
+        srcLine.add(identifier(token.image));
+    }
+    (LOOKAHEAD ( { getToken(1).kind == DOT } )
+        <DOT><IDENTIFIER>
+        {
+            tkCount[0] += 2;
+            srcLine.add(separator("."));
+            srcLine.add(identifier(token.image));
+        }
+    )*
+}
+
+/**
+ * Parse a type declaration.
+ * 
+ * <pre>
+ *   typeDeclaration ::= modifiers classDeclaration
+ * </pre>
+ * 
+ */
+private
+int
+typeDeclaration(List<List<SourceToken>> src, int line, int count[]) :
+{
+    List<SourceToken> curLine = new ArrayList<SourceToken>();
+    src.add(curLine);
+}
+{
+    modifiers(curLine, count)
+    line = classDeclaration(src, line, count, 0)
+    {
+        return line;
+    }
+}
+
+/**
+ * Parse modifiers.
+ * 
+ * <pre>
+ *   modifiers ::= {PUBLIC | PROTECTED | PRIVATE | STATIC | ABSTRACT}
+ * </pre>
+ * 
+ * 
+ */
+
+private
+void
+modifiers(List<SourceToken> curLine, int count[]) :
+{
+}
+{   
+    
+    (
+        ( <PUBLIC> | <PROTECTED> | <PRIVATE> | <STATIC> | <ABSTRACT> | <FINAL> )
+        { 
+            count[0] += 2;
+            curLine.add(keyword(token.image));
+            curLine.add(space());
+        }
+    )*
+    {
+        return;
+    }
+}
+
+/**
+ * Parse a class declaration
+ *
+ * <pre>
+ *   classDeclaration ::= CLASS IDENTIFIER 
+ *                        [EXTENDS qualifiedIdentifier] 
+ *                        classBody
+ * </pre>
+ *
+ */
+private
+int
+classDeclaration(List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> curLine = null;
+}
+{
+    <CLASS>
+    {
+        count[0] += 2;
+        curLine = src.get(line);
+        curLine.add(keyword("class"));
+        curLine.add(space());
+    }
+    <IDENTIFIER>
+    {
+        ++count[0];
+        curLine.add(identifier(token.image));
+    }
+    [
+        <EXTENDS>
+        {
+            count[0] += 3;
+            curLine = src.get(line);
+            curLine.add(space());
+            curLine.add(keyword("extends"));
+            curLine.add(space());
+        }
+        qualifiedIdentifier(src.get(line), count)
+    ]
+    {
+        ++line;
+    }
+    line = classBody(src, line, count, level)
+    {
+        return line;
+    }
+}
+
+/**
+ * Parse a class body.
+ * 
+ * <pre>
+ *   classBody ::= LCURLY
+ *                   {modifiers memberDecl}
+ *                 RCURLY
+ * </pre>
+ * 
+ * @return list of members in the class body.
+ */
+private
+int
+classBody (List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    int n = 0;
+    List<SourceToken> curLine = new ArrayList<SourceToken>();
+    while (n++ < level)
+    {
+        ++count[0];
+        curLine.add(tab());
+    }
+}
+{
+    (
+        <LCURLY>
+        {
+            count[0] += 2;
+            curLine.add(separator("{"));
+            src.add(curLine);
+            ++line;
+            curLine = new ArrayList<SourceToken>();
+            ++level;
+            n = 0;
+            while (n++ < level)
+            {
+                ++count[0];
+                curLine.add(tab());
+            }
+            src.add(curLine);
+        }
+        (
+            modifiers(src.get(line), count)
+            line = memberDecl(src, line, count, level)
+            {
+                curLine = new ArrayList<SourceToken>();
+                n = 0;
+                while (n++ < level)
+                {
+                    ++count[0];
+                    curLine.add(tab());
+                }
+                src.add(curLine);
+            }
+        )*
+        <RCURLY>
+        {
+            --level;
+            n = 0;
+            curLine = new ArrayList<SourceToken>();
+            while (n++ < level)
+            {
+                ++count[0];
+                curLine.add(tab());
+            }
+            curLine.add(separator("}"));
+            src.add(curLine);
+            ++line;
+        }
+    )
+    {
+        return line;
+    }
+        
+}
+
+/**
+ * Parse a member declaration.
+ * 
+ * <pre>
+ *   memberDecl ::= IDENTIFIER            // constructor
+ *                    formalParameters
+ *                    block
+ *                | (PRIMITIVE | REFERENCE) IDENTIFIER  // method
+ *                    formalParameters
+ *                    (block | SEMI)
+ *                | type variableDeclarators SEMI 
+ * </pre>
+ *
+ */
+private
+int
+memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> curLine = null;
+    int n = 0;
+}
+{
+    ( 
+        LOOKAHEAD ( <IDENTIFIER> <LPAREN> )
+        (
+            <IDENTIFIER>
+            {
+                ++count[0];
+                curLine = src.get(line);
+                curLine.add(identifier(token.image));
+                curLine.add(space());
+                ++count[0];
+            }
+            formalParameters(curLine, count)
+            {
+                ++line;
+            }
+            line = block(src, line, count, level)
+        )
+    |
+        LOOKAHEAD ( (scanBasicType() | scanReferenceType()) <IDENTIFIER> <LPAREN>)
+        (
+            type(src.get(line), count)
+            {
+                src.get(line).add(space());
+                ++count[0];
+            }
+            <IDENTIFIER>
+            {
+                ++count[0];
+                curLine = src.get(line);
+                curLine.add(identifier(token.image));
+                curLine.add(space());
+                ++count[0];
+            }
+            formalParameters(curLine, count)
+            // TODO add declared exceptions HERE
+            {
+                ++line;
+            }
+            (
+                <SEMI>
+                {
+                    // put SEMI on previous line
+                    --line;
+                    appendSemi(src.get(line));
+                    ++count[0];
+                }
+            |  
+                line = block(src, line, count, level)
+            )
+        )
+    |
+        (
+            type(curLine = src.get(line), count)
+            {
+                curLine.add(space());
+                ++count[0];
+            }
+            variableDeclarators(curLine, count)
+            <SEMI>
+            {
+                appendSemi(curLine);
+                ++count[0];
+                ++line;
+            }
+        )
+    )
+    {
+        return line;
+    }
+}
+
+/**
+ * parse formal parameters
+ * 
+ * <pre>
+ *   formalParameters ::= LPAREN 
+ *                          [formalParameter 
+ *                            {COMMA  formalParameter}]
+ *                        RPAREN
+ * </pre>
+ * 
+ */
+private
+void
+formalParameters(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    [
+        formalParameter(curLine, count)
+        (
+            <COMMA>
+            {
+                curLine.add(separator(","));
+                ++count[0];
+                curLine.add(space());
+                ++count[0];
+            }
+            formalParameter(curLine, count)
+        )*
+    ]
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+        return;
+    }
+}
+
+/**
+ * Parse a formal parameter.
+ * 
+ * <pre>
+ *   formalParameter ::= type IDENTIFIER
+ * </pre>
+ * 
+ */
+private
+void
+formalParameter(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    type(curLine, count)
+    {
+        curLine.add(space());
+        ++count[0];
+    }
+    <IDENTIFIER>
+    {
+        curLine.add(identifier(token.image));
+        ++count[0];
+    }
+}
+
+
+/**
+ * Parse a type.
+ * 
+ * <pre>
+ *   type ::= PRIMITIVE 
+ *          | REFERENCE
+ * </pre>
+ * 
+ */
+private
+void
+type(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    LOOKAHEAD ( scanReferenceType() )
+    referenceType(curLine, count)
+|
+    basicType(curLine, count)
+}
+
+private
+void
+basicType(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    scanBasicType()
+    {
+        curLine.add(keyword(token.image));
+        ++count[0];
+    }
+}
+
+private
+void
+scanBasicType () :
+{
+}
+{
+    ( <VOID> | <CHAR> | <BOOLEAN> | <BYTE> | <SHORT> | <INT> | <LONG> | <DOUBLE> | <FLOAT> )
+}
+
+private
+void
+scanReferenceType () :
+{
+}
+{
+    scanBasicType() (<LBRACK> <RBRACK>)+
+|
+    <IDENTIFIER> (<DOT> <IDENTIFIER>)*
+}
+
+private
+void
+referenceType(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    basicType(curLine, count)
+    (
+        <LBRACK> <RBRACK>
+        {
+            curLine.add(separator("["));
+            curLine.add(separator("]"));
+            count[0] += 2;
+        }
+    )+
+|
+    qualifiedIdentifier(curLine, count)
+    (
+        <LBRACK> <RBRACK>
+        {
+            curLine.add(separator("["));
+            curLine.add(separator("]"));
+            count[0] += 2;
+        }
+    )*
+    
+}
+
+/**
+ * Parse variable declarators.
+ * 
+ * <pre>
+ *   variableDeclarators ::= variableDeclarator 
+ *                             {COMMA variableDeclarator}
+ * </pre>
+ * 
+ * @param current line, token count
+ */
+
+private
+void
+variableDeclarators (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    variableDeclarator(curLine, count)
+    (
+        <COMMA>
+        {
+            curLine.add(separator(","));
+            ++count[0];
+            curLine.add(space());
+            ++count[0];
+        }
+        variableDeclarator(curLine, count)
+    )*
+}
+
+/**
+ * Parse a variable declarator.
+ * 
+ * <pre>
+ *   variableDeclarator ::= IDENTIFIER
+ *                          [ASSIGN variableInitializer]
+ * </pre>
+ * 
+ */
+
+private
+void
+variableDeclarator (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <IDENTIFIER>
+    {
+        curLine.add(identifier(token.image));
+        ++count[0];
+    }
+    [
+        <ASSIGN>
+        {
+            curLine.add(space());
+            curLine.add(operator("="));
+            curLine.add(space());
+            count[0] += 3;
+        }
+        variableInitializer(curLine, count)
+    ]
+}
+
+/**
+ * Parse a variable initializer.
+ * 
+ * <pre>
+ *   variableInitializer ::= arrayInitializer
+ *                         | expression
+ * </pre>
+ *
+ */
+private
+void
+variableInitializer (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    arrayInitializer(curLine, count) | expression(curLine, count)
+}
+
+/**
+ * Parse an array initializer.
+ * 
+ * <pre>
+ *   arrayInitializer ::= LCURLY 
+ *                          [variableInitializer 
+ *                            {COMMA variableInitializer} [COMMA]]
+ *                        RCURLY 
+ * </pre>
+ * 
+ */
+
+private
+void
+arrayInitializer(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LCURLY>
+    {
+        curLine.add(separator("{"));
+        ++count[0];
+    }
+    [
+        variableInitializer(curLine, count)
+        (
+            <COMMA>
+            {
+                curLine.add(separator(","));
+                curLine.add(space());
+                count[0] += 2;
+            }
+            variableInitializer(curLine, count)
+        )*
+    ]
+    <RCURLY>
+    {
+        curLine.add(separator("}"));
+        ++count[0];
+    }
+}
+
+/**
+ * Parse a block.
+ * 
+ * <pre>
+ *   block ::= LCURLY {blockStatement} RCURLY 
+ * </pre>
+ * 
+ * @return the last line of the block
+ */
+private
+int
+block (List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> cur;
+    int n;
+}
+{
+     <LCURLY>
+     {
+        cur = new ArrayList<SourceToken>();
+        src.add(cur);
+        n = 0;
+        while (n++ < level)
+            cur.add(tab());
+        count[0] += level;
+        
+        cur.add(separator("{"));
+        ++count[0];
+        ++line;
+        ++level;
+     }
+     (
+        line = blockStatement(src, line, count, level)
+     )*
+     <RCURLY>
+     {
+        --level;
+        cur = new ArrayList<SourceToken>();
+        src.add(cur);
+        n = 0;
+        while (n++ < level)
+            cur.add(tab());
+        count[0] += level;
+
+        cur.add(separator("}"));
+        ++count[0];
+        ++line; 
+
+        src.add(emptyLine());
+        ++line;
+        
+        return line;
+     }
+}
+
+
+/**
+ * Parse a block statement.
+ * 
+ * <pre>
+ *   blockStatement ::= localVariableDeclarationStatement
+ *                    | statement
+ * </pre>
+ * 
+ * @return the last line of the statement
+ */
+private
+int
+blockStatement (List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> cur;
+}
+{
+    (
+        LOOKAHEAD ( (scanBasicType() | scanReferenceType() ) <IDENTIFIER> )
+        localVariableDeclarationStatement (cur = new ArrayList<SourceToken>(), count, level)
+        {
+            src.add(cur);
+            ++line;
+        }
+    |
+        line = statement(src, line, count, level)
+    )
+    {
+        return line;
+    }
+}
+
+/**
+ * Parse a statement.
+ * 
+ * <pre>
+ *   statement ::= block
+ *               | IF parExpression statement [ELSE statement]
+ *               | WHILE parExpression statement 
+ *               | RETURN [expression] SEMI
+ *               | SEMI 
+ *               | statementExpression SEMI
+ * </pre>
+ * 
+ * @return an AST for a statement.
+ */
+
+private
+int
+statement (List<List<SourceToken>> src, int line, int count[], int level) :
+{
+    List<SourceToken> curLine;
+    int n;
+}
+{
+    (
+        line = block (src, line, count, level)
+    |
+        <IF>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("if"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        parExpression(curLine, count)                 // condition
+        line = statement(src, line, count, level + 1) // consequence
+
+        // alternative
+        [
+            LOOKAHEAD( <ELSE> )
+            <ELSE>
+            {
+                curLine = new ArrayList<SourceToken>();
+                src.add(curLine);
+
+                n = 0;
+                while (n++ < level)
+                    curLine.add(tab());
+                count[0] += level;
+
+                curLine.add(keyword("else"));
+                ++count[0];
+                ++line;
+            }
+            line = statement(src, line, count, level + 1)
+        ]
+    |
+        <WHILE>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("while"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        parExpression(curLine, count)                 // condition
+        line = statement(src, line, count, level + 1) // consequence
+    |
+        <DO>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("do"));
+            ++count[0];
+            ++line;
+        }
+        line = statement(src, line, count, level + 1) // body
+        <WHILE>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("while"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        parExpression(curLine, count)                 // condition
+        <SEMI>
+        {
+            appendSemi(curLine);
+            ++count[0];
+            ++line;
+        }
+    |
+        <RETURN>
+        {
+            curLine = new ArrayList<SourceToken>();
+            src.add(curLine);
+
+            n = 0;
+            while (n++ < level)
+                curLine.add(tab());
+            count[0] += level;
+
+            curLine.add(keyword("return"));
+            // TODO: what if SEMI follows? (shouldn't need the space)
+            curLine.add(space());
+            count[0] += 2; 
+        }
+        [
+            expression(curLine, count)
+        ]
+        <SEMI>
+        {
+            appendSemi(curLine);
+            ++count[0];
+            ++line;
+        }
+    |
+        <SEMI> // empty statementS
+        {
+            // TODO (maybe just skip empty statement)
+        }
+    |
+        statementExpression (curLine = new ArrayList<SourceToken>(), count, level)
+        {
+            src.add(curLine);
+            ++line;
+        }
+        <SEMI>
+        {
+            appendSemi(curLine);
+        }
+    )
+    {
+        return line;
+    }
+}
+
+private
+void
+statementExpression (List<SourceToken> curLine, int count[], int level) :
+{
+    // TODO
+    int n = 0;
+    while (n++ < level)
+        curLine.add(tab());
+    count[0] += level;
+}
+{
+    expression(curLine, count)
+}
+
+private
+void
+parExpression (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    expression(curLine,count)
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+    }
+}
+
+
+/**
+ * Parse a local variable declaration statement.
+ * 
+ * <pre>
+ *   localVariableDeclarationStatement ::= type 
+ *                                           variableDeclarators 
+ *                                             SEMI
+ * </pre>
+ * 
+ * @return an AST for a variableDeclaration.
+ */
+
+private
+void
+localVariableDeclarationStatement(List<SourceToken> curLine, int count[], int level) :
+{
+    int n = 0;
+    while(n++ < level)
+        curLine.add(tab());
+    count[0] += level;
+}
+{
+    type(curLine, count)
+    {
+        curLine.add(space());
+        ++count[0];
+    }
+    variableDeclarators(curLine, count)
+    <SEMI>
+    {
+        appendSemi(curLine);
+        ++count[0];
+    }
+}
+
+
+/**
+ * An expression.
+ * 
+ * <pre>
+ *   expression ::= assignmentExpression 
+ * </pre>
+ * 
+ */
+
+private
+void
+expression (List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    assignmentExpression(curLine, count)
+}
+
+/**
+ * Parse an assignment expression.
+ * 
+ * <pre>
+ *   assignmentExpression ::= 
+ *       conditionalAndExpression // level 13
+ *           [( ASSIGN  // conditionalExpression
+ *            | PLUS_ASSIGN // must be valid lhs
+ *            )
+ *            assignmentExpression]
+ * </pre>
+ * 
+ */
+
+private
+void
+assignmentExpression(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    conditionalAndExpression (curLine, count)
+    [
+        (<ASSIGN> | <PLUS_ASSIGN>)
+        {
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        assignmentExpression(curLine, count)
+    ]
+}
+
+
+/**
+ * Parse a conditional-and expression.
+ * 
+ * <pre>
+ *   conditionalAndExpression ::= equalityExpression // level 10
+ *                                  {LAND equalityExpression}
+ * </pre>
+ * 
+ */
+
+private 
+void
+conditionalAndExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    equalityExpression(curLine, count)
+    (
+        <LAND>
+        {
+            curLine.add(operator("&&"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        equalityExpression(curLine, count)
+    )*
+}
+
+/**
+ * Parse an equality expression.
+ * 
+ * <pre>
+ *   equalityExpression ::= relationalExpression  // level 6
+ *                            {EQUAL relationalExpression}
+ * </pre>
+ * 
+ */
+
+private
+void
+equalityExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    relationalExpression(curLine, count)
+    (
+        <EQUAL>
+        {
+            curLine.add(operator("=="));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        relationalExpression(curLine, count)
+    )*
+}
+
+/**
+ * Parse a relational expression.
+ * 
+ * <pre>
+ *   relationalExpression ::= additiveExpression  // level 5
+ *                              [(GT | LE) additiveExpression 
+ *                              | INSTANCEOF referenceType]
+ * </pre>
+ * 
+ */
+
+private
+void
+relationalExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    additiveExpression(curLine, count)
+    [
+        (<GT> | <LE> )
+        {
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        additiveExpression(curLine, count)
+    |
+        <INSTANCEOF>
+        {
+            curLine.add(keyword("instanceof"));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        referenceType(curLine, count)
+    ]
+}
+
+/**
+ * Parse an additive expression.
+ * 
+ * <pre>
+ *   additiveExpression ::= multiplicativeExpression // level 3
+ *                            {(MINUS | PLUS)
+ *                                  multiplicativeExpression}
+ * </pre>
+ * 
+ */
+
+private
+void
+additiveExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    multiplicativeExpression(curLine, count)
+    (
+        (<PLUS> | <MINUS>)
+        {
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        multiplicativeExpression(curLine, count)
+    )*
+}
+
+/**
+ * Parse a multiplicative expression.
+ * 
+ * <pre>
+ *   multiplicativeExpression ::= unaryExpression  // level 2
+ *                                  {(STAR | DIV | PERCENt)
+                                           unaryExpression}
+ * </pre>
+ * 
+ */
+
+private
+void
+multiplicativeExpression(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+
+    unaryExpression(curLine, count)
+    (
+        (<STAR> | <DIV> | <PERCENT>)
+        {
+            curLine.add(space());
+            ++count[0];
+            curLine.add(operator(token.image));
+            curLine.add(space());
+            count[0] += 2;
+        }
+        unaryExpression(curLine, count)
+    )*
+    {
+        curLine.add(space());
+        ++count[0];
+    }
+}
+
+/**
+ * Parse an unary expression.
+ * 
+ * <pre>
+ *   unaryExpression ::= INC unaryExpression // level 1
+ *                     | MINUS unaryExpression
+ *                     | simpleUnaryExpression
+ * </pre>
+ * 
+ */
+
+private
+void
+unaryExpression(List<SourceToken> curLine, int count[]):
+{
+}
+{
+    (<INC> | <MINUS>)
+    {
+        curLine.add(operator(token.image));
+        ++count[0];
+        // no space
+    }
+    unaryExpression(curLine, count)
+|
+    simpleUnaryExpression(curLine, count)
+}
+
+/**
+ * Parse a simple unary expression.
+ * 
+ * <pre>
+ *   simpleUnaryExpression ::= LNOT unaryExpression
+ *                           | LPAREN basicType RPAREN 
+ *                               unaryExpression
+ *                           | LPAREN         
+ *                               referenceType
+ *                             RPAREN simpleUnaryExpression
+ *                           | postfixExpression
+ * </pre>
+ * 
+ * @return an AST for a simpleUnaryExpression.
+ */
+
+private
+void
+simpleUnaryExpression(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LNOT>
+    {
+        curLine.add(operator("!"));
+        ++count[0];
+    }
+    unaryExpression(curLine, count)
+|
+    LOOKAHEAD ( <LPAREN> (scanBasicType() | scanReferenceType()) <RPAREN> )
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    type(curLine, count)
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+    }
+    unaryExpression(curLine, count)
+|
+    postfixExpression(curLine, count)
+}
+
+/**
+ * Parse a postfix expression.
+ * 
+ * <pre>
+ *   postfixExpression ::= primary {selector} {DEC}
+ * </pre>
+ * 
+ */
+
+private
+void
+postfixExpression(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    primary(curLine, count)
+    (selector(curLine, count))*
+    (
+        <DEC>
+        {
+            // No space before DEC (eg., foo--)
+            curLine.add(operator(token.image));
+            ++count[0];
+        }
+     )*
+}
+
+/**
+ * Parse arguments.
+ * 
+ * <pre>
+ *   arguments ::= LPAREN [expression {COMMA expression}] RPAREN    
+ * </pre>
+ * 
+ */
+
+private
+void
+arguments(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LPAREN>
+    {
+        curLine.add(separator("("));
+        ++count[0];
+    }
+    [
+        expression(curLine, count)
+        (
+            <COMMA>
+            {
+                curLine.add(separator(","));
+                curLine.add(space());
+                count[0] += 2;
+            }
+            expression(curLine, count)
+        )*
+    ]
+    <RPAREN>
+    {
+        curLine.add(separator(")"));
+        ++count[0];
+    }
+}
+
+/**
+ * Parse a selector.
+ * 
+ * <pre>
+ *   selector ::= DOT qualifiedIdentifier [arguments]
+ *              | LBRACK expression RBRACK
+ * </pre>
+ * 
+ */
+
+private
+void
+selector(List<SourceToken> curLine, int count[]) :
+{       
+}
+{
+    <DOT>
+    {
+        curLine.add(operator("."));
+        ++count[0];
+    }
+    qualifiedIdentifier(curLine, count)
+    [arguments(curLine, count)] 
+|
+    <LBRACK>
+    {
+        curLine.add(separator("["));
+        ++count[0];
+    }
+    expression(curLine, count)
+    <RBRACK>
+    {
+        curLine.add(separator("]"));
+        ++count[0];
+    }
+}
+
+/**
+ * Parse a primary expression.
+ * 
+ * <pre>
+ *   primary ::= parExpression
+ *             | THIS [arguments]
+ *             | SUPER ( arguments 
+ *                     | DOT IDENTIFIER [arguments] 
+ *                     )
+ *             | literal
+ *             | NEW creator
+ *             | qualifiedIdentifier [arguments]
+ * </pre>
+ * 
+ */
+
+private
+void
+primary(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    parExpression(curLine, count)
+|
+    <THIS>
+    {
+        curLine.add(keyword("this"));
+        ++count[0];
+    }
+    [arguments(curLine, count)]
+|
+    <SUPER>
+    {
+        curLine.add(keyword("super"));
+        ++count[0];
+    }
+    (
+        arguments(curLine, count)
+    |
+        <DOT>
+        {
+            curLine.add(separator("."));
+            ++count[0];
+        }
+        <IDENTIFIER>
+        {
+            curLine.add(identifier(token.image));
+            ++count[0];
+        }
+        [arguments(curLine, count)]
+    )
+|
+    literal(curLine, count)
+|
+    <NEW>
+    {
+        curLine.add(keyword("new"));
+        ++count[0];
+    }
+    creator(curLine, count)
+|
+    qualifiedIdentifier(curLine, count)
+    [arguments(curLine, count)]
+}
+
+/**
+ * Parse a creator.
+ * 
+ * <pre>
+ *   creator ::= (basicType | qualifiedIdentifier) 
+ *                 ( arguments
+ *                 | LBRACK RBRACK {LBRACK RBRACK} 
+ *                     [arrayInitializer]
+ *                 | newArrayDeclarator
+ *                 )
+ * </pre>
+ * 
+ */
+
+private
+void
+creator(List<SourceToken> curLine, int count[]):
+{
+}
+{
+
+    (basicType(curLine, count) | qualifiedIdentifier(curLine, count))
+    (
+        arguments(curLine, count)
+    |
+        LOOKAHEAD ( <LBRACK> scanExpression() <RBRACK> )
+        newArrayDeclarator(curLine, count)
+    |
+        <LBRACK> <RBRACK>
+        {
+        }
+        (
+            LOOKAHEAD( <LBRACK> <RBRACK> )
+            <LBRACK> <RBRACK> 
+            {
+            } 
+        )*
+        [
+            arrayInitializer(curLine, count)
+        ]
+    )
+}
+
+/**
+ * Parse a new array declarator.
+ * 
+ * <pre>
+ *   newArrayDeclarator ::= LBRACK expression RBRACK 
+ *                            {LBRACK expression RBRACK}
+ *                            {LBRACK RBRACK}
+ * </pre>
+ */
+private
+void
+newArrayDeclarator(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    <LBRACK>
+    {
+        curLine.add(separator("["));
+        ++count[0];
+    }
+    expression(curLine, count)
+    <RBRACK>
+    {
+        curLine.add(separator("]"));
+        ++count[0];
+    }
+    ( 
+        LOOKAHEAD( <LBRACK> scanExpression() <RBRACK> )
+        <LBRACK>
+        {
+            curLine.add(separator("["));
+            ++count[0];
+        }
+        expression(curLine, count)
+        <RBRACK>
+        {
+            curLine.add(separator("]"));
+            ++count[0];
+        }
+    )*
+    (
+        LOOKAHEAD( <LBRACK> <RBRACK> )
+        <LBRACK> <RBRACK>
+        {
+            curLine.add(separator("["));
+            curLine.add(separator("]"));
+            count[0] += 2;
+        }
+    )*
+}
+
+private
+void
+scanExpression() :
+{
+}
+{
+    expression(draftLine, draft)
+}
+
+/**
+ * Parse a literal.
+ * 
+ * <pre>
+ *   literal ::= INT_LITERAL    | LONG_INTERAL | CHAR_LITERAL
+ *             | STRING_LITERAL | TRUE         | FALSE        | NULL
+ * </pre>
+ * 
+ * @return an AST for a literal.
+ */
+
+private
+void
+literal(List<SourceToken> curLine, int count[]) :
+{
+}
+{
+    wholeNumLiteral(curLine, count)
+|
+    <CHAR_LITERAL>
+    {
+    }
+|
+    <STRING_LITERAL>
+    {
+    }
+|
+    (<TRUE> | <FALSE> | <NULL>)
+    {
+        curLine.add(keyword(token.image));
+        ++count[0];
+    }
+}
+
+private
+void
+wholeNumLiteral(List<SourceToken> curLine, int count[]) :
+{
+    char postfix;
+    int base;
+}
+{
+    (
+        <INT_LITERAL>
+    |
+        <LONG_LITERAL> {postfix = 'L';}
+    |
+        <HEX_INT_LITERAL> {base = 16;}
+    |
+        <HEX_LONG_LITERAL> {postfix = 'L'; base = 16;}
+    |
+        <OCT_INT_LITERAL> {base = 8;}
+    |
+        <OCT_LONG_LITERAL> {postfix = 'L'; base = 8;}
+    |
+        <BIN_INT_LITERAL> {base = 2;}
+    |
+        <BIN_LONG_LITERAL> {postfix = 'L'; base = 2;}
+    )
+    {
+        curLine.add(numLiteral(token.image));
+        ++count[0];
+    }
 }

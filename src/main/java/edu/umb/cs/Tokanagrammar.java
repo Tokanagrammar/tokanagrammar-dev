@@ -21,9 +21,10 @@
 
 package edu.umb.cs;
 
+import edu.umb.cs.api.APIs;
+import edu.umb.cs.gui.GUI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +34,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import edu.umb.cs.gui.GUI;
 
 public class Tokanagrammar extends Application{
 	
@@ -66,11 +66,14 @@ public class Tokanagrammar extends Application{
         	scene = new Scene(page);
         	
             primaryStage.setScene(scene);
-            //primaryStage.centerOnScreen();
             primaryStage.getIcons().add(new Image(Tokanagrammar.class.
             		getResourceAsStream("/images/ui/tokanagrammarIcon.fw.png")));
             primaryStage.setTitle(CURRENT_VERSION);
 
+            primaryStage.setTitle("Tokanagrammar " + APIs.getVersion());
+            primaryStage.setResizable(false);
+            primaryStage.sizeToScene();
+            primaryStage.initStyle(StageStyle.DECORATED);
 
             //clean up db etc
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
@@ -79,7 +82,6 @@ public class Tokanagrammar extends Application{
 					System.out.println("Handle for saving db.");
 				}
             });
-            
             primaryStage.show();
             
             GUI.getInstance().gameState_initGUI();

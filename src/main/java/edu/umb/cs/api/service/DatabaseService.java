@@ -24,6 +24,8 @@ package edu.umb.cs.api.service;
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
+import edu.umb.cs.parser.ParseException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -82,6 +84,11 @@ public class DatabaseService
         emf = Persistence.createEntityManagerFactory(partialURL + dbName, properties);
         em = emf.createEntityManager();
         em.getTransaction().begin();
+        
+        // TODO replace all em.createQuery().exeucte... 
+        // with prepare state.
+        // ie., create those queries only once and execute them when needed
+        // (This saves A LOT of time in parsing)
     }
     
     /**
@@ -138,7 +145,7 @@ public class DatabaseService
             em.persist(p);
             em.getTransaction().commit();
         }
-        catch (IOException exc)
+        catch (IOException | ParseException exc)
         {
             return false;
         }

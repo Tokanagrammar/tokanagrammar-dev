@@ -18,36 +18,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package edu.umb.cs.source.std;
 
-package edu.umb.cs.api;
-
-import edu.umb.cs.api.service.DatabaseService;
-import edu.umb.cs.entity.User;
-import java.util.List;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+import edu.umb.cs.parser.InternalException;
+import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Simple test on some of the API methods
+ *
  * @author Vy Thao Nguyen
  */
-public class APITest 
+public class SeparatorToken
 {
-    @Before
-    public void init()
+    private static final Map<String, SourceToken> seps = computeMap();
+    private static Map<String, SourceToken> computeMap()
     {
-        APIs.startTest();
-        APIs.removeAllRecords();
+        Map<String, SourceToken> ret = new HashMap<>();
+        
+        for (String st : Arrays.asList("[", "]", "{", "}", "(", ")", ",", ";", "."))
+            ret.put(st, new SourceTokenBase(st, SourceTokenKind.SEPARATOR));
+        
+        return ret;
     }
     
-    @Test
-    public void testNewUser()
+    public static SourceToken getSep(String img)
     {
-        User user = APIs.newUser("vynguyen");
-        List<User> users = APIs.getUsers();
-        
-        assertEquals(1, users.size());
-        assertEquals("vynguyen", user.getUsername());
+        SourceToken tk = seps.get(img);
+        if (tk == null)
+            throw new InternalException("no such seperator");
+        return tk;
     }
 }
