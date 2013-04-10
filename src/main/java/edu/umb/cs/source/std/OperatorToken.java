@@ -18,46 +18,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
-import java.util.List;
+import edu.umb.cs.source.SourceTokenKind;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class ShuffledSourceImpl implements ShuffledSource
+public class OperatorToken
 {
-    private final SourceFile original;
-    private final SourceFile shuffled;
-    private final List<SourceToken> removed;
-    
-    public ShuffledSourceImpl(SourceFile original, SourceFile shuffled, List<SourceToken> removed)
-    {
-        this.original = original;
-        this.shuffled = shuffled;
-        this.removed = removed;
-    }
+    private static final Map<String, SourceToken> instances
+                = new HashMap<String, SourceToken>();
 
-    @Override
-    public SourceFile getOrinalSource()
+    public static SourceToken getOperator(String img)
     {
-        return original;
-    }
-
-    @Override
-    public SourceFile getShuffledSource()
-    {
-        return shuffled;
-    }
-
-    @Override
-    public List<SourceToken> getRemovedTokens()
-    {
-        return removed;
+        SourceToken tk = instances.get(img);
+        if (tk == null)
+            instances.put(img, tk = new SourceTokenBase(img, SourceTokenKind.OPERATOR));
+        return tk;
     }
 }

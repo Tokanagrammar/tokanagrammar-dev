@@ -18,46 +18,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package edu.umb.cs.source.std;
 
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.source.SourceToken;
-import java.util.List;
+import edu.umb.cs.source.SourceTokenKind;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Vy Thao Nguyen
  */
-public class ShuffledSourceImpl implements ShuffledSource
+public class SeparatorToken
 {
-    private final SourceFile original;
-    private final SourceFile shuffled;
-    private final List<SourceToken> removed;
+    private static final Map<String, SourceToken> seps = computeMap();
+    private static Map<String, SourceToken> computeMap()
+    {
+        Map<String, SourceToken> ret = new HashMap<>();
+        
+        for (String st : Arrays.asList("[", "]", "{", "}", "(", ")", ",", ";", "."))
+            ret.put(st, new SourceTokenBase(st, SourceTokenKind.SEPARATOR));
+        
+        return ret;
+    }
     
-    public ShuffledSourceImpl(SourceFile original, SourceFile shuffled, List<SourceToken> removed)
+    public static SourceToken getSep(String img)
     {
-        this.original = original;
-        this.shuffled = shuffled;
-        this.removed = removed;
-    }
-
-    @Override
-    public SourceFile getOrinalSource()
-    {
-        return original;
-    }
-
-    @Override
-    public SourceFile getShuffledSource()
-    {
-        return shuffled;
-    }
-
-    @Override
-    public List<SourceToken> getRemovedTokens()
-    {
-        return removed;
+        SourceToken tk = seps.get(img);
+        if (tk == null)
+            throw new InternalException("no such seperator");
+        return tk;
     }
 }

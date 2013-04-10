@@ -21,9 +21,10 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.Token;
+import edu.umb.cs.source.SourceToken;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,20 +35,40 @@ public class JavaSourceFile implements SourceFile
 {
 
     private final String path;
-    private final ArrayList<ArrayList<Token>> srcFile;
+    private final List<List<SourceToken>> srcFile;
     private final int tokenCount;
-    private final Map<Token, Integer> stats;
+    private final Map<SourceToken, Integer> stats;
     
     public JavaSourceFile(String path,
-                          ArrayList<ArrayList<Token>> tokens,
+                          List<List<SourceToken>> tokens,
                           int tokenCount)
-            throws FileNotFoundException
     {
         this.path = path;
         this.srcFile = tokens;
         this.tokenCount = tokenCount;
         stats = buildStats(srcFile);
     }
+    
+    // Object interface
+    @Override
+    public String toString()
+    {
+        StringBuilder bd = new StringBuilder();
+        bd.append("PATH = " ).append(path).append('\n');
+        bd.append("SOURCE starts here: \n--------------\n");
+        for (List<SourceToken> line : srcFile)
+        {
+            for (SourceToken tk : line)
+            {
+                bd.append(tk.image());
+            }
+            bd.append('\n');
+        }
+        
+        return bd.toString();
+    }
+    
+    // SourceFile interface
     
     @Override
     public String getLine(int line)
@@ -56,7 +77,7 @@ public class JavaSourceFile implements SourceFile
     }
 
     @Override
-    public Token getToken(int line, int position)
+    public SourceToken getToken(int line, int position)
     {
         return srcFile.get(line).get(position);
     }
@@ -80,7 +101,7 @@ public class JavaSourceFile implements SourceFile
     }
 
     @Override
-    public Map<Token, Integer> getStatistic()
+    public Map<SourceToken, Integer> getStatistic()
     {
         return stats;
     }
@@ -91,8 +112,9 @@ public class JavaSourceFile implements SourceFile
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private static Map<Token, Integer> buildStats(ArrayList<ArrayList<Token>> srcFile)
+    private static Map<SourceToken, Integer> buildStats(List<List<SourceToken>> srcFile)
     {
-        throw new UnsupportedOperationException();
+        return null;
+        //throw new UnsupportedOperationException();
     }
 }

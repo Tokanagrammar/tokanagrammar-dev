@@ -22,7 +22,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.Token;
+import edu.umb.cs.source.SourceToken;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,18 +36,18 @@ class ArtificialSourceFile implements SourceFile
 {
     private final int lineCount;
     private final int tokenCount;
-    private final List<List<Token>> srcFile;
+    private final List<List<SourceToken>> srcFile;
     private final List<String> lines;
-    ArtificialSourceFile(int lineCount, int tokenCount, List<List<Token>> src)
+    ArtificialSourceFile(int lineCount, int tokenCount, List<List<SourceToken>> src)
     {
         this.lineCount = lineCount;
         this.tokenCount = tokenCount;
         this.srcFile = src;
         lines = new ArrayList<>(lineCount);
-        for (List<Token> line : src)
+        for (List<SourceToken> line : src)
         {
             StringBuilder bd = new StringBuilder();
-            for (Token tk : line)
+            for (SourceToken tk : line)
                 bd.append(tk.image()).append(' ');
             lines.add(bd.toString());
         }
@@ -60,7 +60,7 @@ class ArtificialSourceFile implements SourceFile
     }
 
     @Override
-    public Token getToken(int line, int position)
+    public SourceToken getToken(int line, int position)
     {
         return srcFile.get(line).get(position);
     }
@@ -84,7 +84,7 @@ class ArtificialSourceFile implements SourceFile
     }
 
     @Override
-    public Map<Token, Integer> getStatistic()
+    public Map<SourceToken, Integer> getStatistic()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
