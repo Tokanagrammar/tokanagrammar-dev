@@ -23,6 +23,9 @@ package edu.umb.cs.gui;
 
 import java.util.LinkedList;
 
+import edu.umb.cs.gui.IconizedToken.Location;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -57,10 +60,10 @@ public class TokenBay {
 	private static Pane pane;
 	
 	/**An image's base class is a Node**/
-	private ObservableList<Node> images;
+	private static ObservableList<Node> nodes;
 	
 	/**The current tokens contained in tokenBay**/
-	private LinkedList<IconizedToken> iTokens;
+	private static List<IconizedToken> iTokens;
 	
 	private TokenBay(){ }
 	
@@ -68,23 +71,30 @@ public class TokenBay {
 	
 	public static TokenBay getInstance(){
 		pane = Controller.getTokenBay();
+		//pane.getChildren().
 		tokenBayWidth = (int) pane.getBoundsInLocal().getWidth();
 		tokenBayHeight = (int) pane.getBoundsInLocal().getHeight();
 		return tokenBay;
 	}
+	
+	public void resetTokenBay(){
+		currentRow = 0;
+		startPosition = BUFFERSIZE;
+		nodes.removeAll(nodes);
+		iTokens.removeAll(iTokens);
+	}
 
 	
 	/**Places the tokens in the tokenBay by calling settleTokenBay**/
-	public void initTokenBay(LinkedList<IconizedToken> iTokens){
-		this.iTokens = iTokens;
-		this.images = pane.getChildren();
+	public void initTokenBay(List<IconizedToken> iTokens){
+		TokenBay.iTokens = iTokens;
+		nodes = pane.getChildren();
+
+		//set the location of each iToken to TokenBay
+		for(IconizedToken token: iTokens)
+			token.setBroadLocation(Location.TOKENBAY);
 		
-		//make sure tokenbay is cleared before calling settleTokenBay
-		currentRow = 0;
-		startPosition = BUFFERSIZE;
-		images.removeAll(images);
-		iTokens.removeAll(iTokens);
-		//ready to place tokens!
+		//place the tokens
 		settleTokenBay(iTokens);
 	}
 	
@@ -92,7 +102,7 @@ public class TokenBay {
 	 * All IconizedTokens in TokenBay.
 	 * @return
 	 */
-	public LinkedList<IconizedToken> getITokens(){
+	public List<IconizedToken> getITokens(){
 		return iTokens;
 	}
 	/**
@@ -101,10 +111,13 @@ public class TokenBay {
 	 * @return
 	 */
 	public IconizedToken remove(IconizedToken iToken){
+		
 		IconizedToken copy = iToken;
-		images.remove(iToken.getImage());
+		nodes.remove(iToken.getImgView());
 		iTokens.remove(iToken);
-		pane.getChildren().remove(iToken);
+		//temporarily set the iToken loction to NOTPLACED
+		copy.setBroadLocation(Location.NOTPLACED);
+		
 		return copy;
 	}
 	/**
@@ -113,19 +126,27 @@ public class TokenBay {
 	 * @return true if successfully added
 	 */
 	public boolean add(IconizedToken iToken){
-		if(iTokens.add(iToken))
+		
+		if(iTokens.add(iToken)){
+
+			iToken.setBroadLocation(Location.TOKENBAY);
+
 			return true;
+		}
 		return false;
 	}
+	
 	
 	/**
 	 * Uses a circular buffer like technique to place all the tokens removed 
 	 * from the original source on the RHS in a "best fit" manner.
 	 * @param tokens
 	 */
-	private void settleTokenBay(LinkedList<IconizedToken> rhsTokens){
+	private void settleTokenBay(List<IconizedToken> rhsTokens){
 		
 		LinkedList<IconizedToken> tooLargeForLine = new LinkedList<IconizedToken>();
+		
+		System.out.println("SETTLE TOKEN BAY: " + rhsTokens);
 		
 		for(int i=0; i < rhsTokens.size(); i++){
 			
@@ -138,7 +159,7 @@ public class TokenBay {
 				ImageView imgView = curToken.getImgView(); //comes with actions
 				imgView.setLayoutX(startPosition);
 				imgView.setLayoutY(currentRow * RHSROWHEIGHT);
-				images.add(imgView);
+				nodes.add(imgView);
 				startPosition += (tokenWidth + BUFFERSIZE);
 				
 				//TODO would like to play sound and then populate a token

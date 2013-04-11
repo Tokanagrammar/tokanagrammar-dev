@@ -37,6 +37,10 @@ import javafx.stage.WindowEvent;
 
 public class Tokanagrammar extends Application{
 
+
+	private static final String TITLE = "Tokanagrammar " + APIs.getVersion();
+	private static final int FINAL_WIDTH = 886;
+	private static final int FINAL_HEIGHT = 689;
 	/**The main scene**/
     private static Scene scene;
 	/**We need access to primaryStage to assign parent to other stages**/
@@ -49,8 +53,13 @@ public class Tokanagrammar extends Application{
     @Override
     public void start(Stage primaryStage) {
         try {
+            APIs.start();
         	Tokanagrammar.primaryStage = primaryStage;
-			
+
+            primaryStage.initStyle(StageStyle.DECORATED);
+            primaryStage.setWidth(FINAL_WIDTH);
+            primaryStage.setHeight(FINAL_HEIGHT);
+            primaryStage.setResizable(false);	//CAUSING GAP IN MAIN FRAME
         	AnchorPane page = 	(AnchorPane) FXMLLoader.load(Thread.
         						currentThread().getContextClassLoader().
         						getResource("fxml/Tokanagrammar.fxml"));
@@ -60,16 +69,18 @@ public class Tokanagrammar extends Application{
             primaryStage.setScene(scene);
             primaryStage.getIcons().add(new Image(Tokanagrammar.class.
             		getResourceAsStream("/images/ui/tokanagrammarIcon.fw.png")));
-            primaryStage.setTitle("Tokanagrammar " + APIs.getVersion());
+            primaryStage.setTitle(TITLE);
             primaryStage.setResizable(false);
             primaryStage.sizeToScene();
             primaryStage.initStyle(StageStyle.DECORATED);
 
             //clean up db etc
+            // TODO: add confirmation dialogue?
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 				@Override
 				public void handle(WindowEvent event) {
-					System.out.println("Handle for saving db.");
+                                        // stop all services properly
+					APIs.stop();
 				}
             });
             primaryStage.show();

@@ -37,6 +37,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import edu.umb.cs.gui.Controller;
 import edu.umb.cs.gui.GUI;
+import edu.umb.cs.gui.GUI.GameState;
 import edu.umb.cs.gui.OutputPanel;
 
 
@@ -52,7 +53,6 @@ public class DifficultyScreen extends SecondaryScreen{
 	private static Slider slider;
 	
 	private static Pane textPane;
-	
 
 	/**the current image in the imgDisplay**/
 	static ImageView curImgInDisplay;
@@ -89,7 +89,7 @@ public class DifficultyScreen extends SecondaryScreen{
 		String message = 	"Increasing the difficulty will remove more " +
 							"tokens from the original source file.";
 		//Remind the user he'll have to restart the game if difficulty sel here.
-		if(GUI.getGameState().equals("startGame"))
+		if(GUI.getCurGameState().equals(GameState.START_GAME))
 			message += " You will have to reset the board to do this now.";
 		
 		//Write the message to the textPane portion of the window.
@@ -140,7 +140,7 @@ public class DifficultyScreen extends SecondaryScreen{
 	 */
 	public static void executeSetBtnFired(){
 		
-		String gameState = GUI.getGameState();
+		GameState gameState = GUI.getCurGameState();
 		
 		if(gameState.equals("startGame")){
 			//TODO add drop shadow to all output:: add at lower level than this
