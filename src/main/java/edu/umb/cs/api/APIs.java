@@ -30,7 +30,12 @@ import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.ShufflerKind;
 import edu.umb.cs.source.SourceFile;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * APIs for interacting with the backend
@@ -46,7 +51,23 @@ public class APIs
     private static boolean testStarted = false;
     private static boolean testStopped = false;
 
-    private static final String VERSION = "0.5"; // TODO: get this from config file
+    private static final String VERSION = findVersion();
+    private static String findVersion()
+    {
+        String ret = "UNKNOWN";
+        try
+        {
+            FileInputStream fis = new FileInputStream(new File("config/version.txt"));
+            Scanner sc = new Scanner(fis);
+            ret = sc.next();
+        }
+        catch (FileNotFoundException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return ret;
+    }
 
     public static void start()
     {
