@@ -127,6 +127,9 @@ public class Controller implements Initializable{
 	public static ImageView getCurDifficultyIcon(){
 		return curDifficultyIcon;
 	}
+
+	
+	
 	
 	public static void setCurDifficultyIcon(final ImageView cdi){
 		
@@ -155,12 +158,9 @@ public class Controller implements Initializable{
 		cdi.setOnMousePressed(new EventHandler <MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				GameState gameState = GUI.getCurGameState();
-				if(gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME)){
-					DifficultyScreen ds = new DifficultyScreen();
-				}	
-				else
-					System.out.println("Pause Game Here.");//pause
+				GameState gameState = GUI.getInstance().getCurGameState();
+				if(gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME))
+					GUI.getInstance().pauseGame(new DifficultyScreen());
 			}
 		});
 
@@ -225,7 +225,7 @@ public class Controller implements Initializable{
      */
 	public void runFired(ActionEvent event){
 		Text text = new Text("runFired");
-		GUI.getOutputPanel().writeNodes(text);
+		GUI.getInstance().getOutputPanel().writeNodes(text);
 	}
 	
     /**
@@ -235,7 +235,7 @@ public class Controller implements Initializable{
      */
 	public void stopFired(ActionEvent event){
 		Text text = new Text("stopFired");
-		GUI.getOutputPanel().writeNodes(text);
+		GUI.getInstance().getOutputPanel().writeNodes(text);
 	}
 	
     /**
@@ -284,11 +284,9 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void categoryFired(ActionEvent event){
-		GameState gameState = GUI.getCurGameState();
-		if(	gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME)){
-			CategoriesScreen cs = new CategoriesScreen();
-		}else
-			System.out.println("Pause Game Here.");//pause
+		GameState gameState = GUI.getInstance().getCurGameState();
+		if(	gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME))
+			GUI.getInstance().pauseGame(new CategoriesScreen());
 	}
 	
 	
@@ -299,10 +297,11 @@ public class Controller implements Initializable{
      */
 	public void resetBoardFired(ActionEvent event){
 		Text text = new Text("resetBoardFired");
-		GUI.getOutputPanel().writeNodes(text);
+		GUI.getInstance().getOutputPanel().writeNodes(text);
 		
 		//TEST ONLY
-		GUI.getInstance().gameState_resetGame();
+		GUI.getInstance().resetGame();
+		GUI.getInstance().gameState_initGUI();
 	}
 	
     /**

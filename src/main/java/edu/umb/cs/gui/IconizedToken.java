@@ -60,12 +60,12 @@ public class IconizedToken{
 		this.imgView = new ImageViewFactory().createImageView(image);
 	}
 	
-	//
+
 	public Location getBroadLocation(){
 		return broadLocation;
 	}
 	
-	
+
 	public void setBroadLocation(Location loc){
 		this.broadLocation = loc;
 	}

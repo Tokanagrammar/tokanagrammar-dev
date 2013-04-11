@@ -26,14 +26,21 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import edu.umb.cs.Tokanagrammar;
 import edu.umb.cs.demo.DemoSource;
+import edu.umb.cs.demo.DemoToken;
 import edu.umb.cs.demo.DemoTokens;
+import edu.umb.cs.gui.screens.SecondaryScreen;
 
 /**
  * Handle game states and also work as a main GUI API.
@@ -41,26 +48,34 @@ import edu.umb.cs.demo.DemoTokens;
  */
 public class GUI {
 	
-	public enum GameState {INIT_GUI, START_GAME, RESET_GAME};
+	public enum GameState {INIT_GUI, START_GAME};
 	
 	/**controller wrappers**/
+	
 	private static TokenBay tokenBay;
 	private static TokenBoard tokenBoard;
 	private static LegalDragZone legalDragZone;
 	private static Timer timer;
 	private static OutputPanel outputPanel;
 	
-	/**For now, gameState is a String -- might stay that way**/
 	private static GameState curGameState;
 	
 	/**maps the gameState to a list of active buttons while in this state**/
-	private static HashMap<String, ArrayList<String>> activeButtons;
+	private static HashMap<GameState, ArrayList<String>> activeButtons;
 	
-	private int curDifficulty;
+	private int curDifficulty = 50;
 	
-	private List<String> curCategories;
+	private List<String> curCategories = new LinkedList<String>();
 	
 	private static boolean showTutorial;										//not implemented.
+	
+	private static boolean inGame;
+	
+	private LinkedList<DemoToken> tokenBayTokens;
+	private LinkedList<DemoToken> tokenBoardTokens;
+	
+	/** Used to blur screen on pausing*/
+	private static boolean blurOn = false;
 	
 	private static final GUI gui = new GUI();
 	
@@ -76,6 +91,9 @@ public class GUI {
 		return gui;
 	}
 	
+	
+	
+	
 
 	//--------------------------------------------------------------------------
 	//GAMESTATES
@@ -86,11 +104,12 @@ public class GUI {
 	 * Welcome the user and give prompt to choose category.
 	 */
 	public void gameState_initGUI(){
+		
+		inGame = false;
 		curGameState = GameState.INIT_GUI;
 		System.out.println("GAMESTATE::: " + curGameState);
-		this.curDifficulty = 50;
-		this.curCategories = new LinkedList<String>();
-		
+		//this.curDifficulty = curDifficulty;
+		blurOff();
 		tokenBay = TokenBay.getInstance();
 		tokenBoard = TokenBoard.getInstance();
 		legalDragZone = LegalDragZone.getInstance();
@@ -98,9 +117,7 @@ public class GUI {
 		timer = Timer.getInstance();
 		
 		if(showTutorial){ }														//not implemented.
-		
-		//Message Is::	"Category <DEMO> has been selected on difficulty <DEMO>
-		//				 Hint: <GET HINTS FROM BACKEND CODE>"
+
 		Text welcomeText = new Text("Welcome to Tokanagrammar! ");
 		welcomeText.setFont(new Font(14));
 		outputPanel.writeNodes(welcomeText);
@@ -121,7 +138,7 @@ public class GUI {
 									"be plenty wide to test that it wraps this is a compiler message " +
 									"test it should be plenty wide to test that it wraps");
 		
-		initButtons(activeButtons.get("initGUI"));
+		initButtons(activeButtons.get(curGameState));
 	}
 	
 	
@@ -133,58 +150,110 @@ public class GUI {
 	public void gameState_startGame(){
 		curGameState = GameState.START_GAME;
 		System.out.println("GAMESTATE::: " + curGameState);
+		blurOff();
+		//initialization of new start of game
+		if(!inGame){
+			//TODO  Remove Demo Stuff
+			//TODO replace with real source
+			DemoSource demoSource = new DemoSource();
+			DemoTokens demoTokens = demoSource.getDemoTokens();
+			//note that this would be set by the setter from outside code
+			tokenBayTokens = demoTokens.getRemovedTokens();		//set w/ setter!
+			tokenBoardTokens = demoTokens.getRemainingTokens();	//set w/ setter!
+			
+			tokenBay.initTokenBay(TokenIconizer.iconizeTokens(tokenBayTokens));
+			tokenBay.initTokenBay(TokenIconizer.iconizeTokens(tokenBoardTokens));
+			
+
+			outputPanel.clear();  //start w/a clean outputPanel
+			
+			
+			/*
+			 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
+			 * 					 Hitnts: <hints>
+			 */
+			String concatCategories = "";
+			Text text = new Text("Category " + "<");
+			for(int i=0; i< curCategories.size(); i++)
+				concatCategories += (curCategories.get(i) + " ");
+			Label categoryText = new Label(concatCategories);
+			categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+			Text text2 = new Text(">" + " has been selected on difficulty ");
+			Label difficultyText = new Label(curDifficulty + "");
+			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(153, 153, 50);" );
+			Text text3 = new Text("Hint: ");
+			Label hintText = new Label(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
+			hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+			outputPanel.writeNodes(text, categoryText, text2, difficultyText);
+			outputPanel.writeNodes(text3, hintText);
+		}
+		
 		timer.start();
-		outputPanel.clear();  //start w/a clean outputPanel
-		
-		/*  TODO
-		 *  -- HERE ASSUME THAT THERE IS A CATEGORY SELECTED --
-		 *  ** back end randomly selects a source file in this category **
-		 *  ** source file is parsed and the tag, meta-data, and source **
-		 *  ** file are passed here (implementation may be different    **
-		 *  ** but this is what is assumed here).
-		 *  -- ALSO ASSUME A DIFFICULTY WAS SELECTED OR USE DEFAULT --
-		 *  ** use back end algorithms to get the difficulty, store it  **
-		 *  ** in a variable here and return tokens for lhs and rhs.    **
-		 *  -- HINTS SHOULD ALSO COME FROM BACK-END -- IS THIS META?    **
-		 */
-		
-		//TODO replace with real source
-		DemoSource demoSource = new DemoSource();
-		
-		//TODO replace with real tokens
-		DemoTokens demoTokens = demoSource.getDemoTokens();
-		
-		//TODO replace argument with real "removed" and "new-source-tokens" tokens
-		LinkedList<IconizedToken> lhsIconizedTokens = 
-				(TokenIconizer.iconizeTokens(demoTokens.getRemainingTokens()));
-		LinkedList<IconizedToken> rhsIconizedTokens = 
-				(TokenIconizer.iconizeTokens(demoTokens.getRemovedTokens()));
-		
-		//tokenBoard.initTokenBoard(lhsIconizedTokens);
-		tokenBay.initTokenBay(rhsIconizedTokens);
 
-
-		String concatCategories = "";
-		Text text = new Text("Category " + "<");
-		for(int i=0; i< curCategories.size(); i++)
-			concatCategories += (curCategories.get(i) + " ");
-		
-		Label categoryText = new Label(concatCategories);
-		categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-
-		Text text2 = new Text(">" + " has been selected on difficulty ");
-		
-		Label difficultyText = new Label(curDifficulty + "");
-		difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(153, 153, 50);" );
-		Text text3 = new Text("Hint: ");
-		Label hintText = new Label(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
-		hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-		
-		outputPanel.writeNodes(text, categoryText, text2, difficultyText);
-		outputPanel.writeNodes(text3, hintText);
-
-		initButtons(activeButtons.get("startGame"));
+		inGame = true;
+		initButtons(activeButtons.get(curGameState));
 	}
+	
+	/**
+	 * Pause the game
+	 * All screens go here.
+	 */
+	public void pauseGame(SecondaryScreen screen){
+		
+		timer.stop();
+		
+		//blur screen
+		blurOn();
+		
+		if(screen.getName().equals("pause")){
+			System.out.println("standard pause screen PAUSE!");
+		}
+		if(screen.getName().equals("skip")){
+			System.out.println("skip screen PAUSE!");
+		}
+		if(screen.getName().equals("categories")){
+			System.out.println("categories screen PAUSE!");
+		}
+		if(screen.getName().equals("difficulty")){
+			System.out.println("difficulty screen PAUSE!");
+		}
+		if(screen.getName().equals("refresh")){
+			System.out.println("refresh screen PAUSE!");
+		}
+
+		screen.setupScreen();
+
+	}
+	
+	/**
+	 * Blurs the main frame of the GUI (it's AnchorPane).
+	 */
+	public void blurOn(){
+		AnchorPane mainScreen = Tokanagrammar.getAnchorPane();
+		ObservableList<Node> screenComponents = mainScreen.getChildren();
+		
+		BoxBlur bb = new BoxBlur();
+		bb.setIterations(3);
+		for(Node node: screenComponents)
+			node.effectProperty().set(bb);
+			
+	}
+	
+	/**
+	 * Turn blur off the main frame.
+	 */
+	public void blurOff(){
+		
+		System.out.println("BLUROFF");
+		
+		AnchorPane mainScreen = Tokanagrammar.getAnchorPane();
+		ObservableList<Node> screenComponents = mainScreen.getChildren();
+		
+		for(Node node: screenComponents)
+			node.effectProperty().set(null);
+	}
+	
+
 	
 	/**
 	 * Reset the Game
@@ -194,13 +263,10 @@ public class GUI {
 	 * 
 	 * GameState is Reset
 	 */
-	public void gameState_resetGame(){
-		curGameState = GameState.RESET_GAME;
+	public void resetGame(){
 		tokenBay.resetTokenBay();
 		timer.reset();
 		outputPanel.clear();
-		
-		gameState_initGUI();
 	}
 	
 	/**
@@ -215,10 +281,7 @@ public class GUI {
 		System.out.println("REFRESH STATE IS NOT IMPLEMENTED -- FULL RESET INSTEAD");
 		//not enough data to implement this now
 		//send to resetGame
-		gameState_resetGame();
-		
-		//should go back to state startGame
-		//gameState_startGame();
+		resetGame();
 		
 	}
 	
@@ -229,7 +292,7 @@ public class GUI {
 	 * GameState is set by Controller or logic classes.
 	 * @return the current game state
 	 */
-	public static GameState getCurGameState(){
+	public GameState getCurGameState(){
 		return curGameState;
 	}
 	
@@ -250,7 +313,7 @@ public class GUI {
 	/**
 	 * Get the OutputPanel
 	 */
-	public static OutputPanel getOutputPanel(){
+	public OutputPanel getOutputPanel(){
 		return outputPanel;
 	}
 	
@@ -289,6 +352,21 @@ public class GUI {
 		this.curCategories = categories;
 	}
 	
+	/**
+	 * Sets the tokenBay tokens
+	 * Used by external API
+	 */
+	public void setTokenBayTokens(LinkedList<DemoToken> tokens){
+		this.tokenBayTokens = tokens;
+	}
+	
+	/**
+	 * Sets the tokenBoard tokens
+	 * Used by external API
+	 */
+	public void setTokenBoardTokens(LinkedList<DemoToken> tokens){
+		this.tokenBoardTokens = tokens;
+	}
 	
 	//--------------------------------------------------------------------------
 	//PRIVATE HELPERS
@@ -324,14 +402,13 @@ public class GUI {
 	 */
 	private static void setupActiveButtonsTable(){
 		
-		activeButtons = new HashMap<String, ArrayList<String>>();
-		
+		activeButtons = new HashMap<GameState, ArrayList<String>>();
 		//initialization state ("initGUI")
 		ArrayList<String> initGuiBtns = new ArrayList<String>();
 		initGuiBtns.add("categoryButton");
 		initGuiBtns.add("logoButton");
 		initGuiBtns.add("difficultyButton");
-		activeButtons.put("initGUI", initGuiBtns);
+		activeButtons.put(GameState.INIT_GUI, initGuiBtns);
 		
 		//starting the game state ("startGame")
 		ArrayList<String> startGameBtns = new ArrayList<String>();
@@ -341,6 +418,6 @@ public class GUI {
 		startGameBtns.add("difficultyButton");
 		startGameBtns.add("resetBoardButton");
 		startGameBtns.add("logoButton");
-		activeButtons.put("startGame", startGameBtns);
+		activeButtons.put(GameState.START_GAME, startGameBtns);
 	}
 }

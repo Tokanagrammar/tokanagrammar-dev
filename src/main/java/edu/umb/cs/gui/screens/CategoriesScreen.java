@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import edu.umb.cs.gui.GUI;
+import edu.umb.cs.gui.GUI.GameState;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -51,21 +52,23 @@ public class CategoriesScreen extends SecondaryScreen{
 	private static Button startBtn;
 	private static Pane rightPane;
 
-	public CategoriesScreen(){
-		super.setupScreen("fxml/Categories.fxml");
+	private String name = "categories";
+	
+	@Override
+	public void setupScreen(){
+		super.setupLargeScreen("fxml/Categories.fxml");
 		populateFeatures();
 	}
-	
-//	/**
-//	 * Auxiliary method needed for sending the categories to GUI.java
-//	 * once the start button is pressed.
-//	 */
-//	public 
+
+	@Override
+	public String getName() {
+		return name;
+	}
 	
 	/**
 	 * Populate the pane with the current categories available.
 	 */
-	private void populateFeatures(){
+	public void populateFeatures(){
 
 		leftPane  = CategoriesScreenController.getLeftPane();
 		rightPane = CategoriesScreenController.getRightPane();
@@ -78,19 +81,27 @@ public class CategoriesScreen extends SecondaryScreen{
 		startBtn = CategoriesScreenController.getStartBtn();
 		startBtn.setDisable(true);
 		
-		/*
-		 * Note that this can only be clicked if at least one category is selected.
-		 * It also sets the game's global selected categories in GUI.java and
-		 * closes the window.
-		 */
+
+		//Note that this can only be clicked if at least one category is selected.
+		//It also sets the game's global selected categories in GUI.java and
+		//closes the window.
 		startBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("DEBUG::: setting current categories in GUI.java from CategoriesScreen.java");
+
 				GUI.getInstance().setCurCategories(selectedCategories);
-				GUI.getInstance().gameState_startGame();
 				
-				CategoriesScreen.tearDownScreen();
+				if(GUI.getInstance().getCurGameState().equals(GameState.INIT_GUI)){
+					//This is the one and only entry point into actually playing a game.
+					GUI.getInstance().gameState_startGame();
+				}else if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
+					GUI.getInstance().resetGame();
+					GUI.getInstance().gameState_initGUI();
+					GUI.getInstance().gameState_startGame();
+					GUI.getInstance().setCurCategories(selectedCategories);
+					System.out.println(GUI.getInstance().getCurCategories());
+				}
+				tearDown();
 			}
 		});
 		
@@ -170,6 +181,8 @@ public class CategoriesScreen extends SecondaryScreen{
 			});
 		}
 	}
+
+
 
 	
 }

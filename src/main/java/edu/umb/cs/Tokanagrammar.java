@@ -28,7 +28,9 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -38,7 +40,12 @@ import javafx.stage.WindowEvent;
 public class Tokanagrammar extends Application{
 	
 	
-	private static final String CURRENT_VERSION = "Tokanagrammar 0.8";
+	private final static String CURRENT_VERSION = "Tokanagrammar " + APIs.getVersion();
+	
+	//static Group root = new Group();
+	
+	static AnchorPane page; 
+	
 	private static final int FINAL_WIDTH = 886;
 	private static final int FINAL_HEIGHT = 689;
 	/**The main scene**/
@@ -54,14 +61,18 @@ public class Tokanagrammar extends Application{
     public void start(Stage primaryStage) {
         try {
         	Tokanagrammar.primaryStage = primaryStage;
+        	
+            
+
 
             primaryStage.initStyle(StageStyle.DECORATED);
             primaryStage.setWidth(FINAL_WIDTH);
             primaryStage.setHeight(FINAL_HEIGHT);
             primaryStage.setResizable(false);	//CAUSING GAP IN MAIN FRAME
-        	AnchorPane page = 	(AnchorPane) FXMLLoader.load(Thread.
+        	page = 	(AnchorPane) FXMLLoader.load(Thread.
         						currentThread().getContextClassLoader().
         						getResource("fxml/Tokanagrammar.fxml"));
+        	
         	
         	scene = new Scene(page);
         	
@@ -70,7 +81,6 @@ public class Tokanagrammar extends Application{
             		getResourceAsStream("/images/ui/tokanagrammarIcon.fw.png")));
             primaryStage.setTitle(CURRENT_VERSION);
 
-            primaryStage.setTitle("Tokanagrammar " + APIs.getVersion());
             primaryStage.setResizable(false);
             primaryStage.sizeToScene();
             primaryStage.initStyle(StageStyle.DECORATED);
@@ -92,6 +102,10 @@ public class Tokanagrammar extends Application{
         }
     }
 
+    public static AnchorPane getAnchorPane(){
+    	return page;
+    }
+    
     public static Scene getScene(){
     	return scene;
     }

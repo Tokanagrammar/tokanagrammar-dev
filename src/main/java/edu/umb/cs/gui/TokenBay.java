@@ -145,8 +145,6 @@ public class TokenBay {
 		
 		LinkedList<IconizedToken> tooLargeForLine = new LinkedList<IconizedToken>();
 		
-		System.out.println("SETTLE TOKEN BAY: " + rhsTokens);
-		
 		for(int i=0; i < rhsTokens.size(); i++){
 			
 			IconizedToken curToken = rhsTokens.get(i);

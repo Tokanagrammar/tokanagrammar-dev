@@ -24,6 +24,9 @@ package edu.umb.cs.gui.screens;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import edu.umb.cs.gui.GUI;
+import edu.umb.cs.gui.GUI.GameState;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -62,7 +65,12 @@ public class DifficultyScreenController implements SecondaryScreenController{
 	}
 	
 	public void closeBtnFired(ActionEvent event){
-		DifficultyScreen.tearDownScreen();
+		if(GUI.getInstance().getCurGameState().equals(GameState.INIT_GUI))
+			GUI.getInstance().blurOff();
+		else if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+			GUI.getInstance().gameState_startGame();
+		
+		CategoriesScreen.tearDown();
 	}
 	
 	public void setBtnFired(ActionEvent event){
