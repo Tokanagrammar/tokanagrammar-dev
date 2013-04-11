@@ -28,7 +28,7 @@ public enum SourceTokenKind
 {
     KEYWORD,
     NUM_LITERAL,
-    CHAR_LITEARL,
+    CHAR_LITERAL,
     STRING_LITERAL,
     OPERATOR,
     SEPARATOR,

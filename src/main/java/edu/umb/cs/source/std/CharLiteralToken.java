@@ -30,6 +30,6 @@ public class CharLiteralToken extends SourceTokenBase
 {
     public CharLiteralToken(String img)
     {
-        super(img, SourceTokenKind.CHAR_LITEARL);
+        super(img, SourceTokenKind.CHAR_LITERAL);
     }
 }

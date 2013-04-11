@@ -26,10 +26,17 @@ import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.parser.InternalException;
+import edu.umb.cs.parser.ParseException;
+import edu.umb.cs.source.Language;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.ShufflerKind;
 import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.SourceFiles;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * APIs for interacting with the backend
@@ -128,6 +135,22 @@ public class APIs
         return DatabaseService.getAllUsers();
     }
     
+    // temp
+    // should be remove!
+    public static SourceFile getRandomSrc() 
+    {
+        String path = 
+                "C:\\Users\\Owner\\Desktop\\Documents\\Document\\UMASS courses\\Spring 2013\\cs410\\new_gui2\\tokanagrammar-dev\\puzzles\\HelloWorld.java";
+        try
+        {
+            return SourceFiles.getSourceFile(new File(path), Language.JAVA);
+        }
+        catch (ParseException | FileNotFoundException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
+    }
     /**
      * 
      * @return a list of available puzzles
@@ -148,22 +171,23 @@ public class APIs
      * @param puzzle
      * @return 
      */
-    public static ShuffledSource shuffle (Puzzle puzzle)
+    public static ShuffledSource shuffle (SourceFile src)
     {
-        return shuffle(puzzle, DEFAULT_PERCENT);
+        return shuffle(src, DEFAULT_PERCENT);
     }
 
     /**
      * 
-     * @param puzzle
+     * @param src
      * @param percentToRemove
      * @return 
      */
-    public static ShuffledSource shuffle (Puzzle puzzle, int percentToRemove)
+    public static ShuffledSource shuffle (SourceFile src, int percentToRemove)
     {
-        SourceFile src = puzzle.getSourceFile();
+        if (percentToRemove > MAX_TO_REMOVE_PERCENT)
+            percentToRemove = MAX_TO_REMOVE_PERCENT;
         return getDefaultShuffler().getShuffler().shuffle(src,
-                                                          percentToRemove / 100 * src.tokenCount());
+                                                          (int)(percentToRemove / 100.0 * src.tokenCount()));
     }
     
      // for testing
@@ -195,6 +219,7 @@ public class APIs
             throw new InternalException("Service must be started before being used");
     }
     
-    private static final int DEFAULT_PERCENT = 5;
+    private static final int MAX_TO_REMOVE_PERCENT = 80;
+    private static final int DEFAULT_PERCENT = 10;
 }
 
