@@ -20,31 +20,19 @@
  */
 package edu.umb.cs.gui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.WritableImage;
-
-import javax.imageio.ImageIO;
-
-import edu.umb.cs.demo.DemoToken;
 import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
-import java.util.*;
 import static edu.umb.cs.source.SourceTokenKind.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
+import javax.imageio.ImageIO;
 
 /**
  *

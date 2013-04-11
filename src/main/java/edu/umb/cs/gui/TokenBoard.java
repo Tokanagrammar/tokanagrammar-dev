@@ -21,16 +21,24 @@
 
 package edu.umb.cs.gui;
 
-import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.SourceFile;
-import java.util.LinkedList;
-
+import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class TokenBoard {
 	
 	private static Pane pane;
 	
+        private static VBox vBox = new VBox();
+        static
+        {
+            vBox.setPadding(new Insets(5,5,5,10));
+        }
+
 	private static final TokenBoard tokenBoard = new TokenBoard();
 	
 	private TokenBoard(){}
@@ -42,15 +50,79 @@ public class TokenBoard {
 	 */
 	public static TokenBoard getInstance(){
 		pane = Controller.getTokenBoard();
+                pane.getChildren().add(vBox);
 		return tokenBoard;
 	}
-		
+	
+        public void clear()
+        {
+            pane.getChildren().removeAll(pane.getChildren());
+            vBox.getChildren().removeAll(vBox.getChildren());
+        }
 	
 	/**
 	 * 
 	 * @param lhsTokens
 	 */
 	public void settleTokenBoard(SourceFile src){
-		System.out.println(src.toString());
+            
+                
+            Font font = new Font(10);
+            Text t = new Text(src.toString());
+            t.setFont(font);
+            t.setFill(Color.BLUE);
+            vBox.getChildren().add(t);
+/*            
+            int nLines = src.lineCount();
+            ObservableList<Node> children = vBox.getChildren();
+            for (int n = 0; n < nLines; ++n)
+            {
+                List<SourceToken> line = src.getTokens(n);
+                Font font = new Font(10);
+                
+                HBox hBox = new HBox();
+                for (SourceToken tk : line)
+                {
+                    System.out.print(tk.image());
+                    Text t = new Text(tk.image());
+                    t.setFont(font);
+                    t.setWrappingWidth(530);
+                    switch(tk.getKind())
+                    {
+                        case KEYWORD:
+                            t.setFill((Color.BLUE));
+                            break;
+                        case NUM_LITERAL:
+                            t.setFill((Color.BLACK));
+                            break;
+                        case CHAR_LITERAL:
+                            t.setFill((Color.ORANGE));
+                            break; 
+                        case STRING_LITERAL:
+                            t.setFill((Color.ORANGE));
+                            break;
+                        case OPERATOR:
+                            t.setFill((Color.BLACK));
+                            break;
+                        case SEPARATOR:
+                            t.setFill((Color.BLACK));
+                            break;
+                        case IDENTIFIER:
+                            t.setFill((Color.RED));
+                            break;
+                        case TAB:
+                        case SPACE:
+                        case EMPTY:
+                            t.setFill((Color.BLACK));
+                            break;
+                    }
+                    t.setText(tk.image());
+                    hBox.getChildren().add(t);
+                }
+                System.out.println();
+                children.add(hBox);
+            }
+            * 
+            */
 	}
 }

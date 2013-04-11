@@ -21,14 +21,13 @@
 
 package edu.umb.cs.gui;
 
+import edu.umb.cs.source.SourceToken;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import edu.umb.cs.demo.DemoToken;
-import edu.umb.cs.source.SourceToken;
 
 
 /**

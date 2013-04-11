@@ -21,22 +21,18 @@
 
 package edu.umb.cs.gui;
 
+import edu.umb.cs.source.ShuffledSource;
+import edu.umb.cs.source.SourceFile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import edu.umb.cs.demo.DemoSource;
-import edu.umb.cs.demo.DemoTokens;
-import edu.umb.cs.entity.Puzzle;
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.SourceFile;
 
 /**
  * Handle game states and also work as a main GUI API.
@@ -209,7 +205,7 @@ public class GUI {
 		tokenBay.resetTokenBay();
 		timer.reset();
 		outputPanel.clear();
-
+                tokenBoard.clear();
 		gameState_initGUI();
 	}
 

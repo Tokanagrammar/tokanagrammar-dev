@@ -54,7 +54,7 @@ public class SimpleShufflerTest extends SourceTestBase
             return;
         }
         // remove a few tokens
-        int toRemove = 6;
+        int toRemove = 6; // percent
         ShuffledSource shuffled = SimpleShuffler.INSTANCE.shuffle(srcFile, toRemove);
         List<SourceToken> removed = shuffled.getRemovedTokens();
 
