@@ -1,3 +1,4 @@
+//catagory: Exception, try catch block
 public class Exception1
 {
 	public static void main(String args[])

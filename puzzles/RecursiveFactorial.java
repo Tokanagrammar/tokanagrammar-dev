@@ -1,3 +1,4 @@
+//catagory: recurion
 public class RecursiveFactorial {
 	public static int factorial(int n)
 	{

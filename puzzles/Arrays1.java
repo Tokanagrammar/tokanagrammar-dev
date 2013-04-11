@@ -1,3 +1,4 @@
+//catagory: Array, loop, string
 //http://www.freejavaguide.com/arrays.htm
 
 public class Arrays1{ 

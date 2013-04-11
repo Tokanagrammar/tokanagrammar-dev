@@ -1,3 +1,4 @@
+//Catagory: boolean expression
 //http://www.freejavaguide.com/boolean_operators.htm
 class BooleanExpression{ 
    public static void main(String args[]){

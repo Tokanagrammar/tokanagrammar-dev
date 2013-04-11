@@ -1,3 +1,4 @@
+//catagory: Arithmetic Operators
 //http://www.freejavaguide.com/corejava2.htm
 
 public class ArithmeticProg {

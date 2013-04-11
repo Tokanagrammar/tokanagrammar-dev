@@ -1,3 +1,4 @@
+//catagory: loop
 public class IterativeFactorial {
 	//iterative function calculates n!
 	static int factorial(int n)

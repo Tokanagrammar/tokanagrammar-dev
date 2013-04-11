@@ -1,3 +1,4 @@
+//catagory: relational expression
 //http://www.freejavaguide.com/relational_operators.htm
 
 public class RelationalExpression {

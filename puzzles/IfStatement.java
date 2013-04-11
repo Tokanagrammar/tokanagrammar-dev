@@ -1,3 +1,4 @@
+///catagory: if statement
 //http://www.freejavaguide.com/corejava3.htm
 class IfStatement
 {

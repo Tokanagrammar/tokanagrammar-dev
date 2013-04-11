@@ -1,3 +1,5 @@
+//catagory: interface
+
 public interface Interface
 {
 	abstract void increment();
