@@ -38,25 +38,37 @@ class ArtificialSourceFile implements SourceFile
     private final int tokenCount;
     private final List<List<SourceToken>> srcFile;
     private final List<String> lines;
+    private final String rep;
     ArtificialSourceFile(int lineCount, int tokenCount, List<List<SourceToken>> src)
     {
         this.lineCount = lineCount;
         this.tokenCount = tokenCount;
         this.srcFile = src;
         lines = new ArrayList<>(lineCount);
+        StringBuilder file = new StringBuilder();
+        
         for (List<SourceToken> line : src)
         {
             StringBuilder bd = new StringBuilder();
             for (SourceToken tk : line)
-                bd.append(tk.image()).append(' ');
+                bd.append(tk.image());
+            file.append(bd).append('\n');
             lines.add(bd.toString());
         }
+        
+        rep = file.toString();
     }
 
     @Override
     public String getLine(int line)
     {
         return lines.get(line);
+    }
+
+    @Override
+    public List<SourceToken> getTokens(int line)
+    {
+        return srcFile.get(line);
     }
 
     @Override
@@ -95,4 +107,9 @@ class ArtificialSourceFile implements SourceFile
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public String toString()
+    {
+        return rep;
+    }
 }
