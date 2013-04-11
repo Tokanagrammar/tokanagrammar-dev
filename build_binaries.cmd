@@ -82,7 +82,7 @@ IF ERRORLEVEL 1 GOTO EOF
 REM push  distributable package to website
 IF DEFINED DRY_RUN GOTO EOF
 cd target
-call git clone git@github.com:Tokanagrammar/tokanagrammar.github.com.git
+call git clone "git@github.com:Tokanagrammar/tokanagrammar.github.com.git"
 cd tokanagrammar.github.com
 call git checkout -b %version%
 cd ..
