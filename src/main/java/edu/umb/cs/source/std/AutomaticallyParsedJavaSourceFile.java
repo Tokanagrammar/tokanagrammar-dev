@@ -135,6 +135,12 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     }
 
     @Override
+    public List<SourceToken> getTokens(int line)
+    {
+        return srcFile.get(line);
+    }
+    
+    @Override
     public SourceToken getToken(int line, int position)
     {
         return srcFile.get(line).get(position);

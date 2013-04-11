@@ -22,8 +22,6 @@ package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +71,13 @@ public class JavaSourceFile implements SourceFile
     @Override
     public String getLine(int line)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return srcFile.get(line).toString();
+    }
+
+    @Override
+    public List<SourceToken> getTokens(int line)
+    {
+        return srcFile.get(line);
     }
 
     @Override

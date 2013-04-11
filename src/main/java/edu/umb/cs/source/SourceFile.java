@@ -20,6 +20,7 @@
  */
 package edu.umb.cs.source;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +32,8 @@ public interface SourceFile
 {
     String getLine(int line);
 
+    List<SourceToken> getTokens(int line);
+    
     /**
      * 
      * @param line
