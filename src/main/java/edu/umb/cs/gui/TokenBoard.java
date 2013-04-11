@@ -21,17 +21,8 @@
 
 package edu.umb.cs.gui;
 
-import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceToken;
-import java.util.LinkedList;
-import java.util.List;
-import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -45,7 +36,7 @@ public class TokenBoard {
         private static VBox vBox = new VBox();
         static
         {
-            vBox.setPadding(new Insets(5,15,5,5));
+            vBox.setPadding(new Insets(5,5,5,10));
         }
 
 	private static final TokenBoard tokenBoard = new TokenBoard();
