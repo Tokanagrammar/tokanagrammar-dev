@@ -22,14 +22,19 @@
 package edu.umb.cs.gui;
 
 import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 /**
  * Gets the controller's outputPane (the console in the gui)
@@ -83,22 +88,47 @@ public class OutputPanel{
 		return outputPanel;
 	}
 	
+	/**
+	 * Completely clears and forgets previous data displayed.
+	 */
 	public void clear(){
 		entries.removeAll(entries);
 	}
 	
+	
+	/**
+	 * Compiler Message
+	 * Used to format actual compiler messages.
+	 */
+	public void compilerMessage(String str){
+		Text t = new Text(str);
+		t.setFont(new Font(12));
+		t.setWrappingWidth(530);
+		t.setFill(Color.RED);
+		t.setText(str);
+		vBox.getChildren().add(t);
+	}
+	
+	
 	/**
 	 * You can write ImageView, Text, Labels, and other Nodes to the
-	 * OutputPanel.
-	 * 
-	 * EX:::	
+	 * OutputPanel with this method.
 	 * 
 	 * @param nodes
 	 */
 	public void writeNodes(Node ... nodes){
+		
 		HBox hBox = new HBox();
-		for(Node node: nodes)
+		for(Node node: nodes){
+			if(node instanceof Text){
+				DropShadow ds = new DropShadow();
+				ds.setColor(Color.GRAY);
+				ds.setOffsetX(3);
+				ds.setOffsetY(3);
+				node.setEffect(ds);
+			}
 			hBox.getChildren().add(node);
+		}
 		vBox.getChildren().add(hBox);
 		rePosScroll = true;
 	}

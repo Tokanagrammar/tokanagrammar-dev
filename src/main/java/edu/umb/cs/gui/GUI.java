@@ -24,23 +24,24 @@ package edu.umb.cs.gui;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import edu.umb.cs.demo.DemoSource;
 import edu.umb.cs.demo.DemoTokens;
-import edu.umb.cs.gui.screens.CategoriesScreen;
 
 /**
  * Handle game states and also work as a main GUI API.
  * @author Matt
  */
 public class GUI {
+	
+	public enum GameState {INIT_GUI, START_GAME, RESET_GAME};
 	
 	/**controller wrappers**/
 	private static TokenBay tokenBay;
@@ -50,16 +51,18 @@ public class GUI {
 	private static OutputPanel outputPanel;
 	
 	/**For now, gameState is a String -- might stay that way**/
-	private static String gameState;
+	private static GameState curGameState;
 	
 	/**maps the gameState to a list of active buttons while in this state**/
 	private static HashMap<String, ArrayList<String>> activeButtons;
 	
+	private int curDifficulty;
+	
+	private List<String> curCategories;
+	
 	private static boolean showTutorial;										//not implemented.
 	
 	private static final GUI gui = new GUI();
-	
-	private int curDifficulty;
 	
 	private GUI(){}
 	
@@ -83,10 +86,10 @@ public class GUI {
 	 * Welcome the user and give prompt to choose category.
 	 */
 	public void gameState_initGUI(){
-		
-		gameState = "initGUI";
-		System.out.println("GAMESTATE::: " + gameState);
+		curGameState = GameState.INIT_GUI;
+		System.out.println("GAMESTATE::: " + curGameState);
 		this.curDifficulty = 50;
+		this.curCategories = new LinkedList<String>();
 		
 		tokenBay = TokenBay.getInstance();
 		tokenBoard = TokenBoard.getInstance();
@@ -110,6 +113,14 @@ public class GUI {
 		text.setFont(new Font(14));
 		outputPanel.writeNodes(categoryText, imgView, text);
 		
+		/*
+		 * TEST COMPILER MESSAGE
+		 */
+		outputPanel.compilerMessage("**TESTING COMPILER MESSAGE**This is a compiler message test it should be plenty wide to " +
+									"test that it wraps this is a compiler message test it should " + 
+									"be plenty wide to test that it wraps this is a compiler message " +
+									"test it should be plenty wide to test that it wraps");
+		
 		initButtons(activeButtons.get("initGUI"));
 	}
 	
@@ -120,15 +131,10 @@ public class GUI {
 	 * The user has selected a category (or categories) and pressed "start".
 	 */
 	public void gameState_startGame(){
-		gameState = "startGame";
-		System.out.println("GAMESTATE::: " + gameState);
-		//close the categories screen and begin the game
-		CategoriesScreen.tearDownScreen();
-		
-
+		curGameState = GameState.START_GAME;
+		System.out.println("GAMESTATE::: " + curGameState);
 		timer.start();
-		//get the output panel and announce the puzzle and the hint(s)
-		outputPanel.clear();
+		outputPanel.clear();  //start w/a clean outputPanel
 		
 		/*  TODO
 		 *  -- HERE ASSUME THAT THERE IS A CATEGORY SELECTED --
@@ -156,27 +162,64 @@ public class GUI {
 		
 		//tokenBoard.initTokenBoard(lhsIconizedTokens);
 		tokenBay.initTokenBay(rhsIconizedTokens);
+
+
+		String concatCategories = "";
+		Text text = new Text("Category " + "<");
+		for(int i=0; i< curCategories.size(); i++)
+			concatCategories += (curCategories.get(i) + " ");
 		
-		//announce category, difficulty, and hints
-		//for now announce that the demo has begun!
-		//TODO See what can be done about formating for output at a lower level than this.
-		Text text = new Text("Category ");
-		Text categoryText = new Text("<" + demoSource.getCategory() + ">");		//TODO should get from the submitted form
-		categoryText.setFill(Color.web("#9999FF"));
-		categoryText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-		Text text2 = new Text(" has been selected on difficulty ");
-		Text difficultyText = new Text(curDifficulty + "");						//TODO should get from the submitted form or use default
-		difficultyText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-		difficultyText.setFill(Color.web("#9999FF"));
+		Label categoryText = new Label(concatCategories);
+		categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+
+		Text text2 = new Text(">" + " has been selected on difficulty ");
+		
+		Label difficultyText = new Label(curDifficulty + "");
+		difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(153, 153, 50);" );
 		Text text3 = new Text("Hint: ");
-		//randomly grab one of the hints from the hints array (DemoSource)
-		Text hintText = new Text(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
-		hintText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
-		hintText.setFill(Color.rgb(234, 175, 175));
+		Label hintText = new Label(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
+		hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+		
 		outputPanel.writeNodes(text, categoryText, text2, difficultyText);
 		outputPanel.writeNodes(text3, hintText);
 
 		initButtons(activeButtons.get("startGame"));
+	}
+	
+	/**
+	 * Reset the Game
+	 * Warning: This reboots the game completely!
+	 * If you want to place the orig rhs and lhs tokens
+	 * back to their original state, use refresh.
+	 * 
+	 * GameState is Reset
+	 */
+	public void gameState_resetGame(){
+		curGameState = GameState.RESET_GAME;
+		tokenBay.resetTokenBay();
+		timer.reset();
+		outputPanel.clear();
+		
+		gameState_initGUI();
+	}
+	
+	/**
+	 * Refresh the Game
+	 * Places all original tokens back to their
+	 * original place.
+	 * 
+	 * GameState is Refresh
+	 */
+	public void gameState_refreshGame(){
+		
+		System.out.println("REFRESH STATE IS NOT IMPLEMENTED -- FULL RESET INSTEAD");
+		//not enough data to implement this now
+		//send to resetGame
+		gameState_resetGame();
+		
+		//should go back to state startGame
+		//gameState_startGame();
+		
 	}
 	
 	//--------------------------------------------------------------------------
@@ -186,8 +229,8 @@ public class GUI {
 	 * GameState is set by Controller or logic classes.
 	 * @return the current game state
 	 */
-	public static String getGameState(){
-		return gameState;
+	public static GameState getCurGameState(){
+		return curGameState;
 	}
 	
 	/**
@@ -195,6 +238,13 @@ public class GUI {
 	 */
 	public int getCurDifficulty(){
 		return curDifficulty;
+	}
+	
+	/**
+	 * Get the current categories
+	 */
+	public List<String> getCurCategories(){
+		return curCategories;
 	}
 	
 	/**
@@ -207,21 +257,21 @@ public class GUI {
 	/**
 	 * Get the TokenBay
 	 */
-	public static TokenBay getTokenBay(){
+	public TokenBay getTokenBay(){
 		return tokenBay;
 	}
 	
 	/**
 	 * Get the TokenBoard
 	 */
-	public static TokenBoard getTokenBoard(){
+	public TokenBoard getTokenBoard(){
 		return tokenBoard;
 	}
 	
 	/**
 	 * Get the LegalDropZone
 	 */
-	public static LegalDragZone getLegalDragZone(){
+	public LegalDragZone getLegalDragZone(){
 		return legalDragZone;
 	}
 	
@@ -230,6 +280,13 @@ public class GUI {
 	 */
 	public void setCurDifficulty(int curDifficulty){
 		this.curDifficulty = curDifficulty;
+	}
+	
+	/**
+	 * Set the current categories
+	 */
+	public void setCurCategories(List<String> categories){
+		this.curCategories = categories;
 	}
 	
 	

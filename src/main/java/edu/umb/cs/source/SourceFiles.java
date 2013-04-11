@@ -36,7 +36,7 @@ public class SourceFiles
 {
     public static SourceFile getSourceFile(File file,
                                            Language languageType)
-                             throws FileNotFoundException, ParseException
+                             throws FileNotFoundException//, ParseException
     {
         switch(languageType)
         {
