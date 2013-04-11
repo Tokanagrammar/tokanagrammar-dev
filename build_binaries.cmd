@@ -71,10 +71,9 @@ echo Package built by > %OUTDIR%\config\build_notes.txt
 call git var GIT_COMMITTER_IDENT >> %OUTDIR%\config\build_notes.txt
 echo , >> %OUTDIR%\config\build_notes.txt
 echo COMMIT_HASH: >> %OUTDIR%\config\build_notes.txt
-echo , >> %OUTDIR%\config\build_notes.txt
 call git rev-parse HEAD >> %OUTDIR%\config\build_notes.txt
-echo , 
-echo [ ] ON DATE: %date% TIME: %time%>> %OUTDIR%\config\build_notes.txt 
+echo ,  >> %OUTDIR%\config\build_notes.txt
+echo ON DATE: %date% TIME: %time%>> %OUTDIR%\config\build_notes.txt
 
 REM zip them up!
 call 7z a -tzip target\tokanagrammar.zip %OUTDIR%
