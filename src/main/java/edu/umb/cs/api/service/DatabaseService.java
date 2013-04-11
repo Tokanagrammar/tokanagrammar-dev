@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 /**
@@ -63,7 +64,6 @@ public class DatabaseService
         partialURL = "$objectdb/db/";
         emf = Persistence.createEntityManagerFactory(partialURL + dbName, properties);
         em = emf.createEntityManager();
-        em.getTransaction().begin();
     }
 
     /**
@@ -83,7 +83,6 @@ public class DatabaseService
         properties.put("javax.persistence.jdbc.password", password);
         emf = Persistence.createEntityManagerFactory(partialURL + dbName, properties);
         em = emf.createEntityManager();
-        em.getTransaction().begin();
         
         // TODO replace all em.createQuery().exeucte... 
         // with prepare state.
@@ -97,7 +96,9 @@ public class DatabaseService
      */
     public static void closeConnection()
     {   
-        //em.getTransaction().commit();
+        EntityTransaction t = em.getTransaction();
+        if (t.isActive())
+            t.commit();
         em.close();
         emf.close();
     }
@@ -107,9 +108,23 @@ public class DatabaseService
      */
     public static void deleteAll()
     {
-        em.createQuery("DELETE FROM User u").executeUpdate();
-        em.createQuery("DELETE FROM Puzzle p").executeUpdate();
-        em.createQuery("DELETE FROM Game g").executeUpdate();
+        EntityTransaction t = em.getTransaction();
+        boolean success  = false;
+        try
+        {
+            t.begin();
+            // em.createQuery("DELETE FROM User u").executeUpdate();
+            em.createQuery("DELETE FROM Puzzle p").executeUpdate();
+            //em.createQuery("DELETE FROM Game g").executeUpdate();
+            success = true;
+        }
+        finally
+        {
+            if (success)
+                t.commit();
+            else
+                t.rollback();
+        }
     }
 
     /**
@@ -137,19 +152,28 @@ public class DatabaseService
      */
     public static boolean addPuzzle(String filePath, String expResult, String metaData, Hint... hints)
     {
+        boolean success = false;
+        EntityTransaction t = em.getTransaction();
         try
         {
+            t.begin();
             Puzzle p = new Puzzle(filePath, expResult, metaData);
             for (Hint h : hints)
                 p.addHint(h);
             em.persist(p);
-            em.getTransaction().commit();
+            success = true;
         }
         catch (IOException | ParseException exc)
         {
             return false;
         }
-        
+        finally
+        {
+            if (success)
+                t.commit();
+            else
+                t.rollback();
+        }
         return true;
     }
     
@@ -176,7 +200,6 @@ public class DatabaseService
         em.persist(p);
         em.getTransaction().commit();
     }
-    
     /**
      * 
      * @param username

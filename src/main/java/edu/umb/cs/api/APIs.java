@@ -60,6 +60,20 @@ public class APIs
             return;
         started = true;
         DatabaseService.openConnection(PRODUCTION_DB);
+        
+        // TEMP remoe this when we have the 'real' code
+        // for populating the db
+        // (For now, just wipe out everything and insert data 
+      removeAllRecords();
+
+       File dir = new File("puzzles");
+       assert dir.isDirectory() : "directory puzzles not exist";
+       
+       for (File f : dir.listFiles())
+       {
+           System.out.println("adding files; " + f.getAbsolutePath());
+           DatabaseService.addPuzzle(f.getAbsolutePath(), "Expted Result", "Metada");
+       }
     }
     
     public static void stop()
@@ -137,19 +151,12 @@ public class APIs
     
     // temp
     // should be remove!
+    private static int n = 0;
     public static SourceFile getRandomSrc() 
     {
-        String path = 
-                "C:\\Users\\Owner\\Desktop\\Documents\\Document\\UMASS courses\\Spring 2013\\cs410\\new_gui2\\tokanagrammar-dev\\puzzles\\HelloWorld.java";
-        try
-        {
-            return SourceFiles.getSourceFile(new File(path), Language.JAVA);
-        }
-        catch (ParseException | FileNotFoundException ex)
-        {
-            ex.printStackTrace();
-            return null;
-        }
+        int next = n % getPuzzles().size();
+        ++n;
+        return getPuzzles().get(next).getSourceFile();
     }
     /**
      * 
