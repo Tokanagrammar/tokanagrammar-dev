@@ -18,7 +18,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package edu.umb.cs.gui;
 
 import java.awt.Color;
@@ -41,167 +40,180 @@ import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
 
 import edu.umb.cs.demo.DemoToken;
+import edu.umb.cs.parser.InternalException;
+import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
+import java.util.*;
+import static edu.umb.cs.source.SourceTokenKind.*;
 
 /**
- * 
+ *
  * @author Matt
  *
  */
-public class TokenIconizer {
-	
-	final static int TOKEN_HEIGHT = 32; //token height is always the same
-	final static int MIN_WIDTH = 32;	//the minimum token width
-	
-	private static HashMap<String, Color> tokenFontColor;
-	
-	private TokenIconizer(){}
-	
-	/**
-	 * The primary method of TokenIconizer does all iconizing at once, for the
-	 * entire LinkedList of pased tokens.
-	 * @param tokens
-	 * @return
-	 */
-	public static LinkedList<IconizedToken> iconizeTokens(List<DemoToken> tokens){
-		
-		//store all the newly iconized tokens here
-		LinkedList<IconizedToken> iconizedTokens = new LinkedList<IconizedToken>();
-		
-		HashMap<DemoToken, Integer> occurrenceTable = new HashMap<DemoToken, Integer>();
-		tokenFontColor = new HashMap<String, Color>();
-    	
-    	tokenFontColor.put("keyword", Color.yellow);
-    	tokenFontColor.put("literal", Color.white);
-    	tokenFontColor.put("identifier", Color.red );
-    	tokenFontColor.put("quotedString", Color.blue);
-    	tokenFontColor.put("refType", Color.blue);
-    	tokenFontColor.put("delimiter", Color.black);
-    	tokenFontColor.put("operator", Color.white);
-		
-		//load the occurrence table with all 0's
-		for(int k=0; k< tokens.size(); k++)
-			//We know we have at least one of each that are passed to this method.
-			occurrenceTable.put(tokens.get(k), 1);
-		
-		//mark the appropriate location in the occurrence table if we find a duplicate
-		for(int i=0; i< tokens.size(); i++){
-			DemoToken comparer = tokens.get(i);
-			for(int j= i+1; j< tokens.size(); j++){
-				DemoToken compareTo = tokens.get(j);
-				if(compareTo.equals(comparer))
-					occurrenceTable.put(comparer, occurrenceTable.get(comparer) + 1) ;
-			}
-		}
-		
-		Set<Entry<DemoToken, Integer>> entrySet = occurrenceTable.entrySet();
-		
-		for(Entry<DemoToken, Integer> entry : entrySet)
-			iconizedTokens.add( iconizeToken((DemoToken) entry.getKey(), (Integer) entry.getValue()) );
-		
-		return iconizedTokens;
-	}
-	
-	
-	/**
-	 * Take a token and makes a graphic representation of it.
-	 * @param token
-	 * @return an IconizedToken
-	 */
-	private static IconizedToken iconizeToken(DemoToken token, Integer occurrences){
-		
-		String tokenType = token.getType();
-		BufferedImage image = null; 
-		BufferedImage finalImage = null;
-		Graphics graphics = null;
-		int imagePadding = 20;
-		
-		//TODO put this info in a table
-		try{
-			if(tokenType.equals("keyword")){	//actual api wants to use isKeyword etc once i get used to the real api
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png"));
-			}else if(tokenType.equals("literal")){
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png"));
-			}else if(tokenType.equals("identifier")){
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
-			}else if(tokenType.equals("quotedString")){
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
-			}else if(tokenType.equals("refType")){
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png"));
-			}else if(tokenType.equals("delimiter")){
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_yellow.fw.png"));
-			}else if(tokenType.equals("operator")){
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_purple.fw.png"));
-			}else if(tokenType.equals(null)){
-				System.out.println("Token type " + tokenType + " is not valid.");
-			}
-		} catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		graphics = image.getGraphics();
-		FontMetrics fm = graphics.getFontMetrics();
-		
-		if(fm.stringWidth(token.getImage()) < 25)
-			finalImage = finalizeImage(image, token, occurrences, TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
-		else
-			finalImage = finalizeImage(image, token, occurrences, TOKEN_HEIGHT, fm.stringWidth(token.getImage()) + imagePadding, Image.SCALE_DEFAULT);
+public class TokenIconizer
+{
 
-		WritableImage writableImage = SwingFXUtils.toFXImage(finalImage, null);
-		
-		return new IconizedToken(writableImage, token, occurrences);
-	}
-
-	
-	/**
-	 * Resizes an image, adds the string text, and adds occurrence subscript.
-	 * @param originalImage
-	 * @param height
-	 * @param width
-	 * @param type
-	 * @return
-	 */
-    private static BufferedImage finalizeImage(	BufferedImage originalImage, 
-    											DemoToken token, 
-    											Integer occurrences, 
-    											int height, 
-    											int width, 
-    											int type){
-
-    	String tokenImage = token.getImage();
-    	String tokenType = token.getType();
-    	Font font = new Font("Arial", type, 11);
-		BufferedImage resizedImage = new BufferedImage(width, height, type);
-		Graphics2D g = resizedImage.createGraphics();
-	    FontMetrics fm = g.getFontMetrics();
-	    
-	    int strWidth = (fm.stringWidth(tokenImage));
-	    int imageWidth = resizedImage.getWidth();
-	    
-	    int textBegin = (imageWidth - strWidth) / 2 - 1;
-	    int textHeight = (fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2 - 3);
-	    
-		g.drawImage(originalImage, 0, 0, width, height, null);
-		g.setColor(tokenFontColor.get(tokenType));  //color set in tokenFontColor
-	    g.setFont(font);
-	    g.drawString(tokenImage, textBegin, textHeight); 
-
-    	//for multiple occurrences, draw subscript
-	    if(occurrences > 1){
-		    try {
-				BufferedImage numOnSubscript = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/subscript.fw.png"));
-				g.drawImage(numOnSubscript, width - 20, height-20, 20, 20, null);
-				g.setColor(Color.white);
-				g.drawString(occurrences.toString(), width - 11, (height-20)*2 + 5);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	    
-		g.dispose();
-	 
-		return resizedImage;
-		
-    }
+    final static int TOKEN_HEIGHT = 32;     //token height is always the same
+    final static int MIN_WIDTH = 32;	//the minimum token width
+    private static final Map<SourceTokenKind, Color> tokenTextColors = computeColorsMap();
+    private static final Map<SourceTokenKind, Image> tokenImages = computeImagesMap();
+    private static final int defaultPadding = 20;
     
+    private static Map<SourceTokenKind, Color> computeColorsMap()
+    {
+        EnumMap<SourceTokenKind, Color> ret = new EnumMap<>(SourceTokenKind.class);
+
+        ret.put(KEYWORD, Color.blue);
+        ret.put(NUM_LITERAL, Color.white);
+        ret.put(CHAR_LITERAL, Color.white);
+        ret.put(IDENTIFIER, Color.red);
+        ret.put(STRING_LITERAL, Color.blue);
+        ret.put(SEPARATOR, Color.black);
+        ret.put(OPERATOR, Color.white);
+
+        return Collections.unmodifiableMap(ret);
+    }
+
+    private static Map<SourceTokenKind, Image> computeImagesMap()
+    {
+        try
+        {
+            EnumMap<SourceTokenKind, Image> ret = new EnumMap<>(SourceTokenKind.class);
+
+            ret.put(KEYWORD,ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png")));
+            ret.put(NUM_LITERAL, ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png")));
+            ret.put(CHAR_LITERAL, ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_pink.fw.png")));
+            ret.put(IDENTIFIER, ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png")));
+            ret.put(STRING_LITERAL, ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png")));
+            ret.put(SEPARATOR, ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_yellow.fw.png")));
+            ret.put(OPERATOR, ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_purple.fw.png")));
+            // TODO: ref-type (This is actually IDENTIFIER for now)
+            //ret.put(REFTYPE, ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/ui_token_green.fw.png")));
+
+            return Collections.unmodifiableMap(ret);
+        }
+        catch (IOException ex)
+        {
+            throw new InternalException("IOException while initialising TokenIconizer: " + ex.getMessage());
+        }
+    }
+
+    private TokenIconizer()
+    {
+    }
+
+    /**
+     * The primary method of TokenIconizer does all iconizing at once, for the
+     * entire LinkedList of pased tokens.
+     *
+     * @param tokens
+     * @return
+     */
+    public static List<IconizedToken> iconizeTokens(List<SourceToken> tokens)
+    {
+        //store all the newly iconized tokens here
+        List<IconizedToken> iconizedTokens = new LinkedList<>();
+
+        // statistic table
+        Map<SourceToken, Integer> stats = new HashMap<>();
+
+        // count the occurrences
+        for (SourceToken tk : tokens)
+        {
+            Integer c = stats.put(tk, 1);
+            if (c != null)            // previously seen
+                stats.put(tk, c + 1); // increment the count
+        }
+
+        // now iconise them
+        for (Entry<SourceToken, Integer> entry : stats.entrySet())
+            iconizedTokens.add(iconizeToken(entry.getKey(), entry.getValue()));
+
+        return iconizedTokens;
+    }
+
+    /**
+     * Take a token and makes a graphic representation of it.
+     *
+     * @param token
+     * @return an IconizedToken
+     */
+    private static IconizedToken iconizeToken(SourceToken token, Integer count)
+    {
+        Image image = tokenImages.get(token.getKind());
+        if (image == null)
+            throw new InternalException("No such token: " + token);
+        
+        Graphics graphics = image.getGraphics();
+        FontMetrics fm = graphics.getFontMetrics();
+        BufferedImage finalImage
+                = finalizeImage(image,
+                                token,
+                                count,
+                                TOKEN_HEIGHT,
+                                fm.stringWidth(token.image()) < 25
+                                    ? MIN_WIDTH
+                                    : fm.stringWidth(token.image()) + defaultPadding,
+                                Image.SCALE_DEFAULT);
+        
+        WritableImage writableImage = SwingFXUtils.toFXImage(finalImage, null);
+        return new IconizedToken(writableImage, token, count);
+    }
+
+    /**
+     * Resizes an image, adds the string text, and adds occurrence subscript.
+     *
+     * @param originalImage
+     * @param height
+     * @param width
+     * @param type
+     * @return
+     */
+    private static BufferedImage finalizeImage(Image originalImage,
+                                               SourceToken token,
+                                               Integer occurrences,
+                                               int height,
+                                               int width,
+                                               int type)
+    {
+        String tkImage = token.image(); // textual representation of the token
+                                        // (not to be confused with 'image')
+        
+        Font font = new Font("Arial", type, 11);
+        BufferedImage resizedImage = new BufferedImage(width, height, type);
+        Graphics2D g = resizedImage.createGraphics();
+        FontMetrics fm = g.getFontMetrics();
+
+        int strW = fm.stringWidth(tkImage);
+        int imageW = resizedImage.getWidth(); // same as width arg?
+        
+        int textBegin = (imageW - strW) / 2 - 1;
+        int textHeight = fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2 - 3;
+        
+        g.drawImage(originalImage, 0, 0, width, height, null);
+        g.setColor(tokenTextColors.get(token.getKind()));
+        g.setFont(font);
+        g.drawString(tkImage, textBegin, textHeight);
+
+        //for multiple occurrences, draw subscript
+        if (occurrences > 1)
+        {
+            try
+            {
+                Image numOnSubscript 
+                        = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/subscript.fw.png"));
+                g.drawImage(numOnSubscript, width - 20, height - 20, 20, 20, null);
+                g.setColor(Color.white);
+                g.drawString(occurrences.toString(), width - 11, (height - 20) * 2 + 5);
+            }
+            catch (IOException e)
+            {
+                throw new InternalException("IOException while drawing subscript: " + e.getMessage());
+            }
+        }
+
+        g.dispose();
+        return resizedImage;
+    }
 }

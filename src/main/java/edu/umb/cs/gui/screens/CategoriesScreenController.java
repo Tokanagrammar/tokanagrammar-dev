@@ -60,18 +60,28 @@ public class CategoriesScreenController implements SecondaryScreenController{
 	public static Pane getRightPane(){
 		return rightPane;
 	}
+	public static Button getStartBtn(){
+		return startBtn;
+	}
 	
 	public void closeBtnFired(ActionEvent event){
 		System.out.println("closeBtn fired!");
 		CategoriesScreen.tearDownScreen();
 	}
 	
-	public void startBtnFired(ActionEvent event){
-		String gameState = GUI.getGameState();
-		if((gameState.equals("initGUI") || gameState.equals("startGame"))){
-			
-			GUI.getInstance().gameState_startGame();
-		}
-
-	}
+//	public void startBtnFired(ActionEvent event){
+//		String gameState = GUI.getGameState();
+//		if((gameState.equals("initGUI") || gameState.equals("startGame"))){
+//			
+//			System.out.println("DEBUG::: setting current categories in GUI.java from CategoriesScreen.java");
+//			//send the selected categories to the GUI, but let the controller
+//			//handle the close of window
+//			GUI.getInstance().setCurCategories(CategoriesScreen.getSelectectedCategories());
+//			
+//			GUI.getInstance().gameState_startGame();
+//
+//			CategoriesScreen.tearDownScreen();
+//		}
+//
+//	}
 }

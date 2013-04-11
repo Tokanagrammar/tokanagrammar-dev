@@ -47,6 +47,7 @@ public class SimpleShuffler implements Shuffler
     @Override
     public ShuffledSource shuffle(SourceFile src, int toRemove)
     {
+        System.out.println("to remove: " + toRemove);
         Random rand = new Random();
         // TODO: issue some warning here?
         toRemove = Math.min(toRemove, src.tokenCount());
@@ -93,7 +94,7 @@ public class SimpleShuffler implements Shuffler
     {
         int lineC = src.lineCount();
         ArrayList<List<SourceToken>> ret = new ArrayList<>(lineC);
-        
+            
         for (int n = 0; n < lineC; ++n)
         {
             int tkCount = src.tokenCount(n);

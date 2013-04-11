@@ -21,6 +21,8 @@
 
 package edu.umb.cs.gui;
 
+import edu.umb.cs.source.ShuffledSource;
+import edu.umb.cs.source.SourceFile;
 import java.util.LinkedList;
 
 import javafx.scene.layout.Pane;
@@ -48,7 +50,7 @@ public class TokenBoard {
 	 * 
 	 * @param lhsTokens
 	 */
-	public void settleTokenBoard(LinkedList<IconizedToken> lhsTokens){
-		
+	public void settleTokenBoard(SourceFile src){
+		System.out.println(src.toString());
 	}
 }
