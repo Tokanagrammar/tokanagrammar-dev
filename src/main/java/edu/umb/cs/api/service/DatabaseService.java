@@ -21,6 +21,7 @@
 
 package edu.umb.cs.api.service;
 
+import edu.umb.cs.entity.Game;
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
@@ -64,6 +65,11 @@ public class DatabaseService
         partialURL = "$objectdb/db/";
         emf = Persistence.createEntityManagerFactory(partialURL + dbName, properties);
         em = emf.createEntityManager();
+        
+        // make the classes known to ODB
+        em.find(User.class, User.class);
+        em.find(Puzzle.class, Puzzle.class);
+        em.find(Game.class, Game.class);
     }
 
     /**
@@ -113,8 +119,8 @@ public class DatabaseService
         try
         {
             t.begin();
-            em.createQuery("DELETE FROM User u").executeUpdate();
             em.createQuery("DELETE FROM Puzzle p").executeUpdate();
+            em.createQuery("DELETE FROM User u").executeUpdate();
             em.createQuery("DELETE FROM Game g").executeUpdate();
             success = true;
         }
@@ -230,9 +236,24 @@ public class DatabaseService
         if (usernameExists(username))
             throw new Exception("Username has already existed");
         
-        User u = new User(username);
-        em.persist(u);
-        em.getTransaction().commit();
+        EntityTransaction t = em.getTransaction();
+        boolean success = false;
+        User u;
+        try
+        {
+            t.begin();
+            u = new User(username);
+            em.persist(u);
+            success = true;   
+        }
+        finally
+        {
+            if (success)
+                t.commit();
+            else
+                t.rollback();
+        }
+        
         return u;
     }
     
