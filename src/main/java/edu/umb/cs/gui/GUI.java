@@ -282,7 +282,14 @@ public class GUI {
 		//not enough data to implement this now
 		//send to resetGame
 		resetGame();
-		
+	}
+	
+	/**
+	 * Skips the current board and goes to the next.
+	 */
+	public void skipPuzzle(){
+		System.out.println("<Back end for skipping a puzzle");
+		//need a "recover" done in GUI to take care of blurring off.
 	}
 	
 	//--------------------------------------------------------------------------

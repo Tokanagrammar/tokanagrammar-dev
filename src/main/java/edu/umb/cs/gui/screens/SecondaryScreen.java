@@ -122,10 +122,10 @@ public abstract class SecondaryScreen {
 	 * A small screen is xxxxxxxx and is centered on the main stage.
 	 * @param resource
 	 */
-	public void setupSmallScreen(String resource){
+	public void setupBantamScreen(String resource){
 		try {
-			int screenWidth = 528;
-			int screenHeight = 396;
+			int screenWidth = 307;
+			int screenHeight = 230;
 			Stage primaryStage = Tokanagrammar.getStage();
 			stage = new Stage();
 			stage.initStyle(StageStyle.TRANSPARENT);

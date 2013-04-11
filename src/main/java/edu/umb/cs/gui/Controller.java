@@ -42,6 +42,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import edu.umb.cs.gui.GUI.GameState;
+import edu.umb.cs.gui.screens.BantamConfirmScreen;
 import edu.umb.cs.gui.screens.CategoriesScreen;
 import edu.umb.cs.gui.screens.DifficultyScreen;
 
@@ -193,18 +194,9 @@ public class Controller implements Initializable{
 		return timer;
 	}
 	
-	
-	//this is being updated to allow dynamic change of this button
-	//note this feature is more unique than a regular button
-	//We can handle all changing here.
 	public static Pane getDifficultyPane(){
 		return difficultyPane;
 	}
-	
-	
-	/**
-	 * Initialize the difficultyPane to hold the "difficulty: 50" image
-	 */
 	
 	
 	/**
@@ -247,14 +239,18 @@ public class Controller implements Initializable{
 		Text text = new Text("pauseFired");
 		OutputPanel.getInstance().writeNodes(text);
 		
+
 		
+		//TEST remove an iToken
+		System.out.println("DEBUG::: " + TokenBay.getInstance().remove(TokenBay.getInstance().getITokens().getFirst()));
+		System.out.println(TokenBay.getInstance().getITokens());
 		//little pause demo only
-		if(Timer.getInstance().getTimerState().equals("running"))
-			Timer.getInstance().pause();
-		else if(Timer.getInstance().getTimerState().equals("paused"))
-			Timer.getInstance().start();
-		if(Timer.getInstance().getTimerState().equals("stopped"))
-			Timer.getInstance().start();
+//		if(Timer.getInstance().getTimerState().equals("running"))
+//			Timer.getInstance().pause();
+//		else if(Timer.getInstance().getTimerState().equals("paused"))
+//			Timer.getInstance().start();
+//		if(Timer.getInstance().getTimerState().equals("stopped"))
+//			Timer.getInstance().start();
 		//put in another game state gameStatePauseGame
 		//stop the timer if it's running
 		
@@ -273,9 +269,9 @@ public class Controller implements Initializable{
 		Text text = new Text("skipFired");
 		OutputPanel.getInstance().writeNodes(text);
 		
-		//TEST remove an iToken
-		System.out.println("DEBUG::: " + TokenBay.getInstance().remove(TokenBay.getInstance().getITokens().getFirst()));
-		System.out.println(TokenBay.getInstance().getITokens());
+		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+			GUI.getInstance().pauseGame(new BantamConfirmScreen());
+	
 	}
 	
     /**
