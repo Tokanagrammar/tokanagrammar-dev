@@ -26,17 +26,11 @@ import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.parser.InternalException;
-import edu.umb.cs.parser.ParseException;
-import edu.umb.cs.source.Language;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.ShufflerKind;
 import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceFiles;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * APIs for interacting with the backend
