@@ -3,16 +3,13 @@ package edu.umb.cs.gui.screens;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import edu.umb.cs.gui.GUI;
-import edu.umb.cs.gui.GUI.GameState;
-
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import edu.umb.cs.gui.GUI;
+import edu.umb.cs.gui.GUI.GameState;
 
 /**
  * These screens are small enough to put the controller and logic together.
@@ -20,10 +17,7 @@ import javafx.scene.layout.Pane;
  * @author Matt
  *
  */
-public class BantamConfirmScreen extends SecondaryScreen implements Initializable {
-	
-	private String name = "confirm";
-	
+public class ConfirmSkipScreen extends SecondaryScreen implements Initializable {
 	
 	@FXML
 	private static Pane textPane;
@@ -35,13 +29,17 @@ public class BantamConfirmScreen extends SecondaryScreen implements Initializabl
 	private static Button confirmNo;
 	
 	
-	public BantamConfirmScreen(){
+	@Override
+	public void initialize(URL location, ResourceBundle resources) { }
+	
+	@Override
+	public void setupScreen() {
+		
+		super.setupBantamScreen("fxml/SkipScreen.fxml");
+		populateFeatures();
 	}
 	
 	public void closeBtnFired(){
-		System.out.println("closeBtnFired");
-		
-		//REFACTOR BLUR TECHNIQUE
 		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
 			GUI.getInstance().blurOff();
 			tearDown();
@@ -50,32 +48,22 @@ public class BantamConfirmScreen extends SecondaryScreen implements Initializabl
 	}
 	
 	public void confirmNoBtnFired(){
-		System.out.println("confirmNoBtnFired(");
-		//REFACTOR BLUR TECHNIQUE
 		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
 			GUI.getInstance().blurOff();
 			tearDown();
 			GUI.getInstance().gameState_startGame();
 		}
 	}
+	
+
 	public void confirmYesBtnFired(){
-		System.out.println("confirmYesBtnFired");
 		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
 			GUI.getInstance().blurOff();
 			tearDown();
-
 			GUI.getInstance().skipPuzzle();
-			
-			System.out.println("For now, just reset.");
-			GUI.getInstance().resetGame();
-			GUI.getInstance().gameState_initGUI();
 		}
 	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
+
 
 	@Override
 	public void populateFeatures() {
@@ -96,34 +84,8 @@ public class BantamConfirmScreen extends SecondaryScreen implements Initializabl
 		label.setWrapText(true);
 		label.setMaxWidth(256);
 		textPane.getChildren().add(label);
-		
 
-		confirmYes.setOnMouseClicked(new EventHandler<MouseEvent>(){
-			@Override
-			public void handle(MouseEvent event) {
-				//TODO this is backend code
-				if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
-
-					GUI.getInstance().skipPuzzle();
-					GUI.getInstance().gameState_startGame();
-					tearDown();
-				}
-			}
-		});
-		
-		
 	}
 
-	@Override
-	public void setupScreen() {
-		super.setupBantamScreen("fxml/BantamGeneric.fxml");
-		populateFeatures();
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -59,13 +59,7 @@ public class DifficultyScreen extends SecondaryScreen{
 	private static int curDifficultyLevel;
 	private final static int DIVISOR = 11;
 	private final static int DEFAULT_DIFFICULTY = 50;
-	
-	private static String name = "difficulty";
 
-	@Override
-	public String getName() {
-		return name;
-	}
 
 	@Override
 	public void setupScreen() {

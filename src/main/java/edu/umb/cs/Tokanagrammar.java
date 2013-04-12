@@ -21,28 +21,24 @@
 
 package edu.umb.cs;
 
-import edu.umb.cs.api.APIs;
-import edu.umb.cs.gui.GUI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import edu.umb.cs.api.APIs;
+import edu.umb.cs.gui.GUI;
 
 public class Tokanagrammar extends Application{
 	
-	
 	private final static String CURRENT_VERSION = "Tokanagrammar " + APIs.getVersion();
-	
-	//static Group root = new Group();
 	
 	static AnchorPane page; 
 	
@@ -61,18 +57,14 @@ public class Tokanagrammar extends Application{
     public void start(Stage primaryStage) {
         try {
         	Tokanagrammar.primaryStage = primaryStage;
-        	
-            
-
 
             primaryStage.initStyle(StageStyle.DECORATED);
             primaryStage.setWidth(FINAL_WIDTH);
             primaryStage.setHeight(FINAL_HEIGHT);
-            primaryStage.setResizable(false);	//CAUSING GAP IN MAIN FRAME
+            primaryStage.setResizable(false); 
         	page = 	(AnchorPane) FXMLLoader.load(Thread.
         						currentThread().getContextClassLoader().
         						getResource("fxml/Tokanagrammar.fxml"));
-        	
         	
         	scene = new Scene(page);
         	
@@ -89,7 +81,12 @@ public class Tokanagrammar extends Application{
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 				@Override
 				public void handle(WindowEvent event) {
-					System.out.println("Handle for saving db.");
+					
+					System.out.println("\n\nGUI CLOSING REPORT:");
+					GUI gui = GUI.getInstance();
+					System.out.println("CURCATEGORIES::: " + gui.getCurCategories());
+					System.out.println("END GAME STATE::: " + gui.getCurGameState());
+					System.out.println("CURDIFFICULTY::: " + gui.getCurDifficulty());
 				}
             });
             primaryStage.show();

@@ -51,8 +51,6 @@ public class CategoriesScreen extends SecondaryScreen{
 	private static ObservableList<Node> categoryNames;
 	private static Button startBtn;
 	private static Pane rightPane;
-
-	private String name = "categories";
 	
 	@Override
 	public void setupScreen(){
@@ -60,10 +58,6 @@ public class CategoriesScreen extends SecondaryScreen{
 		populateFeatures();
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
 	
 	/**
 	 * Populate the pane with the current categories available.
@@ -80,7 +74,6 @@ public class CategoriesScreen extends SecondaryScreen{
 		
 		startBtn = CategoriesScreenController.getStartBtn();
 		startBtn.setDisable(true);
-		
 
 		//Note that this can only be clicked if at least one category is selected.
 		//It also sets the game's global selected categories in GUI.java and
@@ -105,8 +98,6 @@ public class CategoriesScreen extends SecondaryScreen{
 			}
 		});
 		
-
-		
 		int rowHeight = 35;
 		int rowCount = 0;
 
@@ -125,8 +116,7 @@ public class CategoriesScreen extends SecondaryScreen{
 		categoryDesc.put(categoryNames.get(3),new Label("This is shown for demo category 4."));
 		categoryDesc.put(categoryNames.get(4),new Label("This is shown for demo category 5."));
 		
-
-		for(int i = 0; i < categoryNames.size(); i++){
+		for(int i = 0; i < categoryDesc.size(); i++){
 			final CheckBox category = (CheckBox) categoryNames.get(i);
 			
 			category.setLayoutX(10);
@@ -183,6 +173,4 @@ public class CategoriesScreen extends SecondaryScreen{
 	}
 
 
-
-	
 }

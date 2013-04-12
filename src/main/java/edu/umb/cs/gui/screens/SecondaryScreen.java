@@ -37,9 +37,7 @@ import edu.umb.cs.Tokanagrammar;
  * SecondaryScreen
  * 
  * 
- * Note: Secondary screens are instantiated, they don't act like components of the
- * game board.  On that note this class itself is abstract and cannot be.  You
- * should make to new screen by extending this.
+ * 
  * @author Matt
  *
  */
@@ -55,8 +53,6 @@ public abstract class SecondaryScreen {
 	protected static double initY;
 	
 	protected static Pane page;
-	
-	public abstract String getName();
 	
 	public abstract void populateFeatures();
 	

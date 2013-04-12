@@ -42,9 +42,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import edu.umb.cs.gui.GUI.GameState;
-import edu.umb.cs.gui.screens.BantamConfirmScreen;
+import edu.umb.cs.gui.screens.ConfirmRefreshBoard;
+import edu.umb.cs.gui.screens.ConfirmSkipScreen;
 import edu.umb.cs.gui.screens.CategoriesScreen;
 import edu.umb.cs.gui.screens.DifficultyScreen;
+import edu.umb.cs.gui.screens.PauseScreen;
 
 
 public class Controller implements Initializable{
@@ -240,23 +242,8 @@ public class Controller implements Initializable{
 		OutputPanel.getInstance().writeNodes(text);
 		
 
-		
-		//TEST remove an iToken
-		System.out.println("DEBUG::: " + TokenBay.getInstance().remove(TokenBay.getInstance().getITokens().getFirst()));
-		System.out.println(TokenBay.getInstance().getITokens());
-		//little pause demo only
-//		if(Timer.getInstance().getTimerState().equals("running"))
-//			Timer.getInstance().pause();
-//		else if(Timer.getInstance().getTimerState().equals("paused"))
-//			Timer.getInstance().start();
-//		if(Timer.getInstance().getTimerState().equals("stopped"))
-//			Timer.getInstance().start();
-		//put in another game state gameStatePauseGame
-		//stop the timer if it's running
-		
-		//blur current screen
-        
-		//open the 'continue?' dialog box
+		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+			GUI.getInstance().pauseGame(new PauseScreen());
 		
 	}
 	
@@ -270,7 +257,7 @@ public class Controller implements Initializable{
 		OutputPanel.getInstance().writeNodes(text);
 		
 		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
-			GUI.getInstance().pauseGame(new BantamConfirmScreen());
+			GUI.getInstance().pauseGame(new ConfirmSkipScreen());
 	
 	}
 	
@@ -295,9 +282,8 @@ public class Controller implements Initializable{
 		Text text = new Text("resetBoardFired");
 		GUI.getInstance().getOutputPanel().writeNodes(text);
 		
-		//TEST ONLY
-		GUI.getInstance().resetGame();
-		GUI.getInstance().gameState_initGUI();
+		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+			GUI.getInstance().pauseGame(new ConfirmRefreshBoard());
 	}
 	
     /**

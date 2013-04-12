@@ -50,8 +50,6 @@ public class GUI {
 	
 	public enum GameState {INIT_GUI, START_GAME};
 	
-	/**controller wrappers**/
-	
 	private static TokenBay tokenBay;
 	private static TokenBoard tokenBoard;
 	private static LegalDragZone legalDragZone;
@@ -76,6 +74,9 @@ public class GUI {
 	
 	/** Used to blur screen on pausing*/
 	private static boolean blurOn = false;
+	private static boolean init  = false;
+	
+	private static HashMap<String, String> defaultCategories;
 	
 	private static final GUI gui = new GUI();
 	
@@ -87,7 +88,12 @@ public class GUI {
 	 */
 	public static GUI getInstance(){
 		showTutorial = false;													//not implemented.
-		setupActiveButtonsTable();
+		
+		if(!init){
+			setupActiveButtonsTable();
+			init = true;
+		}
+
 		return gui;
 	}
 	
@@ -108,7 +114,6 @@ public class GUI {
 		inGame = false;
 		curGameState = GameState.INIT_GUI;
 		System.out.println("GAMESTATE::: " + curGameState);
-		//this.curDifficulty = curDifficulty;
 		blurOff();
 		tokenBay = TokenBay.getInstance();
 		tokenBoard = TokenBoard.getInstance();
@@ -164,9 +169,7 @@ public class GUI {
 			tokenBay.initTokenBay(TokenIconizer.iconizeTokens(tokenBayTokens));
 			tokenBay.initTokenBay(TokenIconizer.iconizeTokens(tokenBoardTokens));
 			
-
 			outputPanel.clear();  //start w/a clean outputPanel
-			
 			
 			/*
 			 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
@@ -189,7 +192,6 @@ public class GUI {
 		}
 		
 		timer.start();
-
 		inGame = true;
 		initButtons(activeButtons.get(curGameState));
 	}
@@ -204,22 +206,6 @@ public class GUI {
 		
 		//blur screen
 		blurOn();
-		
-		if(screen.getName().equals("pause")){
-			System.out.println("standard pause screen PAUSE!");
-		}
-		if(screen.getName().equals("skip")){
-			System.out.println("skip screen PAUSE!");
-		}
-		if(screen.getName().equals("categories")){
-			System.out.println("categories screen PAUSE!");
-		}
-		if(screen.getName().equals("difficulty")){
-			System.out.println("difficulty screen PAUSE!");
-		}
-		if(screen.getName().equals("refresh")){
-			System.out.println("refresh screen PAUSE!");
-		}
 
 		screen.setupScreen();
 
@@ -229,6 +215,9 @@ public class GUI {
 	 * Blurs the main frame of the GUI (it's AnchorPane).
 	 */
 	public void blurOn(){
+		
+		System.out.println("BLURON");
+		
 		AnchorPane mainScreen = Tokanagrammar.getAnchorPane();
 		ObservableList<Node> screenComponents = mainScreen.getChildren();
 		
@@ -276,21 +265,58 @@ public class GUI {
 	 * 
 	 * GameState is Refresh
 	 */
-	public void gameState_refreshGame(){
-		
-		System.out.println("REFRESH STATE IS NOT IMPLEMENTED -- FULL RESET INSTEAD");
-		//not enough data to implement this now
-		//send to resetGame
-		resetGame();
+	public void refreshGame(){
+		tokenBay.resetTokenBay();
+		inGame = false;
+		gameState_startGame();
 	}
 	
 	/**
-	 * Skips the current board and goes to the next.
+	 * Skips the current board and goes to the next. //TODO
 	 */
 	public void skipPuzzle(){
-		System.out.println("<Back end for skipping a puzzle");
-		//need a "recover" done in GUI to take care of blurring off.
+		System.out.println("<<<Back end for skipping a puzzle>>>");		//TODO
+		
+		outputPanel.clear();
+		
+		//set the next puzzle via nextPuzzle backend api
+		//for now, print a fake
+		LinkedList<String> demoCurCategories = new LinkedList<String>();
+		
+		
+		
+		setCurCategories(demoCurCategories);
+		
+		
+		printCategoryAndDifficultyMessage();
+		
+		resetGame();
+		inGame = false;
+		gameState_startGame();
 	}
+	
+	
+	private void printCategoryAndDifficultyMessage(){
+		/*
+		 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
+		 * 					 Hitnts: <hints>
+		 */
+		String concatCategories = "";
+		Text text = new Text("Category " + "<");
+		for(int i=0; i< curCategories.size(); i++)
+			concatCategories += (curCategories.get(i) + " ");
+		Label categoryText = new Label(concatCategories);
+		categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+		Text text2 = new Text(">" + " has been selected on difficulty ");
+		Label difficultyText = new Label(curDifficulty + "");
+		difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(153, 153, 50);" );
+		Text text3 = new Text("Hint: ");
+		Label hintText = new Label(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
+		hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
+		outputPanel.writeNodes(text, categoryText, text2, difficultyText);
+		outputPanel.writeNodes(text3, hintText);
+	}
+	
 	
 	//--------------------------------------------------------------------------
 	//Getters / Setters
@@ -339,6 +365,13 @@ public class GUI {
 	}
 	
 	/**
+	 * Get the Timer
+	 */
+	public Timer getTimer(){
+		return timer;
+	}
+	
+	/**
 	 * Get the LegalDropZone
 	 */
 	public LegalDragZone getLegalDragZone(){
@@ -373,6 +406,13 @@ public class GUI {
 	 */
 	public void setTokenBoardTokens(LinkedList<DemoToken> tokens){
 		this.tokenBoardTokens = tokens;
+	}
+	
+	/**
+	 * Sets the available categories so they can be referenced elsewhere.
+	 */
+	public void setDefaultCategories(HashMap<String, String> categories){
+		this.defaultCategories = categories;
 	}
 	
 	//--------------------------------------------------------------------------
