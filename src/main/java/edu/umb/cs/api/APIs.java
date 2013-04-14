@@ -25,6 +25,7 @@ import edu.umb.cs.api.service.DatabaseService;
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.ShufflerKind;
@@ -171,7 +172,8 @@ public class APIs
     {
         int next = n % getPuzzles().size();
         ++n;
-        return getPuzzles().get(next).getSourceFile();
+        // TODO: let user decide what style they want
+        return getPuzzles().get(next).getSourceFile(BracingStyle.ALLMAN);
     }
     /**
      * 

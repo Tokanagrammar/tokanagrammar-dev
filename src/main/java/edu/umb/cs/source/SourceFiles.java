@@ -21,6 +21,7 @@
 
 package edu.umb.cs.source;
 
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.parser.JavaParser;
 import edu.umb.cs.parser.ParseException;
@@ -35,7 +36,8 @@ import java.io.FileNotFoundException;
 public class SourceFiles 
 {
     public static SourceFile getSourceFile(File file,
-                                           Language languageType)
+                                           Language languageType,
+                                           BracingStyle style)
                              throws FileNotFoundException, ParseException
     {
         switch(languageType)
@@ -43,7 +45,7 @@ public class SourceFiles
             case JAVA:
                 FileInputStream fin = new FileInputStream(file);
                 JavaParser parser = new JavaParser(new FileInputStream(file));
-                return parser.parseJava();
+                return parser.parseJava(style);
             default:
                 throw new InternalException("Unsupported Language: " + languageType);
         }

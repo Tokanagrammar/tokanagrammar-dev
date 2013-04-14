@@ -21,6 +21,7 @@
 
 package edu.umb.cs.source.std;
 
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.ParseException;
 import edu.umb.cs.source.*;
 import java.io.File;
@@ -46,7 +47,7 @@ public class SimpleShufflerTest extends SourceTestBase
         SourceFile srcFile;
         try
         {
-            srcFile = SourceFiles.getSourceFile(in, Language.JAVA);
+            srcFile = SourceFiles.getSourceFile(in, Language.JAVA, BracingStyle.ALLMAN);
         }
         catch (ParseException ex)
         {
