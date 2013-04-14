@@ -1049,8 +1049,13 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
         {
             ++line;
         }
-        line = statement(src, line, count, level + 1) // consequence
-
+        // consequence
+        (
+            LOOKAHEAD ( <LCURLY> )
+            line = statement(src, line, count, level) // don't need to indent if see a block
+        |
+            line = statement(src, line, count, level + 1) 
+        )
         // alternative
         [
             LOOKAHEAD( <ELSE> )
@@ -1086,7 +1091,13 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
             count[0] += 2;
         }
         parExpression(curLine, count)                 // condition
-        line = statement(src, line, count, level + 1) // consequence
+        // consequence
+        (
+            LOOKAHEAD ( <LCURLY> )
+            line = statement(src, line, count, level) // don't need to indent if see a block
+        |
+            line = statement(src, line, count, level + 1) 
+        )
     |
         <DO>
         {
