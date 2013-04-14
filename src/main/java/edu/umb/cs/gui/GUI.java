@@ -150,19 +150,31 @@ public class GUI {
             // TODO: This method should be called with an argument
             // be the set of categories,
             // we can do: p = APIs.picOne(<set of categories>);
-            SourceFile orig = edu.umb.cs.api.APIs.getRandomSrc();
-
-            ShuffledSource shuffled = edu.umb.cs.api.APIs.shuffle(orig, curDifficulty);
-            List<IconizedToken> rhsIconizedTokens =
-                    TokenIconizer.iconizeTokens(shuffled.getRemovedTokens());
-            tokenBay.initTokenBay(rhsIconizedTokens);
+            SourceFile orig = null;
+            try
+            {
+                 orig = edu.umb.cs.api.APIs.getRandomSrc();
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                outputPanel.compilerMessage("Error retrieving puzzles: " + ex.getMessage());
+            }
             
-            // TODO: fix this SOON
-            // iconized the lhs or just print plain text?
-//		LinkedList<IconizedToken> lhsIconizedTokens = 
-//				(TokenIconizer.iconizeTokens(shuffled.getShuffledSource));
-            tokenBoard.settleTokenBoard(shuffled.getShuffledSource());
+            ShuffledSource shuffled = null;
+            if (orig != null)
+            {
+                shuffled = edu.umb.cs.api.APIs.shuffle(orig, curDifficulty);
+                List<IconizedToken> rhsIconizedTokens =
+                        TokenIconizer.iconizeTokens(shuffled.getRemovedTokens());
+                tokenBay.initTokenBay(rhsIconizedTokens);
 
+                // TODO: fix this SOON
+                // iconized the lhs or just print plain text?
+    //		LinkedList<IconizedToken> lhsIconizedTokens = 
+    //				(TokenIconizer.iconizeTokens(shuffled.getShuffledSource));
+                tokenBoard.settleTokenBoard(shuffled.getShuffledSource());
+            }
 
 
             String concatCategories = "";
@@ -185,10 +197,12 @@ public class GUI {
             outputPanel.writeNodes(text3, hintText);
 
             // Some message on the puzzle
-            outputPanel.compilerMessage("Total tokens: " + orig.tokenCount());
-            outputPanel.compilerMessage("Removed: " + shuffled.getRemovedTokens().size()
-                                            + "(" + curDifficulty + "%)");
-            
+            if (orig != null)
+            {
+                outputPanel.compilerMessage("Total tokens: " + orig.tokenCount());
+                outputPanel.compilerMessage("Removed: " + shuffled.getRemovedTokens().size()
+                                                + "(" + curDifficulty + "%)");
+            }
             initButtons(activeButtons.get("startGame"));
 	}
 

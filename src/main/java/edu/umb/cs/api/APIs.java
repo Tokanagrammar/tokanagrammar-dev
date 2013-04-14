@@ -25,13 +25,13 @@ import edu.umb.cs.api.service.DatabaseService;
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.InternalException;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.ShufflerKind;
 import edu.umb.cs.source.SourceFile;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -43,6 +43,7 @@ import java.util.logging.Logger;
  */
 public class APIs
 {   
+    private static final String LOG = "config/log.txt";
     private static final String PRODUCTION_DB = "tokanagrammar";
     private static boolean started = false;
     private static boolean stopped = false;
@@ -52,6 +53,22 @@ public class APIs
     private static boolean testStopped = false;
 
     private static final String VERSION = findVersion();
+    private static final  PrintStream stdout = System.out;
+    private static final PrintStream logStream = getLogStream();
+    
+    private static PrintStream getLogStream()
+    {
+        try
+        {
+            return new PrintStream(new FileOutputStream(LOG, true), true);
+        }
+        catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(APIs.class.getName()).log(Level.SEVERE, null, ex);
+            return stdout;
+        }
+    }
+
     private static String findVersion()
     {
         String ret = "UNKNOWN";
@@ -74,6 +91,11 @@ public class APIs
         if (started)
             return;
         started = true;
+        // redirect stdout to log file
+        System.setOut(logStream);
+        
+        System.out.println("\n=================================");
+        System.out.println("Application started on: " + new Date());
         DatabaseService.openConnection(PRODUCTION_DB);
         
         // TEMP remoe this when we have the 'real' code
@@ -96,6 +118,8 @@ public class APIs
         if (stopped)
             return;
         stopped = true;
+        System.out.println("Application stopped: " + new Date());
+        System.setOut(stdout);
         DatabaseService.closeConnection();
     }
 
@@ -167,11 +191,14 @@ public class APIs
     // temp
     // should be remove!
     private static int n = 0;
-    public static SourceFile getRandomSrc() 
+    public static SourceFile getRandomSrc() throws Exception
     {
         int next = n % getPuzzles().size();
         ++n;
-        return getPuzzles().get(next).getSourceFile();
+        // TODO: let user decide what style they 
+        SourceFile ret = getPuzzles().get(next).getSourceFile(BracingStyle.ALLMAN);
+        
+        return ret;
     }
     /**
      * 
@@ -208,8 +235,10 @@ public class APIs
     {
         if (percentToRemove > MAX_TO_REMOVE_PERCENT)
             percentToRemove = MAX_TO_REMOVE_PERCENT;
+        
+        int total = src.tokenCount();
         return getDefaultShuffler().getShuffler().shuffle(src,
-                                                          (int)(percentToRemove / 100.0 * src.tokenCount()));
+                                                          (int)(percentToRemove / 100.0 * total));
     }
     
      // for testing

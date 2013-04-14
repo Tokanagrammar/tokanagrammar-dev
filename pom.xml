@@ -188,6 +188,7 @@
                         <exclude>target/generated-sources/javacc/GrammarParser/*.java</exclude>
                         <exclude>target/**</exclude>
                         <exclude>puzzles/**</exclude>
+                        <exclude>config/version.txt</exclude>
                     </excludes>
                     <mapping>
                         <g>JAVADOC_STYLE</g>

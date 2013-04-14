@@ -20,6 +20,7 @@
  */
 package edu.umb.cs.source;
 
+import edu.umb.cs.parser.BracingStyle;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,12 @@ import java.util.Map;
  */
 public interface SourceFile
 {
+    BracingStyle getStyle();
+
+    /**
+     * @deprecate
+     * Use List<SourceToken> getTokens(line) instead
+     */
     String getLine(int line);
 
     List<SourceToken> getTokens(int line);

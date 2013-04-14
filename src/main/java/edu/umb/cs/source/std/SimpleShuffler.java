@@ -47,7 +47,6 @@ public class SimpleShuffler implements Shuffler
     @Override
     public ShuffledSource shuffle(SourceFile src, int toRemove)
     {
-        System.out.println("to remove: " + toRemove);
         Random rand = new Random();
         // TODO: issue some warning here?
         toRemove = Math.min(toRemove, src.tokenCount());
@@ -55,10 +54,14 @@ public class SimpleShuffler implements Shuffler
 
         List<List<SourceToken>>  newSrc = buildList(src);
         List<SourceToken> removed = new ArrayList<>(toRemove);
-        
+
         while (hasRemoved != toRemove)
         {
             int lineIndex = rand.nextInt(newSrc.size());
+            
+            // if line is empty (no token to remove) move on)
+            if (newSrc.get(lineIndex).isEmpty())
+                continue;
             int tokenIndex = rand.nextInt(newSrc.get(lineIndex).size());
             
             ArrayList<SourceToken> line = (ArrayList<SourceToken>)newSrc.get(lineIndex);
@@ -79,7 +82,8 @@ public class SimpleShuffler implements Shuffler
         
         SourceFile shuffled = new ArtificialSourceFile(src.lineCount(),
                                                        src.tokenCount(),
-                                                       newSrc);
+                                                       newSrc,
+                                                       src.getStyle());
 
         return new ShuffledSourceImpl(src, shuffled, removed);
     }

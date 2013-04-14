@@ -21,6 +21,7 @@
 
 package edu.umb.cs.source.std;
 
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
 import java.util.ArrayList;
@@ -39,11 +40,16 @@ class ArtificialSourceFile implements SourceFile
     private final List<List<SourceToken>> srcFile;
     private final List<String> lines;
     private final String rep;
-    ArtificialSourceFile(int lineCount, int tokenCount, List<List<SourceToken>> src)
+    private final BracingStyle style;
+    ArtificialSourceFile(int lineCount,
+                         int tokenCount,
+                         List<List<SourceToken>> src,
+                         BracingStyle style)
     {
         this.lineCount = lineCount;
         this.tokenCount = tokenCount;
         this.srcFile = src;
+        this.style = style;
         lines = new ArrayList<>(lineCount);
         StringBuilder file = new StringBuilder();
         
@@ -57,6 +63,12 @@ class ArtificialSourceFile implements SourceFile
         }
         
         rep = file.toString();
+    }
+
+    @Override
+    public BracingStyle getStyle()
+    {
+        return style;
     }
 
     @Override

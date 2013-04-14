@@ -20,6 +20,7 @@
  */
 package edu.umb.cs.source.std;
 
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
@@ -52,7 +53,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
             isKeyword = keywords.contains(img);
         }
         
-        // SourceFile interface 
+        // SourceToken interface 
         
         @Override
         public String image()
@@ -127,6 +128,13 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     }
     
     // --- SourceFile states ---
+    
+    @Override
+    public BracingStyle getStyle()
+    {
+        // null for unknown style
+        return null;
+    }
     
     @Override
     public String getLine(int line)

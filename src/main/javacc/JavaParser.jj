@@ -46,6 +46,7 @@ package edu.umb.cs.parser;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.source.std.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,8 @@ public class JavaParser
     private static final char NOT_SET = 0;
     private static final List<SourceToken> emptyLine = new ArrayList<SourceToken>();
     private static List<SourceToken> draftLine = new ArrayList<SourceToken>();
+
+    private BracingStyle style;
     int draft[] = new int[] {0};
     static
     {
@@ -65,7 +68,6 @@ public class JavaParser
 
     private SourceToken keyword(String img)
     {
-        // TODO: cache keywords and reuse them
         return new KeywordToken(img);
     }
 
@@ -74,7 +76,7 @@ public class JavaParser
         return new NumLiteralToken(img);
     }
 
-    private SourceToken quotedString (String img)
+    private SourceToken stringLiteral (String img)
     {
         return new StringLiteralToken(img);
     }
@@ -127,6 +129,38 @@ public class JavaParser
             curLine.add(semi());
         else
             curLine.set(n, semi());
+    }
+
+    private int appendOpenCurly(List<List<SourceToken>> src,
+                                 int line, int count[], int level)
+    {
+        switch(style)
+        {
+            case ALLMAN:
+                int n = 0;
+                List<SourceToken> curLine = src.get(line);
+                while (n++ < level)
+                    curLine.add(tab());
+                count[0] += level;
+                curLine.add(separator("{"));
+                ++line;
+                return line;
+            
+            case K_AND_R:
+                List<SourceToken> prev = src.get(line - 1);
+                prev.add(space());
+                prev.add(separator("{"));
+                ++count[0];
+                
+                // remove the line
+                // (And do not increment the line number)
+                src.remove(line);
+                return line;
+            
+            default:
+                throw new InternalException("Unknown bracing style: " + style);
+        }
+        
     }
 }
 PARSER_END(JavaParser)
@@ -267,8 +301,9 @@ TOKEN:
  * </pre>
  */
 SourceFile
-parseJava():
+parseJava(BracingStyle style):
 {
+    this.style = style;
     int tkCount[] = new int[] {0};
     int line = 0;
     List<List<SourceToken>> srcFile = new ArrayList<List<SourceToken>>();
@@ -314,7 +349,7 @@ parseJava():
     )*
     <EOF>
     {
-        return new JavaSourceFile("TODO", srcFile, tkCount[0]);
+        return new JavaSourceFile("TODO", srcFile, tkCount[0], style);
     }
 }
 
@@ -329,7 +364,8 @@ qualifiedIdentifier (List<SourceToken> srcLine, int tkCount[]) :
         ++tkCount[0];
         srcLine.add(identifier(token.image));
     }
-    (LOOKAHEAD ( { getToken(1).kind == DOT } )
+    (
+        LOOKAHEAD ( { getToken(1).kind == DOT } )
         <DOT><IDENTIFIER>
         {
             tkCount[0] += 2;
@@ -468,10 +504,10 @@ classBody (List<List<SourceToken>> src, int line, int count[], int level) :
     (
         <LCURLY>
         {
-            count[0] += 2;
-            curLine.add(separator("{"));
             src.add(curLine);
-            ++line;
+            line = appendOpenCurly(src, line, count, level);
+
+            // prepare the line for the next member
             curLine = new ArrayList<SourceToken>();
             ++level;
             n = 0;
@@ -906,14 +942,7 @@ block (List<List<SourceToken>> src, int line, int count[], int level) :
      {
         cur = new ArrayList<SourceToken>();
         src.add(cur);
-        n = 0;
-        while (n++ < level)
-            cur.add(tab());
-        count[0] += level;
-        
-        cur.add(separator("{"));
-        ++count[0];
-        ++line;
+        line = appendOpenCurly(src, line, count, level);
         ++level;
      }
      (
@@ -1780,10 +1809,14 @@ literal(List<SourceToken> curLine, int count[]) :
 |
     <CHAR_LITERAL>
     {
+        curLine.add(charLiteral(token.image));
+        ++count[0];
     }
 |
     <STRING_LITERAL>
     {
+        curLine.add(stringLiteral(token.image));
+        ++count[0];
     }
 |
     (<TRUE> | <FALSE> | <NULL>)

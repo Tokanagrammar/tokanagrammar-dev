@@ -14,6 +14,9 @@ public class Foo
 
     Foo(int x)
     {
+        char ch = 'a';
+        String str = "Hello, World";
+        System.out.println(ch);
     }
 
     void bar()
