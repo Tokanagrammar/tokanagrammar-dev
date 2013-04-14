@@ -40,6 +40,11 @@
             <name>ObjectDB Repository</name>
             <url>http://m2.objectdb.com</url>
         </repository>
+        <repository>
+            <id>google-releases</id>
+            <name>Google Releases</name>
+            <url>https://oss.sonatype.org/content/repositories/google-releases</url>
+      </repository>
     </repositories>
 
     <properties>
@@ -59,12 +64,17 @@
             <artifactId>javafx</artifactId>
             <version>2.2.7</version>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>com.objectdb</groupId>
             <artifactId>objectdb</artifactId>
             <version>2.4.7</version>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-io</artifactId>
+            <version>r03</version>
+        </dependency>	
+    </dependencies>
 
   <!-- rules for build -->
     <build>
@@ -189,6 +199,7 @@
                         <exclude>target/**</exclude>
                         <exclude>puzzles/**</exclude>
                         <exclude>config/version.txt</exclude>
+                        <exclude>temp/**</exclude>
                     </excludes>
                     <mapping>
                         <g>JAVADOC_STYLE</g>
