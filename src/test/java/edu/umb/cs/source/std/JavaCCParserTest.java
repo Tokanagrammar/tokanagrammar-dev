@@ -20,6 +20,7 @@
  */
 package edu.umb.cs.source.std;
 
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.JavaParser;
 import edu.umb.cs.parser.ParseException;
 import edu.umb.cs.source.SourceFile;
@@ -46,7 +47,7 @@ public class JavaCCParserTest extends SourceTestBase
         JavaParser parser = new JavaParser(fin);
         try
         {
-            SourceFile inParsed = parser.parseJava();
+            SourceFile inParsed = parser.parseJava(BracingStyle.ALLMAN);
             System.out.println(inParsed);   
         }
         catch (ParseException ex)

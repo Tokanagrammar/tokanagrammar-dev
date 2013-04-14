@@ -20,6 +20,7 @@
  */
 package edu.umb.cs.source.std;
 
+import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
 import java.util.List;
@@ -36,15 +37,17 @@ public class JavaSourceFile implements SourceFile
     private final List<List<SourceToken>> srcFile;
     private final int tokenCount;
     private final Map<SourceToken, Integer> stats;
-    
+    private final BracingStyle style;
     public JavaSourceFile(String path,
                           List<List<SourceToken>> tokens,
-                          int tokenCount)
+                          int tokenCount,
+                          BracingStyle style)
     {
         this.path = path;
         this.srcFile = tokens;
         this.tokenCount = tokenCount;
         stats = buildStats(srcFile);
+        this.style = style;
     }
     
     // Object interface
@@ -67,6 +70,12 @@ public class JavaSourceFile implements SourceFile
     }
     
     // SourceFile interface
+    
+    @Override
+    public BracingStyle getStyle()
+    {
+        return style;
+    }
     
     @Override
     public String getLine(int line)
