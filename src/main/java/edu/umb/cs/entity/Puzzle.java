@@ -102,21 +102,11 @@ public class Puzzle implements Serializable
         hints = new HashSet<Hint>();
     }
     
-    public SourceFile getSourceFile(BracingStyle style)
+    public SourceFile getSourceFile(BracingStyle style) throws ParseException, FileNotFoundException
     {
         // TODO: let user decide what stlye (ie., ALLMAN or K$R) 
-        try
-        {
-            return SourceFiles.getSourceFile(new File(filePath), langType, style);
-        }
-        catch (FileNotFoundException ex)
-        {
-            ex.printStackTrace();
-        }
-        finally
-        {
-            return null;
-        }
+        
+        return SourceFiles.getSourceFile(new File(filePath), langType, style);
     }
 
     public void addGame(Game g)
