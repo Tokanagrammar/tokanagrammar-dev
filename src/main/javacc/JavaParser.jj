@@ -61,6 +61,7 @@ public class JavaParser
 
     private BracingStyle style;
     int draft[] = new int[] {0};
+    String outerMost = null;
     static
     {
         emptyLine.add(SpaceToken.INSTANCE);
@@ -349,7 +350,7 @@ parseJava(BracingStyle style):
     )*
     <EOF>
     {
-        return new JavaSourceFile("TODO", srcFile, tkCount[0], style);
+        return new JavaSourceFile("TODO", srcFile, tkCount[0], style, outerMost);
     }
 }
 
@@ -455,6 +456,8 @@ classDeclaration(List<List<SourceToken>> src, int line, int count[], int level) 
     <IDENTIFIER>
     {
         ++count[0];
+        if (outerMost == null)
+            outerMost = token.image;
         curLine.add(identifier(token.image));
     }
     [
@@ -1043,6 +1046,9 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
             count[0] += 2;
         }
         parExpression(curLine, count)                 // condition
+        {
+            ++line;
+        }
         line = statement(src, line, count, level + 1) // consequence
 
         // alternative

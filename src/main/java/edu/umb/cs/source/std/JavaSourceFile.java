@@ -38,16 +38,23 @@ public class JavaSourceFile implements SourceFile
     private final int tokenCount;
     private final Map<SourceToken, Integer> stats;
     private final BracingStyle style;
+    private final String outerMost;
+    
+    private boolean hasError = true;
+    private String output = null;
+    
     public JavaSourceFile(String path,
                           List<List<SourceToken>> tokens,
                           int tokenCount,
-                          BracingStyle style)
+                          BracingStyle style,
+                          String outer)
     {
         this.path = path;
         this.srcFile = tokens;
         this.tokenCount = tokenCount;
         stats = buildStats(srcFile);
         this.style = style;
+        outerMost = outer;
     }
     
     // Object interface
@@ -122,7 +129,13 @@ public class JavaSourceFile implements SourceFile
     @Override
     public String compileAndExecute()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (output == null)
+        {
+            int retcode [] = new int[1];
+            output = Utils.compile(srcFile, outerMost, retcode);
+            hasError = retcode[0] != 0;
+        }
+        return output;
     }
 
     private static Map<SourceToken, Integer> buildStats(List<List<SourceToken>> srcFile)
