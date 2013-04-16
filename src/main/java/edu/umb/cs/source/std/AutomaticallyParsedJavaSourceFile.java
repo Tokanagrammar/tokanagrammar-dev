@@ -21,6 +21,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.parser.BracingStyle;
+import edu.umb.cs.source.Output;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
@@ -33,7 +34,7 @@ import java.util.*;
  * that is, 'token' is defined as a list of characters not separated by any 
  * whitespace.
  * 
- * 
+ * @deprecated Consider using <pre>JavaSourceFile</pre> with the parser instead
  * @author Vy Thao Nguyen
  */
 public class AutomaticallyParsedJavaSourceFile implements SourceFile
@@ -179,11 +180,17 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
     }
 
     @Override
-    public String compileAndExecute()
+    public Output compileAndExecute()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    @Override
+    public String getClassName()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     @Override
     public String toString()
     {
