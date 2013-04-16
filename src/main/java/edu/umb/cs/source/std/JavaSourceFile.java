@@ -21,6 +21,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.parser.BracingStyle;
+import edu.umb.cs.source.Output;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
 import java.util.List;
@@ -39,9 +40,8 @@ public class JavaSourceFile implements SourceFile
     private final Map<SourceToken, Integer> stats;
     private final BracingStyle style;
     private final String outerMost;
-    
-    private boolean hasError = true;
-    private String output = null;
+
+    private Output output = null;
     
     public JavaSourceFile(String path,
                           List<List<SourceToken>> tokens,
@@ -127,17 +127,23 @@ public class JavaSourceFile implements SourceFile
     }
 
     @Override
-    public String compileAndExecute()
+    public Output compileAndExecute()
     {
         if (output == null)
         {
             int retcode [] = new int[1];
-            output = Utils.compile(srcFile, outerMost, retcode);
-            hasError = retcode[0] != 0;
+            String outString = Utils.compile(srcFile, outerMost, retcode);
+            output = new Output(outString, retcode[0] != 0);
         }
         return output;
     }
 
+    @Override
+    public String getClassName()
+    {
+        return outerMost;
+    }
+    
     private static Map<SourceToken, Integer> buildStats(List<List<SourceToken>> srcFile)
     {
         return null;

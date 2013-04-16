@@ -24,6 +24,7 @@ import com.google.common.io.CharStreams;
 import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.ParseException;
 import edu.umb.cs.source.Language;
+import edu.umb.cs.source.Output;
 import edu.umb.cs.source.SourceFiles;
 import java.io.*;
 import static org.junit.Assert.assertEquals;
@@ -42,11 +43,12 @@ public class CompileExecuteTest extends SourceTestBase
         try
         {
             String exp = CharStreams.toString(new InputStreamReader(new FileInputStream(expted)));
-            String actual = SourceFiles.getSourceFile(in,
+            Output actual = SourceFiles.getSourceFile(in,
                                                       Language.JAVA,
                                                       BracingStyle.ALLMAN)
                                           .compileAndExecute();
-            assertEquals(exp, actual);
+            String actualString = actual.getOuput();
+            assertEquals(exp, actualString);
         }
         catch (FileNotFoundException ex)
         {
