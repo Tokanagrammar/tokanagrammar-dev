@@ -22,7 +22,6 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.source.*;
-import edu.umb.cs.source.std.AutomaticallyParsedJavaSourceFile.SimpleToken;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,15 +32,6 @@ import java.util.Random;
  */
 public class SimpleShuffler implements Shuffler
 {
-    static final SourceToken EMPTY = new SimpleToken("<REMOVED>")
-    {
-        @Override
-        public SourceTokenKind getKind()
-        {
-            return SourceTokenKind.EMPTY;
-        }
-    };
-    
     public static final SimpleShuffler INSTANCE = new SimpleShuffler();
 
     @Override
@@ -76,14 +66,15 @@ public class SimpleShuffler implements Shuffler
                 continue;
             
             removed.add(token);
-            newSrc.get(lineIndex).set(tokenIndex, EMPTY);
+            newSrc.get(lineIndex).set(tokenIndex, EmptyToken.INSTANCE);
             ++hasRemoved;
         }
         
-        SourceFile shuffled = new ArtificialSourceFile(src.lineCount(),
-                                                       src.tokenCount(),
-                                                       newSrc,
-                                                       src.getStyle());
+        SourceFile shuffled = new JavaSourceFile("UNKNOWN_PATH",
+                                                 newSrc,
+                                                 src.tokenCount(),
+                                                 src.getStyle(),
+                                                 src.getClassName());
 
         return new ShuffledSourceImpl(src, shuffled, removed);
     }

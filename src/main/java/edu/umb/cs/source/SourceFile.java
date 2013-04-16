@@ -31,6 +31,12 @@ import java.util.Map;
  */
 public interface SourceFile
 {
+    /**
+     * 
+     * @return name of the outer most class
+     */
+    String getClassName();
+    
     BracingStyle getStyle();
 
     /**
@@ -76,5 +82,5 @@ public interface SourceFile
     /**
      * compile the source, execute and return the output
      */
-    String compileAndExecute();
+    Output compileAndExecute();
 }

@@ -18,30 +18,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.source;
+package edu.umb.cs.source.std;
+
+import edu.umb.cs.source.SourceTokenKind;
 
 /**
- *
+ * Represents a position of a token that has been removed from the source
+ * during shuffling
  * @author Vy Thao Nguyen
  */
-public class Output 
+class EmptyToken extends SourceTokenBase
 {
-    private final String output;
-    private final boolean isError;
-    
-    public Output(String output, boolean isError)
+    static final SourceTokenBase INSTANCE = new EmptyToken();
+        
+    private EmptyToken()
     {
-        this.output = output;
-        this.isError = isError;
-    }
-    
-    public String getOuput()
-    {
-        return output;
-    }
-    
-    public boolean isError()
-    {
-        return isError;
+        super("<REMOVED>", SourceTokenKind.EMPTY);
     }
 }
