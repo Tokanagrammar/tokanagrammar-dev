@@ -18,37 +18,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package edu.umb.cs.demo;
 
-package edu.umb.cs.gui;
-
-import java.util.LinkedList;
-
-import javafx.scene.layout.Pane;
-
-public class TokenBoard {
+public class SourceToken {
 	
-	private static Pane pane;
+	private String type;
+	private String image;
 	
-	private static final TokenBoard tokenBoard = new TokenBoard();
-	
-	private TokenBoard(){}
-	
-	/**
-	 * There can only be one instance of the TokenBoard
-	 * at any time.  This uses the Singleton pattern to ensure this.
-	 * @return
-	 */
-	public static TokenBoard getInstance(){
-		pane = Controller.getTokenBoard();
-		return tokenBoard;
+	public SourceToken(String type, String image){
+		this.type = type;
+		this.image = image;
 	}
-		
 	
-	/**
-	 * 
-	 * @param lhsTokens
-	 */
-	public void settleTokenBoard(LinkedList<IconizedToken> lhsTokens){
-		
+	public String getType(){
+		return type;
 	}
+	
+	public String getImage(){
+		return image;
+	}
+	
+    public boolean equals(Object obj) {
+    	if(obj instanceof SourceToken)
+    		return 	type.equals(((SourceToken) obj).getType()) &&
+    				image.equals(((SourceToken) obj).getImage());
+    	else return false;
+
+    }
+    
+    public int hashCode() {
+    	return image.hashCode() + type.hashCode();
+    }
+    
+    @Override
+    public String toString(){
+    	String string = "[type: " + type + " image: " + image + "]";
+    	
+		return string;
+    }
+
 }

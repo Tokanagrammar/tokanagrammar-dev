@@ -20,38 +20,57 @@
  */
 package edu.umb.cs.demo;
 
+import java.util.LinkedList;
+
 /*
- * This is for demo of 0.8::  
+ * This is for demo only. 
  */
 public class DemoSource {
 	
-
 	//tokens
-	DemoTokens demoTokens = new DemoTokens();
+	LinkedList<SourceToken> tokenBoardTokens;
+	
+	LinkedList<SourceToken> tokenBayTokens;
 	
 	//getMetaData
-	String metaData = "This is some test metadata";
+	String metaData;
 	
 	//get category of this source file
-	String category = "SEE DEMO SOURCE";
+	LinkedList<String> categories;
 	
 	//getHints
-	String[] hints = {"this is test hint 1", "this is test hint 2", "this is test hint 3"};
+	String[] hints;
 	
-	public DemoTokens getDemoTokens(){
-		return demoTokens;
+	public DemoSource(	LinkedList<SourceToken> tokenBoardTokens,
+						LinkedList<SourceToken> tokenBayTokens,
+						String metaData,
+						LinkedList<String> categories,
+						String[] hints){ 
+		this.tokenBoardTokens = tokenBoardTokens;
+		this.tokenBayTokens = tokenBayTokens;
+		this.metaData = metaData;
+		this.categories = categories;
+		this.hints = hints;
 	}
+
 	
 	public String getMetaData(){
 		return metaData;
 	}
 	
-	public String getCategory(){
-		return category;
+	public LinkedList<String> getCategories(){
+		return categories;
 	}
 	
 	public String[] getHints(){
 		return hints;
 	}
 	
+	public LinkedList<SourceToken> getTokenBayTokens(){
+		return tokenBayTokens;
+	}
+	
+	public LinkedList<SourceToken> getTokenBoardTokens(){
+		return tokenBoardTokens;
+	}
 }

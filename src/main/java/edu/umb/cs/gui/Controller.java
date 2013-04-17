@@ -55,15 +55,10 @@ public class Controller implements Initializable{
 	private AnchorPane mainFrame;
 	@FXML 
 	private static Pane legalDragZone;
-	
-	//panels
-	@FXML
-	private static Pane tokenBoard;
 	@FXML
 	private static Pane tokenBay;
 	@FXML
 	private static Pane outputPanel;
-	
 
 	@FXML
 	private static Pane difficultyPane;
@@ -109,9 +104,8 @@ public class Controller implements Initializable{
 		buttons.add(resetBoardButton);
 		buttons.add(logoButton);
 		
-		
 		//The default difficulty icon is a little less than "50"
-		Image defaultDiffImg = new Image(getClass().getResourceAsStream("/images/ui/secondaryScreens/difficulty4.fw.png"));		//TODO
+		Image defaultDiffImg = new Image(getClass().getResourceAsStream("/images/ui/secondaryScreens/difficulty4.fw.png"));
 		final ImageView imgView = new ImageView(defaultDiffImg);
 		setCurDifficultyIcon(imgView);
 		
@@ -123,16 +117,9 @@ public class Controller implements Initializable{
 		}
 	}
 	
-	/**
-	 * 
-	 * @return  the current difficulty icon being displayed
-	 */
 	public static ImageView getCurDifficultyIcon(){
 		return curDifficultyIcon;
 	}
-
-	
-	
 	
 	public static void setCurDifficultyIcon(final ImageView cdi){
 		
@@ -167,27 +154,17 @@ public class Controller implements Initializable{
 			}
 		});
 
-		
 		difficultyPane.getChildren().remove(getCurDifficultyIcon());
 		curDifficultyIcon = cdi;
 		difficultyPane.getChildren().add(cdi);
 	}
 	
 	
-	
-	
 	public static HashMap<Integer, ImageView> getImgViewTable(){
 		return imgViewTable;
 	}
-	
-	public static Pane getTokenBay(){
-		return tokenBay;
-	}
 	public static Pane getOutputPane(){
 		return outputPanel;
-	}
-	public static Pane getTokenBoard(){
-		return tokenBoard;
 	}
 	public static Pane getLegalDragZone(){
 		return legalDragZone;
@@ -195,11 +172,12 @@ public class Controller implements Initializable{
 	public static Pane getTimer(){
 		return timer;
 	}
-	
 	public static Pane getDifficultyPane(){
 		return difficultyPane;
 	}
-	
+	public static Pane getTokenBay(){
+		return tokenBay;
+	}
 	
 	/**
 	 * Convenience method to get buttons.
@@ -218,18 +196,18 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void runFired(ActionEvent event){
-		Text text = new Text("runFired");
-		GUI.getInstance().getOutputPanel().writeNodes(text);
+		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+			GUI.getInstance().compileNewSource();
 	}
 	
     /**
      * Called when the stop button is fired.
-     *
+     * This should only be available when in GameState.Compiling
      * @param event the action event.
      */
 	public void stopFired(ActionEvent event){
-		Text text = new Text("stopFired");
-		GUI.getInstance().getOutputPanel().writeNodes(text);
+		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+			GUI.getInstance().stopCompile();
 	}
 	
     /**
@@ -238,13 +216,8 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void pauseFired(ActionEvent event){
-		Text text = new Text("pauseFired");
-		OutputPanel.getInstance().writeNodes(text);
-		
-
 		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
 			GUI.getInstance().pauseGame(new PauseScreen());
-		
 	}
 	
     /**
@@ -253,12 +226,8 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void skipFired(ActionEvent event){
-		Text text = new Text("skipFired");
-		OutputPanel.getInstance().writeNodes(text);
-		
 		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
 			GUI.getInstance().pauseGame(new ConfirmSkipScreen());
-	
 	}
 	
     /**
@@ -268,7 +237,7 @@ public class Controller implements Initializable{
      */
 	public void categoryFired(ActionEvent event){
 		GameState gameState = GUI.getInstance().getCurGameState();
-		if(	gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME))
+		if(gameState.equals(GameState.START_GAME) || gameState.equals(GameState.INIT_GUI) )
 			GUI.getInstance().pauseGame(new CategoriesScreen());
 	}
 	
@@ -293,16 +262,14 @@ public class Controller implements Initializable{
      */
 	public void logoFired(ActionEvent event){
 		
-		//if(GUI.getGameState().equals("initGUI")){
-			try {
-				URI uri = new URI(CURRENT_WEB_ADDRESS);
-				java.awt.Desktop.getDesktop().browse(uri);
+		try {
+			URI uri = new URI(CURRENT_WEB_ADDRESS);
+			java.awt.Desktop.getDesktop().browse(uri);
 
-			} catch (URISyntaxException | IOException e) {
-				System.out.println("THROW::: make sure we handle browser error");
-				e.printStackTrace();
-			}
-		//}
+		} catch (URISyntaxException | IOException e) {
+			System.out.println("THROW::: make sure we handle browser error");
+			e.printStackTrace();
+		}
 		
 	}
 	//--------------------------------------------------------------------------------

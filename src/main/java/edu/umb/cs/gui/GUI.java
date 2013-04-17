@@ -21,25 +21,30 @@
 
 package edu.umb.cs.gui;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BlurType;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import edu.umb.cs.Tokanagrammar;
+import edu.umb.cs.Tokanagrammar.Category;
 import edu.umb.cs.demo.DemoSource;
-import edu.umb.cs.demo.DemoToken;
-import edu.umb.cs.demo.DemoTokens;
+import edu.umb.cs.demo.SourceToken;
 import edu.umb.cs.gui.screens.SecondaryScreen;
 
 /**
@@ -48,38 +53,33 @@ import edu.umb.cs.gui.screens.SecondaryScreen;
  */
 public class GUI {
 	
-	public enum GameState {INIT_GUI, START_GAME};
+	public enum GameState {INIT_GUI, START_GAME, FULL_LHS, COMPILING};
 	
-	private static TokenBay tokenBay;
-	private static TokenBoard tokenBoard;
-	private static LegalDragZone legalDragZone;
+	private static GameBoard legalDragZone;
 	private static Timer timer;
 	private static OutputPanel outputPanel;
-	
 	private static GameState curGameState;
 	
 	/**maps the gameState to a list of active buttons while in this state**/
 	private static HashMap<GameState, ArrayList<String>> activeButtons;
 	
-	private int curDifficulty = 50;
+	private int curDifficulty;
 	
-	private List<String> curCategories = new LinkedList<String>();
-	
-	private static boolean showTutorial;										//not implemented.
+	LinkedList<Category> categories= new LinkedList<Category>();
+
+	private DemoSource demoSource;												//TODO replace with real source
 	
 	private static boolean inGame;
 	
-	private LinkedList<DemoToken> tokenBayTokens;
-	private LinkedList<DemoToken> tokenBoardTokens;
+	private LinkedList<SourceToken> tokenBayTokens;
+	private LinkedList<SourceToken> tokenBoardTokens;
+	
+	private LinkedList<String> curCategories;
 	
 	/** Used to blur screen on pausing*/
-	private static boolean blurOn = false;
 	private static boolean init  = false;
 	
-	private static HashMap<String, String> defaultCategories;
-	
 	private static final GUI gui = new GUI();
-	
 	private GUI(){}
 	
 	/**
@@ -87,20 +87,15 @@ public class GUI {
 	 * @return
 	 */
 	public static GUI getInstance(){
-		showTutorial = false;													//not implemented.
-		
 		if(!init){
 			setupActiveButtonsTable();
 			init = true;
 		}
-
+		
 		return gui;
 	}
 	
 	
-	
-	
-
 	//--------------------------------------------------------------------------
 	//GAMESTATES
 	
@@ -113,32 +108,17 @@ public class GUI {
 		
 		inGame = false;
 		curGameState = GameState.INIT_GUI;
-		System.out.println("GAMESTATE::: " + curGameState);
 		blurOff();
-		tokenBay = TokenBay.getInstance();
-		tokenBoard = TokenBoard.getInstance();
-		legalDragZone = LegalDragZone.getInstance();
+		legalDragZone = GameBoard.getInstance();
 		outputPanel = OutputPanel.getInstance();
 		timer = Timer.getInstance();
 		
-		if(showTutorial){ }														//not implemented.
-
-		Text welcomeText = new Text("Welcome to Tokanagrammar! ");
-		welcomeText.setFont(new Font(14));
-		outputPanel.writeNodes(welcomeText);
-		Text categoryText = new Text("Please select a category ");
-		categoryText.setFont(new Font(14));
-		Image img = new Image(OutputPanel.class.
-				getResourceAsStream("/images/ui/categoryButton_console_display_size.fw.png"));
-		ImageView imgView = new ImageView(img);
-		Text text = new Text(" to continue.");
-		text.setFont(new Font(14));
-		outputPanel.writeNodes(categoryText, imgView, text);
+		printWelcomeMessage();
 		
 		/*
 		 * TEST COMPILER MESSAGE
 		 */
-		outputPanel.compilerMessage("**TESTING COMPILER MESSAGE**This is a compiler message test it should be plenty wide to " +
+		outputPanel.compilerMessage("\n**TESTING COMPILER MESSAGE**This is a compiler message test it should be plenty wide to " +
 									"test that it wraps this is a compiler message test it should " + 
 									"be plenty wide to test that it wraps this is a compiler message " +
 									"test it should be plenty wide to test that it wraps");
@@ -154,70 +134,43 @@ public class GUI {
 	 */
 	public void gameState_startGame(){
 		curGameState = GameState.START_GAME;
-		System.out.println("GAMESTATE::: " + curGameState);
 		blurOff();
 		//initialization of new start of game
 		if(!inGame){
-			//TODO  Remove Demo Stuff
-			//TODO replace with real source
-			DemoSource demoSource = new DemoSource();
-			DemoTokens demoTokens = demoSource.getDemoTokens();
-			//note that this would be set by the setter from outside code
-			tokenBayTokens = demoTokens.getRemovedTokens();		//set w/ setter!
-			tokenBoardTokens = demoTokens.getRemainingTokens();	//set w/ setter!
+			tokenBayTokens = demoSource.getTokenBayTokens();  		//TODO set w/ setter!
+			tokenBoardTokens = demoSource.getTokenBoardTokens();  	//TODO set w/ setter!
 			
-			tokenBay.initTokenBay(TokenIconizer.iconizeTokens(tokenBayTokens));
-			tokenBay.initTokenBay(TokenIconizer.iconizeTokens(tokenBoardTokens));
+			legalDragZone.initTokenBoard(LHSTokenIconizer.iconizeTokens(tokenBoardTokens));
+			legalDragZone.initTokenBay(RHSTokenIconizer.iconizeTokens(tokenBayTokens));
 			
-			outputPanel.clear();  //start w/a clean outputPanel
+			outputPanel.clear();
 			
-			/*
-			 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
-			 * 					 Hitnts: <hints>
-			 */
-			String concatCategories = "";
-			Text text = new Text("Category " + "<");
-			for(int i=0; i< curCategories.size(); i++)
-				concatCategories += (curCategories.get(i) + " ");
-			Label categoryText = new Label(concatCategories);
-			categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-			Text text2 = new Text(">" + " has been selected on difficulty ");
-			Label difficultyText = new Label(curDifficulty + "");
-			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(153, 153, 50);" );
-			Text text3 = new Text("Hint: ");
-			Label hintText = new Label(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
-			hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-			outputPanel.writeNodes(text, categoryText, text2, difficultyText);
-			outputPanel.writeNodes(text3, hintText);
+			printCategoryAndDifficultyMessage();
 		}
 		
 		timer.start();
 		inGame = true;
 		initButtons(activeButtons.get(curGameState));
 	}
+		
+	
+	//--------------------------------------------------------------------------
+	//UTIL
 	
 	/**
 	 * Pause the game
-	 * All screens go here.
+	 * All secondary screens go here.
 	 */
 	public void pauseGame(SecondaryScreen screen){
-		
 		timer.stop();
-		
-		//blur screen
 		blurOn();
-
 		screen.setupScreen();
-
 	}
 	
 	/**
 	 * Blurs the main frame of the GUI (it's AnchorPane).
 	 */
 	public void blurOn(){
-		
-		System.out.println("BLURON");
-		
 		AnchorPane mainScreen = Tokanagrammar.getAnchorPane();
 		ObservableList<Node> screenComponents = mainScreen.getChildren();
 		
@@ -225,24 +178,18 @@ public class GUI {
 		bb.setIterations(3);
 		for(Node node: screenComponents)
 			node.effectProperty().set(bb);
-			
 	}
 	
 	/**
 	 * Turn blur off the main frame.
 	 */
 	public void blurOff(){
-		
-		System.out.println("BLUROFF");
-		
 		AnchorPane mainScreen = Tokanagrammar.getAnchorPane();
 		ObservableList<Node> screenComponents = mainScreen.getChildren();
 		
 		for(Node node: screenComponents)
 			node.effectProperty().set(null);
 	}
-	
-
 	
 	/**
 	 * Reset the Game
@@ -253,7 +200,8 @@ public class GUI {
 	 * GameState is Reset
 	 */
 	public void resetGame(){
-		tokenBay.resetTokenBay();
+		legalDragZone.resetTokenBay();
+		legalDragZone.resetTokenBoard();
 		timer.reset();
 		outputPanel.clear();
 	}
@@ -261,33 +209,25 @@ public class GUI {
 	/**
 	 * Refresh the Game
 	 * Places all original tokens back to their
-	 * original place.
+	 * original place -- DOES NOT RESET TIMER.
 	 * 
 	 * GameState is Refresh
 	 */
 	public void refreshGame(){
-		tokenBay.resetTokenBay();
+		legalDragZone.resetTokenBay();
+		legalDragZone.resetTokenBoard();
 		inGame = false;
 		gameState_startGame();
 	}
 	
 	/**
-	 * Skips the current board and goes to the next. //TODO
+	 * Skips the current board and goes to the next. 							//TODO backend
 	 */
 	public void skipPuzzle(){
-		System.out.println("<<<Back end for skipping a puzzle>>>");		//TODO
+		System.out.println("<<<Back end for getting the next puzzle>>>");			//TODO backend
 		
 		outputPanel.clear();
-		
-		//set the next puzzle via nextPuzzle backend api
-		//for now, print a fake
-		LinkedList<String> demoCurCategories = new LinkedList<String>();
-		
-		
-		
-		setCurCategories(demoCurCategories);
-		
-		
+
 		printCategoryAndDifficultyMessage();
 		
 		resetGame();
@@ -295,26 +235,182 @@ public class GUI {
 		gameState_startGame();
 	}
 	
+	/**
+	 * Called when all of the RHS is empty.
+	 */
+	public void enableCompileButton(){
+		System.out.println("ENABLE COMPILE BUTTON CALLED");
+		initButtons(activeButtons.get(GameState.FULL_LHS));
+	}
+	
+	/**
+	 * Called when there is at least one iToken on the RHS.
+	 */
+	public void disableCompileButton(){
+		initButtons(activeButtons.get(GameState.START_GAME));
+	}
+	
+	/**
+	 * Called after all the RHS tokens are on the LHS and the compile btn
+	 * was enabled, then pressed.
+	 */
+	public void compileNewSource(){												//TODO Backend specialty!  
+		LinkedList<LHSIconizedToken> tokenList;									//For now, just print formated source code!
+		GameBoard gb = GameBoard.getInstance();
+		
+		tokenList = gb.getTokenBoardItokens();
+		
+		//make sure the RHS is empty -- it should since we control the comp. btn
+		if(GameBoard.getInstance().isRHSempty()){								//TODO PUT CALL COMPILER CODE HERE
+			
+			System.out.println("\n\nCompiling New Source Code.");
+			String compileMessage = "";
+			
+			//Stop the timer to save the user precious ms while
+			//compiling -- restart it immediatly below if there are errors.
+			timer.stop();	
+			
+			for(LHSIconizedToken iToken: tokenList){
+				//FOR NOW, DISPLAY THE WHAT THE PROGRAM FILE LOOKS LIKE
+				//PRINTS A FORMATED VERSION OF THE SOURCE IN THE OUTPUT PANEL.
+				String nextToken = iToken.getSourceToken().getImage();
+				System.out.print(nextToken);
+				compileMessage += nextToken;
+			}
+			
+			//While compiling, show the stop button.							//TODO while compiling, show the stop button -- this is very crude code for now.
+			boolean isCompiling = true;
+			if(isCompiling)
+				enableStopButton();
+			else
+				disableStopButton();
+			
+			boolean success = true;												//TODO -- crude -- need real compiler success of course
+			if(success){
+				//If source code passes, then show the appropriate message to the user.		//TODO @mhs
+				//Think the team agreed would be the database reports page with latest score etc. ?double check.
+				timer.stop();
+			}else{
+				//Output to the output panel using "compiler message" if fails.
+				outputPanel.compilerMessage("THERE WAS SOME ERROR HERE OR THERE");
+				timer.start();
+			}
+			outputPanel.clear();
+			//For now print the formatted text in the outputPanel too.
+			outputPanel.compilerMessage("COMPILING SOURCE CODE... not really.");
+			outputPanel.compilerMessage("THIS IS SIMULATING THE COMPILER BEING IN SOME LOOP.");
+			outputPanel.compilerMessage("You were trying to compile the following...");
+			outputPanel.compilerMessage(compileMessage);
+			outputPanel.compilerMessage("\n\nPRESS THE STOP BUTTON TO RECOVER.");
+		}
+		
+	}
+	
+	/**
+	 * Enable stop button.
+	 * Only used in "compile state"
+	 */
+	public void enableStopButton(){
+		initButtons(activeButtons.get(GameState.COMPILING));
+	}
+	
+	/**
+	 * Disable stop button.
+	 * Fired when returning from "compile state".
+	 */
+	public void disableStopButton(){
+		initButtons(activeButtons.get(GameState.START_GAME));
+	}
+	
+	/**
+	 * The compile button is turned on while compiling only.
+	 * Use this as a fail safe to stop compiling (avoids stack overflow etc).
+	 */
+	public void stopCompile(){
+		Text text = new Text("Stop button needs to be hooked up -- enable WHILE COMPILING ONLY");
+		System.out.println("Stop button needs to be hooked up -- enable WHILE COMPILING ONLY");
+		outputPanel.writeNodes(text);
+		
+		//Last, send the user back to the full LHS pseudo state and restart the timer.
+		initButtons(activeButtons.get(GameState.FULL_LHS));
+		timer.start();
+	}
+	
+	
+	//--------------------------------------------------------------------------
+	//Static message printing
 	
 	private void printCategoryAndDifficultyMessage(){
 		/*
 		 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
-		 * 					 Hitnts: <hints>
+		 * 					 Hints: <hints>
 		 */
 		String concatCategories = "";
-		Text text = new Text("Category " + "<");
+		
+		Text text;
+		if(curCategories.size() > 1)
+			text = new Text("Categories Selected: ");
+		else
+			text = new Text("Category Selected: ");
 		for(int i=0; i< curCategories.size(); i++)
 			concatCategories += (curCategories.get(i) + " ");
+		
 		Label categoryText = new Label(concatCategories);
 		categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-		Text text2 = new Text(">" + " has been selected on difficulty ");
+		Text text2 = new Text("Difficulty: ");
+		
+		DropShadow dropShadow = new DropShadow();
+		dropShadow.setColor(Color.GRAY);
+		dropShadow.setRadius(30);
+		dropShadow.setHeight(30);
+		dropShadow.setBlurType(BlurType.ONE_PASS_BOX);
 		Label difficultyText = new Label(curDifficulty + "");
-		difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(153, 153, 50);" );
+		Label difficultyRank = new Label("");
+		//difficulty 0-31 easy 32-65 med 66-99 hard
+		if(curDifficulty >= 0 && curDifficulty <= 31){
+			difficultyRank.setText("(EASY)");
+			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 255, 38);" );
+			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 255, 38);" );
+		}
+		else if(curDifficulty >= 32 && curDifficulty <= 65){
+			difficultyRank.setText("(MEDIUM)");
+			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(253, 148, 37);" );
+			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(253, 148, 37);" );
+		}
+		else if(curDifficulty >= 66 && curDifficulty <= 89){
+			difficultyRank.setText("(HARD)");
+			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
+			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
+		}
+		else if(curDifficulty >= 90 && curDifficulty <= 100){
+			difficultyRank.setText("(INSANE)");
+			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
+			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
+		}
+		difficultyRank.setEffect(dropShadow);
+		difficultyText.setEffect(dropShadow);
+		
 		Text text3 = new Text("Hint: ");
-		Label hintText = new Label(" <GET HINTS FROM BACKEND CODE> ");			//TODO should get from backend-- place api in GUI.java
+		String hint = demoSource.getHints()[0];									//TODO replace demoSource with real source -- should be random?
+		Label hintText = new Label(" < " + hint + " > ");
 		hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-		outputPanel.writeNodes(text, categoryText, text2, difficultyText);
+		outputPanel.writeNodes(text, categoryText);
+		outputPanel.writeNodes(text2, difficultyText, difficultyRank);
 		outputPanel.writeNodes(text3, hintText);
+	}
+	
+	private void printWelcomeMessage(){
+		Text welcomeText = new Text("Welcome to Tokanagrammar, Java Edition! ");
+		welcomeText.setFont(new Font(14));
+		outputPanel.writeNodes(welcomeText);
+		Text categoryText = new Text("Please select a category ");
+		categoryText.setFont(new Font(14));
+		Image img = new Image(OutputPanel.class.
+				getResourceAsStream("/images/ui/categoryButton_console_display_size.fw.png"));
+		ImageView imgView = new ImageView(img);
+		Text text = new Text(" to continue.");
+		text.setFont(new Font(14));
+		outputPanel.writeNodes(categoryText, imgView, text);
 	}
 	
 	
@@ -337,9 +433,9 @@ public class GUI {
 	}
 	
 	/**
-	 * Get the current categories
+	 * Get the current categories being played
 	 */
-	public List<String> getCurCategories(){
+	public LinkedList<String> getCurCategories(){
 		return curCategories;
 	}
 	
@@ -351,20 +447,6 @@ public class GUI {
 	}
 	
 	/**
-	 * Get the TokenBay
-	 */
-	public TokenBay getTokenBay(){
-		return tokenBay;
-	}
-	
-	/**
-	 * Get the TokenBoard
-	 */
-	public TokenBoard getTokenBoard(){
-		return tokenBoard;
-	}
-	
-	/**
 	 * Get the Timer
 	 */
 	public Timer getTimer(){
@@ -372,10 +454,31 @@ public class GUI {
 	}
 	
 	/**
-	 * Get the LegalDropZone
+	 * Get the LegalDragZone
 	 */
-	public LegalDragZone getLegalDragZone(){
+	public GameBoard getLegalDragZone(){
 		return legalDragZone;
+	}
+	
+	/**
+	 * Get the Source File
+	 */
+	public DemoSource getSource(){												//TODO
+		return this.demoSource;
+	}
+	
+	/**
+	 * Get the current RHS tokens -- tokenBay tokens
+	 */
+	public LinkedList<RHSIconizedToken> getRHSIconizedTokens(){
+		return GameBoard.getInstance().getTokenBayItokens();
+	}
+	
+	/**
+	 * Get the current LHS tokens
+	 */
+	public LinkedList<LHSIconizedToken> getLHSIconizedTokens(){
+		return GameBoard.getInstance().getTokenBoardItokens();
 	}
 	
 	/**
@@ -386,17 +489,24 @@ public class GUI {
 	}
 	
 	/**
-	 * Set the current categories
+	 * Set the current categories being played.
 	 */
-	public void setCurCategories(List<String> categories){
+	public void setCurCategories(LinkedList<String> categories){
 		this.curCategories = categories;
+	}
+	
+	/**
+	 * Set the AVAILABLE categories
+	 */
+	public void setAvailableCategories(LinkedList<Category> categories){
+		this.categories = categories;
 	}
 	
 	/**
 	 * Sets the tokenBay tokens
 	 * Used by external API
 	 */
-	public void setTokenBayTokens(LinkedList<DemoToken> tokens){
+	public void setTokenBayTokens(LinkedList<SourceToken> tokens){
 		this.tokenBayTokens = tokens;
 	}
 	
@@ -404,15 +514,15 @@ public class GUI {
 	 * Sets the tokenBoard tokens
 	 * Used by external API
 	 */
-	public void setTokenBoardTokens(LinkedList<DemoToken> tokens){
+	public void setTokenBoardTokens(LinkedList<SourceToken> tokens){
 		this.tokenBoardTokens = tokens;
 	}
 	
 	/**
-	 * Sets the available categories so they can be referenced elsewhere.
+	 * 
 	 */
-	public void setDefaultCategories(HashMap<String, String> categories){
-		this.defaultCategories = categories;
+	public void setDemoSource(DemoSource source){								//TODO replace with real source
+		this.demoSource = source;
 	}
 	
 	//--------------------------------------------------------------------------
@@ -428,6 +538,7 @@ public class GUI {
 		
 		for(Button button: buttons){
 			String buttonID = button.getId();
+			System.out.println("ENABLING BUTTON: " + buttonID);
 			for(String str: buttonNames)
 				if(buttonID.equals(str)){
 					button.setDisable(false);
@@ -466,5 +577,21 @@ public class GUI {
 		startGameBtns.add("resetBoardButton");
 		startGameBtns.add("logoButton");
 		activeButtons.put(GameState.START_GAME, startGameBtns);
+		
+		//Pseudo game state "full left hand side" (all tokens placed on LHS)
+		ArrayList<String> fullLHSbtns = new ArrayList<String>();
+		fullLHSbtns.add("runButton");
+		fullLHSbtns.add("pauseButton");
+		fullLHSbtns.add("skipButton");
+		fullLHSbtns.add("categoryButton");
+		fullLHSbtns.add("difficultyButton");
+		fullLHSbtns.add("resetBoardButton");
+		fullLHSbtns.add("logoButton");
+		activeButtons.put(GameState.FULL_LHS, fullLHSbtns);
+		
+		//Pseudo game state "compiling"
+		ArrayList<String> compilingBtns = new ArrayList<String>();
+		compilingBtns.add("stopButton");
+		activeButtons.put(GameState.COMPILING, compilingBtns);
 	}
 }

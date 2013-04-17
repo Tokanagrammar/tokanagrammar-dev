@@ -21,11 +21,7 @@
 
 package edu.umb.cs.gui.screens;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-
-import edu.umb.cs.gui.GUI;
-import edu.umb.cs.gui.GUI.GameState;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,6 +35,9 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import edu.umb.cs.Tokanagrammar.Category;
+import edu.umb.cs.gui.GUI;
+import edu.umb.cs.gui.GUI.GameState;
 
 /**
  * A window to select a category.
@@ -92,7 +91,6 @@ public class CategoriesScreen extends SecondaryScreen{
 					GUI.getInstance().gameState_initGUI();
 					GUI.getInstance().gameState_startGame();
 					GUI.getInstance().setCurCategories(selectedCategories);
-					System.out.println(GUI.getInstance().getCurCategories());
 				}
 				tearDown();
 			}
@@ -102,41 +100,30 @@ public class CategoriesScreen extends SecondaryScreen{
 		int rowCount = 0;
 
 		categoryNames = leftPane.getChildren();
-		categoryNames.add(new CheckBox("Demo Category 1"));
-		categoryNames.add(new CheckBox("Demo Category 2"));
-		categoryNames.add(new CheckBox("Demo Category 3"));
-		categoryNames.add(new CheckBox("Demo Category 4"));
-		categoryNames.add(new CheckBox("Demo Category 5"));
 		
-		//Map the name of category to the description (only used for visual).
-		final HashMap<Node, Label> categoryDesc = new HashMap<Node, Label>();
-		categoryDesc.put(categoryNames.get(0),new Label("This is shown for demo category 1."));
-		categoryDesc.put(categoryNames.get(1),new Label("This is shown for demo category 2."));
-		categoryDesc.put(categoryNames.get(2),new Label("This is shown for demo category 3."));
-		categoryDesc.put(categoryNames.get(3),new Label("This is shown for demo category 4."));
-		categoryDesc.put(categoryNames.get(4),new Label("This is shown for demo category 5."));
-		
-		for(int i = 0; i < categoryDesc.size(); i++){
-			final CheckBox category = (CheckBox) categoryNames.get(i);
+		for(final Category category: Category.values()){
+			final CheckBox checkbox = new CheckBox(category.getName());
+			final Label label = new Label(category.getDesc());
+			categoryNames.add(checkbox);
 			
-			category.setLayoutX(10);
-			category.setLayoutY(rowHeight * rowCount);
+			checkbox.setLayoutX(10);
+			checkbox.setLayoutY(rowHeight * rowCount);
 			rowCount++;
 			
-			category.setStyle(		"-fx-font-size: 20;" +
+			checkbox.setStyle(		"-fx-font-size: 20;" +
 				    				"-fx-base: rgb(153, 153, 50);" +
 				    				"-fx-text-fill: rgb(255, 255, 90);" );
 
 			//handle changing a checkbox.
-		    category.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			checkbox.selectedProperty().addListener(new ChangeListener<Boolean>() {
 		    	boolean selected = false;
 		        public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
 		        	//here is our toggle -- keep track of how many are selected
 		        	selected = !selected;
 		        	if(selected)
-		        		selectedCategories.add(category.getText());
+		        		selectedCategories.add(checkbox.getText());
 		        	else
-		        		selectedCategories.remove(category.getText());
+		        		selectedCategories.remove(checkbox.getText());
 		        	
 		        	if(selectedCategories.size() > 0)
 		        		startBtn.setDisable(false);
@@ -145,13 +132,10 @@ public class CategoriesScreen extends SecondaryScreen{
 		        }
 		    });
 		    
-			category.setOnMouseEntered(new EventHandler<MouseEvent>(){
+			checkbox.setOnMouseEntered(new EventHandler<MouseEvent>(){
 				@Override
 				public void handle(MouseEvent event) {
-					category.setEffect(new Glow(0.5));
-					//display the category info on the rhs
-					Label label = (Label) categoryDesc.get(category);
-					
+					checkbox.setEffect(new Glow(0.5));
 					label.setStyle(	"-fx-font-size: 20;" +
 				    				"-fx-text-fill: rgb(153, 153, 255);" );
 					label.setLayoutX(10);
@@ -162,15 +146,13 @@ public class CategoriesScreen extends SecondaryScreen{
 				}
 			});
 			
-			category.setOnMouseExited(new EventHandler<MouseEvent>(){
+			checkbox.setOnMouseExited(new EventHandler<MouseEvent>(){
 				@Override
 				public void handle(MouseEvent event) {
-					category.setEffect(new Glow(0.0));
-					rightPane.getChildren().remove(categoryDesc.get(category));
+					checkbox.setEffect(new Glow(0.0));
+					rightPane.getChildren().remove(label);
 				}
 			});
 		}
 	}
-
-
 }
