@@ -29,7 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class Timer {
+public class GUITimer {
 	
 	private static Integer milliseconds;
 	static Label label = new Label();
@@ -38,11 +38,11 @@ public class Timer {
 	
 	private String timerState = "";
 	
-	private static final Timer timer = new Timer();
+	private static final GUITimer timer = new GUITimer();
 	
-	private Timer() {};
+	private GUITimer() {};
 
-	public static Timer getInstance(){
+	public static GUITimer getInstance(){
 		return timer;
 	}
 	

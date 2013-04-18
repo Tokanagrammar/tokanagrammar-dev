@@ -23,7 +23,6 @@ package edu.umb.cs.gui;
 
 import edu.umb.cs.Tokanagrammar;
 import edu.umb.cs.api.CategoryDescriptor;
-import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.gui.screens.SecondaryScreen;
 import edu.umb.cs.parser.BracingStyle;
@@ -31,6 +30,8 @@ import edu.umb.cs.source.Output;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -48,6 +49,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javax.swing.*;
 
 /**
  * Handle game states and also work as a main GUI API.
@@ -58,7 +60,7 @@ public class GUI {
 	public enum GameState {INIT_GUI, START_GAME, FULL_LHS, COMPILING};
 
         private static GameBoard legalDragZone;
-	private static Timer timer;
+	private static GUITimer timer;
 	private static OutputPanel outputPanel;
 	private static GameState curGameState;
 
@@ -119,7 +121,7 @@ public class GUI {
 		blurOff();
 		legalDragZone = GameBoard.getInstance();
 		outputPanel = OutputPanel.getInstance();
-		timer = Timer.getInstance();
+		timer = GUITimer.getInstance();
                 
                 printWelcomeMessage();
 
@@ -138,6 +140,11 @@ public class GUI {
                 //initialization of new start of game
 		if(!inGame)
                 {
+                    // TODO: have a radio button in the main windows
+                    // for easy switching back and forth
+                    // ask for style: 
+                    getBracingStyle();
+                    
                     // retrieve a puzzle from back end
                     // TODO: This method should be called with an argument
                     // being the set of categories,
@@ -147,7 +154,7 @@ public class GUI {
                     {
                         curPuzzle = edu.umb.cs.api.APIs.getRandomPuzzle();
                         // TODO: let user choose the bracing style
-                        orig = curPuzzle.getSourceFile(BracingStyle.ALLMAN);
+                        orig = curPuzzle.getSourceFile(style);
                     }
                     catch (Exception ex)
                     {
@@ -307,8 +314,20 @@ public class GUI {
                     bd.append(tk.getSourceToken().image());
                 }
                 enableStopButton();
+                new Thread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        blurOn();
+                        javax.swing.JOptionPane.showMessageDialog(null,
+                                                                  "Compiling, please wait!");
+                    }   
+                }).start();
+                
                 Output out = edu.umb.cs.api.APIs.compile(bd.toString(),
                                                          currentSource.getOrinalSource().getClassName());
+                blurOff();
                 disableStopButton();
                 if(out.isError()){
                         outputPanel.compilerMessage("The program has the following errors:");
@@ -467,7 +486,7 @@ public class GUI {
 	/**
 	 * Get the Timer
 	 */
-	public Timer getTimer(){
+	public GUITimer getTimer(){
 		return timer;
 	}
 	
@@ -614,4 +633,48 @@ public class GUI {
 		compilingBtns.add("stopButton");
 		activeButtons.put(GameState.COMPILING, compilingBtns);
 	}
+        
+        private static BracingStyle style;
+        private static BracingStyle getBracingStyle()
+        {
+            // allman
+            JRadioButton allman = new JRadioButton("ALLMAN");
+            allman.addActionListener(new AllmanListener());
+            
+            // K&R
+            JRadioButton kr = new JRadioButton("K&R");
+            kr.addActionListener(new KRListener());;
+ 
+            ButtonGroup group = new ButtonGroup();
+            group.add(allman);
+            group.add(kr);
+            group.setSelected(allman.getModel(), true);
+            style = BracingStyle.ALLMAN;
+            final JComponent[] ops = new JComponent[]
+            {
+                allman,
+                kr
+            };
+            
+            javax.swing.JOptionPane.showMessageDialog(null, ops, "Choose a bracing style", JOptionPane.PLAIN_MESSAGE);
+            return style;
+        }
+        
+        private static class AllmanListener implements ActionListener
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                style = BracingStyle.ALLMAN;
+            }   
+        }
+        
+        private static class KRListener implements ActionListener
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                style = BracingStyle.K_AND_R;
+            }   
+        }
 }
