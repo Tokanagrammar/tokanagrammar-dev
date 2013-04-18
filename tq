@@ -1,114 +1,0 @@
-[1mdiff --git a/src/main/resources/styles/secondary.css b/src/main/resources/styles/secondary.css[m
-[1mindex 0a50696..7c26409 100644[m
-[1m--- a/src/main/resources/styles/secondary.css[m
-[1m+++ b/src/main/resources/styles/secondary.css[m
-[36m@@ -49,18 +49,18 @@[m
- .startBtn{[m
- 	-fx-text-decoration: none;[m
- 	-fx-background-repeat: no-repeat;[m
-[31m-	-fx-background-image: url("../images/ui/secondaryScreens/startbtn.fw.png");[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/startBtn.fw.png");[m[41m[m
- 	-fx-background-color: transparent;[m
- }[m
- .startBtn:hover{[m
- 	-fx-text-decoration: none;[m
- 	-fx-background-repeat: no-repeat;[m
-[31m-	-fx-background-image: url("../images/ui/secondaryScreens/startbtn_HOVER.fw.png");[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/startBtn_HOVER.fw.png");[m[41m[m
- 	-fx-background-color: transparent;[m
- }[m
- .startBtn:pressed{[m
- 	-fx-background-repeat: no-repeat;[m
-[31m-	-fx-background-image: url("../images/ui/secondaryScreens/startbtn.fw.png");[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/startBtn.fw.png");[m[41m[m
- 	-fx-background-color: transparent;[m
- }[m
- [m
-[36m@@ -82,3 +82,87 @@[m
- 	-fx-background-color: transparent;[m
- }[m
- /*-------------------------------END CATEGORIES WINDOW CSS------------------------ */[m
-[32m+[m[41m[m
-[32m+[m[41m[m
-[32m+[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m/*-------------------------------------------------------------------------------- */[m[41m[m
-[32m+[m[32m/*-------------------------------BANTAM SCREENS----------------------------------- */[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m.bantam_bg{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/bantamPane.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m.bTitleText{[m[41m[m
-[32m+[m	[32m-fx-font-size: 20;[m[41m[m
-[32m+[m	[32m-fx-font-family: "Georgia";[m[41m[m
-[32m+[m	[32m-fx-text-fill: rgb(255, 255, 90);[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.bCloseBtn{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/closeBtn_bantam_sm.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.bCloseBtn:hover{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/closeBtn_bantam_sm_HOVER.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.bCloseBtn:pressed{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/closeBtn_bantam_sm.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m.confirmYes{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/confirm_yes.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.confirmYes:hover{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/confirm_yes_HOVER.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.confirmYes:pressed{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/confirm_yes.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m.confirmNo{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/confirm_no.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.confirmNo:hover{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/confirm_no_HOVER.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.confirmNo:pressed{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/confirm_no.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m.textPane{[m[41m[m
-[32m+[m	[32m-fx-font-size: 20;[m[41m[m
-[32m+[m	[32m-fx-font-family: "Georgia";[m[41m[m
-[32m+[m	[32m-fx-text-fill: rgb(153, 153, 255);[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[32m/*-------------------------------------------------------------------------------- */[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m/*-----------------------------PAUSE SCREEN--------------------------------------- */[m[41m[m
-[32m+[m[32m.pauseBg{[m[41m[m
-[32m+[m	[32m-fx-background-repeat: no-repeat;[m[41m[m
-[32m+[m	[32m-fx-background-image: url("../images/ui/secondaryScreens/simpleOnePanel.fw.png");[m[41m[m
-[32m+[m	[32m-fx-background-color: transparent;[m[41m[m
-[32m+[m[32m}[m[41m[m
-[32m+[m[41m[m
-[32m+[m[32m/*-------------------------------------------------------------------------------- */[m[41m[m
-[32m+[m[32m/*-------------------------------------------------------------------------------- */[m[41m[m
-[32m+[m[32m/*-------------------------------------------------------------------------------- */[m[41m[m
-[32m+[m[32m/*-------------------------------------------------------------------------------- */[m[41m[m
-[32m+[m[32m/*-------------------------------------------------------------------------------- */[m[41m[m
