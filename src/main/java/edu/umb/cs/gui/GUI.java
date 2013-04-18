@@ -49,7 +49,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  * Handle game states and also work as a main GUI API.
@@ -496,14 +499,7 @@ public class GUI {
 	public GameBoard getLegalDragZone(){
 		return legalDragZone;
 	}
-	
-	/**
-	 * Get the Source File
-	 */
-//	public DemoSource getSource(){												//TODO
-//		return this.demoSource;
-//	}
-	
+
 	/**
 	 * Get the current RHS tokens -- tokenBay tokens
 	 */
@@ -554,14 +550,6 @@ public class GUI {
 	public void setTokenBoardTokens(LinkedList<SourceToken> tokens){
 		this.tokenBoardTokens = tokens;
 	}
-//	
-//	/**
-//	 * 
-//	 */
-//	public void setDemoSource(DemoSource source){								//TODO replace with real source
-//		this.demoSource = source;
-//	}
-//	
 
 	//--------------------------------------------------------------------------
 	//PRIVATE HELPERS

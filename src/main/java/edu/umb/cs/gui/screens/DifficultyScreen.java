@@ -149,15 +149,16 @@ public class DifficultyScreen extends SecondaryScreen{
 			difficultyNumberText.setFont(new Font(14));
 			
 			OutputPanel.getInstance().writeNodes(difficultyText, difficultyNumberText);
-			
+			tearDown();
 		}else if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
+                        tearDown();
 			GUI.getInstance().resetGame();
 			GUI.getInstance().gameState_initGUI();
 			GUI.getInstance().gameState_startGame();
 		}
 		
 		GUI.getInstance().blurOff();
-		tearDown();
+		
 		
 		//update the icon on the main screen to reflect the recent change
 		//note that this does not use the original image view, we need to create
