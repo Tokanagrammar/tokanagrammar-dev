@@ -21,10 +21,7 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.parser.BracingStyle;
-import edu.umb.cs.source.Output;
-import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceToken;
-import edu.umb.cs.source.SourceTokenKind;
+import edu.umb.cs.source.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
@@ -38,6 +35,18 @@ import java.util.*;
  */
 public class AutomaticallyParsedJavaSourceFile implements SourceFile
 {
+
+    @Override
+    public ArrayList<Position> getNonWhitespaces()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<List<SourceToken>> getAll()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     /**
      * Simple representation of a token.
      * Everything is treated as an identifer

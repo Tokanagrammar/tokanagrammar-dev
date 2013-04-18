@@ -21,9 +21,8 @@
 package edu.umb.cs.source.std;
 
 import edu.umb.cs.parser.BracingStyle;
-import edu.umb.cs.source.Output;
-import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +41,7 @@ public class JavaSourceFile implements SourceFile
     private final String outerMost;
 
     private Output output = null;
+    private ArrayList<Position> nonWhitespaces;
     
     public JavaSourceFile(String path,
                           List<List<SourceToken>> tokens,
@@ -144,5 +144,34 @@ public class JavaSourceFile implements SourceFile
     {
         return null;
         //throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ArrayList<Position> getNonWhitespaces()
+    {
+        if (nonWhitespaces == null)
+        {
+            nonWhitespaces = new ArrayList<>(tokenCount);
+            
+            for (int line = srcFile.size() - 1; line >= 0; --line)
+            {
+                List<SourceToken> curLine = srcFile.get(line);
+                for (int tk = curLine.size() -1; tk >= 0; --tk)
+                {
+                    SourceToken curTk = curLine.get(tk);
+                    if (curTk.kind() != SourceTokenKind.TAB
+                            && curTk.kind() != SourceTokenKind.SPACE)
+                        nonWhitespaces.add(new Position(line, tk));
+                }
+            }
+        }
+        // TODO make deep copy
+        return nonWhitespaces;
+    }
+
+    @Override
+    public List<List<SourceToken>> getAll()
+    {
+        return srcFile;
     }
 }

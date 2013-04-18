@@ -21,6 +21,7 @@
 package edu.umb.cs.source;
 
 import edu.umb.cs.parser.BracingStyle;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,8 @@ import java.util.Map;
  */
 public interface SourceFile
 {
+    ArrayList<Position> getNonWhitespaces();
+    
     /**
      * 
      * @return name of the outer most class
@@ -83,4 +86,6 @@ public interface SourceFile
      * compile the source, execute and return the output
      */
     Output compileAndExecute();
+    
+    List<List<SourceToken>> getAll();
 }
