@@ -59,32 +59,7 @@ public class SimpleShuffler implements Shuffler
             removed.add(tk);
             ++hasRemoved;
         }
-        
-//        while (hasRemoved != toRemove)
-//        {
-//            int lineIndex = rand.nextInt(newSrc.size());
-//            
-//            // if line is empty (no token to remove) move on)
-//            if (newSrc.get(lineIndex).isEmpty())
-//                continue;
-//            int tokenIndex = rand.nextInt(newSrc.get(lineIndex).size());
-//            
-//            ArrayList<SourceToken> line = (ArrayList<SourceToken>)newSrc.get(lineIndex);
-//            SourceToken token = line.get(tokenIndex);
-//            
-//            // already removed. or is quite spaces
-//            // (it is not a good idea to remove white spaces)
-//            SourceTokenKind kind = token.kind();
-//            if (kind == SourceTokenKind.EMPTY
-//                    || kind == SourceTokenKind.SPACE
-//                    || kind == SourceTokenKind.TAB)
-//                continue;
-//            
-//            removed.add(token);
-//            newSrc.get(lineIndex).set(tokenIndex, EmptyToken.INSTANCE);
-//            ++hasRemoved;
-//        }
-        
+ 
         SourceFile shuffled = new JavaSourceFile("UNKNOWN_PATH",
                                                  newSrc,
                                                  src.tokenCount(),
