@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import edu.umb.cs.gui.GUI;
+import edu.umb.cs.gui.GUI.GameState;
 
 /**
  * 
@@ -65,23 +66,11 @@ public class CategoriesScreenController implements SecondaryScreenController{
 	}
 	
 	public void closeBtnFired(ActionEvent event){
-		System.out.println("closeBtn fired!");
-		CategoriesScreen.tearDownScreen();
+		if(GUI.getInstance().getCurGameState().equals(GameState.INIT_GUI))
+			GUI.getInstance().blurOff();
+		else if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+			GUI.getInstance().gameState_startGame();
+		
+		CategoriesScreen.tearDown();
 	}
-	
-//	public void startBtnFired(ActionEvent event){
-//		String gameState = GUI.getGameState();
-//		if((gameState.equals("initGUI") || gameState.equals("startGame"))){
-//			
-//			System.out.println("DEBUG::: setting current categories in GUI.java from CategoriesScreen.java");
-//			//send the selected categories to the GUI, but let the controller
-//			//handle the close of window
-//			GUI.getInstance().setCurCategories(CategoriesScreen.getSelectectedCategories());
-//			
-//			GUI.getInstance().gameState_startGame();
-//
-//			CategoriesScreen.tearDownScreen();
-//		}
-//
-//	}
 }

@@ -30,5 +30,5 @@ package edu.umb.cs.source;
 public interface SourceToken 
 {
     String image();
-    SourceTokenKind getKind();
+    SourceTokenKind kind();
 }

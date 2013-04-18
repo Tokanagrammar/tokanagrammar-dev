@@ -129,13 +129,9 @@ public class JavaSourceFile implements SourceFile
     @Override
     public Output compileAndExecute()
     {
-        if (output == null)
-        {
-            int retcode [] = new int[1];
-            String outString = Utils.compile(srcFile, outerMost, retcode);
-            output = new Output(outString, retcode[0] != 0);
-        }
-        return output;
+        return output == null
+                ? output = Utils.compile(srcFile, outerMost)
+                : output;
     }
 
     @Override

@@ -58,30 +58,25 @@ public class DifficultyScreen extends SecondaryScreen{
 	static ImageView curImgInDisplay;
 	private static int curDifficultyLevel;
 	private final static int DIVISOR = 11;
-	private final static int DEFAULT_DIFFICULTY = 50;
-	
-	/**
-	 * A one-step constructor that displays the window (no init needed).
-	 */
-	public DifficultyScreen(){
-		
-		super.setupScreen("fxml/Difficulty.fxml");
-		
-		imgDisplay = DifficultyScreenController.getImgDisplay();
-		textPane = DifficultyScreenController.getTextPane();
-		slider = DifficultyScreenController.getSlider();
-		
+	private final static int DEFAULT_DIFFICULTY = 10; 
+
+
+	@Override
+	public void setupScreen() {
+		super.setupLargeScreen("fxml/Difficulty.fxml");
 		populateFeatures();
 	}
-	
 	public static int getDifficultyLevel(){
 		return curDifficultyLevel;
 	}
 
 	public static boolean firstRun = true;
 	
-	private static void populateFeatures(){
+	public void populateFeatures(){
 
+		imgDisplay = DifficultyScreenController.getImgDisplay();
+		textPane = DifficultyScreenController.getTextPane();
+		slider = DifficultyScreenController.getSlider();
 		//Display the text about how the difficulty selector works.
 		textPane.setPadding(new Insets(5, 5, 5, 5));
 		textPane.setMaxWidth(textPane.getWidth());
@@ -89,7 +84,7 @@ public class DifficultyScreen extends SecondaryScreen{
 		String message = 	"Increasing the difficulty will remove more " +
 							"tokens from the original source file.";
 		//Remind the user he'll have to restart the game if difficulty sel here.
-		if(GUI.getCurGameState().equals(GameState.START_GAME))
+		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
 			message += " You will have to reset the board to do this now.";
 		
 		//Write the message to the textPane portion of the window.
@@ -140,24 +135,29 @@ public class DifficultyScreen extends SecondaryScreen{
 	 */
 	public static void executeSetBtnFired(){
 		
-		GameState gameState = GUI.getCurGameState();
-		
-		if(gameState.equals("startGame")){
-			//TODO add drop shadow to all output:: add at lower level than this
-			System.out.println("game state is startGame");
-			Text developerNote = new Text("DEV NOTE::: Need to have gameState_reset here!");
-			developerNote.setFont(Font.font("Comic Sans MS", FontWeight.BOLD ,14));
-			developerNote.setFill(Color.rgb(234, 175, 175));
-			developerNote.setFont(new Font(14));
-			
-			OutputPanel.getInstance().writeNodes(developerNote);
-			//TODO  This gamestate is needed.
-			//GUI.getInstance().gameState_restartGame();
-		}
+		GameState gameState = GUI.getInstance().getCurGameState();
 		
 		//*******Sets the difficultyLevel in in GUI*******
 		GUI.getInstance().setCurDifficulty(curDifficultyLevel);
-		DifficultyScreen.tearDownScreen();
+		
+		if(gameState.equals(GameState.INIT_GUI)){
+			//Message the output panel about the current difficulty level.
+			Text difficultyText = new Text("Difficulty Level Set to: ");
+			Text difficultyNumberText = new Text(curDifficultyLevel + "");
+			difficultyNumberText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD ,14));
+			difficultyNumberText.setFill(Color.rgb(153, 153, 255));
+			difficultyNumberText.setFont(new Font(14));
+			
+			OutputPanel.getInstance().writeNodes(difficultyText, difficultyNumberText);
+			
+		}else if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
+			GUI.getInstance().resetGame();
+			GUI.getInstance().gameState_initGUI();
+			GUI.getInstance().gameState_startGame();
+		}
+		
+		GUI.getInstance().blurOff();
+		tearDown();
 		
 		//update the icon on the main screen to reflect the recent change
 		//note that this does not use the original image view, we need to create
@@ -167,17 +167,8 @@ public class DifficultyScreen extends SecondaryScreen{
 		ImageView temp = new ImageView(img);
 		Controller.setCurDifficultyIcon(temp);
 		
-		//TODO:::  Possibly re-write the somewhat clunky output panel writer.
-		//Message the output panel about the current difficulty level.
-		//Message Is::	"Category <DEMO> has been selected on difficulty <DEMO>
-		//				 Hint: <GET HINTS FROM BACKEND CODE>"
-		Text difficultyText = new Text("Difficulty Level Set to: ");
-		Text difficultyNumberText = new Text(curDifficultyLevel + "");
-		difficultyNumberText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD ,14));
-		difficultyNumberText.setFill(Color.rgb(153, 153, 255));
-		difficultyNumberText.setFont(new Font(14));
-		
-		OutputPanel.getInstance().writeNodes(difficultyText, difficultyNumberText);
+
 	}
+
 	
 }

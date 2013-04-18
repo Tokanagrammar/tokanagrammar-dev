@@ -199,7 +199,7 @@
                         <exclude>target/**</exclude>
                         <exclude>puzzles/**</exclude>
                         <exclude>config/version.txt</exclude>
-                        <exclude>temp/**</exclude>
+                        <exclude>tmp/**</exclude>
                     </excludes>
                     <mapping>
                         <g>JAVADOC_STYLE</g>
