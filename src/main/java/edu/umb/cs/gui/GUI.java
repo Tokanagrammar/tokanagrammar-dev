@@ -23,7 +23,6 @@ package edu.umb.cs.gui;
 
 import edu.umb.cs.Tokanagrammar;
 import edu.umb.cs.api.CategoryDescriptor;
-import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.gui.screens.SecondaryScreen;
 import edu.umb.cs.parser.BracingStyle;
@@ -58,7 +57,7 @@ public class GUI {
 	public enum GameState {INIT_GUI, START_GAME, FULL_LHS, COMPILING};
 
         private static GameBoard legalDragZone;
-	private static Timer timer;
+	private static GUITimer timer;
 	private static OutputPanel outputPanel;
 	private static GameState curGameState;
 
@@ -119,7 +118,7 @@ public class GUI {
 		blurOff();
 		legalDragZone = GameBoard.getInstance();
 		outputPanel = OutputPanel.getInstance();
-		timer = Timer.getInstance();
+		timer = GUITimer.getInstance();
                 
                 printWelcomeMessage();
 
@@ -307,8 +306,20 @@ public class GUI {
                     bd.append(tk.getSourceToken().image());
                 }
                 enableStopButton();
+                new Thread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        blurOn();
+                        javax.swing.JOptionPane.showMessageDialog(null,
+                                                                  "Compiling, please wait!");
+                    }   
+                }).start();
+                
                 Output out = edu.umb.cs.api.APIs.compile(bd.toString(),
                                                          currentSource.getOrinalSource().getClassName());
+                blurOff();
                 disableStopButton();
                 if(out.isError()){
                         outputPanel.compilerMessage("The program has the following errors:");
@@ -467,7 +478,7 @@ public class GUI {
 	/**
 	 * Get the Timer
 	 */
-	public Timer getTimer(){
+	public GUITimer getTimer(){
 		return timer;
 	}
 	

@@ -18,3 +18,112 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ====
+
+=================================
+Application started on: Thu Apr 18 04:45:26 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 04:46:34 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 05:00:45 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+
+
+Compiling New Source Code.
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+
+
+Compiling New Source Code.
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 05:02:12 EDT 2013
