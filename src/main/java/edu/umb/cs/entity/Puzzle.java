@@ -104,8 +104,6 @@ public class Puzzle implements Serializable
     
     public SourceFile getSourceFile(BracingStyle style) throws ParseException, FileNotFoundException
     {
-        // TODO: let user decide what stlye (ie., ALLMAN or K$R) 
-        
         return SourceFiles.getSourceFile(new File(filePath), langType, style);
     }
 

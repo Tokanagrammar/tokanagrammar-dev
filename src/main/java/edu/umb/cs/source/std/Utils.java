@@ -21,6 +21,7 @@
 package edu.umb.cs.source.std;
 
 import com.google.common.io.CharStreams;
+import edu.umb.cs.source.Output;
 import edu.umb.cs.source.SourceToken;
 import java.io.*;
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.logging.Logger;
  *
  * @author Vy Thao Nguyen
  */
-class Utils 
+public class Utils 
 {
     private static File tempDir;
     static
@@ -40,10 +41,91 @@ class Utils
         tempDir.mkdirs();
     }
 
-    static String compile(List<List<SourceToken>> src, String outer, int retcode[])
+    public static Output compile(String src, String outer)
+    {
+        // remove the package (to avoid having to create dirs)
+        if (src.startsWith("package"))
+        {
+            int n = 0;
+            for (; n < src.length(); ++n)
+            {
+                if (src.charAt(n) == ';')
+                {
+                    src = src.substring(n+1);
+                    break;
+                }
+            }
+        }
+        try
+        {
+            int retcode = 0;
+            String fn = outer + ".java";
+
+            // write the source to file
+            FileWriter fstream = new FileWriter(tempDir.getAbsolutePath() + "/" + fn);
+            BufferedWriter outFile = new BufferedWriter(fstream);
+            outFile.write(src);
+            //Close the output stream
+            outFile.close();
+
+            // compile the source
+            Process p = Runtime.getRuntime().exec("javac " + fn, null, tempDir);            
+            try
+            {
+                p.waitFor();
+                retcode = p.exitValue();
+            }
+            catch (InterruptedException ex)
+            {
+                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+                return new Output(ex.getMessage(), true);
+            }
+
+            if (retcode != 0)
+            {
+                // cannot compile!
+                return new Output(CharStreams.toString(new InputStreamReader(p.getErrorStream())),
+                                  true);
+            }
+            
+            // execute the source
+            p = Runtime.getRuntime().exec("java " + outer, null, tempDir);
+            try
+            {
+                p.waitFor();
+                retcode = p.exitValue();
+            }
+            catch (InterruptedException ex)
+            {
+                Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+                return new Output(ex.getMessage(), true);
+            }
+            
+            if (retcode != 0)
+            {
+                // something wrong!
+                return new Output(CharStreams.toString(new InputStreamReader(p.getErrorStream())),
+                                  true);
+            }
+
+            // otherwise, return the output
+            String ret = CharStreams.toString(new InputStreamReader(p.getInputStream()));
+
+            // TODO: clean up the temp files ?
+            return new Output(ret, false);
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+            return new Output(ex.getMessage(), true);
+        }
+    }
+    
+    static Output compile(List<List<SourceToken>> src, String outer)
     {
         try
         {
+            int retcode = 0;
             String fn = outer + ".java";
 
             // write the source to file
@@ -61,18 +143,19 @@ class Utils
             try
             {
                 p.waitFor();
+                retcode = p.exitValue();
             }
             catch (InterruptedException ex)
             {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
-                retcode[0] = -1;
-                return ex.getMessage();
+                return new Output(ex.getMessage(), true);
             }
 
-            if ((retcode[0] = p.exitValue()) != 0)
+            if (retcode != 0)
             {
                 // cannot compile!
-                return CharStreams.toString(new InputStreamReader(p.getErrorStream()));
+                return new Output(CharStreams.toString(new InputStreamReader(p.getErrorStream())),
+                                  true);
             }
             
             // execute the source
@@ -80,31 +163,31 @@ class Utils
             try
             {
                 p.waitFor();
+                retcode = p.exitValue();
             }
             catch (InterruptedException ex)
             {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
-                retcode[0] = -1;
-                return ex.getMessage();
+                return new Output(ex.getMessage(), true);
             }
             
-            if ((retcode[0] = p.exitValue()) != 0)
+            if (retcode != 0)
             {
                 // something wrong!
-                return CharStreams.toString(new InputStreamReader(p.getErrorStream()));
+                return new Output(CharStreams.toString(new InputStreamReader(p.getErrorStream())),
+                                  true);
             }
 
             // otherwise, return the output
             String ret = CharStreams.toString(new InputStreamReader(p.getInputStream()));
 
             // TODO: clean up the temp files ?
-            return ret;
+            return new Output(ret, false);
         }
         catch (IOException ex)
         {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
-            retcode[0] = -3;
-            return ex.getMessage();
+            return new Output(ex.getMessage(), true);
         }
     }
 }

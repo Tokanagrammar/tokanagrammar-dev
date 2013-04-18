@@ -34,7 +34,6 @@ import java.util.*;
  * that is, 'token' is defined as a list of characters not separated by any 
  * whitespace.
  * 
- * @deprecated Consider using <pre>JavaSourceFile</pre> with the parser instead
  * @author Vy Thao Nguyen
  */
 public class AutomaticallyParsedJavaSourceFile implements SourceFile
@@ -63,7 +62,7 @@ public class AutomaticallyParsedJavaSourceFile implements SourceFile
         }
 
         @Override
-        public SourceTokenKind getKind()
+        public SourceTokenKind kind()
         {
             return isKeyword ? SourceTokenKind.KEYWORD : SourceTokenKind.IDENTIFIER;
         }

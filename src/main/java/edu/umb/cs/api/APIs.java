@@ -27,10 +27,13 @@ import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.InternalException;
+import edu.umb.cs.source.Output;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.ShufflerKind;
 import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.std.Utils;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -92,7 +95,7 @@ public class APIs
             return;
         started = true;
         // redirect stdout to log file
-        System.setOut(logStream);
+       System.setOut(logStream);
         
         System.out.println("\n=================================");
         System.out.println("Application started on: " + new Date());
@@ -126,6 +129,15 @@ public class APIs
     public static String getVersion()
     {
         return VERSION;
+    }
+
+    public static List<CategoryDescriptor> getCategories()
+    {
+        // TODO: replace this with real call to db-service
+        // also keep a map of categorydesc ==> real-category obj ==> set of puzzles
+        return Arrays.asList(new CategoryDescriptor("Cat1", "desc1"),
+                             new CategoryDescriptor("Cat2", "desc2"),
+                             new CategoryDescriptor("Cat3", "desc3"));
     }
 
     public static void removeAllRecords()
@@ -189,16 +201,20 @@ public class APIs
     }
     
     // temp
+    public static Output compile(String src, String name)
+    {
+        return Utils.compile(src, name);
+    }
+    
+    // temp
     // should be remove!
     private static int n = 0;
-    public static SourceFile getRandomSrc() throws Exception
+    public static Puzzle getRandomPuzzle() throws Exception
     {
         int next = n % getPuzzles().size();
         ++n;
         // TODO: let user decide what style they 
-        SourceFile ret = getPuzzles().get(next).getSourceFile(BracingStyle.ALLMAN);
-        
-        return ret;
+        return getPuzzles().get(next);
     }
     /**
      * 

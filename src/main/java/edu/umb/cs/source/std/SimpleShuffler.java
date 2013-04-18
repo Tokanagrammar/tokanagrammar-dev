@@ -59,7 +59,7 @@ public class SimpleShuffler implements Shuffler
             
             // already removed. or is quite spaces
             // (it is not a good idea to remove white spaces)
-            SourceTokenKind kind = token.getKind();
+            SourceTokenKind kind = token.kind();
             if (kind == SourceTokenKind.EMPTY
                     || kind == SourceTokenKind.SPACE
                     || kind == SourceTokenKind.TAB)
