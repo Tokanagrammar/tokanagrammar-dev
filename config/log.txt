@@ -19,3 +19,874 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ====
 
+
+=================================
+Application started on: Thu Apr 18 02:55:37 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu Apr 18 03:00:54 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu Apr 18 03:09:31 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+Application stopped: Thu Apr 18 03:11:31 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 03:13:30 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 03:16:17 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 03:22:50 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 03:24:16 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 03:24:35 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 03:25:15 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 03:36:31 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+
+=================================
+Application started on: Thu Apr 18 03:47:46 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 03:48:42 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 03:53:24 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 03:56:17 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 03:56:44 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+compingling src
+Application stopped: Thu Apr 18 03:57:42 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 04:03:16 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 04:04:46 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 04:07:31 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 04:09:38 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 04:13:48 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+confirmYesBtnFired
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+
+
+Compiling New Source Code.
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 04:14:50 EDT 2013
+
+=================================
+Application started on: Thu Apr 18 04:24:08 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\misc_cleanup\tokanagrammar-dev\puzzles\HelloWorld.java
+Controller.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+compingling src
+
+
+Compiling New Source Code.
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+ENABLING BUTTON: runButton
+ENABLING BUTTON: stopButton
+ENABLING BUTTON: pauseButton
+ENABLING BUTTON: skipButton
+ENABLING BUTTON: categoryButton
+ENABLING BUTTON: resetBoardButton
+ENABLING BUTTON: logoButton
+Application stopped: Thu Apr 18 04:25:16 EDT 2013

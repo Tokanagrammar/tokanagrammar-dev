@@ -126,7 +126,7 @@ public class JavaParser
     private void appendSemi(List<SourceToken> curLine)
     {
         int n = curLine.size() - 1;
-        if (n < 0 || curLine.get(n).getKind() != SourceTokenKind.SPACE)
+        if (n < 0 || curLine.get(n).kind() != SourceTokenKind.SPACE)
             curLine.add(semi());
         else
             curLine.set(n, semi());

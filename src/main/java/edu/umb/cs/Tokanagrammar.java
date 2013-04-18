@@ -39,13 +39,16 @@ public class Tokanagrammar extends Application{
 
 
 	private static final String TITLE = "Tokanagrammar " + APIs.getVersion();
+        
+        static AnchorPane page;
+        
 	private static final int FINAL_WIDTH = 886;
 	private static final int FINAL_HEIGHT = 689;
 	/**The main scene**/
-    private static Scene scene;
+        private static Scene scene;
 	/**We need access to primaryStage to assign parent to other stages**/
 	private static Stage primaryStage;
-
+        
     public static void main(String[] args) {
         Application.launch(Tokanagrammar.class, (java.lang.String[]) null);
     }
@@ -53,14 +56,16 @@ public class Tokanagrammar extends Application{
     @Override
     public void start(Stage primaryStage) {
         try {
+            // start all back end services
             APIs.start();
-        	Tokanagrammar.primaryStage = primaryStage;
+
+            Tokanagrammar.primaryStage = primaryStage;
 
             primaryStage.initStyle(StageStyle.DECORATED);
             primaryStage.setWidth(FINAL_WIDTH);
             primaryStage.setHeight(FINAL_HEIGHT);
-            primaryStage.setResizable(false);	//CAUSING GAP IN MAIN FRAME
-        	AnchorPane page = 	(AnchorPane) FXMLLoader.load(Thread.
+            primaryStage.setResizable(true); 
+        	page = 	(AnchorPane) FXMLLoader.load(Thread.
         						currentThread().getContextClassLoader().
         						getResource("fxml/Tokanagrammar.fxml"));
         	
@@ -70,6 +75,7 @@ public class Tokanagrammar extends Application{
             primaryStage.getIcons().add(new Image(Tokanagrammar.class.
             		getResourceAsStream("/images/ui/tokanagrammarIcon.fw.png")));
             primaryStage.setTitle(TITLE);
+
             primaryStage.setResizable(false);
             primaryStage.sizeToScene();
             primaryStage.initStyle(StageStyle.DECORATED);
@@ -85,6 +91,11 @@ public class Tokanagrammar extends Application{
             });
             primaryStage.show();
             
+            GUI gui = GUI.getInstance();
+            gui.setCurCategories(APIs.getCategories());
+            gui.setCurDifficulty(50); // default?
+            
+            // TODO? Why another call to getInstance()???
             GUI.getInstance().gameState_initGUI();
             
         } catch (Exception ex) {
@@ -93,6 +104,11 @@ public class Tokanagrammar extends Application{
         }
     }
 
+    public static AnchorPane getAnchorPane(){
+    	return page;
+    }
+   
+     
     public static Scene getScene(){
     	return scene;
     }

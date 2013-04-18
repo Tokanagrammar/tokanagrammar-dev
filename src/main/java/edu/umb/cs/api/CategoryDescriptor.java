@@ -18,18 +18,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.umb.cs.gui;
+package edu.umb.cs.api;
 
-public class APIs {
-	
-	//getBoard
-	
-	//getTimer
-	
-	//getTokenBay
-	
-	//getOutputPane
-	
-	//display screens
+/**
+ *
+ * @author Vy Thao Nguyen
+ */
+public class CategoryDescriptor 
+{
+    private final String name;
+    private final String desc;
 
+    public CategoryDescriptor(String name, String desc)
+    {
+        this.name = name;
+        this.desc = desc;
+
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
+    
+    public String getDesc()
+    {
+        return desc;
+    }
+    
+    public String toString()
+    {
+        return name;
+    }
 }

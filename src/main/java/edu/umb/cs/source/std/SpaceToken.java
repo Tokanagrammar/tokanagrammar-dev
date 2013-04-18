@@ -41,7 +41,7 @@ public class SpaceToken implements SourceToken
     }
 
     @Override
-    public SourceTokenKind getKind()
+    public SourceTokenKind kind()
     {
         return SourceTokenKind.SPACE;
     }

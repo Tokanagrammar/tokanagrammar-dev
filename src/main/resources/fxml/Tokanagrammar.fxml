@@ -10,12 +10,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="880.0" styleClass=", uiBG" xmlns:fx="http://javafx.com/fxml" fx:controller="edu.umb.cs.gui.Controller">
   <children>
-    <Pane id="LEGAL_DRAG_ZONE" fx:id="legalDragZone" layoutX="87.0" layoutY="98.0" prefHeight="433.0" prefWidth="779.0">
-      <children>
-        <Pane fx:id="tokenBay" layoutX="544.0" layoutY="3.0" prefHeight="433.0" prefWidth="232.0" />
-        <Pane fx:id="tokenBoard" layoutY="3.0" prefHeight="433.0" prefWidth="510.0" />
-      </children>
-    </Pane>
+    <Pane id="LEGAL_DRAG_ZONE" fx:id="legalDragZone" layoutX="87.0" layoutY="100.0" prefHeight="428.0" prefWidth="779.0" />
     <HBox id="HBox" alignment="CENTER" spacing="15.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="22.0" />
     <Button fx:id="runButton" layoutX="85.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#runFired" prefHeight="50.0" prefWidth="50.0" styleClass="runButton">
       <tooltip>
@@ -48,7 +43,7 @@
       </tooltip>
     </Button>
     <Pane id="outputPane" fx:id="outputPanel" layoutX="53.0" layoutY="533.0" maxHeight="84.0" maxWidth="550.0" minHeight="84.0" minWidth="550.0" prefHeight="84.0" prefWidth="550.0" styleClass="outputPane" />
-    <Button fx:id="logoButton" layoutX="663.0" layoutY="591.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="40.0" prefWidth="166.0" styleClass="logoButton" />
+    <Button fx:id="logoButton" layoutX="636.0" layoutY="589.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="62.0" prefWidth="218.0" styleClass="logoButton" />
     <Accordion layoutX="107.0" layoutY="50.0" />
     <Pane fx:id="timer" layoutX="639.0" layoutY="529.0" prefHeight="56.0" prefWidth="218.0" />
     <Pane fx:id="difficultyPane" layoutX="717.0" layoutY="45.0" maxHeight="40.0" maxWidth="64.0" minHeight="40.0" minWidth="64.0" prefHeight="40.0" prefWidth="64.0" />

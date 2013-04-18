@@ -27,9 +27,9 @@ import edu.umb.cs.source.SourceTokenKind;
  * during shuffling
  * @author Vy Thao Nguyen
  */
-class EmptyToken extends SourceTokenBase
+public class EmptyToken extends SourceTokenBase
 {
-    static final SourceTokenBase INSTANCE = new EmptyToken();
+    public static final SourceTokenBase INSTANCE = new EmptyToken();
         
     private EmptyToken()
     {

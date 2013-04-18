@@ -32,7 +32,7 @@ public class SourceTokenBase implements SourceToken
     private final String img;
     private final SourceTokenKind kind;
     private final String rep;
-    SourceTokenBase(String img, SourceTokenKind kind)
+    public SourceTokenBase(String img, SourceTokenKind kind)
     {
         this.img = img;
         this.kind = kind;
@@ -46,7 +46,7 @@ public class SourceTokenBase implements SourceToken
     }
 
     @Override
-    public SourceTokenKind getKind()
+    public SourceTokenKind kind()
     {
         return kind;
     }
