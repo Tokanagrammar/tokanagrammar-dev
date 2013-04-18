@@ -49,18 +49,18 @@
 .startBtn{
 	-fx-text-decoration: none;
 	-fx-background-repeat: no-repeat;
-	-fx-background-image: url("../images/ui/secondaryScreens/startBtn.fw.png");
+	-fx-background-image: url("../images/ui/secondaryScreens/startbtn.fw.png");
 	-fx-background-color: transparent;
 }
 .startBtn:hover{
 	-fx-text-decoration: none;
 	-fx-background-repeat: no-repeat;
-	-fx-background-image: url("../images/ui/secondaryScreens/startBtn_HOVER.fw.png");
+	-fx-background-image: url("../images/ui/secondaryScreens/startbtn_HOVER.fw.png");
 	-fx-background-color: transparent;
 }
 .startBtn:pressed{
 	-fx-background-repeat: no-repeat;
-	-fx-background-image: url("../images/ui/secondaryScreens/startBtn.fw.png");
+	-fx-background-image: url("../images/ui/secondaryScreens/startbtn.fw.png");
 	-fx-background-color: transparent;
 }
 
