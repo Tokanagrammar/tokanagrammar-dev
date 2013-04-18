@@ -135,9 +135,9 @@ public class APIs
     {
         // TODO: replace this with real call to db-service
         // also keep a map of categorydesc ==> real-category obj ==> set of puzzles
-        return Arrays.asList(new CategoryDescriptor("Cat1", "desc1"),
-                             new CategoryDescriptor("Cat2", "desc2"),
-                             new CategoryDescriptor("Cat3", "desc3"));
+        return Arrays.asList(new CategoryDescriptor("Category 1", "desc1"),
+                             new CategoryDescriptor("Category 2", "desc2"),
+                             new CategoryDescriptor("Category 3", "desc3"));
     }
 
     public static void removeAllRecords()
