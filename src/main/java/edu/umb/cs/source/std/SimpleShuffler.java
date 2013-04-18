@@ -38,37 +38,52 @@ public class SimpleShuffler implements Shuffler
     public ShuffledSource shuffle(SourceFile src, int toRemove)
     {
         Random rand = new Random();
-        // TODO: issue some warning here?
-        toRemove = Math.min(toRemove, src.tokenCount());
         int hasRemoved = 0;
 
         List<List<SourceToken>>  newSrc = buildList(src);
         List<SourceToken> removed = new ArrayList<>(toRemove);
-
+        ArrayList<Position> removable = src.getNonWhitespaces();
+        
+        // TODO: issue some warning here?
+        toRemove = Math.min(toRemove, removable.size());
+        
         while (hasRemoved != toRemove)
         {
-            int lineIndex = rand.nextInt(newSrc.size());
+            int i = rand.nextInt(removable.size());
+            Position pos = removable.get(i);
+            removable.remove(i);
             
-            // if line is empty (no token to remove) move on)
-            if (newSrc.get(lineIndex).isEmpty())
-                continue;
-            int tokenIndex = rand.nextInt(newSrc.get(lineIndex).size());
-            
-            ArrayList<SourceToken> line = (ArrayList<SourceToken>)newSrc.get(lineIndex);
-            SourceToken token = line.get(tokenIndex);
-            
-            // already removed. or is quite spaces
-            // (it is not a good idea to remove white spaces)
-            SourceTokenKind kind = token.kind();
-            if (kind == SourceTokenKind.EMPTY
-                    || kind == SourceTokenKind.SPACE
-                    || kind == SourceTokenKind.TAB)
-                continue;
-            
-            removed.add(token);
-            newSrc.get(lineIndex).set(tokenIndex, EmptyToken.INSTANCE);
+            List<SourceToken> curLine = newSrc.get(pos.getLine());
+            SourceToken tk = curLine.get(pos.getPos());
+            curLine.set(pos.getPos(), EmptyToken.INSTANCE);
+            removed.add(tk);
             ++hasRemoved;
         }
+        
+//        while (hasRemoved != toRemove)
+//        {
+//            int lineIndex = rand.nextInt(newSrc.size());
+//            
+//            // if line is empty (no token to remove) move on)
+//            if (newSrc.get(lineIndex).isEmpty())
+//                continue;
+//            int tokenIndex = rand.nextInt(newSrc.get(lineIndex).size());
+//            
+//            ArrayList<SourceToken> line = (ArrayList<SourceToken>)newSrc.get(lineIndex);
+//            SourceToken token = line.get(tokenIndex);
+//            
+//            // already removed. or is quite spaces
+//            // (it is not a good idea to remove white spaces)
+//            SourceTokenKind kind = token.kind();
+//            if (kind == SourceTokenKind.EMPTY
+//                    || kind == SourceTokenKind.SPACE
+//                    || kind == SourceTokenKind.TAB)
+//                continue;
+//            
+//            removed.add(token);
+//            newSrc.get(lineIndex).set(tokenIndex, EmptyToken.INSTANCE);
+//            ++hasRemoved;
+//        }
         
         SourceFile shuffled = new JavaSourceFile("UNKNOWN_PATH",
                                                  newSrc,
@@ -87,18 +102,7 @@ public class SimpleShuffler implements Shuffler
 
     static List<List<SourceToken>> buildList(SourceFile src)
     {
-        int lineC = src.lineCount();
-        ArrayList<List<SourceToken>> ret = new ArrayList<>(lineC);
-            
-        for (int n = 0; n < lineC; ++n)
-        {
-            int tkCount = src.tokenCount(n);
-            ArrayList<SourceToken> line = new ArrayList<>(tkCount);
-            for (int m = 0; m < tkCount; ++m)
-                line.add((src.getToken(n, m)));
-            ret.add(line);
-        }
-        
-        return ret;
+        // TODO: deep copy
+        return src.getAll();
     }
 }
