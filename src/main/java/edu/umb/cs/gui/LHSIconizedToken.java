@@ -153,58 +153,58 @@ public class LHSIconizedToken extends IconizedToken{
 				});
 
 			
-			imgView.setOnDragDropped(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					
-					if(!occupied){
-						Dragboard db = event.getDragboard();
-						boolean success = false;
-						if (db.hasString()) {
-						
-							List<LHSIconizedToken> iTokens = 
-									GameBoard.getInstance().getTokenBoardItokens();
-							
-							String dragBoardContent = db.getString();
-							String delims = "[ ]+";
-							String[] strs = dragBoardContent.split(delims);
-							
-							SourceToken sourceToken = new SourceTokenBase(strs[1], // image
-                                                                                                      SourceTokenKind.valueOf(strs[0])); // kind
-							
-							//Replace the current underlying source token with new.
-							token = sourceToken;
-							LHSIconizedToken replacementLHSiToken = 
-									LHSTokenIconizer.createSingleIconizedToken(sourceToken, index);
+				imgView.setOnDragDropped(new EventHandler<DragEvent>() {
+					public void handle(DragEvent event) {
 
-							//Replace the blank image with the dropped token.
-					        LHSIconizedToken element = iTokens.remove(index);
-					        iTokens.add(index, replacementLHSiToken);
-					        
-					        //Update the current image view since it's final.
-					        ImageView curImgView = replacementLHSiToken.getImgView();
-					        Image curImg = replacementLHSiToken.getImgView().getImage();
-					        
-					        imgView.setImage(curImg);
-					        //imgView.resize(curImgView.getFitWidth(), curImgView.getFitHeight());
-					        
+						if(!occupied){
+							Dragboard db = event.getDragboard();
+							boolean success = false;
+							if (db.hasString()) {
 
-							occupied = true;
-					        /*
-					         * BECOMES OCCUPIED
-					         */
-				            occupyEmptySpace(imgView);
-				            
-							
-							success = true;
-							
-							event.setDropCompleted(success);
+								List<LHSIconizedToken> iTokens = 
+										GameBoard.getInstance().getTokenBoardItokens();
+
+								String dragBoardContent = db.getString();
+								String delims = "[ ]+";
+								String[] strs = dragBoardContent.split(delims);
+
+								SourceToken sourceToken = new SourceTokenBase(strs[1], // image
+										SourceTokenKind.valueOf(strs[0])); // kind
+
+								//Replace the current underlying source token with new.
+								token = sourceToken;
+								LHSIconizedToken replacementLHSiToken = 
+										LHSTokenIconizer.createSingleIconizedToken(sourceToken, index);
+
+								//Replace the blank image with the dropped token.
+								LHSIconizedToken element = iTokens.remove(index);
+								iTokens.add(index, replacementLHSiToken);
+
+								//Update the current image view since it's final.
+								ImageView curImgView = replacementLHSiToken.getImgView();
+								Image curImg = replacementLHSiToken.getImgView().getImage();
+
+								imgView.setImage(curImg);
+								//imgView.resize(curImgView.getFitWidth(), curImgView.getFitHeight());
+
+
+								occupied = true;
+								/*
+								 * BECOMES OCCUPIED
+								 */
+								occupyEmptySpace(imgView);
+
+
+								success = true;
+
+								event.setDropCompleted(success);
+							}
+
 						}
-						
-					}
 
-					event.consume();
-				}
-			});
+						event.consume();
+					}
+				});
 			
 			
 			imgView.setOnDragExited(new EventHandler<DragEvent>(){

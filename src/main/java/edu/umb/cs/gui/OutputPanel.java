@@ -53,17 +53,18 @@ public class OutputPanel{
 
 	{
 		final ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setMinWidth(550);
-		scrollPane.setMinHeight(84);
+		scrollPane.setMinWidth(545);
+		scrollPane.setMinHeight(117);
 		scrollPane.setContent(vBox);
 		scrollPane.setVvalue(scrollPane.getVmax());
-		scrollPane.setMaxHeight(84);
-		scrollPane.setMaxWidth(550);
+
+		scrollPane.setMaxWidth(545);
+		scrollPane.setMaxHeight(117);
 
 		pane = Controller.getOutputPane();
 		pane.getChildren().add(scrollPane);
 
-		pane.setMaxHeight(84);
+		pane.setMaxHeight(117);
 		vBox.setSpacing(8);
 		vBox.setPadding(new Insets(3,3,3,3));
 
@@ -106,6 +107,7 @@ public class OutputPanel{
 		t.setFill(Color.RED);
 		t.setText(str);
 		vBox.getChildren().add(t);
+		rePosScroll = true;
 	}
 
 
@@ -128,6 +130,7 @@ public class OutputPanel{
 			}
 			hBox.getChildren().add(node);
 		}
+		rePosScroll = true;
 		vBox.getChildren().add(hBox);
 		rePosScroll = true;
 	}

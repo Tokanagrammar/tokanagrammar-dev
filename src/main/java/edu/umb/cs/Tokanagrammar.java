@@ -40,12 +40,12 @@ public class Tokanagrammar extends Application{
 
 	private static final String TITLE = "Tokanagrammar " + APIs.getVersion();
         
-        static AnchorPane page;
+    static AnchorPane page;
         
 	private static final int FINAL_WIDTH = 886;
 	private static final int FINAL_HEIGHT = 689;
 	/**The main scene**/
-        private static Scene scene;
+    private static Scene scene;
 	/**We need access to primaryStage to assign parent to other stages**/
 	private static Stage primaryStage;
         
@@ -94,9 +94,7 @@ public class Tokanagrammar extends Application{
             GUI gui = GUI.getInstance();
             gui.setCurCategories(APIs.getCategories());
             gui.setCurDifficulty(50); // default?
-            
-            // TODO? Why another call to getInstance()???
-            GUI.getInstance().gameState_initGUI();
+            gui.gameState_initGUI();
             
         } catch (Exception ex) {
             Logger.getLogger(Tokanagrammar.class.getName()).

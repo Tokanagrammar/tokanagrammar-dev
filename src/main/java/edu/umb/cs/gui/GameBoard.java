@@ -72,7 +72,7 @@ public class GameBoard {
 	
 	static final int TOKENBOARD_OFFSET = 5;
 	static final int TOKENBOARD_WIDTH = 510;
-	static final int TOKENBOARD_HEIGHT = 433;
+	static final int TOKENBOARD_HEIGHT = 425;
 	static final int TOKENBOARD_BUFFERSIZE = 1;
 	static final int TOKENBOARD_ROWHEIGHT = 35;
 	
@@ -179,13 +179,14 @@ public class GameBoard {
 	//--------------------------------------------------------------------------
 	//TOKEN BAY 
 	
-	static final int TOKENBAY_WIDTH = 225;
+	static final int TOKENBAY_WIDTH = 233;
+	static final int TOKENBAY_HEIGHT = 427;
 	static final int TOKENBAY_BUFFERSIZE = 5;
 	static final int TOKENBAY_ROWHEIGHT = 35;
 	
 	private static List<RHSIconizedToken> tokenBayItokens;
 	private static int tokenBayCurrentRow;
-	private static int tokenBayStartPosition = 	TOKENBAY_BUFFERSIZE;
+	private static int tokenBayStartPosition = TOKENBAY_BUFFERSIZE;
 	
 	private static Pane tokenBay = new Pane();
 	
@@ -199,6 +200,7 @@ public class GameBoard {
 		//System.out.println("\nTOKENBAY TOKENS INIT! (GameBoard.java):::" + iTokens);
 
 		tokenBayItokens = iTokens;
+		
 
 
 		if(!isTokenBayInit){
@@ -206,12 +208,35 @@ public class GameBoard {
 			isTokenBayInit = true;
 		}
 		
-		tokenBay.setLayoutX(545);
-		tokenBay.setLayoutY(0);
-		tokenBay.setMinWidth(225);
-		tokenBay.setMinHeight(421);
-		tokenBay.setMaxWidth(225);
-		tokenBay.setMaxHeight(421);
+		
+		
+		final ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setMinWidth(TOKENBAY_WIDTH);
+		scrollPane.setMinHeight(TOKENBAY_HEIGHT);
+		//scrollPane.setVvalue(scrollPane.getVmax());
+		scrollPane.setMaxHeight(TOKENBAY_HEIGHT);
+		scrollPane.setMaxWidth(TOKENBAY_WIDTH);
+		scrollPane.setStyle("-fx-background-color: transparent;");
+		
+		ldzChildren.add(scrollPane);
+		//lhsLineContainer.setPadding(new Insets(0, 5, 5, 5));		
+		scrollPane.setContent(tokenBay);
+
+		
+		scrollPane.setLayoutX(545);
+		scrollPane.setLayoutY(0);
+		scrollPane.setMinWidth(225);
+		scrollPane.setMinHeight(421);
+		scrollPane.setMaxWidth(225);
+		scrollPane.setMaxHeight(421);
+		
+		
+//		tokenBay.setLayoutX(545);
+//		tokenBay.setLayoutY(0);
+//		tokenBay.setMinWidth(220);
+//		tokenBay.setMinHeight(421);
+//		tokenBay.setMaxWidth(225);
+//		tokenBay.setMaxHeight(421);
 		//tokenBay event handlers
 		tokenBay.setOnDragOver(new EventHandler<DragEvent>(){
 			@Override
@@ -299,6 +324,8 @@ public class GameBoard {
 		LinkedList<RHSIconizedToken> tooLargeForLine = 
 				new LinkedList<RHSIconizedToken>();
 
+		
+
 		tokenBayChildren = tokenBay.getChildren();
 
 		for(int i=0; i < rhsTokens.size(); i++){
@@ -355,10 +382,18 @@ public class GameBoard {
 	 * @return
 	 */
 	public boolean isRHSempty(){
+		
+		String compileMessage = "";
+		
 		for(RHSIconizedToken rhsItoken: getTokenBayItokens())
-                    if (rhsItoken.getSourceToken().kind() != SourceTokenKind.EMPTY)
-                        return false;
+                    if (rhsItoken.getSourceToken().kind() != SourceTokenKind.EMPTY || getTokenBayItokens() == null)
+                    	return false;
+
+    	OutputPanel.getInstance().compilerMessage(compileMessage + "");
 		return true;
+    	//OutputPanel.getInstance().compilerMessage(rhsItoken.getSourceToken().kind() + "");
+                        
+		//return true;
 	}
 	
 }

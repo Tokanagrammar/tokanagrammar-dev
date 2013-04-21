@@ -23,6 +23,9 @@ package edu.umb.cs.gui;
 
 
 import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.SourceTokenKind;
+import edu.umb.cs.source.std.SourceTokenBase;
+
 import java.util.LinkedList;
 
 import javafx.beans.property.DoubleProperty;
@@ -179,17 +182,19 @@ public class RHSIconizedToken extends IconizedToken{
 		imgView.setOnDragDone(new EventHandler<DragEvent>() {
 		    public void handle(DragEvent event) {
 		    
-//		    	LinkedList<RHSIconizedToken> iTokens = GameBoard.getInstance().getTokenBayItokens();
+		    	LinkedList<RHSIconizedToken> iTokens = (LinkedList<RHSIconizedToken>) GameBoard.getInstance().getTokenBayItokens();
+		    	
 		        if (event.getTransferMode() == TransferMode.MOVE) {
-//		            RHSIconizedToken element = iTokens.remove(index);
-//		            iTokens.add(index, new RHSIconizedToken(element.getImage(), new SourceToken("removed", "removed"), index));
-		            imgView.setVisible(false); 
-
-//		            System.out.println("\n\nDrag Done, Remove and Replace RHS token with \"empty\" token: ");
-//		            System.out.println("Check Data Structures:  ");
-//		            System.out.println("RHSIconizedTokens: (make sure replaced!)" + iTokens);
-//		            
-//		            System.out.println("\n[[[PASS]]]\n\n");
+		            RHSIconizedToken element = iTokens.remove(index);
+		            
+		            SourceToken sourceToken = new SourceTokenBase(element.getSourceToken().image(), // image
+                            SourceTokenKind.EMPTY); // kind
+		            
+		            iTokens.add(index, new RHSIconizedToken(element.getImage(), sourceToken, index));
+		            imgView.setVisible(false);
+		            
+		            
+		            OutputPanel.getInstance().compilerMessage(iTokens.toString());
 		            
 		            GameBoard theGameBoard = GameBoard.getInstance();
 		            GUI theGUI = GUI.getInstance();
