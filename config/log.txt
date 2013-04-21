@@ -4385,3 +4385,23 @@ Controller.initialize
 CategoriesScreenController.initialize
 CategoriesScreenController.initialize
 Application stopped: Sun Apr 21 17:13:57 EDT 2013
+
+=================================
+Application started on: Sun Apr 21 17:22:29 EDT 2013
+adding files; C:\eclipse\Tokanagrammar1.0\repo\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\eclipse\Tokanagrammar1.0\repo\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\eclipse\Tokanagrammar1.0\repo\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\eclipse\Tokanagrammar1.0\repo\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\eclipse\Tokanagrammar1.0\repo\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+confirmYesBtnFired
+
+Dragged Item: NUM_LITERAL 20 99
+ENABLE COMPILE BUTTON CALLED
+
+
+Compiling New Source Code.
+Application stopped: Sun Apr 21 17:23:46 EDT 2013
