@@ -39,16 +39,21 @@ public class Tokanagrammar extends Application{
 
 
 	private static final String TITLE = "Tokanagrammar " + APIs.getVersion();
+	
+	private static final int DEFAULT_DIFFICULTY = 50;
         
-        static AnchorPane page;
-        
+    private static AnchorPane page;
+    
+    /**The width and height of the screen is fixed**/
 	private static final int FINAL_WIDTH = 886;
 	private static final int FINAL_HEIGHT = 689;
+	
 	/**The main scene**/
-        private static Scene scene;
+    private static Scene scene;
 	/**We need access to primaryStage to assign parent to other stages**/
 	private static Stage primaryStage;
-        
+    
+	/*Big Bang*/
     public static void main(String[] args) {
         Application.launch(Tokanagrammar.class, (java.lang.String[]) null);
     }
@@ -85,7 +90,12 @@ public class Tokanagrammar extends Application{
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 				@Override
 				public void handle(WindowEvent event) {
-                                        // stop all services properly
+                    //TODO
+					//add close-confirmation
+					//if "yes, I want to close"
+					//then stop apis etc
+					
+					// stop all services properly
 					APIs.stop();
 				}
             });
@@ -93,10 +103,8 @@ public class Tokanagrammar extends Application{
             
             GUI gui = GUI.getInstance();
             gui.setCurCategories(APIs.getCategories());
-            gui.setCurDifficulty(50); // default?
-            
-            // TODO? Why another call to getInstance()???
-            GUI.getInstance().gameState_initGUI();
+            gui.setCurDifficulty(DEFAULT_DIFFICULTY);
+            gui.gameState_initGUI();
             
         } catch (Exception ex) {
             Logger.getLogger(Tokanagrammar.class.getName()).
