@@ -104,23 +104,17 @@ public class LHSIconizedToken extends IconizedToken{
 		this.startY = startY;
 	}
 
-	/**
-	 * There are no equal LHSIconizedTokens
-	 */
-//	public boolean equals(Object obj) {
-//		if(obj instanceof LHSIconizedToken){
-//			return 	token.equals(((LHSIconizedToken) obj).getSourceToken()) && 
-//					index == (((LHSIconizedToken) obj).getIndex());
-//		}
-//		else return false;
-//	}
-
-//	public int hashCode() {
-//		return token.hashCode();
-//	}
-
 	public String dragBoardString(){
 		return token.kind() + " " + token.image() + " " + index;
+	}
+	
+	
+
+	@Override
+	public String toString(){
+		String string = 	"[image: " + image + " Token: " + token + 
+							" index: " + index + "]";
+		return string;
 	}
 
 	protected ImageView initImageView(Image img){
@@ -136,12 +130,6 @@ public class LHSIconizedToken extends IconizedToken{
 					
 					@Override
 					public void handle(DragEvent event) {
-						//System.out.println("DRAG OVER TOKEN TYPE IS: " + token.getType());
-//						Image image = new Image("/images/ui/legalDropIcon.fw.png");
-//						Tokanagrammar.getScene().setCursor(new ImageCursor(image,
-//	                            image.getWidth() / 2,
-//	                            image.getHeight() /2));
-
 						if(!occupied){
 							Dragboard db = event.getDragboard();
 							imgView.setEffect(new Glow(0.7));
@@ -185,8 +173,6 @@ public class LHSIconizedToken extends IconizedToken{
 								Image curImg = replacementLHSiToken.getImgView().getImage();
 
 								imgView.setImage(curImg);
-								//imgView.resize(curImgView.getFitWidth(), curImgView.getFitHeight());
-
 
 								occupied = true;
 								/*
@@ -194,12 +180,10 @@ public class LHSIconizedToken extends IconizedToken{
 								 */
 								occupyEmptySpace(imgView);
 
-
 								success = true;
-
-								event.setDropCompleted(success);
 							}
 
+							event.setDropCompleted(success);
 						}
 
 						event.consume();
@@ -226,7 +210,7 @@ public class LHSIconizedToken extends IconizedToken{
 	
 	/**
 	 * Updates the imageView on dropped.
-	 * Previously the imgView was a blank, now it's it's a placed token.
+	 * Previously the imgView was a blank; now it's a placed token.
 	 */
 	public ImageView occupyEmptySpace(final ImageView imgView){
 
@@ -258,7 +242,7 @@ public class LHSIconizedToken extends IconizedToken{
 				ClipboardContent content = new ClipboardContent();
 				content.putString(LHSIconizedToken.this.dragBoardString());
 
-				System.out.println("\nDragged Item: " + LHSIconizedToken.this.dragBoardString());
+				//System.out.println("\nDragged Item: " + LHSIconizedToken.this.dragBoardString());
 
 				Dragboard db = imgView.startDragAndDrop(TransferMode.ANY); //makes mouse unusable when set to anything but NONE??!!
 				db.setContent(content); 
@@ -351,12 +335,5 @@ public class LHSIconizedToken extends IconizedToken{
 
 		return imgView;
 	}
-	
 
-	@Override
-	public String toString(){
-		String string = 	"[image: " + image + " Token: " + token + 
-							" index: " + index + "]";
-		return string;
-	}
 }

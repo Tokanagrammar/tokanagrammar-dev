@@ -76,11 +76,12 @@ public class GUI {
         private List<CategoryDescriptor> categories;
 
         private List<SourceToken> tokenBayTokens;
+        
 	private List<SourceToken> tokenBoardTokens;
 	
 	private List<CategoryDescriptor> curCategories;
         
-        /** Used to blur screen on pausing*/
+    /** Used to blur screen on pausing*/
 	private static boolean init  = false;
 	
 	private static boolean inGame;
@@ -100,11 +101,14 @@ public class GUI {
 	 * @return
 	 */
 	public static GUI getInstance(){
-                if(!init){
+		if(!init){
 			setupActiveButtonsTable();
+			gameBoard = GameBoard.getInstance();
+			outputPanel = OutputPanel.getInstance();
+			timer = GUITimer.getInstance();
 			init = true;
 		}
-		
+
 		return gui;
 	}
 
@@ -119,16 +123,13 @@ public class GUI {
 	 */
 	public void gameState_initGUI(){
 
-                inGame = false;
+		inGame = false;
 		curGameState = GameState.INIT_GUI;
 		blurOff();
-		gameBoard = GameBoard.getInstance();
-		outputPanel = OutputPanel.getInstance();
-		timer = GUITimer.getInstance();
-                
-                printWelcomeMessage();
 
-                initButtons(activeButtons.get(curGameState));
+		printWelcomeMessage();
+
+		initButtons(activeButtons.get(curGameState));
 	}
 
 
@@ -187,21 +188,19 @@ public class GUI {
                     }
 
                 }
-		
         
         if(GameBoard.getInstance().isRHSempty()){
         	enableCompileButton();
         	curGameState = GameState.FULL_LHS;
         }
-        	
-		
+        
 		timer.start();
 		inGame = true;
 		
 		initButtons(activeButtons.get(curGameState));
 	}
 
-        //--------------------------------------------------------------------------
+	//--------------------------------------------------------------------------
 	//UTIL
 	
 	/**
@@ -262,7 +261,7 @@ public class GUI {
 	 * 
 	 * GameState is Refresh
 	 */
-	public void refreshGame(){
+	public void refreshGame(){													//TODO @mhs this is same as reset for now.
 		LHSTokenIconizer.resetIndex();
         RHSTokenIconizer.resetIndex();
 		gameBoard.resetTokenBay();
@@ -275,7 +274,7 @@ public class GUI {
 	 * Skips the current board and goes to the next. 							//TODO backend
 	 */
 	public void skipPuzzle(){
-		System.out.println("<<<Back end for getting the next puzzle>>>");			//TODO backend
+		System.out.println("<<<Back end for getting the next puzzle>>>");		//TODO backend
 		
 		outputPanel.clear();
 
@@ -306,7 +305,7 @@ public class GUI {
 	 * was enabled, then pressed.
 	 */
 	public void compileNewSource(){												//TODO Backend specialty!  
-		List<LHSIconizedToken> tokenList;									//For now, just print formated source code!
+		List<LHSIconizedToken> tokenList;										//For now, just print formated source code!
 		GameBoard gb = GameBoard.getInstance();
 		
 		tokenList = gb.getTokenBoardItokens();
@@ -604,7 +603,7 @@ public class GUI {
 		
 		//starting the game state ("startGame")
 		ArrayList<String> startGameBtns = new ArrayList<String>();
-                //startGameBtns.add("runButton");	//fix issues with compiler first
+        startGameBtns.add("runButton");
 		startGameBtns.add("pauseButton");
 		startGameBtns.add("skipButton");
 		startGameBtns.add("categoryButton");

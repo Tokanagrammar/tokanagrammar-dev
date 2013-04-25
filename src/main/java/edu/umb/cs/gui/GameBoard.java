@@ -72,7 +72,7 @@ public class GameBoard {
 	
 	static final int TOKENBOARD_OFFSET = 5;
 	static final int TOKENBOARD_WIDTH = 510;
-	static final int TOKENBOARD_HEIGHT = 425;
+	static final int TOKENBOARD_HEIGHT = 427;
 	static final int TOKENBOARD_BUFFERSIZE = 1;
 	static final int TOKENBOARD_ROWHEIGHT = 35;
 	
@@ -90,13 +90,12 @@ public class GameBoard {
 		final ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setMinWidth(TOKENBOARD_WIDTH);
 		scrollPane.setMinHeight(TOKENBOARD_HEIGHT);
-		//scrollPane.setVvalue(scrollPane.getVmax());
-		scrollPane.setMaxHeight(TOKENBOARD_HEIGHT);
 		scrollPane.setMaxWidth(TOKENBOARD_WIDTH);
+		scrollPane.setMaxHeight(TOKENBOARD_HEIGHT);
 		scrollPane.setStyle("-fx-background-color: transparent;");
 		
 		ldzChildren.add(scrollPane);
-		lhsLineContainer.setPadding(new Insets(0, 5, 5, 5));		
+		lhsLineContainer.setPadding(new Insets(0, 5, 0, 5));		
 		scrollPane.setContent(lhsLineContainer);
 
 		tokenBoardItokens = settleTokenBoard(src);
@@ -144,8 +143,8 @@ public class GameBoard {
                     ret.add(iconizedCurTok);
                     if ((TOKENBOARD_OFFSET + TOKENBOARD_WIDTH) < (tokenBoardStartPosition
                                                         + tokenWidth
-                                                        + TOKENBOARD_BUFFERSIZE
-                                                        + lineNumberSize))
+                                                        + TOKENBOARD_BUFFERSIZE ))
+                                                        //+ lineNumberSize))
                     {
 
                         lineNumber  = new Text(Integer.toString(printedLine));
@@ -184,6 +183,8 @@ public class GameBoard {
 	static final int TOKENBAY_BUFFERSIZE = 5;
 	static final int TOKENBAY_ROWHEIGHT = 35;
 	
+	static final int SCROLL_BAR_PADDING = 10;
+	
 	private static List<RHSIconizedToken> tokenBayItokens;
 	private static int tokenBayCurrentRow;
 	private static int tokenBayStartPosition = TOKENBAY_BUFFERSIZE;
@@ -192,52 +193,34 @@ public class GameBoard {
 	
 	private static ObservableList<Node> tokenBayChildren;
 	
-	private static boolean isTokenBayInit = false;
+	//private static boolean isTokenBayInit = false;
 	
 	/**Places the tokens in the tokenBay by calling settleTokenBay**/
 	public void initTokenBay(List<RHSIconizedToken> iTokens){
 		
-		//System.out.println("\nTOKENBAY TOKENS INIT! (GameBoard.java):::" + iTokens);
-
 		tokenBayItokens = iTokens;
-		
 
-
-		if(!isTokenBayInit){
-			ldzChildren.add(tokenBay);
-			isTokenBayInit = true;
-		}
-		
-		
+		//isTokenBayInit = true;
 		
 		final ScrollPane scrollPane = new ScrollPane();
+		
 		scrollPane.setMinWidth(TOKENBAY_WIDTH);
 		scrollPane.setMinHeight(TOKENBAY_HEIGHT);
-		//scrollPane.setVvalue(scrollPane.getVmax());
-		scrollPane.setMaxHeight(TOKENBAY_HEIGHT);
 		scrollPane.setMaxWidth(TOKENBAY_WIDTH);
+		scrollPane.setMaxHeight(TOKENBAY_HEIGHT);
+		
 		scrollPane.setStyle("-fx-background-color: transparent;");
 		
-		ldzChildren.add(scrollPane);
-		//lhsLineContainer.setPadding(new Insets(0, 5, 5, 5));		
+		ldzChildren.add(scrollPane);	
 		scrollPane.setContent(tokenBay);
-
 		
 		scrollPane.setLayoutX(545);
 		scrollPane.setLayoutY(0);
-		scrollPane.setMinWidth(225);
+		scrollPane.setMinWidth(230);
 		scrollPane.setMinHeight(421);
-		scrollPane.setMaxWidth(225);
+		scrollPane.setMaxWidth(230);
 		scrollPane.setMaxHeight(421);
 		
-		
-//		tokenBay.setLayoutX(545);
-//		tokenBay.setLayoutY(0);
-//		tokenBay.setMinWidth(220);
-//		tokenBay.setMinHeight(421);
-//		tokenBay.setMaxWidth(225);
-//		tokenBay.setMaxHeight(421);
-		//tokenBay event handlers
 		tokenBay.setOnDragOver(new EventHandler<DragEvent>(){
 			@Override
 			public void handle(DragEvent event) {
@@ -245,7 +228,6 @@ public class GameBoard {
 				if (db.hasString())
 					event.acceptTransferModes(TransferMode.ANY);
 			}
-			
 		});
 		
 		tokenBay.setOnDragDropped(new EventHandler<DragEvent>() {
@@ -253,6 +235,7 @@ public class GameBoard {
 
 				Dragboard db = event.getDragboard();
 				boolean success = false;
+				
 				if (db.hasString()) {
 
 					List<RHSIconizedToken> iTokens = 
@@ -271,7 +254,7 @@ public class GameBoard {
 					String[] strs = dragBoardContent.split(delims);
 
 					SourceToken sourceToken = new SourceTokenBase(strs[1], // image
-                                                                                      SourceTokenKind.valueOf(strs[0])); // kind
+							SourceTokenKind.valueOf(strs[0])); // kind
 
 					String index = strs[2];
 					Integer intIndex = Integer.parseInt(index);
@@ -290,10 +273,9 @@ public class GameBoard {
 			        tokenBayChildren.add(replacementRHSiToken.getImgView());
 			        
 					success = true;
-
-					event.setDropCompleted(success);
 				}
 
+				event.setDropCompleted(success);
 				event.consume();
 			}
 		});
@@ -335,7 +317,8 @@ public class GameBoard {
 			
 			if((TOKENBAY_WIDTH) < (	tokenBayStartPosition + 
 									tokenWidth + 
-									TOKENBAY_BUFFERSIZE) )
+									TOKENBAY_BUFFERSIZE +
+									SCROLL_BAR_PADDING) )
 				
 				tooLargeForLine.add(curToken);
 			else{
@@ -374,26 +357,21 @@ public class GameBoard {
 		return tokenBayItokens;
 	}
 	
-	//TESTING ONLY
-	//CHECK TO SEE IF ALL THE TOKENS ON THE RHS ARE "REMOVED"
 	/**
 	 * If all the tokens on the RHS have been removed, we have to turn on
 	 * the compile button.  This is used to test that case.
 	 * @return
 	 */
 	public boolean isRHSempty(){
-		
-		String compileMessage = "";
-		
-		for(RHSIconizedToken rhsItoken: getTokenBayItokens())
-                    if (rhsItoken.getSourceToken().kind() != SourceTokenKind.EMPTY || getTokenBayItokens() == null)
-                    	return false;
 
-    	OutputPanel.getInstance().compilerMessage(compileMessage + "");
+		String compileMessage = "";
+
+		for(RHSIconizedToken rhsItoken: getTokenBayItokens())
+			if (rhsItoken.getSourceToken().kind() != SourceTokenKind.EMPTY || getTokenBayItokens() == null)
+				return false;
+
+		OutputPanel.getInstance().compilerMessage(compileMessage + "");
 		return true;
-    	//OutputPanel.getInstance().compilerMessage(rhsItoken.getSourceToken().kind() + "");
-                        
-		//return true;
 	}
 	
 }
