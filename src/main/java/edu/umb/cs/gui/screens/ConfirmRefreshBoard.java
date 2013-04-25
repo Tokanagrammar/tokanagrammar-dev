@@ -58,8 +58,8 @@ public class ConfirmRefreshBoard extends SecondaryScreen implements Initializabl
 	}
 	
 	public void closeBtnFired(){
-		System.out.println("closeBtnFired");
-		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(gs.equals(GameState.START_GAME) || gs.equals(GameState.FULL_LHS)){
 			GUI.getInstance().blurOff();
 			tearDown();
 			GUI.getInstance().gameState_startGame();
@@ -67,15 +67,15 @@ public class ConfirmRefreshBoard extends SecondaryScreen implements Initializabl
 	}
 	//only acts as a duplicate close button...
 	public void confirmNoBtnFired(){
-		System.out.println("confirmNoBtnFired(");
-		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(gs.equals(GameState.START_GAME) || gs.equals(GameState.FULL_LHS))
 			closeBtnFired();
 	}
 	
 	
 	public void confirmYesBtnFired(){
-		System.out.println("confirmYesBtnFired");
-		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(gs.equals(GameState.START_GAME) || gs.equals(GameState.FULL_LHS)){
 			GUI.getInstance().blurOff();
 			tearDown();
 

@@ -58,7 +58,7 @@ public class DifficultyScreen extends SecondaryScreen{
 	static ImageView curImgInDisplay;
 	private static int curDifficultyLevel;
 	private final static int DIVISOR = 11;
-	private final static int DEFAULT_DIFFICULTY = 10; 
+	//private final static int DEFAULT_DIFFICULTY = 10; 
 
 
 	@Override
@@ -107,7 +107,7 @@ public class DifficultyScreen extends SecondaryScreen{
 		
 		//If it's the first run, we know that the needle should be at about 50%.
 		if(firstRun){
-			curImgInDisplay = imgViewTable.get(DEFAULT_DIFFICULTY/DIVISOR);
+			curImgInDisplay = imgViewTable.get(GUI.getInstance().getCurDifficulty()/DIVISOR);
 			slider.setValue(50);
 			firstRun = false;
 		}else{

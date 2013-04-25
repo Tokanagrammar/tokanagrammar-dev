@@ -62,7 +62,7 @@ public class GUI {
 
 	public enum GameState {INIT_GUI, START_GAME, FULL_LHS, COMPILING};
 
-        private static GameBoard legalDragZone;
+        private static GameBoard gameBoard;
 	private static GUITimer timer;
 	private static OutputPanel outputPanel;
 	private static GameState curGameState;
@@ -76,11 +76,12 @@ public class GUI {
         private List<CategoryDescriptor> categories;
 
         private List<SourceToken> tokenBayTokens;
+        
 	private List<SourceToken> tokenBoardTokens;
 	
 	private List<CategoryDescriptor> curCategories;
         
-        /** Used to blur screen on pausing*/
+    /** Used to blur screen on pausing*/
 	private static boolean init  = false;
 	
 	private static boolean inGame;
@@ -100,11 +101,14 @@ public class GUI {
 	 * @return
 	 */
 	public static GUI getInstance(){
-                if(!init){
+		if(!init){
 			setupActiveButtonsTable();
+			gameBoard = GameBoard.getInstance();
+			outputPanel = OutputPanel.getInstance();
+			timer = GUITimer.getInstance();
 			init = true;
 		}
-		
+
 		return gui;
 	}
 
@@ -119,16 +123,13 @@ public class GUI {
 	 */
 	public void gameState_initGUI(){
 
-                inGame = false;
+		inGame = false;
 		curGameState = GameState.INIT_GUI;
 		blurOff();
-		legalDragZone = GameBoard.getInstance();
-		outputPanel = OutputPanel.getInstance();
-		timer = GUITimer.getInstance();
-                
-                printWelcomeMessage();
 
-                initButtons(activeButtons.get(curGameState));
+		printWelcomeMessage();
+
+		initButtons(activeButtons.get(curGameState));
 	}
 
 
@@ -168,32 +169,38 @@ public class GUI {
                     if (orig != null)
                     {
                         currentSource = edu.umb.cs.api.APIs.shuffle(orig, curDifficulty);
-                        
+
                         tokenBayTokens = currentSource.getRemovedTokens();
-                        
-                        legalDragZone.initTokenBoard(currentSource.getShuffledSource());
-                        legalDragZone.initTokenBay(RHSTokenIconizer.iconizeTokens(tokenBayTokens));
-                        
+
+                        gameBoard.initTokenBoard(currentSource.getShuffledSource());
+                        gameBoard.initTokenBay(RHSTokenIconizer.iconizeTokens(tokenBayTokens));
+
                         outputPanel.clear();
-			printCategoryAndDifficultyMessage();
-                        
+                        printCategoryAndDifficultyMessage();
+
                         // Some message on the puzzle
                         if (orig != null)
                         {
-                            outputPanel.compilerMessage("Total tokens: " + orig.tokenCount());
-                            outputPanel.compilerMessage("Removed: " + currentSource.getRemovedTokens().size()
-                                                            + "(" + curDifficulty + "%)");
+                        	outputPanel.compilerMessage("Total tokens: " + orig.tokenCount());
+                        	outputPanel.compilerMessage("Removed: " + currentSource.getRemovedTokens().size()
+                        			+ "(" + curDifficulty + "%)");
                         }
                     }
 
-		}
-		
+                }
+        
+        if(GameBoard.getInstance().isRHSempty()){
+        	enableCompileButton();
+        	curGameState = GameState.FULL_LHS;
+        }
+        
 		timer.start();
 		inGame = true;
+		
 		initButtons(activeButtons.get(curGameState));
 	}
 
-        //--------------------------------------------------------------------------
+	//--------------------------------------------------------------------------
 	//UTIL
 	
 	/**
@@ -241,8 +248,8 @@ public class GUI {
 	public void resetGame(){
                 LHSTokenIconizer.resetIndex();
                 RHSTokenIconizer.resetIndex();
-		legalDragZone.resetTokenBay();
-		legalDragZone.resetTokenBoard();
+		gameBoard.resetTokenBay();
+		gameBoard.resetTokenBoard();
 		timer.reset();
 		outputPanel.clear();
 	}
@@ -254,9 +261,11 @@ public class GUI {
 	 * 
 	 * GameState is Refresh
 	 */
-	public void refreshGame(){
-		legalDragZone.resetTokenBay();
-		legalDragZone.resetTokenBoard();
+	public void refreshGame(){													//TODO @mhs this is same as reset for now.
+		LHSTokenIconizer.resetIndex();
+        RHSTokenIconizer.resetIndex();
+		gameBoard.resetTokenBay();
+		gameBoard.resetTokenBoard();
 		inGame = false;
 		gameState_startGame();
 	}
@@ -265,7 +274,7 @@ public class GUI {
 	 * Skips the current board and goes to the next. 							//TODO backend
 	 */
 	public void skipPuzzle(){
-		System.out.println("<<<Back end for getting the next puzzle>>>");			//TODO backend
+		System.out.println("<<<Back end for getting the next puzzle>>>");		//TODO backend
 		
 		outputPanel.clear();
 
@@ -296,7 +305,7 @@ public class GUI {
 	 * was enabled, then pressed.
 	 */
 	public void compileNewSource(){												//TODO Backend specialty!  
-		List<LHSIconizedToken> tokenList;									//For now, just print formated source code!
+		List<LHSIconizedToken> tokenList;										//For now, just print formated source code!
 		GameBoard gb = GameBoard.getInstance();
 		
 		tokenList = gb.getTokenBoardItokens();
@@ -337,12 +346,11 @@ public class GUI {
                         outputPanel.compilerMessage(out.getOuput());
                         timer.start();
                 }else{
-                        outputPanel.writeNodes(new Text("Congratulation! You successfully solved the puzzle!"));
+                        outputPanel.writeNodes(new Text("Congratulations! You have successfully solved the puzzle!"));
                         outputPanel.writeNodes(new Text("The output is: \"" + out.getOuput() + "\""));
                         // TODO: record score
                         timer.stop();
                 }
-		
 	}
 	
 	/**
@@ -366,9 +374,9 @@ public class GUI {
 	 * Use this as a fail safe to stop compiling (avoids stack overflow etc).
 	 */
 	public void stopCompile(){
-		Text text = new Text("Stop button needs to be hooked up -- enable WHILE COMPILING ONLY");
-		System.out.println("Stop button needs to be hooked up -- enable WHILE COMPILING ONLY");
-		outputPanel.writeNodes(text);
+//		Text text = new Text("Stop button needs to be hooked up -- enable WHILE COMPILING ONLY");
+//		System.out.println("Stop button needs to be hooked up -- enable WHILE COMPILING ONLY");
+//		outputPanel.writeNodes(text);
 		
 		//Last, send the user back to the full LHS pseudo state and restart the timer.
 		initButtons(activeButtons.get(GameState.FULL_LHS));
@@ -497,7 +505,7 @@ public class GUI {
 	 * Get the LegalDragZone
 	 */
 	public GameBoard getLegalDragZone(){
-		return legalDragZone;
+		return gameBoard;
 	}
 
 	/**
@@ -564,7 +572,6 @@ public class GUI {
 		
 		for(Button button: buttons){
 			String buttonID = button.getId();
-			System.out.println("ENABLING BUTTON: " + buttonID);
 			for(String str: buttonNames)
 				if(buttonID.equals(str)){
 					button.setDisable(false);
@@ -596,7 +603,7 @@ public class GUI {
 		
 		//starting the game state ("startGame")
 		ArrayList<String> startGameBtns = new ArrayList<String>();
-                startGameBtns.add("runButton");
+        startGameBtns.add("runButton");
 		startGameBtns.add("pauseButton");
 		startGameBtns.add("skipButton");
 		startGameBtns.add("categoryButton");

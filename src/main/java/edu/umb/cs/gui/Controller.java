@@ -104,7 +104,6 @@ public class Controller implements Initializable{
 		buttons.add(categoryButton);
 		buttons.add(resetBoardButton);
 		buttons.add(logoButton);
-               
 		
 		//The default difficulty icon is a little less than "50"
 		Image defaultDiffImg = new Image(getClass().getResourceAsStream("/images/ui/secondaryScreens/difficulty4.fw.png"));
@@ -151,7 +150,9 @@ public class Controller implements Initializable{
 			@Override
 			public void handle(MouseEvent event) {
 				GameState gameState = GUI.getInstance().getCurGameState();
-				if(gameState.equals(GameState.INIT_GUI) || gameState.equals(GameState.START_GAME))
+				if(gameState.equals(	GameState.INIT_GUI) || 
+										gameState.equals(GameState.START_GAME) ||
+										gameState.equals(GameState.FULL_LHS))
 					GUI.getInstance().pauseGame(new DifficultyScreen());
 			}
 		});
@@ -198,10 +199,9 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void runFired(ActionEvent event){
-            System.out.println("compingling src");
-            GUI.getInstance().compileNewSource();
-//		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
-//			GUI.getInstance().compileNewSource();
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(	gs.equals(GameState.START_GAME) || gs.equals(GameState.FULL_LHS))
+			GUI.getInstance().compileNewSource();
 	}
 	
     /**
@@ -210,7 +210,8 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void stopFired(ActionEvent event){
-		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(	gs.equals(GameState.START_GAME) || gs.equals(GameState.FULL_LHS))
 			GUI.getInstance().stopCompile();
 	}
 	
@@ -220,7 +221,9 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void pauseFired(ActionEvent event){
-		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(	gs.equals(GameState.START_GAME)
+				|| gs.equals(GameState.FULL_LHS))
 			GUI.getInstance().pauseGame(new PauseScreen());
 	}
 	
@@ -230,7 +233,9 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void skipFired(ActionEvent event){
-		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(	gs.equals(GameState.START_GAME)
+				|| gs.equals(GameState.FULL_LHS))
 			GUI.getInstance().pauseGame(new ConfirmSkipScreen());
 	}
 	
@@ -240,8 +245,10 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void categoryFired(ActionEvent event){
-		GameState gameState = GUI.getInstance().getCurGameState();
-		if(gameState.equals(GameState.START_GAME) || gameState.equals(GameState.INIT_GUI) )
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(	gs.equals(GameState.START_GAME)
+				|| gs.equals(GameState.FULL_LHS)
+				|| gs.equals(GameState.INIT_GUI))
 			GUI.getInstance().pauseGame(new CategoriesScreen());
 	}
 	
@@ -252,10 +259,9 @@ public class Controller implements Initializable{
      * @param event the action event.
      */
 	public void resetBoardFired(ActionEvent event){
-		Text text = new Text("resetBoardFired");
-		GUI.getInstance().getOutputPanel().writeNodes(text);
-		
-		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
+		GameState gs = GUI.getInstance().getCurGameState();
+		if(	gs.equals(GameState.START_GAME)
+				|| gs.equals(GameState.FULL_LHS))
 			GUI.getInstance().pauseGame(new ConfirmRefreshBoard());
 	}
 	
