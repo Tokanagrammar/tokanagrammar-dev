@@ -46,68 +46,72 @@ import static edu.umb.cs.source.SourceTokenKind.*;
  */
 public class LHSTokenIconizer {
 	
-	final static int TOKEN_HEIGHT = 32; //token height is always the same
+	final static int TOKEN_HEIGHT = 20; //token height is always the same
 	final static int MIN_WIDTH = 32;	//the minimum token width
+	
+	final static Font TOKEN_FONT = new Font("Courier New", Image.SCALE_DEFAULT, 12);
 	
 	private static int index;
 	
 	static final Map<SourceTokenKind, Color> tokenFontColors = computeColorsMap();
-        private static Map<SourceTokenKind, Color> computeColorsMap()
-        {
-            EnumMap<SourceTokenKind, Color> ret = new EnumMap<>(SourceTokenKind.class);
+	
+	private static Map<SourceTokenKind, Color> computeColorsMap()
+	{
+		EnumMap<SourceTokenKind, Color> ret = new EnumMap<>(SourceTokenKind.class);
 
-            ret.put(KEYWORD, Color.MAGENTA);
-            ret.put(NUM_LITERAL, Color.black);
-            ret.put(CHAR_LITERAL, Color.orange);
-            ret.put(IDENTIFIER, Color.red);
-            ret.put(STRING_LITERAL, Color.orange);
-            ret.put(SEPARATOR, Color.black);
-            ret.put(OPERATOR, Color.black);
-            return Collections.unmodifiableMap(ret);
-        }
-        
-	/**
-	 * Take a token and makes a graphic representation of it.
-	 * @param token
-	 * @return an IconizedToken
-	 */
-	public static LHSIconizedToken iconizeToken(SourceToken token){
-		
-		SourceTokenKind tokenKind = token.kind();
-		BufferedImage image = null; 
-		BufferedImage finalImage = null;
-		Graphics graphics = null;
-
-		try{ 
-			if(tokenKind == SourceTokenKind.EMPTY)
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/removed_.fw.png"));
-			else
-				image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/noop_.fw.png"));
-
-		} catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		graphics = image.getGraphics();
-		FontMetrics fm = graphics.getFontMetrics();
-		
-                switch(tokenKind)
-                {
-                    case EMPTY:
-                        finalImage = finalizeImage(image, EmptyToken.INSTANCE,TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
-                        break;
-                        
-                    case TAB:
-                        finalImage = finalizeImage(image, token,TOKEN_HEIGHT, 20 , Image.SCALE_DEFAULT);
-                        break;
-                        
-                    default:
-                        finalImage = finalizeImage(image, token,TOKEN_HEIGHT, fm.stringWidth(token.image()) +2 , Image.SCALE_DEFAULT);
-                }
-		
-		WritableImage writableImage = SwingFXUtils.toFXImage(finalImage, null);		
-		return new LHSIconizedToken(writableImage, token, index++);
+		ret.put(KEYWORD, Color.MAGENTA);
+		ret.put(NUM_LITERAL, Color.black);
+		ret.put(CHAR_LITERAL, Color.orange);
+		ret.put(IDENTIFIER, Color.red);
+		ret.put(STRING_LITERAL, Color.orange);
+		ret.put(SEPARATOR, Color.black);
+		ret.put(OPERATOR, Color.black);
+		return Collections.unmodifiableMap(ret);
 	}
+        
+        /**
+         * Take a token and makes a graphic representation of it.
+         * @param token
+         * @return an IconizedToken
+         */
+        public static LHSIconizedToken iconizeToken(SourceToken token){
+
+        	SourceTokenKind tokenKind = token.kind();
+        	BufferedImage image = null; 
+        	BufferedImage finalImage = null;
+        	Graphics graphics = null;
+
+        	try{ 
+        		if(tokenKind == SourceTokenKind.EMPTY)
+        			image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/removed_.fw.png"));
+        		else
+        			image = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("images/ui/tokens/noop_.fw.png"));
+
+        	} catch(IOException e){
+        		e.printStackTrace();
+        	}
+
+        	graphics = image.getGraphics();
+        	FontMetrics fm = graphics.getFontMetrics(TOKEN_FONT);
+
+        	switch(tokenKind)
+        	{
+        	case EMPTY:
+        		finalImage = finalizeImage(image, EmptyToken.INSTANCE,TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
+        		break;
+
+        	case TAB:
+        		finalImage = finalizeImage(image, token,TOKEN_HEIGHT, 20 , Image.SCALE_DEFAULT);
+        		break;
+
+        	default:
+        		finalImage = finalizeImage(image, token,TOKEN_HEIGHT, fm.stringWidth(token.image()), Image.SCALE_DEFAULT);
+        	}
+
+        	WritableImage writableImage = SwingFXUtils.toFXImage(finalImage, null);
+
+        	return new LHSIconizedToken(writableImage, token, index++);
+        }
 	
 	/**
 	 * Creates a "pretty" clear token so the user can tell it's a placed token.
@@ -159,7 +163,9 @@ public class LHSTokenIconizer {
             }
             
             graphics = image.getGraphics();
-            FontMetrics fm = graphics.getFontMetrics();
+            FontMetrics fm = graphics.getFontMetrics(TOKEN_FONT);
+            
+   
 
             if(fm.stringWidth(token.image()) < 25 || token.kind() == SourceTokenKind.EMPTY)
                 finalImage = finalizeImage(image, token,TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
@@ -180,35 +186,34 @@ public class LHSTokenIconizer {
 	 * @param type
 	 * @return an image worth putting in the LDZ
 	 */
-    private static BufferedImage finalizeImage(	Image originalImage, 
-                                                SourceToken token, 
-                                                int height, 
-                                                int width, 
-                                                int type){
-    	
-    	String tokenImage = token.image();
-    	SourceTokenKind kind = token.kind();
+	private static BufferedImage finalizeImage(	Image originalImage, 
+			SourceToken token, 
+			int height, 
+			int width, 
+			int type){
 
-    	Font font = new Font("Arial", type, 12);
+		String tokenImage = token.image();
+		SourceTokenKind kind = token.kind();
+
 		BufferedImage resizedImage = new BufferedImage(width, height, type);
 		Graphics2D g = resizedImage.createGraphics();
-	    FontMetrics fm = g.getFontMetrics();
-	    
-	    int strWidth = (fm.stringWidth(tokenImage));
-	    int imageWidth = resizedImage.getWidth();
-	    
-	    int textBegin = (imageWidth - strWidth) / 2 - 1;
-	    int textHeight = (fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2 - 3);
-	    
-            g.drawImage(originalImage, 0, 0, width, height, null);
-            g.setColor(tokenFontColors.get(kind));
-	    g.setFont(font);
-            if (kind != SourceTokenKind.EMPTY)
-                g.drawString(tokenImage, textBegin, textHeight);
-		
-            g.dispose();
-            return resizedImage;
-    }
+		FontMetrics fm = g.getFontMetrics(TOKEN_FONT);
+
+		int strWidth = (fm.stringWidth(tokenImage));
+		int imageWidth = resizedImage.getWidth();
+
+		int textBegin = (imageWidth - strWidth) / 2;
+		int textHeight = (fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2 );
+
+		g.drawImage(originalImage, 0, 0, width, height, null);
+		g.setColor(tokenFontColors.get(kind));
+		g.setFont(TOKEN_FONT);
+		if (kind != SourceTokenKind.EMPTY)
+			g.drawString(tokenImage, textBegin, textHeight);
+
+		g.dispose();
+		return resizedImage;
+	}
     
     // temp
     public static void resetIndex()

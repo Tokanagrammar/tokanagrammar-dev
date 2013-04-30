@@ -31,6 +31,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -74,7 +75,7 @@ public class GameBoard {
 	static final int TOKENBOARD_WIDTH = 510;
 	static final int TOKENBOARD_HEIGHT = 427;
 	static final int TOKENBOARD_BUFFERSIZE = 1;
-	static final int TOKENBOARD_ROWHEIGHT = 35;
+	static final int TOKENBOARD_ROWHEIGHT = 30;
 	
 	private static VBox lhsLineContainer = new VBox();
 	
@@ -102,7 +103,7 @@ public class GameBoard {
 	}
 	
 	public void resetTokenBoard(){
-		tokenBoardStartPosition = TOKENBOARD_OFFSET + TOKENBOARD_BUFFERSIZE;
+		//tokenBoardStartPosition = TOKENBOARD_OFFSET + TOKENBOARD_BUFFERSIZE;
 
 		lhsLines.removeAll(lhsLines);
 		
@@ -120,55 +121,27 @@ public class GameBoard {
         {
             List<LHSIconizedToken> ret = new ArrayList<>(src.tokenCount());
             
-            //TODO line numbering here.
             HBox line = new HBox();
-            //int curLine = 1;
-            //Text lineNumber = new Text(curLine + "");
-
-            //lineNumber.se
-            int lineNumberSize = src.lineCount();
+            Label lineNumber = new Label(1 + "");
             int lineCount = src.lineCount();
-
-            //line.getChildren().add(lineNumber);
-            int printedLine = 0; // not always the same as the 'real' number of line in source
+            
             for (int lineIndex = 0; lineIndex < lineCount; ++lineIndex)
             {
-                Text lineNumber = new Text(Integer.toString(printedLine));
-                lineNumber.setStyle("-fx-fill:black;");
+                line.setMinHeight(30);
+            	lineNumber = new Label(lineIndex + 1 + "  ");
+                lineNumber.setStyle("-fx-fill:black; -fx-padding: 0, 0, 0, 0;");
 
+                line.getChildren().add(lineNumber);
+                
                 for (SourceToken curToken : src.getTokens(lineIndex))
                 {
-                    final LHSIconizedToken iconizedCurTok = LHSTokenIconizer.iconizeToken(curToken);
-                    final double tokenWidth = iconizedCurTok.getImage().getWidth();
-                    ret.add(iconizedCurTok);
-                    if ((TOKENBOARD_OFFSET + TOKENBOARD_WIDTH) < (tokenBoardStartPosition
-                                                        + tokenWidth
-                                                        + TOKENBOARD_BUFFERSIZE ))
-                                                        //+ lineNumberSize))
-                    {
+                	final LHSIconizedToken iconizedCurTok = LHSTokenIconizer.iconizeToken(curToken);
+                	ret.add(iconizedCurTok);
 
-                        lineNumber  = new Text(Integer.toString(printedLine));
-                        lineNumber.setY(-10);
-
-                        tokenBoardStartPosition = (TOKENBOARD_OFFSET
-                                                + TOKENBOARD_BUFFERSIZE);
-
-                        lhsLines.add(line);
-
-                        ++printedLine;
-                        line = new HBox();
-                        //line.getChildren().add(lineNumber);
-
-                    }
-
-                    ImageView imgView = iconizedCurTok.getImgView();
-                    line.getChildren().add(imgView);
-                    tokenBoardStartPosition += (tokenWidth + TOKENBOARD_BUFFERSIZE);
+                	ImageView imgView = iconizedCurTok.getImgView();
+                	line.getChildren().add(imgView);
                 }
-
-                tokenBoardStartPosition = (TOKENBOARD_OFFSET + TOKENBOARD_BUFFERSIZE);
                 lhsLines.add(line);
-                ++printedLine;
                 line = new HBox();
             }
             
@@ -181,7 +154,7 @@ public class GameBoard {
 	static final int TOKENBAY_WIDTH = 233;
 	static final int TOKENBAY_HEIGHT = 427;
 	static final int TOKENBAY_BUFFERSIZE = 5;
-	static final int TOKENBAY_ROWHEIGHT = 35;
+	static final int TOKENBAY_ROWHEIGHT = 25;
 	
 	static final int SCROLL_BAR_PADDING = 10;
 	

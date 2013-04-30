@@ -179,12 +179,12 @@ public class GUI {
                         printCategoryAndDifficultyMessage();
 
                         // Some message on the puzzle
-                        if (orig != null)
-                        {
-                        	outputPanel.compilerMessage("Total tokens: " + orig.tokenCount());
-                        	outputPanel.compilerMessage("Removed: " + currentSource.getRemovedTokens().size()
-                        			+ "(" + curDifficulty + "%)");
-                        }
+//                        if (orig != null)
+//                        {
+//                        	outputPanel.compilerMessage("Total tokens: " + orig.tokenCount());
+//                        	outputPanel.compilerMessage("Removed: " + currentSource.getRemovedTokens().size()
+//                        			+ "(" + curDifficulty + "%)");
+//                        }
                     }
 
                 }
@@ -387,70 +387,13 @@ public class GUI {
 	//--------------------------------------------------------------------------
 	//Static message printing
 	
-	private void printCategoryAndDifficultyMessage(){
-		/*
-		 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
-		 * 					 Hints: <hints>
-		 */
-		String concatCategories = "";
-		
-		Text text;
-		if(curCategories.size() > 1)
-			text = new Text("Categories Selected: ");
-		else
-			text = new Text("Category Selected: ");
-		for(int i=0; i< curCategories.size(); i++)
-			concatCategories += (curCategories.get(i) + " ");
-		
-		Label categoryText = new Label(concatCategories);
-		categoryText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-		Text text2 = new Text("Difficulty: ");
-		
-		DropShadow dropShadow = new DropShadow();
-		dropShadow.setColor(Color.GRAY);
-		dropShadow.setRadius(30);
-		dropShadow.setHeight(30);
-		dropShadow.setBlurType(BlurType.ONE_PASS_BOX);
-		Label difficultyText = new Label(curDifficulty + "");
-		Label difficultyRank = new Label("");
-		//difficulty 0-31 easy 32-65 med 66-99 hard
-		if(curDifficulty >= 0 && curDifficulty <= 31){
-			difficultyRank.setText("(EASY)");
-			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 255, 38);" );
-			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 255, 38);" );
-		}
-		else if(curDifficulty >= 32 && curDifficulty <= 65){
-			difficultyRank.setText("(MEDIUM)");
-			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(253, 148, 37);" );
-			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(253, 148, 37);" );
-		}
-		else if(curDifficulty >= 66 && curDifficulty <= 89){
-			difficultyRank.setText("(HARD)");
-			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
-			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
-		}
-		else if(curDifficulty >= 90 && curDifficulty <= 100){
-			difficultyRank.setText("(INSANE)");
-			difficultyRank.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
-			difficultyText.setStyle(	"-fx-font-size: 18; -fx-text-fill: rgb(255, 0, 0);" );
-		}
-		difficultyRank.setEffect(dropShadow);
-		difficultyText.setEffect(dropShadow);
-		
-		Text text3 = new Text("Hint: ");
-//		String hint = curPuzzle.getHints().get(0);
-                String hint = "NO HINT available";
-                Label hintText = new Label(" < " + hint + " > ");
-		hintText.setStyle(	"-fx-font-size: 14; -fx-text-fill: rgb(153, 153, 50);" );
-		outputPanel.writeNodes(text, categoryText);
-		outputPanel.writeNodes(text2, difficultyText, difficultyRank);
-		outputPanel.writeNodes(text3, hintText);
-	}
 	
 	private void printWelcomeMessage(){
+		
 		Text welcomeText = new Text("Welcome to Tokanagrammar, Java Edition! ");
 		welcomeText.setFont(new Font(14));
 		outputPanel.writeNodes(welcomeText);
+		
 		Text categoryText = new Text("Please select a category ");
 		categoryText.setFont(new Font(14));
 		Image img = new Image(OutputPanel.class.
@@ -460,6 +403,63 @@ public class GUI {
 		text.setFont(new Font(14));
 		outputPanel.writeNodes(categoryText, imgView, text);
 	}
+	
+	private void printCategoryAndDifficultyMessage(){
+		/*
+		 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
+		 * 					 Hints: <hints>
+		 */
+		String concatCategories = "";
+		
+		Text text;
+
+		String style = "-fx-font-size: 18; -fx-text-fill: rgb(0, 178, 45);";
+		
+		if(curCategories.size() > 1)
+			text = new Text("Categories: ");
+		else
+			text = new Text("Category: ");
+		for(int i=0; i< curCategories.size(); i++)
+			concatCategories += (curCategories.get(i) + " ");
+		
+		Label categoryText = new Label(concatCategories);
+		categoryText.setStyle(style);
+		Text text2 = new Text("Difficulty: ");
+		
+		Label difficultyText = new Label(curDifficulty + "");
+		Label difficultyRank = new Label("");
+		
+		if(curDifficulty >= 0 && curDifficulty <= 32){
+			difficultyRank.setText("(EASY)");
+			difficultyRank.setStyle(style);
+			difficultyText.setStyle(style);
+		}
+		else if(curDifficulty >= 33 && curDifficulty <= 64){
+			difficultyRank.setText("(MEDIUM)");
+			difficultyRank.setStyle(style);
+			difficultyText.setStyle(style);
+		}
+		else if(curDifficulty >= 65 && curDifficulty <= 90){
+			difficultyRank.setText("(HARD)");
+			difficultyRank.setStyle(style);
+			difficultyText.setStyle(style);
+		}
+		else if(curDifficulty >= 91 && curDifficulty <= 100){
+			difficultyRank.setText("(INSANE)");
+			difficultyRank.setStyle(style);
+			difficultyText.setStyle(style);
+		}
+		
+		Text text3 = new Text("Hint: ");
+//		String hint = curPuzzle.getHints().get(0);
+                String hint = "NO HINT available";
+                Label hintText = new Label(" < " + hint + " > ");
+		hintText.setStyle(style);
+		outputPanel.writeNodes(text, categoryText);
+		outputPanel.writeNodes(text2, difficultyText, difficultyRank);
+		outputPanel.writeNodes(text3, hintText);
+	}
+
 	
 	
 	//--------------------------------------------------------------------------

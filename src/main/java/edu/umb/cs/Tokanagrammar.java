@@ -37,7 +37,6 @@ import javafx.stage.WindowEvent;
 
 public class Tokanagrammar extends Application{
 
-
 	private static final String TITLE = "Tokanagrammar " + APIs.getVersion();
 	
 	private static final int DEFAULT_DIFFICULTY = 50;
