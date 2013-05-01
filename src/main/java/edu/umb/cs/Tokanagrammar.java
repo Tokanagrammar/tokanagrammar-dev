@@ -89,13 +89,15 @@ public class Tokanagrammar extends Application{
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 				@Override
 				public void handle(WindowEvent event) {
-                    //TODO
+                                        //TODO
 					//add close-confirmation
 					//if "yes, I want to close"
 					//then stop apis etc
 					
 					// stop all services properly
 					APIs.stop();
+                                        // kill all lingering thread(s), if any
+                                        Runtime.getRuntime().exit(0);
 				}
             });
             primaryStage.show();
