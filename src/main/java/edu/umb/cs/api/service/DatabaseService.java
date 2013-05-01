@@ -21,15 +21,11 @@
 
 package edu.umb.cs.api.service;
 
-import edu.umb.cs.entity.Game;
-import edu.umb.cs.entity.Hint;
-import edu.umb.cs.entity.Puzzle;
-import edu.umb.cs.entity.User;
+import edu.umb.cs.entity.*;
 import edu.umb.cs.parser.ParseException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -69,6 +65,7 @@ public class DatabaseService
         em.find(User.class, User.class);
         em.find(Puzzle.class, Puzzle.class);
         em.find(Game.class, Game.class);
+        em.find(Category.class, Category.class);
     }
 
     /**
