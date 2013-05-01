@@ -105,14 +105,13 @@ public class Controller implements Initializable{
 		buttons.add(resetBoardButton);
 		buttons.add(logoButton);
 		
-		//The default difficulty icon is a little less than "50"
-		Image defaultDiffImg = new Image(getClass().getResourceAsStream("/images/ui/secondaryScreens/difficulty4.fw.png"));
+		Image defaultDiffImg = new Image(getClass().getResourceAsStream("/images/ui/secondaryScreens/difficulty5.fw.png"));
 		final ImageView imgView = new ImageView(defaultDiffImg);
 		setCurDifficultyIcon(imgView);
 		
 		imgViewTable = new HashMap<Integer, ImageView>();
 		imgViewTable.put(1, new ImageView());
-		for(int i=0; i < 10; i++){
+		for(int i=0; i < 11; i++){
 			Image img = new Image(DifficultyScreen.class.getResourceAsStream("/images/ui/secondaryScreens/difficulty" + i + ".fw.png"));
 			imgViewTable.put(i, new ImageView(img));
 		}
@@ -124,7 +123,7 @@ public class Controller implements Initializable{
 	
 	public static void setCurDifficultyIcon(final ImageView cdi){
 		
-		cdi.setFitWidth(64);
+		cdi.setFitWidth(80);
 		cdi.setFitHeight(40);
 		
 		cdi.setOnMouseEntered(new EventHandler <MouseEvent>() {

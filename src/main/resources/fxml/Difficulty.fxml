@@ -12,10 +12,10 @@
     <Pane fx:id="titlePane" layoutX="13.0" layoutY="22.0" prefHeight="30.0" prefWidth="314.0" styleClass="difficultyText" />
     <Pane fx:id="leftPane" layoutX="20.0" layoutY="73.0" maxHeight="295.0" maxWidth="490.0" minHeight="295.0" minWidth="490.0" prefHeight="295.0" prefWidth="490.0">
       <children>
-        <Pane fx:id="imgDisplay" layoutX="152.0" layoutY="14.0" prefHeight="116.0" prefWidth="185.0" />
+        <Pane fx:id="imgDisplay" layoutX="145.0" layoutY="14.0" prefHeight="116.0" prefWidth="185.0" />
         <Pane fx:id="textPane" layoutX="7.0" layoutY="164.0" prefHeight="97.0" prefWidth="474.0">
           <children>
-            <Button fx:id="setBtn"  layoutX="366.0" layoutY="90.0" maxHeight="34.0" maxWidth="92.0" minHeight="34.0" minWidth="92.0" mnemonicParsing="false" onAction="#setBtnFired" prefHeight="34.0" prefWidth="92.0" styleClass="setBtn" />
+            <Button fx:id="setBtn" layoutX="366.0" layoutY="90.0" maxHeight="34.0" maxWidth="92.0" minHeight="34.0" minWidth="92.0" mnemonicParsing="false" onAction="#setBtnFired" prefHeight="34.0" prefWidth="92.0" styleClass="setBtn" />
           </children>
         </Pane>
         <Slider fx:id="slider" layoutX="95.0" layoutY="138.0" majorTickUnit="10.0" prefWidth="300.0" showTickLabels="true" />

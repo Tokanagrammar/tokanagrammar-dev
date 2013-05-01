@@ -36,7 +36,7 @@ public class GUITimer {
 	static Timeline digitalTime; 		//timer listener
 	static Pane pane;
 	
-	private String timerState = "";
+	//private String timerState = "";
 	
 	private static final GUITimer timer = new GUITimer();
 	
@@ -60,7 +60,7 @@ public class GUITimer {
 						String minuteString = pad(2, '0', minute.toString());
 						String secondString = pad(2, '0', second.toString());
 						String msString  = pad(2, '0', milliseconds % 100 + "");
-						label.setText(hourString + ":" + minuteString + ":" + secondString + ":" + msString);
+						label.setText(" Time:\t\t " + hourString + ":" + minuteString + ":" + secondString);// + ":" + msString);
 						
 						milliseconds++;
 					}
@@ -89,21 +89,21 @@ public class GUITimer {
 			return sb.toString();
 	}
 	public void start(){
-		timerState = "running";
+		//timerState = "running";
 		label.setVisible(true);
 		digitalTime.play();
 	}
 
 	public void stop(){
-		timerState = "stopped";
+		//timerState = "stopped";
 		digitalTime.stop();
 	}
 	public void pause(){
-		timerState = "paused";
+		//timerState = "paused";
 		digitalTime.stop();
 	}
 	public void reset(){
-		timerState = "stopped";
+		//timerState = "stopped";
 		digitalTime.stop();
 		milliseconds = 0;
 		hideTimer();
@@ -114,7 +114,7 @@ public class GUITimer {
 		label.setVisible(false);
 	}
 	
-	public String getTimerState(){
-		return timerState;
-	}
+//	public String getTimerState(){
+//		return timerState;
+//	}
 }

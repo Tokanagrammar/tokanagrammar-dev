@@ -147,8 +147,8 @@
 	-fx-background-color: transparent;
 }
 .textPane{
-	-fx-font-size: 20;
-	-fx-font-family: "Georgia";
+	-fx-font-size: 10;
+	-fx-font-family: "Trajan Pro";
 	-fx-text-fill: rgb(153, 153, 255);
 }
 /*-------------------------------------------------------------------------------- */
