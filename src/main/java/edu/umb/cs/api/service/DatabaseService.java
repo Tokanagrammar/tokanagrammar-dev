@@ -21,10 +21,7 @@
 
 package edu.umb.cs.api.service;
 
-import edu.umb.cs.entity.Game;
-import edu.umb.cs.entity.Hint;
-import edu.umb.cs.entity.Puzzle;
-import edu.umb.cs.entity.User;
+import edu.umb.cs.entity.*;
 import edu.umb.cs.parser.ParseException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,7 +34,6 @@ import javax.persistence.Persistence;
 
 /**
  * @author              Vy Thuy Nguyen
- * @version             1.0 Mar 23, 2013
  * Last modified:       
  */
 public class DatabaseService 
@@ -69,6 +65,7 @@ public class DatabaseService
         em.find(User.class, User.class);
         em.find(Puzzle.class, Puzzle.class);
         em.find(Game.class, Game.class);
+        em.find(Category.class, Category.class);
     }
 
     /**
@@ -141,6 +138,15 @@ public class DatabaseService
         return em.createQuery("SELECT p FROM Puzzle p", Puzzle.class).getResultList();
     }
     
+    /**
+     * 
+     * @return a list of all categories in the database
+     */
+    public static List<Category> getAllCategories()
+    {
+        return em.createQuery("SELECT c FROM Category c", Category.class).getResultList();
+    }
+    
     //List of users
     public static List<User> getAllUsers()
     {
@@ -161,6 +167,7 @@ public class DatabaseService
         EntityTransaction t = em.getTransaction();
         try
         {
+            //TODO: take category into account
             t.begin();
             Puzzle p = new Puzzle(filePath, expResult, metaData);
             for (Hint h : hints)
