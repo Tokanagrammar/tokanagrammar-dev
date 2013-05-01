@@ -86,7 +86,7 @@ public class PauseScreen extends SecondaryScreen implements Initializable {
 		bTitleText.getChildren().add(title);
 		
 		Label label = new Label("Resume?");
-		label.setStyle(	"-fx-font-size: 40;" +
+		label.setStyle(	"-fx-font-size: 20;" +
 						"-fx-text-fill: rgb(255, 255, 85);" );
 		label.setLayoutX(5);
 		label.setLayoutY(25);

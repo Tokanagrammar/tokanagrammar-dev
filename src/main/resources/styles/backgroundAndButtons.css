@@ -158,3 +158,39 @@
 	-fx-background-image: url("../images/ui/buttons/tokanagrammar0.8_220.fw.png");
 	-fx-background-color: transparent;
 }
+
+
+/*settingsButton*/
+.settingsButton{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/settings.fw.png");
+	-fx-background-color: transparent;
+}
+.settings:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/settings_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+.settings:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/settings.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*addPuzzleButton*/
+.addPuzzle{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/addPuzzle.fw.png");
+	-fx-background-color: transparent;
+}
+.addPuzzle:hover{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/addPuzzle_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+.addPuzzle:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/buttons/addPuzzle.fw.png");
+	-fx-background-color: transparent;
+}
+

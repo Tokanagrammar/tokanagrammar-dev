@@ -44,10 +44,12 @@ import edu.umb.cs.source.SourceTokenKind;
  */
 public class RHSTokenIconizer {
 	
-    final static int TOKEN_HEIGHT = 32; //token height is always the same
+    final static int TOKEN_HEIGHT = 20; //token height is always the same
     final static int MIN_WIDTH = 32;	//the minimum token width
+    
+    final static Font tokenFont = new Font("Courier New", Image.SCALE_DEFAULT, 12);
+	
     private static int index;
-    private RHSTokenIconizer(){}
 
     
     /**
@@ -116,7 +118,7 @@ public class RHSTokenIconizer {
         }
 
         graphics = image.getGraphics();
-        FontMetrics fm = graphics.getFontMetrics();
+        FontMetrics fm = graphics.getFontMetrics(tokenFont);
 
         if (fm.stringWidth(token.image()) < 25)
             finalImage = finalizeImage(image, token, TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
@@ -140,8 +142,6 @@ public class RHSTokenIconizer {
         BufferedImage image = null;
         BufferedImage finalImage = null;
         Graphics graphics = null;
-        int imagePadding = 20;
-
         
         try
         {
@@ -175,13 +175,16 @@ public class RHSTokenIconizer {
         }
 
         graphics = image.getGraphics();
-        FontMetrics fm = graphics.getFontMetrics();
+        
+        FontMetrics fm = graphics.getFontMetrics(tokenFont);
 
         if (fm.stringWidth(token.image()) < 25)
             finalImage = finalizeImage(image, token, TOKEN_HEIGHT, MIN_WIDTH, Image.SCALE_DEFAULT);
         else
-            finalImage = finalizeImage(image, token, TOKEN_HEIGHT, fm.stringWidth(token.image()) + imagePadding, Image.SCALE_DEFAULT);
+            finalImage = finalizeImage(image, token, TOKEN_HEIGHT, fm.stringWidth(token.image()), Image.SCALE_DEFAULT);
+        
         WritableImage writableImage = SwingFXUtils.toFXImage(finalImage, null);
+        
         return new RHSIconizedToken(writableImage, token, newIndex);
     }
 
@@ -203,21 +206,20 @@ public class RHSTokenIconizer {
 	
     	String tokenImage = token.image();
     	SourceTokenKind kind = token.kind();
-    	
-    	Font font = new Font("Arial", type, 12);
+
 		BufferedImage resizedImage = new BufferedImage(width, height, type);
 		Graphics2D g = resizedImage.createGraphics();
-	    FontMetrics fm = g.getFontMetrics();
+	    FontMetrics fm = g.getFontMetrics(tokenFont);
 	    
 	    int strWidth = (fm.stringWidth(tokenImage));
 	    int imageWidth = resizedImage.getWidth();
 	    
-	    int textBegin = (imageWidth - strWidth) / 2 - 1;
-	    int textHeight = (fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2 - 3);
+	    int textBegin = (imageWidth - strWidth) / 2;
+	    int textHeight = (fm.getAscent() + (TOKEN_HEIGHT - (fm.getAscent() + fm.getDescent())) / 2);
 	    
 		g.drawImage(originalImage, 0, 0, width, height, null);
 		g.setColor(LHSTokenIconizer.tokenFontColors.get(kind));
-	    g.setFont(font);
+	    g.setFont(tokenFont);
 	    g.drawString(tokenImage, textBegin, textHeight);
 		g.dispose();
 	 
