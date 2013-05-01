@@ -346,8 +346,10 @@ public class GUI {
                         outputPanel.compilerMessage(out.getOuput());
                         timer.start();
                 }else{
-                        outputPanel.writeNodes(new Text("Congratulations! You have successfully solved the puzzle!"));
-                        outputPanel.writeNodes(new Text("The output is: \"" + out.getOuput() + "\""));
+                        outputPanel.infoMessage("Congratulations! You have successfully solved the puzzle!");
+                        outputPanel.infoMessage("The output is:\n-----");
+                        outputPanel.outputText(out.getOuput());
+                        outputPanel.infoMessage("-----");
                         // TODO: record score
                         timer.stop();
                 }

@@ -116,6 +116,10 @@ public class OutputPanel{
             rePosScroll = true;
         }
 
+        public void outputText(String str)
+        {
+            plainMessage(str, Color.CHOCOLATE);
+        }
         public void infoMessage (String str)
         {
             plainMessage(str, Color.BLUE);
