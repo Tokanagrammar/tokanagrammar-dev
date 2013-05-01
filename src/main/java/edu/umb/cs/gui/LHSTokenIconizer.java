@@ -55,20 +55,22 @@ public class LHSTokenIconizer {
 	
 	static final Map<SourceTokenKind, Color> tokenFontColors = computeColorsMap();
 	
-	private static Map<SourceTokenKind, Color> computeColorsMap()
-	{
-		EnumMap<SourceTokenKind, Color> ret = new EnumMap<>(SourceTokenKind.class);
+	
+        private static Map<SourceTokenKind, Color> computeColorsMap()
+        {
+            EnumMap<SourceTokenKind, Color> ret = new EnumMap<>(SourceTokenKind.class);
 
-		ret.put(KEYWORD, Color.MAGENTA);
-		ret.put(NUM_LITERAL, Color.black);
-		ret.put(CHAR_LITERAL, Color.orange);
-		ret.put(IDENTIFIER, Color.red);
-		ret.put(STRING_LITERAL, Color.orange);
-		ret.put(SEPARATOR, Color.black);
-		ret.put(OPERATOR, Color.black);
-		return Collections.unmodifiableMap(ret);
-	}
-        
+            Color orange = new Color (206, 123, 0);
+            ret.put(KEYWORD, Color.blue);
+            ret.put(NUM_LITERAL, Color.black);
+            ret.put(CHAR_LITERAL, orange);
+            ret.put(IDENTIFIER, Color.black);
+            ret.put(STRING_LITERAL, orange);
+            ret.put(SEPARATOR, Color.black);
+            ret.put(OPERATOR, Color.black);
+            return Collections.unmodifiableMap(ret);
+        }
+
         /**
          * Take a token and makes a graphic representation of it.
          * @param token

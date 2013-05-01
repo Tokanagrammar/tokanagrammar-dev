@@ -100,16 +100,26 @@ public class OutputPanel{
 	 * Compiler Message
 	 * Used to format actual compiler messages.
 	 */
-	public void compilerMessage(String str){
-		Text t = new Text(str);
-		t.setFont(new Font(12));
-		t.setWrappingWidth(530);
-		t.setFill(Color.RED);
-		t.setText(str);
-		vBox.getChildren().add(t);
-		rePosScroll = true;
+	public void compilerMessage(String str)
+        {
+            plainMessage(str, Color.RED);
 	}
 
+        private void plainMessage(String str, Color c)
+        {
+            Text t = new Text(str);
+            t.setFont(new Font(12));
+            t.setWrappingWidth(530);
+            t.setFill(c);
+            t.setText(str);
+            vBox.getChildren().add(t);
+            rePosScroll = true;
+        }
+
+        public void infoMessage (String str)
+        {
+            plainMessage(str, Color.BLUE);
+        }
 
 	/**
 	 * You can write ImageView, Text, Labels, and other Nodes to the

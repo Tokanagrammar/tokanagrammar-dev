@@ -74,8 +74,6 @@
             <artifactId>guava-io</artifactId>
             <version>r03</version>
         </dependency>
-        
-        
     </dependencies>
 
   <!-- rules for build -->

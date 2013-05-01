@@ -179,12 +179,12 @@ public class GUI {
                         printCategoryAndDifficultyMessage();
 
                         // Some message on the puzzle
-//                        if (orig != null)
-//                        {
-//                        	outputPanel.compilerMessage("Total tokens: " + orig.tokenCount());
-//                        	outputPanel.compilerMessage("Removed: " + currentSource.getRemovedTokens().size()
-//                        			+ "(" + curDifficulty + "%)");
-//                        }
+                        if (orig != null)
+                        {
+                            outputPanel.infoMessage("Total tokens: " + orig.tokenCount());
+                            outputPanel.infoMessage("Removed: " + currentSource.getRemovedTokens().size()
+                                                    + "(" + curDifficulty + "%)");
+                        }
                     }
 
                 }
