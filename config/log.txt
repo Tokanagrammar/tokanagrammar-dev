@@ -6646,3 +6646,2219 @@ Compiling New Source Code.
 Application stopped: Wed May 01 20:03:30 EDT 2013
 =======
 >>>>>>> 5ee130d14795f828ebe67a41efd53c8aaa6edbd7
+
+=================================
+Application started on: Wed May 01 20:22:28 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:24:38 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+Application stopped: Wed May 01 20:25:07 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:35:10 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+
+=================================
+Application started on: Wed May 01 20:48:21 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:48:29 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:49:20 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:49:23 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:50:12 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:50:21 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:51:28 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:51:31 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:52:28 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:52:29 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:52:53 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:52:56 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:53:11 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:53:15 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:53:23 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:53:30 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:54:43 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:54:46 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:55:37 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:55:40 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+Application stopped: Wed May 01 20:57:30 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:57:33 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+0 ::: 1
+1 ::: 1
+2 ::: 1
+3 ::: 1
+4 ::: 1
+5 ::: 1
+6 ::: 1
+7 ::: 1
+8 ::: 1
+9 ::: 1
+10 ::: 2
+11 ::: 2
+12 ::: 2
+13 ::: 2
+14 ::: 2
+15 ::: 2
+16 ::: 2
+17 ::: 2
+18 ::: 2
+19 ::: 2
+Application stopped: Wed May 01 20:58:15 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:58:18 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 20:58:51 EDT 2013
+
+=================================
+Application started on: Wed May 01 20:58:54 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:00:18 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:00:21 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+Application stopped: Wed May 01 21:01:24 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:01:25 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+Application stopped: Wed May 01 21:02:00 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:02:04 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+Application stopped: Wed May 01 21:04:42 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:04:50 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:05:11 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:08:04 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Wed May 01 21:08:21 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:08:25 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:08:47 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:08:50 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:08:58 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:09:10 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:09:19 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:09:35 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:10:04 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:10:07 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+
+=================================
+Application started on: Wed May 01 21:10:53 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+Application stopped: Wed May 01 21:11:24 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:11:26 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+Application stopped: Wed May 01 21:12:37 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:12:39 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+
+=================================
+Application started on: Wed May 01 21:13:13 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+
+=================================
+Application started on: Wed May 01 21:24:31 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:24:38 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:26:25 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:35:34 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+Application stopped: Wed May 01 21:37:08 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:37:09 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+Application stopped: Wed May 01 21:37:44 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:38:01 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+Application stopped: Wed May 01 21:40:50 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:40:54 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+DifficultyScreenController.initialize
+Application stopped: Wed May 01 21:42:44 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:43:17 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:44:04 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:45:06 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:50:00 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:50:05 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:53:33 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:53:37 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 21:54:47 EDT 2013
+
+=================================
+Application started on: Wed May 01 21:54:52 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Wed May 01 21:57:13 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:14:12 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:14:17 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:21:50 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:21:57 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:25:27 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:25:28 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:28:23 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:28:29 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:29:44 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:29:48 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:30:26 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:30:29 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:32:25 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:32:27 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:37:45 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:38:13 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:39:18 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:39:21 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:40:36 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:40:40 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:43:40 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:48:51 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:49:38 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:49:40 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:49:55 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:50:51 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:51:00 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:51:05 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Wed May 01 22:52:29 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:52:37 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Wed May 01 22:53:23 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Wed May 01 22:54:34 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:55:08 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:55:17 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:55:48 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:55:51 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:56:08 EDT 2013
+
+=================================
+Application started on: Wed May 01 22:57:50 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 22:58:09 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:13:52 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:14:05 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:17:02 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:41:17 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:41:21 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:42:29 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:42:32 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:42:57 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:43:05 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:44:05 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:44:10 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:46:02 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:46:04 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:47:35 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:47:37 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Wed May 01 23:52:55 EDT 2013
+
+=================================
+Application started on: Wed May 01 23:52:57 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 00:18:19 EDT 2013
+
+=================================
+Application started on: Thu May 02 00:18:20 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 00:18:55 EDT 2013
+
+=================================
+Application started on: Thu May 02 00:22:55 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 00:30:44 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:04:27 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Thu May 02 01:04:30 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:10:43 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 01:13:51 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:13:57 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:15:35 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:15:38 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:16:31 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:16:33 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:16:56 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:17:45 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 01:24:32 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:24:37 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 01:28:14 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:29:04 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:29:07 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:29:34 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:29:35 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:30:18 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:32:35 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 01:32:53 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:33:05 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:33:28 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:36:43 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:36:47 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:37:28 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:37:30 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:37:43 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:43:52 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:44:27 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:44:30 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:45:13 EDT 2013
+
+=================================
+Application started on: Thu May 02 01:55:02 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 01:55:27 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:01:19 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 02:01:24 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:01:43 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:03:43 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:04:34 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:04:36 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:05:17 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:05:22 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:06:07 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:06:09 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 02:06:16 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 02:06:38 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:06:56 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:13:31 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:13:47 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:17:18 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:17:51 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:27:17 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:27:31 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:31:11 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+Application stopped: Thu May 02 02:31:58 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:33:12 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:33:27 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:40:52 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:41:07 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:47:52 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:48:17 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:48:20 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:52:20 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:52:25 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 02:54:05 EDT 2013
+
+=================================
+Application started on: Thu May 02 02:54:09 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 03:04:11 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:04:15 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 03:09:27 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:09:30 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+Application stopped: Thu May 02 03:13:17 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:13:21 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 03:14:45 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:14:52 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 03:20:09 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:20:14 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 03:26:23 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:26:25 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 03:27:07 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:27:10 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 03:28:37 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:28:40 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+Application stopped: Thu May 02 03:33:01 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:33:05 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+Application stopped: Thu May 02 03:36:14 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:36:16 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+Application stopped: Thu May 02 03:42:02 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:46:17 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 03:46:47 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 03:46:57 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Thu May 02 03:47:00 EDT 2013
+
+=================================
+Application started on: Thu May 02 03:50:25 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+confirmYesBtnFired
+closeBtnFired
+closeBtnFired
+closeBtnFired
+closeBtnFired
+confirmYesBtnFired
+
+=================================
+Application started on: Thu May 02 03:51:12 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+closeBtnFired
+confirmYesBtnFired
+confirmYesBtnFired
+closeBtnFired
+
+=================================
+Application started on: Thu May 02 03:52:22 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:00:10 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 04:02:10 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 04:03:06 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 04:07:54 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 04:08:42 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:09:24 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 04:10:28 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:10:39 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 04:11:22 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Thu May 02 04:11:25 EDT 2013
+
+=================================
+Application started on: Thu May 02 04:11:29 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 04:11:35 EDT 2013
+
+=================================
+Application started on: Thu May 02 04:19:12 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:20:18 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:21:24 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:21:50 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:26:20 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Thu May 02 04:26:23 EDT 2013
+
+=================================
+Application started on: Thu May 02 04:26:59 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Thu May 02 04:27:04 EDT 2013
+
+=================================
+Application started on: Thu May 02 04:27:12 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 04:29:57 EDT 2013
+
+=================================
+Application started on: Thu May 02 04:30:04 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+
+=================================
+Application started on: Thu May 02 04:44:12 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 04:45:43 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Thu May 02 04:45:52 EDT 2013
+
+=================================
+Application started on: Thu May 02 04:45:57 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 04:46:26 EDT 2013
+
+=================================
+Application started on: Thu May 02 04:48:03 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 04:49:08 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:17:43 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+
+=================================
+Application started on: Thu May 02 05:23:48 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:24:07 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+Application stopped: Thu May 02 05:24:14 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:24:23 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 05:24:37 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:25:55 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 05:26:08 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:27:07 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 05:27:20 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:28:17 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+Application stopped: Thu May 02 05:28:29 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:31:36 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+
+=================================
+Application started on: Thu May 02 05:33:53 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:34:02 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+
+=================================
+Application started on: Thu May 02 05:34:10 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+
+=================================
+Application started on: Thu May 02 05:36:02 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 05:37:00 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:46:02 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 05:47:18 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:47:48 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 05:48:01 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:48:38 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 05:48:47 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:54:19 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 05:54:30 EDT 2013
+
+=================================
+Application started on: Thu May 02 05:58:06 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 05:58:20 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:01:53 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:02:03 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:07:23 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:07:30 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:08:11 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:08:19 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:08:32 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:08:43 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:14:15 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:14:28 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:15:33 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:16:31 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:21:03 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:21:22 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:36:00 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:36:26 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:40:04 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+Application stopped: Thu May 02 06:40:56 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:41:57 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+
+=================================
+Application started on: Thu May 02 06:43:56 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+
+=================================
+Application started on: Thu May 02 06:45:20 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+CategoriesScreenController.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:45:42 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:46:18 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+
+=================================
+Application started on: Thu May 02 06:46:57 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:47:31 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:48:16 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+confirmYesBtnFired
+DifficultyScreenController.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:49:30 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:50:01 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+ENABLE COMPILE BUTTON CALLED
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+Application stopped: Thu May 02 06:51:06 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:51:09 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+Application stopped: Thu May 02 06:53:54 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:55:15 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:55:37 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:57:41 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+Application stopped: Thu May 02 06:57:53 EDT 2013
+
+=================================
+Application started on: Thu May 02 06:58:07 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+DifficultyScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+confirmYesBtnFired
+ENABLE COMPILE BUTTON CALLED
+SettingsScreenController.initialize
+
+=================================
+Application started on: Thu May 02 07:00:15 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+DifficultyScreenController.initialize
+SettingsScreenController.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+DifficultyScreenController.initialize
+confirmYesBtnFired
+DifficultyScreenController.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+Application stopped: Thu May 02 07:03:52 EDT 2013
+
+=================================
+Application started on: Thu May 02 07:03:56 EDT 2013
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Matt\git\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+CategoriesScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+Application stopped: Thu May 02 11:04:59 EDT 2013

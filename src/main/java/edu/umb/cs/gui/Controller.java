@@ -47,6 +47,7 @@ import edu.umb.cs.gui.screens.ConfirmSkipScreen;
 import edu.umb.cs.gui.screens.CategoriesScreen;
 import edu.umb.cs.gui.screens.DifficultyScreen;
 import edu.umb.cs.gui.screens.PauseScreen;
+import edu.umb.cs.gui.screens.SettingsScreen;
 import javafx.event.EventType;
 
 
@@ -84,6 +85,8 @@ public class Controller implements Initializable{
 	private Button resetBoardButton;
 	@FXML
 	private Button logoButton;
+	@FXML
+	private Button settingsButton;
 	
 	private static LinkedList<Button> buttons;
 	
@@ -280,6 +283,15 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 		
+	}
+	
+    /**
+     * Called when the settings button is fired.
+     *
+     * @param event the action event.
+     */
+	public void settingsFired(ActionEvent event){
+			GUI.getInstance().pauseGame(new SettingsScreen());
 	}
 	//--------------------------------------------------------------------------------
 	//END GUI BUTTONS

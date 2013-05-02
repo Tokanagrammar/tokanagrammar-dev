@@ -20,10 +20,17 @@
  */
 package edu.umb.cs.gui;
 
+import java.io.Serializable;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class IconizedToken {
+public abstract class IconizedToken implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	protected abstract ImageView initImageView(Image img);
 	

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="528.0" styleClass="bg" xmlns:fx="http://javafx.com/fxml" fx:controller="edu.umb.cs.gui.screens.SettingsScreenController">
+  <children>
+    <Pane fx:id="titlePane" layoutX="13.0" layoutY="22.0" prefHeight="30.0" prefWidth="314.0" styleClass="settingsText" />
+    <Pane fx:id="leftPane" layoutX="13.0" layoutY="87.0" prefHeight="292.0" prefWidth="249.0" />
+    <Pane fx:id="rightPane" layoutX="267.0" layoutY="88.0" maxHeight="292.0" maxWidth="249.0" minHeight="292.0" minWidth="249.0" prefHeight="292.0" prefWidth="249.0">
+      <children>
+        <Button id="updateBtn" fx:id="startBtn" layoutX="145.0" layoutY="246.0" maxHeight="34.0" maxWidth="92.0" minHeight="34.0" minWidth="92.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" styleClass="updateBtn">
+          <stylesheets>
+            <URL value="@../styles/secondary.css" />
+          </stylesheets>
+        </Button>
+      </children>
+    </Pane>
+    <Button fx:id="closeBtn" layoutX="480.0" layoutY="20.0" mnemonicParsing="false" onAction="#closeBtnFired" prefHeight="34.0" prefWidth="35.0" styleClass="closeBtn" />
+  </children>
+  <stylesheets>
+    <URL value="@../styles/secondary.css" />
+  </stylesheets>
+</AnchorPane>

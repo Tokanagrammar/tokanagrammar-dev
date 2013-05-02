@@ -105,7 +105,7 @@ public class LHSIconizedToken extends IconizedToken{
 	}
 
 	public String dragBoardString(){
-		return token.kind() + " " + token.image() + " " + index;
+		return token.kind() + ":::" + token.image() + ":::" + index;
 	}
 	
 	
@@ -153,7 +153,7 @@ public class LHSIconizedToken extends IconizedToken{
 										GameBoard.getInstance().getTokenBoardItokens();
 
 								String dragBoardContent = db.getString();
-								String delims = "[ ]+";
+								String delims = "[:::]+";
 								String[] strs = dragBoardContent.split(delims);
 
 								SourceToken sourceToken = new SourceTokenBase(strs[1], // image
@@ -298,13 +298,6 @@ public class LHSIconizedToken extends IconizedToken{
 					iTokens.add(index, new LHSIconizedToken(element.getImage(), EmptyToken.INSTANCE, index));
 
 					imgView.setImage(new Image(Tokanagrammar.class.getResourceAsStream("/images/ui/tokens/removed_.fw.png")));
-
-//					System.out.println("\n\nDrag Done, Remove and Replace LHS token with \"empty\" token: ");
-//					System.out.println("Check Data Structures:  ");
-//					System.out.println("LHSIconizedTokens: (make sure replaced!)");
-//					for(LHSIconizedToken iToken: iTokens)
-//						System.out.println("[[[LHSItoken index: " + iToken.getIndex() + " SourceToken: " + iToken.getSourceToken() + "]]] ");
-//					System.out.println("\n\n");
 
 					occupied = false;
 				}

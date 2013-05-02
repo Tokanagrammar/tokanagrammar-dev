@@ -86,6 +86,8 @@ public class GUI {
 	
 	private List<CategoryDescriptor> curCategories;
         
+    private static BracingStyle curBracingStyle;
+    
     /** Used to blur screen on pausing*/
 	private static boolean init  = false;
 	
@@ -112,6 +114,7 @@ public class GUI {
 			outputPanel = OutputPanel.getInstance();
 			timer = GUITimer.getInstance();
 			init = true;
+			curBracingStyle = BracingStyle.K_AND_R;
 		}
 
 		return gui;
@@ -151,7 +154,7 @@ public class GUI {
             // TODO: have a radio button in the main windows
             // for easy switching back and forth
             // ask for style: 
-            getBracingStyle();
+            //getBracingStyle();
 
             // retrieve a puzzle from back end
             // TODO: This method should be called with an argument
@@ -161,7 +164,7 @@ public class GUI {
             try
             {
                 curPuzzle = edu.umb.cs.api.APIs.getRandomPuzzle();
-                orig = curPuzzle.getSourceFile(style);
+                orig = curPuzzle.getSourceFile(curBracingStyle);
             }
             catch (Exception ex)
             {
@@ -278,7 +281,7 @@ public class GUI {
 	 * Skips the current board and goes to the next. 							//TODO backend
 	 */
 	public void skipPuzzle(){
-		System.out.println("<<<Back end for getting the next puzzle>>>");		//TODO backend
+		System.err.println("<<<Back end for getting the next puzzle>>>");		//TODO backend
 		
 		outputPanel.clear();
 
@@ -538,6 +541,13 @@ public class GUI {
 	public List<RHSIconizedToken> getRHSIconizedTokens(){
 		return GameBoard.getInstance().getTokenBayItokens();
 	}
+	
+	/**
+	 * 
+	 */
+	public BracingStyle getCurBracingStyle(){
+		return curBracingStyle;
+	}
 
 	/**
 	 * Set the current difficulty
@@ -574,6 +584,13 @@ public class GUI {
 	 */
 	public void setTokenBoardTokens(LinkedList<SourceToken> tokens){
 		this.tokenBoardTokens = tokens;
+	}
+	
+	/**
+	 * 
+	 */
+	public void setCurBracingStyle(BracingStyle bs){
+		this.curBracingStyle = bs;
 	}
 
 	//--------------------------------------------------------------------------
@@ -646,49 +663,7 @@ public class GUI {
 		activeButtons.put(GameState.COMPILING, compilingBtns);
 	}
         
-        private static BracingStyle style;
-        private static BracingStyle getBracingStyle()
-        {
-            // allman
-            JRadioButton allman = new JRadioButton("ALLMAN");
-            allman.addActionListener(new AllmanListener());
-            
-            // K&R
-            JRadioButton kr = new JRadioButton("K&R");
-            kr.addActionListener(new KRListener());;
- 
-            ButtonGroup group = new ButtonGroup();
-            group.add(allman);
-            group.add(kr);
-            group.setSelected(allman.getModel(), true);
-            style = BracingStyle.ALLMAN;
-            final JComponent[] ops = new JComponent[]
-            {
-                allman,
-                kr
-            };
-            
-            javax.swing.JOptionPane.showMessageDialog(null, ops, "Choose a bracing style", JOptionPane.PLAIN_MESSAGE);
-            return style;
-        }
-        
-        private static class AllmanListener implements ActionListener
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                style = BracingStyle.ALLMAN;
-            }   
-        }
-        
-        private static class KRListener implements ActionListener
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                style = BracingStyle.K_AND_R;
-            }   
-        }
+
         
         private static class WaitWindow extends JFrame
         {

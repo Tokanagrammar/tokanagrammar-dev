@@ -9,9 +9,9 @@
 	-fx-background-image: url("../images/ui/secondaryScreens/simpleOnePanel.fw.png");
 }
 
-.categoriesText{
+.difficultyText{
 	-fx-background-repeat: no-repeat;
-	-fx-background-image: url("../images/ui/secondaryScreens/categoriesText.fw.png");
+	-fx-background-image: url("../images/ui/secondaryScreens/difficultyText.fw.png");
 }
 .setBtn{
 	-fx-background-repeat: no-repeat;
@@ -29,10 +29,6 @@
 	-fx-background-color: transparent;
 }
 
-.difficultyText{
-	-fx-background-repeat: no-repeat;
-	-fx-background-image: url("../images/ui/secondaryScreens/difficultyText.fw.png");
-}
 
 /*-------------------------------END DIFFICULTY WINDOW CSS------------------------ */
 
@@ -45,6 +41,10 @@
 	-fx-background-image: url("../images/ui/secondaryScreens/simpleTwoPanel.fw.png");
 }
 
+.categoriesText{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/categoriesText.fw.png");
+}
 .startBtn{
 	-fx-text-decoration: none;
 	-fx-background-repeat: no-repeat;
@@ -83,6 +83,31 @@
 /*-------------------------------END CATEGORIES WINDOW CSS------------------------ */
 
 
+/*-------------------------------START SETTINGS WINDOW CSS------------------------ */
+
+.settingsText{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/settingsText.fw.png");
+}
+.updateBtn{
+	-fx-text-decoration: none;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/setbtn.fw.png");
+	-fx-background-color: transparent;
+}
+.updateBtn:hover{
+	-fx-text-decoration: none;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/setbtn_HOVER.fw.png");
+	-fx-background-color: transparent;
+}
+.updateBtn:pressed{
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/ui/secondaryScreens/setbtn.fw.png");
+	-fx-background-color: transparent;
+}
+
+/*-------------------------------END SETTINGS WINDOW CSS-------------------------- */
 
 
 /*-------------------------------------------------------------------------------- */

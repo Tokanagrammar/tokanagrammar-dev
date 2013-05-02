@@ -47,16 +47,8 @@
     <Accordion layoutX="107.0" layoutY="50.0" />
     <Pane fx:id="timer" layoutX="639.0" layoutY="529.0" prefHeight="40.0" prefWidth="218.0" />
     <Pane fx:id="difficultyPane" layoutX="709.0" layoutY="45.0" minHeight="40.0" minWidth="64.0" />
-    <Pane fx:id="settings" layoutX="825.0" layoutY="617.0" prefHeight="35.0" prefWidth="35.0" styleClass="settingsButton">
-      <stylesheets>
-        <URL value="@../styles/backgroundAndButtons.css" />
-      </stylesheets>
-    </Pane>
-    <Pane fx:id="addPuzzle" layoutX="740.0" layoutY="618.0" prefHeight="35.0" prefWidth="35.0" styleClass="addPuzzle">
-      <stylesheets>
-        <URL value="@../styles/backgroundAndButtons.css" />
-      </stylesheets>
-    </Pane>
+    <Button fx:id="settingsButton" onAction="#settingsFired"  layoutX="834.0" layoutY="631.0" prefHeight="25.0" prefWidth="25.0" styleClass="settingsButton"/>
+
   </children>
   <stylesheets>
     <URL value="@../styles/backgroundAndButtons.css" />
