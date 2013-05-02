@@ -141,53 +141,68 @@ public class GUI {
      * Start the game gameState is "startGame" The user has selected a category
      * (or categories) and pressed "start".
      */
-    public void gameState_startGame()
+    public void gameState_startGame(boolean newGame)
     {
         curGameState = GameState.START_GAME;
         blurOff();
+
         //initialization of new start of game
         if (!inGame)
         {
-            // TODO: have a radio button in the main windows
-            // for easy switching back and forth
-            // ask for style: 
-            getBracingStyle();
-
-            // retrieve a puzzle from back end
-            // TODO: This method should be called with an argument
-            // being the set of categories,
-            // we can do: p = APIs.picOne(<set of categories>);
-            SourceFile orig = null;
-            try
+            if (newGame || curPuzzle == null || currentSource == null)
             {
-                curPuzzle = edu.umb.cs.api.APIs.getRandomPuzzle();
-                orig = curPuzzle.getSourceFile(style);
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-                outputPanel.compilerMessage("Error retrieving puzzles: " + ex.getMessage());
-            }
+                // TODO: have a radio button in the main windows
+                // for easy switching back and forth
+                // ask for style: 
+                getBracingStyle();
 
-            if (orig != null)
-            {
-                currentSource = edu.umb.cs.api.APIs.shuffle(orig, curDifficulty);
+                // retrieve a puzzle from back end
+                // TODO: This method should be called with an argument
+                // being the set of categories,
+                // we can do: p = APIs.picOne(<set of categories>);
+                SourceFile orig = null;
+                try
+                {
+                    curPuzzle = edu.umb.cs.api.APIs.getRandomPuzzle();
+                    orig = curPuzzle.getSourceFile(style);
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                    outputPanel.compilerMessage("Error retrieving puzzles: " + ex.getMessage());
+                }
 
-                tokenBayTokens = currentSource.getRemovedTokens();
-
-                gameBoard.initTokenBoard(currentSource.getShuffledSource());
-                gameBoard.initTokenBay(RHSTokenIconizer.iconizeTokens(tokenBayTokens));
-
-                outputPanel.clear();
-                printCategoryAndDifficultyMessage();
-
-                // Some message on the puzzle
                 if (orig != null)
                 {
-                    outputPanel.infoMessage("Total tokens: " + orig.tokenCount());
-                    outputPanel.infoMessage("Removed: " + currentSource.getRemovedTokens().size()
-                                            + "(" + curDifficulty + "%)");
+                    currentSource = edu.umb.cs.api.APIs.shuffle(orig, curDifficulty);
+
+                    tokenBayTokens = currentSource.getRemovedTokens();
+
+                    gameBoard.initTokenBoard(currentSource.getShuffledSource());
+                    gameBoard.initTokenBay(RHSTokenIconizer.iconizeTokens(tokenBayTokens));
+
+                    outputPanel.clear();
+                    printCategoryAndDifficultyMessage();
+
+                    // Some message on the puzzle
+                    if (orig != null)
+                    {
+                        outputPanel.infoMessage("Total tokens: " + orig.tokenCount());
+                        outputPanel.infoMessage("Removed: " + currentSource.getRemovedTokens().size()
+                                                + "(" + curDifficulty + "%)");
+                    }
                 }
+            }
+            else
+            {
+                tokenBayTokens = currentSource.getRemovedTokens();
+
+                    gameBoard.initTokenBoard(currentSource.getShuffledSource());
+                    gameBoard.initTokenBay(RHSTokenIconizer.iconizeTokens(tokenBayTokens));
+
+                    //outputPanel.clear();
+                    //printCategoryAndDifficultyMessage();
+
             }
         }
 
@@ -271,7 +286,7 @@ public class GUI {
             gameBoard.resetTokenBay();
             gameBoard.resetTokenBoard();
             inGame = false;
-            gameState_startGame();
+            gameState_startGame(false);
         }
 	
 	/**
@@ -286,7 +301,7 @@ public class GUI {
 		
 		resetGame();
 		inGame = false;
-		gameState_startGame();
+		gameState_startGame(true);
 	}
 	
 	/**
@@ -703,6 +718,7 @@ public class GUI {
                 pn.add(hourGlass);
                 this.add(pn);
                 this.setLocationRelativeTo(null);
+                this.setAlwaysOnTop(true);
                 this.setVisible(false);
                 // do not let the user close the window
                 // this will be disposed once the compilation is done

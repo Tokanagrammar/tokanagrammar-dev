@@ -68,7 +68,7 @@ public class DifficultyScreenController implements SecondaryScreenController{
 		if(GUI.getInstance().getCurGameState().equals(GameState.INIT_GUI))
 			GUI.getInstance().blurOff();
 		else if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME))
-			GUI.getInstance().gameState_startGame();
+			GUI.getInstance().gameState_startGame(true);
 		
 		CategoriesScreen.tearDown();
 	}
