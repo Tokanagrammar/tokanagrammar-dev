@@ -60,7 +60,7 @@ public class PauseScreen extends SecondaryScreen implements Initializable {
 		if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
 			GUI.getInstance().blurOff();
 			tearDown();
-			GUI.getInstance().gameState_startGame();
+			GUI.getInstance().gameState_startGame(true);
 		}
 	}
 	

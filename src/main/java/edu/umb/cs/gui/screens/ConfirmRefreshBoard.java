@@ -62,7 +62,7 @@ public class ConfirmRefreshBoard extends SecondaryScreen implements Initializabl
 		if(gs.equals(GameState.START_GAME) || gs.equals(GameState.FULL_LHS)){
 			GUI.getInstance().blurOff();
 			tearDown();
-			GUI.getInstance().gameState_startGame();
+			GUI.getInstance().gameState_startGame(false);
 		}
 	}
 	//only acts as a duplicate close button...

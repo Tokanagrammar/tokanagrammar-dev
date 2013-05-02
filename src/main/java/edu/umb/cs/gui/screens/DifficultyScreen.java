@@ -135,7 +135,8 @@ public class DifficultyScreen extends SecondaryScreen{
 	public static void executeSetBtnFired(){
 		
 		GameState gameState = GUI.getInstance().getCurGameState();
-		
+		// TODO: reset difficulty level => same puzzle (not new one)
+                
 		//*******Sets the difficultyLevel in in GUI*******
 		GUI.getInstance().setCurDifficulty(curDifficultyLevel);
 		
@@ -153,7 +154,7 @@ public class DifficultyScreen extends SecondaryScreen{
                         tearDown();
 			GUI.getInstance().resetGame();
 			GUI.getInstance().gameState_initGUI();
-			GUI.getInstance().gameState_startGame();
+			GUI.getInstance().gameState_startGame(true);
 		}
 		
 		GUI.getInstance().blurOff();

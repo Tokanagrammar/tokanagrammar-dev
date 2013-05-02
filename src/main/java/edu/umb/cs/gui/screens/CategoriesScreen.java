@@ -87,11 +87,11 @@ public class CategoriesScreen extends SecondaryScreen{
                                 tearDown();
 				if(GUI.getInstance().getCurGameState().equals(GameState.INIT_GUI)){
 					//This is the one and only entry point into actually playing a game.
-					GUI.getInstance().gameState_startGame();
+					GUI.getInstance().gameState_startGame(true);
 				}else if(GUI.getInstance().getCurGameState().equals(GameState.START_GAME)){
 					GUI.getInstance().resetGame();
 					GUI.getInstance().gameState_initGUI();
-					GUI.getInstance().gameState_startGame();
+					GUI.getInstance().gameState_startGame(true);
 					GUI.getInstance().setCurCategories(selectedCategories);
 				}
 				
