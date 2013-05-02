@@ -326,16 +326,15 @@ public class GUI {
                     bd.append(tk.getSourceToken().image());
                 }
                 enableStopButton();
-                new Thread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
+//                new Thread(new Runnable()
+//                {
+//                    @Override
+//                    public void run()
+//                    {
                         blurOn();
-                        javax.swing.JOptionPane.showMessageDialog(null,
-                                                                  "Compiling, please wait!");
-                    }   
-                }).start();
+                        javax.swing.JOptionPane.showMessageDialog(null,"Compiling, please wait!");
+//                    }   
+//                }).start();
                 
                 Output out = edu.umb.cs.api.APIs.compile(bd.toString(),
                                                          currentSource.getOrinalSource().getClassName());
