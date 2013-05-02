@@ -198,8 +198,9 @@
                         <exclude>target/generated-sources/javacc/GrammarParser/*.java</exclude>
                         <exclude>target/**</exclude>
                         <exclude>puzzles/**</exclude>
-                        <exclude>config/version.txt</exclude>
+                        <exclude>config/*.txt</exclude>
                         <exclude>tmp/**</exclude>
+                        <exclude>**/Thumbs.db</exclude>
                     </excludes>
                     <mapping>
                         <g>JAVADOC_STYLE</g>
