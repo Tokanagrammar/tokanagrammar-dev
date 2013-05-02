@@ -102,6 +102,11 @@ public class GameBoard {
 		tokenBoardItokens = settleTokenBoard(src);
 	}
 	
+        public void refreshTokenBoard()
+        {
+            
+        }
+        
 	public void resetTokenBoard(){
 		//tokenBoardStartPosition = TOKENBOARD_OFFSET + TOKENBOARD_BUFFERSIZE;
 

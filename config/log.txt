@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ====
     Copyright (C) 2013 Tokanagrammar Team
 
@@ -6643,3 +6644,5 @@ CategoriesScreenController.initialize
 
 Compiling New Source Code.
 Application stopped: Wed May 01 20:03:30 EDT 2013
+=======
+>>>>>>> 5ee130d14795f828ebe67a41efd53c8aaa6edbd7

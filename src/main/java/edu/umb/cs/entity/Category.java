@@ -21,86 +21,76 @@
 
 package edu.umb.cs.entity;
 
-import java.util.Calendar;
-import java.util.TimeZone;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
  * @author              Vy Thuy Nguyen
- * @version             2.0-snapshot Mar 23, 2013
  * Last modified:       
  */
 @Entity
-public class Game 
+public class Category 
 {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
     
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private User user;
+    private String name;
     
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private Puzzle puzzle;
+    private String description;
     
-    private long point;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+               fetch = FetchType.EAGER, mappedBy = "categoy")
+    private Set<Puzzle> puzzles;
     
-    /**
-     * Number of seconds since epoch
-     */
-    private long timestamp;
-    
-    public Game()
+    public Category()
     {
         
     }
     
-    public Game(User u, Puzzle p)
+    public Category(String name, String desc)
     {
-        user = u;
-        puzzle = p;
-        point = 0;
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-        calendar.clear();
-        calendar.set(2011, Calendar.OCTOBER, 1);
-        timestamp = calendar.getTimeInMillis() / 1000L;
-        
+        this.name = name.toUpperCase();
+        this.description = desc;
+        this.puzzles = new HashSet<>();
     }
     
-    public User getUser()
+    public String getName()
     {
-        return user;
+        return this.name;
     }
     
-    public Puzzle getPuzzle()
+    public String getDescription()
     {
-        return puzzle;
+        return this.description;
     }
     
-    public long getPoint()
+    public void addPuzzle(Puzzle p)
     {
-        return point;
+        this.puzzles.add(p);
     }
     
-    public void setPoint(int p)
+    public Set<Puzzle> getPuzzles()
     {
-        point = p;
+        return Collections.unmodifiableSet(puzzles);
     }
     
     public int hashCode()
     {
-        return id;
+        return name.hashCode();
     }
-
+    
     @Override
     public boolean equals(Object obj)
     {
-        if (obj == null || !(obj instanceof Game))
+        if (obj == null || !(obj instanceof Category))
         {
             return false;
         }
         
-        Game other = (Game) obj;
-        return id == other.id;
+        Category catOther = (Category) obj;
+        return name.equals(catOther.name);
     }
 }

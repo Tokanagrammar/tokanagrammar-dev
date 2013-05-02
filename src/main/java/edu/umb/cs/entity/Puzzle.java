@@ -76,11 +76,11 @@ public class Puzzle implements Serializable
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, 
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
-    private HashSet<Game> games;
+    private Set<Game> games;
  
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, 
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
-    private HashSet<Hint> hints;
+    private Set<Hint> hints;
  
     public Puzzle()
     {
@@ -98,8 +98,8 @@ public class Puzzle implements Serializable
         filePath = path;
         expectedResult = expRes;
         metaData = mdata;
-        games = new HashSet<Game>();
-        hints = new HashSet<Hint>();
+        games = new HashSet<>();
+        hints = new HashSet<>();
     }
     
     public SourceFile getSourceFile(BracingStyle style) throws ParseException, FileNotFoundException
@@ -161,11 +161,6 @@ public class Puzzle implements Serializable
         }
         
         Puzzle other = (Puzzle) obj;
-        if (this.filePath.equals(other.filePath))
-        {
-            return true;
-        }
-        
-        return false;
+        return filePath.equals(other.filePath);
     }
 }

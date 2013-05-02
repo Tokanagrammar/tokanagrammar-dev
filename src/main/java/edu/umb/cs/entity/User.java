@@ -109,11 +109,7 @@ public class User   implements Serializable
         }
         
         User other = (User) obj;
-        if (this.username.compareTo(other.username) != 0)
-        {
-            return false;
-        }
-        return true;
+        return username.equals(other.username);
     }
 
     @Override
