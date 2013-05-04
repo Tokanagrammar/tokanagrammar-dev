@@ -33,8 +33,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.Glow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -42,7 +40,6 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class GameBoard {
 	
@@ -82,8 +79,6 @@ public class GameBoard {
 	private static List<Node> lhsLines = lhsLineContainer.getChildren();
 	
 	private static List<LHSIconizedToken> tokenBoardItokens;
-	private static int tokenBoardStartPosition = 	TOKENBOARD_OFFSET + 
-													TOKENBOARD_BUFFERSIZE;
 	
 	/**Places the tokens in the tokenBoard by calling settleTokenBoard**/
 	public void initTokenBoard(SourceFile src){
@@ -108,8 +103,6 @@ public class GameBoard {
         }
         
 	public void resetTokenBoard(){
-		//tokenBoardStartPosition = TOKENBOARD_OFFSET + TOKENBOARD_BUFFERSIZE;
-
 		lhsLines.removeAll(lhsLines);
 		
 		tokenBoardItokens.removeAll(tokenBoardItokens);
@@ -133,7 +126,7 @@ public class GameBoard {
             for (int lineIndex = 0; lineIndex < lineCount; ++lineIndex)
             {
                 line.setMinHeight(30);
-            	lineNumber = new Label(lineIndex + 1 + "  ");
+        	lineNumber = new Label(lineIndex + 1 + ((lineIndex + 1 + "").length() == 1 ? "   " : " "));
                 lineNumber.setStyle("-fx-fill:black; -fx-padding: 0, 0, 0, 0;");
 
                 line.getChildren().add(lineNumber);
@@ -171,21 +164,12 @@ public class GameBoard {
 	
 	private static ObservableList<Node> tokenBayChildren;
 	
-	//private static boolean isTokenBayInit = false;
-	
 	/**Places the tokens in the tokenBay by calling settleTokenBay**/
 	public void initTokenBay(List<RHSIconizedToken> iTokens){
 		
 		tokenBayItokens = iTokens;
 
-		//isTokenBayInit = true;
-		
 		final ScrollPane scrollPane = new ScrollPane();
-		
-		scrollPane.setMinWidth(TOKENBAY_WIDTH);
-		scrollPane.setMinHeight(TOKENBAY_HEIGHT);
-		scrollPane.setMaxWidth(TOKENBAY_WIDTH);
-		scrollPane.setMaxHeight(TOKENBAY_HEIGHT);
 		
 		scrollPane.setStyle("-fx-background-color: transparent;");
 		
@@ -199,6 +183,10 @@ public class GameBoard {
 		scrollPane.setMaxWidth(230);
 		scrollPane.setMaxHeight(421);
 		
+		tokenBay.setMinHeight(421);
+		tokenBay.setMinWidth(225);
+		tokenBay.setMaxWidth(225);
+
 		tokenBay.setOnDragOver(new EventHandler<DragEvent>(){
 			@Override
 			public void handle(DragEvent event) {
@@ -213,43 +201,37 @@ public class GameBoard {
 
 				Dragboard db = event.getDragboard();
 				boolean success = false;
-				
+
 				if (db.hasString()) {
-
-					List<RHSIconizedToken> iTokens = 
-							GameBoard.getInstance().getTokenBayItokens();
-
-					//if it was from this side we don't want to mess w/
-					//any data structure, just put the image here.
-					
-					//otherwise the dragboard content is important, we transfer
-					//the token from the LHS to the tokenBay
-
-					//or either way, you could just remove the data structure
-					//and replace it like you have before.
 					String dragBoardContent = db.getString();
-					String delims = "[ ]+";
-					String[] strs = dragBoardContent.split(delims);
+					String delim = "[:::]+";
+					String[] strs = dragBoardContent.split(delim);
 
-					SourceToken sourceToken = new SourceTokenBase(strs[1], // image
-							SourceTokenKind.valueOf(strs[0])); // kind
+					SourceToken sourceToken = 
+							new SourceTokenBase(strs[1], 		// image
+							SourceTokenKind.valueOf(strs[0])); 	// kind
+					String index = strs[2];					// index
+					
+					System.err.println("kind: " + strs[0]);
+					System.err.println("index: " + strs[2]);
 
-					String index = strs[2];
-					Integer intIndex = Integer.parseInt(index);
+					Integer intIndex = 0;
+					
 					RHSIconizedToken replacementRHSiToken = 
 							RHSTokenIconizer.createSingleIconizedToken(sourceToken, intIndex);
 
 					//Replace the blank spot with the iToken.
-			        RHSIconizedToken element = iTokens.remove((int)intIndex);
-			        iTokens.add(intIndex, replacementRHSiToken);
-			        
-			        ImageView rImgView = replacementRHSiToken.getImgView();
-			        
-			        rImgView.setLayoutX(event.getX());
-			        rImgView.setLayoutY(event.getY());
-			        
-			        tokenBayChildren.add(replacementRHSiToken.getImgView());
-			        
+					//getTokenBayItokens().remove((int)intIndex);
+					getTokenBayItokens().add(intIndex, replacementRHSiToken);
+
+					ImageView rImgView = replacementRHSiToken.getImgView();
+					rImgView.setLayoutX(event.getX());
+					rImgView.setLayoutY(event.getY());
+
+					tokenBayChildren.add(replacementRHSiToken.getImgView());
+
+					System.err.println(tokenBayChildren.size());
+					
 					success = true;
 				}
 
@@ -284,8 +266,6 @@ public class GameBoard {
 		LinkedList<RHSIconizedToken> tooLargeForLine = 
 				new LinkedList<RHSIconizedToken>();
 
-		
-
 		tokenBayChildren = tokenBay.getChildren();
 
 		for(int i=0; i < rhsTokens.size(); i++){
@@ -293,8 +273,7 @@ public class GameBoard {
 			final RHSIconizedToken curToken = rhsTokens.get(i);
 			final double tokenWidth = curToken.getImage().getWidth();
 			
-			if((TOKENBAY_WIDTH) < (	tokenBayStartPosition + 
-									tokenWidth + 
+			if((TOKENBAY_WIDTH) < (	tokenBayStartPosition + tokenWidth + 
 									TOKENBAY_BUFFERSIZE +
 									SCROLL_BAR_PADDING) )
 				
@@ -352,4 +331,8 @@ public class GameBoard {
 		return true;
 	}
 	
+	
+	private LinkedList<String> parseDbContent(String dbContent){
+		return null;		
+        }
 }

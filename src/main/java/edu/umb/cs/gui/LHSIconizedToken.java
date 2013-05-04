@@ -21,33 +21,17 @@
 
 package edu.umb.cs.gui;
 
-import java.io.InputStream;
-import java.util.LinkedList;
-
-import javax.imageio.ImageIO;
-
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
-import javafx.scene.ImageCursor;
-import javafx.scene.effect.Glow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 import edu.umb.cs.Tokanagrammar;
 import edu.umb.cs.source.SourceToken;
 import edu.umb.cs.source.SourceTokenKind;
 import edu.umb.cs.source.std.EmptyToken;
 import edu.umb.cs.source.std.SourceTokenBase;
 import java.util.List;
+import javafx.event.EventHandler;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 
 
 /**
@@ -105,7 +89,7 @@ public class LHSIconizedToken extends IconizedToken{
 	}
 
 	public String dragBoardString(){
-		return token.kind() + " " + token.image() + " " + index;
+		return token.kind() + ":::" + token.image() + ":::" + index;
 	}
 	
 	
@@ -153,7 +137,7 @@ public class LHSIconizedToken extends IconizedToken{
 										GameBoard.getInstance().getTokenBoardItokens();
 
 								String dragBoardContent = db.getString();
-								String delims = "[ ]+";
+								String delims = "[:::]+";
 								String[] strs = dragBoardContent.split(delims);
 
 								SourceToken sourceToken = new SourceTokenBase(strs[1], // image
@@ -298,14 +282,6 @@ public class LHSIconizedToken extends IconizedToken{
 					iTokens.add(index, new LHSIconizedToken(element.getImage(), EmptyToken.INSTANCE, index));
 
 					imgView.setImage(new Image(Tokanagrammar.class.getResourceAsStream("/images/ui/tokens/removed_.fw.png")));
-
-//					System.out.println("\n\nDrag Done, Remove and Replace LHS token with \"empty\" token: ");
-//					System.out.println("Check Data Structures:  ");
-//					System.out.println("LHSIconizedTokens: (make sure replaced!)");
-//					for(LHSIconizedToken iToken: iTokens)
-//						System.out.println("[[[LHSItoken index: " + iToken.getIndex() + " SourceToken: " + iToken.getSourceToken() + "]]] ");
-//					System.out.println("\n\n");
-
 					occupied = false;
 				}
 				event.consume();
