@@ -86,7 +86,9 @@ public class GUI {
 	
 	private List<CategoryDescriptor> curCategories;
         
-    /** Used to blur screen on pausing*/
+        private static BracingStyle curBracingStyle = BracingStyle.ALLMAN;
+
+        /** Used to blur screen on pausing*/
 	private static boolean init  = false;
 	
 	private static boolean inGame;
@@ -151,11 +153,6 @@ public class GUI {
         {
             if (newGame || curPuzzle == null || currentSource == null)
             {
-                // TODO: have a radio button in the main windows
-                // for easy switching back and forth
-                // ask for style: 
-                getBracingStyle();
-
                 // retrieve a puzzle from back end
                 // TODO: This method should be called with an argument
                 // being the set of categories,
@@ -164,7 +161,7 @@ public class GUI {
                 try
                 {
                     curPuzzle = edu.umb.cs.api.APIs.getRandomPuzzle();
-                    orig = curPuzzle.getSourceFile(style);
+                    orig = curPuzzle.getSourceFile(curBracingStyle);
                 }
                 catch (Exception ex)
                 {
@@ -554,6 +551,15 @@ public class GUI {
 		return GameBoard.getInstance().getTokenBayItokens();
 	}
 
+        public BracingStyle getCurBracingStyle()
+        {
+            return curBracingStyle;
+        }
+
+        public void setCurBracingStyle(BracingStyle style)
+        {
+            curBracingStyle = style;
+        }
 	/**
 	 * Set the current difficulty
 	 */
@@ -660,50 +666,6 @@ public class GUI {
 		compilingBtns.add("stopButton");
 		activeButtons.put(GameState.COMPILING, compilingBtns);
 	}
-        
-        private static BracingStyle style;
-        private static BracingStyle getBracingStyle()
-        {
-            // allman
-            JRadioButton allman = new JRadioButton("ALLMAN");
-            allman.addActionListener(new AllmanListener());
-            
-            // K&R
-            JRadioButton kr = new JRadioButton("K&R");
-            kr.addActionListener(new KRListener());;
- 
-            ButtonGroup group = new ButtonGroup();
-            group.add(allman);
-            group.add(kr);
-            group.setSelected(allman.getModel(), true);
-            style = BracingStyle.ALLMAN;
-            final JComponent[] ops = new JComponent[]
-            {
-                allman,
-                kr
-            };
-            
-            javax.swing.JOptionPane.showMessageDialog(null, ops, "Choose a bracing style", JOptionPane.PLAIN_MESSAGE);
-            return style;
-        }
-        
-        private static class AllmanListener implements ActionListener
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                style = BracingStyle.ALLMAN;
-            }   
-        }
-        
-        private static class KRListener implements ActionListener
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                style = BracingStyle.K_AND_R;
-            }   
-        }
         
         private static class WaitWindow extends JFrame
         {

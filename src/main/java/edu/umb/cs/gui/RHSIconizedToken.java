@@ -37,11 +37,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 
 /**
@@ -62,6 +58,8 @@ public class RHSIconizedToken extends IconizedToken{
 	/**The view of the image on the GameBoard.**/
 	private ImageView imgView;
 
+	static DataFormat dataFormat = new DataFormat("RHSIconizedToken");
+
 	public RHSIconizedToken(Image image, SourceToken token, int index){
 		this.image = image;
 		this.token = token;
@@ -81,6 +79,9 @@ public class RHSIconizedToken extends IconizedToken{
 	public int getIndex(){
 		return index;
 	}
+	static public DataFormat getDataFormat(){
+		return dataFormat;
+	}
 	
 	/**
 	 * The original location used for setting and tracking the new location of a
@@ -93,24 +94,9 @@ public class RHSIconizedToken extends IconizedToken{
 		this.startY = startY;
 	}
 
-//	/**
-//	 * Compare two iTokens to see if they're equal.  They are never equal.
-//	 */
-//	public boolean equals(Object obj) {
-//		if(obj instanceof RHSIconizedToken){
-//			return 	token.equals(((RHSIconizedToken) obj).getDemoToken()) && 
-//					index == (((RHSIconizedToken) obj).getIndex());
-//		}
-//		else return false;
-//	}
-//
-//	public int hashCode() {
-//		return token.hashCode();
-//	}
 
-	
 	public String tokenLookupInfo(){
-		return token.kind() + " " + token.image() + " " + index;
+		return token.kind() + ":::" + token.image() + ":::" + index;
 	}
 
 	protected ImageView initImageView(Image img){
@@ -134,15 +120,13 @@ public class RHSIconizedToken extends IconizedToken{
 		
 		imgView.setOnDragDetected(new EventHandler<MouseEvent>() {
 		    public void handle(MouseEvent event) {
-		    	
-		    	//System.out.println("**setOnDragDetected PROBLEM OF NOT BEING ABLE TO DRAG HERE**");
-		    	//System.out.println("******************* MAJOR PROBLEM -- NO VISUAL D&D!*********");
-		    	//ALL COMMENTED CODE CAN BE UNCOMMENTED WHEN THIS ISSUE IS FIXED
 		    	ClipboardContent content = new ClipboardContent();
+		    	//content.put(dataFormat, RHSIconizedToken.this);
 		    	content.putString(RHSIconizedToken.this.tokenLookupInfo());
-		    	//makes mouse unusable when set to anything but NONE??!!
 		    	Dragboard db = imgView.startDragAndDrop(TransferMode.ANY); 
+		    	//db.setDragView(image, 7, 7);	//Java 8 only -- perfect soln to visual d&d though :(
 		    	db.setContent(content); 
+		    	System.err.println(db.getString());
 		    	event.consume();
 		    }
 		});
@@ -187,19 +171,12 @@ public class RHSIconizedToken extends IconizedToken{
 		        if (event.getTransferMode() == TransferMode.MOVE) {
 		            RHSIconizedToken element = iTokens.remove(index);
 		            
-		            //SourceToken sourceToken = new SourceTokenBase(element.getSourceToken().image(), // image
-                    //        SourceTokenKind.EMPTY); // kind
-		            
 		            iTokens.add(index, new RHSIconizedToken(element.getImage(), element.getSourceToken(), index));
 		            imgView.setVisible(false);
 		            
-		            //OutputPanel.getInstance().compilerMessage(iTokens.toString());
-		            
 		            GameBoard theGameBoard = GameBoard.getInstance();
 		            GUI theGUI = GUI.getInstance();
-		            //was this the last one removed from the rhs?
-		            //if so we need to signal the CompileButton to be turned on!
-		            //if(
+		            
 		            if(theGameBoard.isRHSempty()){
 		            	theGUI.enableCompileButton();
 		            }else{

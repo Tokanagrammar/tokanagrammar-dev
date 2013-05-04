@@ -20,10 +20,12 @@
  */
 package edu.umb.cs.gui;
 
+import java.io.Serializable;
+import java.util.UUID;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class IconizedToken {
+public abstract class IconizedToken implements Serializable{
 
 	protected abstract ImageView initImageView(Image img);
 	
@@ -31,5 +33,5 @@ public abstract class IconizedToken {
 	
 	public abstract Image getImage();
 	
-	
+	private static final long serialVersionUID = UUID.randomUUID().getLeastSignificantBits();
 }

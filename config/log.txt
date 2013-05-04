@@ -1,0 +1,21 @@
+
+=================================
+Application started on: Sat May 04 02:45:13 EDT 2013
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\build\merge_gui4\tokanagrammar-dev\puzzles\ArithmeticProg.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\build\merge_gui4\tokanagrammar-dev\puzzles\GCD.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\build\merge_gui4\tokanagrammar-dev\puzzles\HelloWorld.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\build\merge_gui4\tokanagrammar-dev\puzzles\IfStatement.java
+adding files; C:\Users\Owner\Desktop\Documents\Document\UMASS courses\Spring 2013\cs410\build\merge_gui4\tokanagrammar-dev\puzzles\RelationalExpression.java
+Controller.initialize
+SettingsScreenController.initialize
+DifficultyScreenController.initialize
+CategoriesScreenController.initialize
+
+
+Compiling New Source Code.
+done compiling:
+
+
+Compiling New Source Code.
+done compiling:
+Application stopped: Sat May 04 02:47:13 EDT 2013

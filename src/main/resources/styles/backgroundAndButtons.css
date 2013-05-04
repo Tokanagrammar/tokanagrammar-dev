@@ -166,12 +166,12 @@
 	-fx-background-image: url("../images/ui/buttons/settings.fw.png");
 	-fx-background-color: transparent;
 }
-.settings:hover{
+.settingsButton:hover{
 	-fx-background-repeat: no-repeat;
 	-fx-background-image: url("../images/ui/buttons/settings_HOVER.fw.png");
 	-fx-background-color: transparent;
 }
-.settings:pressed{
+.settingsButton:pressed{
 	-fx-background-repeat: no-repeat;
 	-fx-background-image: url("../images/ui/buttons/settings.fw.png");
 	-fx-background-color: transparent;

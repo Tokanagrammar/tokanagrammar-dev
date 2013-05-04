@@ -20,6 +20,8 @@
  */
 package edu.umb.cs.gui;
 
+import edu.umb.cs.gui.GUI.GameState;
+import edu.umb.cs.gui.screens.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,7 +29,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,15 +41,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import edu.umb.cs.gui.GUI.GameState;
-import edu.umb.cs.gui.screens.ConfirmRefreshBoard;
-import edu.umb.cs.gui.screens.ConfirmSkipScreen;
-import edu.umb.cs.gui.screens.CategoriesScreen;
-import edu.umb.cs.gui.screens.DifficultyScreen;
-import edu.umb.cs.gui.screens.PauseScreen;
-import javafx.event.EventType;
-
+import edu.umb.cs.gui.screens.SettingsScreen;
 
 public class Controller implements Initializable{
 	
@@ -84,7 +77,9 @@ public class Controller implements Initializable{
 	private Button resetBoardButton;
 	@FXML
 	private Button logoButton;
-	
+	@FXML
+	private Button settingsButton;
+        
 	private static LinkedList<Button> buttons;
 	
 	/**keep this current**/
@@ -280,6 +275,15 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 		
+	}
+       
+    /**
+     * Called when the settings button is fired.
+     *
+     * @param event the action event.
+     */
+	public void settingsFired(ActionEvent event){
+			GUI.getInstance().pauseGame(new SettingsScreen());
 	}
 	//--------------------------------------------------------------------------------
 	//END GUI BUTTONS
