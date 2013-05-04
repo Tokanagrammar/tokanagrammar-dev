@@ -38,6 +38,14 @@ public class GUITimer {
 	
 	//private String timerState = "";
 	
+	public enum TimerState {
+		RUNNING,
+		STOPPED,
+		PAUSED
+	}
+	
+	private static TimerState curTimerState = TimerState.STOPPED;
+	
 	private static final GUITimer timer = new GUITimer();
 	
 	private GUITimer() {};
@@ -89,21 +97,21 @@ public class GUITimer {
 			return sb.toString();
 	}
 	public void start(){
-		//timerState = "running";
+		curTimerState = TimerState.RUNNING;
 		label.setVisible(true);
 		digitalTime.play();
 	}
 
 	public void stop(){
-		//timerState = "stopped";
+		curTimerState = TimerState.STOPPED;
 		digitalTime.stop();
 	}
 	public void pause(){
-		//timerState = "paused";
+		curTimerState = TimerState.PAUSED;
 		digitalTime.stop();
 	}
 	public void reset(){
-		//timerState = "stopped";
+		curTimerState = TimerState.STOPPED;
 		digitalTime.stop();
 		milliseconds = 0;
 		hideTimer();
@@ -114,7 +122,7 @@ public class GUITimer {
 		label.setVisible(false);
 	}
 	
-//	public String getTimerState(){
-//		return timerState;
-//	}
+	public TimerState getTimerState(){
+		return curTimerState;
+	}
 }
