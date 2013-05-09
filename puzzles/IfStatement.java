@@ -1,5 +1,6 @@
-///catagory: if statement
-//http://www.freejavaguide.com/corejava3.htm
+# if statement
+# output
+# This simple program shows the use of If-Else statement
 class IfStatement
 {
 	public static void main (String[] args)

@@ -39,18 +39,33 @@ public class Hint implements Serializable
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Puzzle puzzle;
     
-    private short level;
-    
+    private String text;
+
     public Hint()
     {
-        
     }
     
-    public Hint(Puzzle puzzle)
+    public Hint(String text)
+    {
+        this.text = text;
+    }
+    
+    public Hint(Puzzle puzzle, String text)
     {
         this.puzzle = puzzle;
+        this.text = text;
     }
     
+    public void setPuzzle(Puzzle p)
+    {
+        puzzle = p;
+    }
+
+    public String getHintContent()
+    {
+        return text;
+    }
+
     public Puzzle getPuzzle()
     {
         return puzzle;
@@ -59,7 +74,7 @@ public class Hint implements Serializable
     @Override
     public int hashCode()
     {
-        return level;
+        return text.hashCode();
     }
 
     @Override
@@ -71,10 +86,6 @@ public class Hint implements Serializable
         }
         
         final Hint other = (Hint) obj;
-        if (this.level != other.level)
-        {
-            return false;
-        }
-        return true;
+        return text.equals(other.text);
     }
 }

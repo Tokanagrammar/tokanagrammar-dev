@@ -283,7 +283,7 @@ TOKEN:
 TOKEN:
 {
   // a block of meta data consists of 3 lines (3 meta_data_tags)
-  < META_DATA: <META_DATA_TAG> <META_DATA_TAG> <META_DATA_TAG> >
+  < META_DATA: ((<META_DATA_TAG> <META_DATA_TAG>)  | (<META_DATA_TAG> <META_DATA_TAG> <META_DATA_TAG>) ) >
 |
   < #META_DATA_TAG: "#" (~["\n","\r"])* ("\n"|"\r"|"\r\n") >
 }

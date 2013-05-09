@@ -22,7 +22,9 @@
 package edu.umb.cs.gui;
 
 import edu.umb.cs.Tokanagrammar;
-import edu.umb.cs.api.service.CategoryDescriptor;
+import edu.umb.cs.api.APIs;
+import edu.umb.cs.entity.Category;
+import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.gui.screens.SecondaryScreen;
 import edu.umb.cs.parser.BracingStyle;
@@ -30,31 +32,21 @@ import edu.umb.cs.source.Output;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.SourceToken;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
+import java.util.*;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlurType;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Handle game states and also work as a main GUI API.
@@ -78,14 +70,18 @@ public class GUI {
 	
 	private int curDifficulty;
 
-        private List<CategoryDescriptor> categories;
+        private List<Category> categories;
 
         private List<SourceToken> tokenBayTokens;
         
 	private List<SourceToken> tokenBoardTokens;
 	
-	private List<CategoryDescriptor> curCategories;
+	private List<Category> curCategories;
         
+        private Iterator<Puzzle> puzzlesIter;
+
+        private Set<Puzzle> puzzles;
+
         private static BracingStyle curBracingStyle = BracingStyle.ALLMAN;
 
         /** Used to blur screen on pausing*/
@@ -97,6 +93,8 @@ public class GUI {
 
         private static Puzzle curPuzzle;
         
+        private static int curHint = 0;
+
         private static ShuffledSource currentSource;
         
 	private GUI(){}
@@ -160,7 +158,9 @@ public class GUI {
                 SourceFile orig = null;
                 try
                 {
-                    curPuzzle = edu.umb.cs.api.APIs.getRandomPuzzle();
+                    if (!puzzlesIter.hasNext())
+                        puzzlesIter = puzzles.iterator();
+                    curPuzzle = puzzlesIter.next();
                     orig = curPuzzle.getSourceFile(curBracingStyle);
                 }
                 catch (Exception ex)
@@ -184,8 +184,8 @@ public class GUI {
                     // Some message on the puzzle
                     if (orig != null)
                     {
-                        outputPanel.infoMessage("Total tokens: " + orig.tokenCount());
-                        outputPanel.infoMessage("Removed: " + currentSource.getRemovedTokens().size()
+                        outputPanel.infoMessage("Total (removable) tokens: " + currentSource.totalRemovable());
+                        outputPanel.infoMessage("Removed: " + currentSource.removedCount()
                                                 + "(" + curDifficulty + "%)");
                     }
                 }
@@ -445,7 +445,7 @@ public class GUI {
 		 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
 		 * 					 Hints: <hints>
 		 */
-		String concatCategories = "";
+		StringBuilder concatCategories = new StringBuilder();
 		
 		Text text;
 
@@ -456,9 +456,16 @@ public class GUI {
 		else
 			text = new Text("Category: ");
 		for(int i=0; i< curCategories.size(); i++)
-			concatCategories += (curCategories.get(i) + " ");
-		
-		Label categoryText = new Label(concatCategories);
+                    concatCategories.append(' ').append(curCategories.get(i)).append(',');
+                Label categoryText;
+                // chop off the last comma
+                int len = concatCategories.length();
+                if (len != 0
+                        && concatCategories.charAt(len - 1) == ',')
+                    categoryText = new Label(concatCategories.substring(0, len -1));
+                else
+                    categoryText = new Label(concatCategories.toString());
+
 		categoryText.setStyle(style);
 		Text text2 = new Text("Difficulty: ");
 		
@@ -487,8 +494,11 @@ public class GUI {
 		}
 		
 		Text text3 = new Text("Hint: ");
-//		String hint = curPuzzle.getHints().get(0);                
-                String hint = "NO HINT available";
+                List<Hint> hints = curPuzzle.getHints();
+                String hint = hints.isEmpty()
+                                ? "NO hints available!"
+                                :curPuzzle.getHints().get(curHint).getHintContent();
+                
                 Label hintText = new Label(" < " + hint + " > ");
 		hintText.setStyle(style);
 		outputPanel.writeNodes(text, categoryText);
@@ -519,7 +529,7 @@ public class GUI {
 	/**
 	 * Get the current categories being played
 	 */
-	public List<CategoryDescriptor> getCurCategories(){
+	public List<Category> getCurCategories(){
 		return curCategories;
 	}
 	
@@ -570,17 +580,28 @@ public class GUI {
 	/**
 	 * Set the current categories being played.
 	 */
-	public void setCurCategories(List<CategoryDescriptor> categories){
+	public void setCurCategories(List<Category> categories){
 		this.curCategories = categories;
+                puzzles = new HashSet<Puzzle>();
+                for (Category c : categories)
+                    puzzles.addAll(c.getPuzzles());
+                
+                puzzlesIter = puzzles.iterator();
 	}
 	
 	/**
 	 * Set the AVAILABLE categories
 	 */
-	public void setAvailableCategories(List<CategoryDescriptor> categories){
+	public void setAvailableCategories(List<Category> categories){
 		this.categories = categories;
 	}
 	
+        public List<Category> getAvailableCategories()
+        {
+            if (categories == null)
+                categories = APIs.getCategories();
+            return categories;
+        }
 	/**
 	 * Sets the tokenBay tokens
 	 * Used by external API

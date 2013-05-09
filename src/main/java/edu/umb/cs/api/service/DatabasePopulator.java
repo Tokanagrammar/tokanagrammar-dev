@@ -71,7 +71,5 @@ public class DatabasePopulator
     public static void doPopulate()
     {
         start();
-        
-        
     }
 }

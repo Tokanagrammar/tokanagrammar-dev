@@ -1,5 +1,6 @@
-//catagory: relational expression
-//http://www.freejavaguide.com/relational_operators.htm
+# relational
+# Expected-TODO
+# This program prints a series of boolean expressions
 
 public class RelationalExpression {
 	public static void main(String[] args) {

@@ -21,17 +21,12 @@
 
 package edu.umb.cs.api;
 
-import edu.umb.cs.api.service.CategoryDescriptor;
 import edu.umb.cs.api.service.DatabaseService;
-import edu.umb.cs.entity.Hint;
+import edu.umb.cs.entity.Category;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
-import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.InternalException;
-import edu.umb.cs.source.Output;
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.ShufflerKind;
-import edu.umb.cs.source.SourceFile;
+import edu.umb.cs.source.*;
 import edu.umb.cs.source.std.Utils;
 import java.io.*;
 import java.util.Arrays;
@@ -96,7 +91,7 @@ public class APIs
             return;
         started = true;
         // redirect stdout to log file
-       System.setOut(logStream);
+        System.setOut(logStream);
         
         System.out.println("\n=================================");
         System.out.println("Application started on: " + new Date());
@@ -112,8 +107,21 @@ public class APIs
        
        for (File f : dir.listFiles())
        {
-           System.out.println("adding files; " + f.getAbsolutePath());
-           DatabaseService.addPuzzle(f.getAbsolutePath(), "Expted Result", "Metada", "Category");
+           MetaData meta = null;
+            try
+            {
+                meta = MetaData.parseMetaData(f.getAbsolutePath());
+            }
+            catch (FileNotFoundException ex)
+            {
+                ex.printStackTrace();
+            }
+            
+            if (meta != null)
+                DatabaseService.addPuzzle(f.getAbsolutePath(),
+                                          meta.getExpectedOutput(),
+                                          meta.getCategoryName(), 
+                                          meta.getHints());
        }
     }
     
@@ -132,13 +140,9 @@ public class APIs
         return VERSION;
     }
 
-    public static List<CategoryDescriptor> getCategories()
+    public static List<Category> getCategories()
     {
-        // TODO: replace this with real call to db-service
-        // also keep a map of categorydesc ==> real-category obj ==> set of puzzles
-        return Arrays.asList(new CategoryDescriptor("Category 1"),
-                             new CategoryDescriptor("Category 2"),
-                             new CategoryDescriptor("Category 3"));
+        return DatabaseService.getAllCategories();
     }
 
     public static void removeAllRecords()
@@ -148,9 +152,9 @@ public class APIs
     }
 
 
-    public static void addPuzzle(String filePath, String expResult, String metaD, String catName, Hint...hints)
+    public static void addPuzzle(String filePath, String expResult, String metaD, String catName, String...hints)
     {
-	DatabaseService.addPuzzle(filePath, expResult, metaD, catName, hints);
+	DatabaseService.addPuzzle(filePath, expResult, catName, Arrays.asList(hints));
     }
 
     public static User newUser(String username)
