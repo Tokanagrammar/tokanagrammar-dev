@@ -31,11 +31,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.*;
@@ -59,6 +55,9 @@ public class Puzzle implements Serializable
     private SourceFile srcFile;
     
     @Transient
+    private List<Hint> cachedHints = null;
+    
+    @Transient
     private final Language langType = Language.JAVA;  //TODO: Only support JAVA for now
                                                       // This should be settable later
                                                       // when we do support other languages
@@ -71,8 +70,6 @@ public class Puzzle implements Serializable
     private String prettyName;
     
     private String expectedResult;
-    
-    private String metaData;
     
     private int lang = langType.ordinal();
     
@@ -92,7 +89,7 @@ public class Puzzle implements Serializable
         
     }
     
-    public Puzzle (String path, String expRes, String mdata, String catName) throws IOException, ParseException
+    public Puzzle (String path, String expRes, String catName) throws IOException, ParseException
     {
         File file = new File(path);
         if (!file.exists())
@@ -101,7 +98,6 @@ public class Puzzle implements Serializable
         prettyName = file.getName();
         filePath = path;
         expectedResult = expRes;
-        metaData = mdata;
         games = new HashSet<>();
         hints = new HashSet<>();
         category = DatabaseService.findOrCreateCategory(catName);
@@ -140,9 +136,11 @@ public class Puzzle implements Serializable
         hints.remove(h);
     }
     
-    public Set<Hint> getHints()
+    public List<Hint> getHints()
     {
-        return Collections.unmodifiableSet(hints);
+        if (cachedHints == null)
+            cachedHints = new ArrayList<>(hints);
+        return cachedHints;
     }
     
     @Override

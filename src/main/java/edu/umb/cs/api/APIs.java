@@ -28,6 +28,7 @@ import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
 import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.InternalException;
+import edu.umb.cs.source.MetaData;
 import edu.umb.cs.source.Output;
 import edu.umb.cs.source.ShuffledSource;
 import edu.umb.cs.source.ShufflerKind;
@@ -113,7 +114,21 @@ public class APIs
        for (File f : dir.listFiles())
        {
            System.out.println("adding files; " + f.getAbsolutePath());
-           DatabaseService.addPuzzle(f.getAbsolutePath(), "Expted Result", "Metada", "Category");
+           MetaData meta = null;
+            try
+            {
+                meta = MetaData.parseMetaData(f.getAbsolutePath());
+            }
+            catch (FileNotFoundException ex)
+            {
+                ex.printStackTrace();
+            }
+            
+            if (meta != null)
+                DatabaseService.addPuzzle(f.getAbsolutePath(),
+                                          meta.getExpectedOutput(),
+                                          meta.getCategoryName(), 
+                                          meta.getHints());
        }
     }
     
@@ -148,9 +163,9 @@ public class APIs
     }
 
 
-    public static void addPuzzle(String filePath, String expResult, String metaD, String catName, Hint...hints)
+    public static void addPuzzle(String filePath, String expResult, String metaD, String catName, String...hints)
     {
-	DatabaseService.addPuzzle(filePath, expResult, metaD, catName, hints);
+	DatabaseService.addPuzzle(filePath, expResult, catName, Arrays.asList(hints));
     }
 
     public static User newUser(String username)

@@ -42,7 +42,7 @@ public class Category
     //private String description; => name should be descriptive so that we don't need description!
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-               fetch = FetchType.EAGER, mappedBy = "categoy")
+               fetch = FetchType.EAGER, mappedBy = "category")
     private Set<Puzzle> puzzles;
     
     public Category()

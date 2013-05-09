@@ -161,16 +161,20 @@ public class DatabaseService
      * @param metaData meta data
      * @return true if the source file can be found and added correctly
      */
-    public static boolean addPuzzle(String filePath, String expResult, String metaData, String catName, Hint... hints)
+    public static boolean addPuzzle(String filePath, String expResult, String catName, List<String> hints)
     {
         boolean success = false;
         EntityTransaction t = em.getTransaction();
         try
         {
             t.begin();
-            Puzzle p = new Puzzle(filePath, expResult, metaData, catName);
-            for (Hint h : hints)
-                p.addHint(h);
+            Puzzle p = new Puzzle(filePath, expResult, catName);
+            if (hints != null)
+                for (String hint : hints)
+                {
+                    Hint h = new Hint(p, hint);
+                    p.addHint(h);
+                }
             em.persist(p);
             success = true;
         }
@@ -288,11 +292,8 @@ public class DatabaseService
         
         if (category == null)
         {
-            EntityTransaction t = em.getTransaction();
-            t.begin();
             category = new Category(catName);
-            em.persist(category);
-            t.commit();
+            em.persist(category);   
         }
         
         return category;

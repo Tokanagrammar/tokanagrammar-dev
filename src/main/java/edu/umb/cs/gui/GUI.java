@@ -23,6 +23,7 @@ package edu.umb.cs.gui;
 
 import edu.umb.cs.Tokanagrammar;
 import edu.umb.cs.api.service.CategoryDescriptor;
+import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.gui.screens.SecondaryScreen;
 import edu.umb.cs.parser.BracingStyle;
@@ -97,6 +98,8 @@ public class GUI {
 
         private static Puzzle curPuzzle;
         
+        private static int curHint = 0;
+
         private static ShuffledSource currentSource;
         
 	private GUI(){}
@@ -487,8 +490,11 @@ public class GUI {
 		}
 		
 		Text text3 = new Text("Hint: ");
-//		String hint = curPuzzle.getHints().get(0);                
-                String hint = "NO HINT available";
+                List<Hint> hints = curPuzzle.getHints();
+                String hint = hints.isEmpty()
+                                ? "NO hints available!"
+                                :curPuzzle.getHints().get(curHint).getHintContent();
+                
                 Label hintText = new Label(" < " + hint + " > ");
 		hintText.setStyle(style);
 		outputPanel.writeNodes(text, categoryText);
