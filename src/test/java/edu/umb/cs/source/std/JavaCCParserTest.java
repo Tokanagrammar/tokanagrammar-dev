@@ -42,6 +42,7 @@ public class JavaCCParserTest extends SourceTestBase
     @Override
     void doTest(File expted, File in) throws FileNotFoundException, IOException
     {
+        System.out.println("Running parser on " + expted.getAbsolutePath());
         FileInputStream fin = new FileInputStream(in);
         
         JavaParser parser = new JavaParser(fin);
