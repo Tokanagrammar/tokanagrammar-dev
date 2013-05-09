@@ -976,8 +976,8 @@ block (List<List<SourceToken>> src, int line, int count[], int level) :
         ++count[0];
         ++line; 
 
-        src.add(emptyLine());
-        ++line;
+        //src.add(emptyLine());
+        //++line;
         
         return line;
      }
@@ -1084,7 +1084,12 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
                 ++count[0];
                 ++line;
             }
-            line = statement(src, line, count, level + 1)
+            (
+               LOOKAHEAD ( <LCURLY> )
+                line = statement(src, line, count, level) // don't need to indent if see a block
+            |
+                line = statement(src, line, count, level + 1) 
+            )
         ]
     |
         <WHILE>

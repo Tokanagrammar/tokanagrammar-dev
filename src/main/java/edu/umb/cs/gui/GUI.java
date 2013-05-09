@@ -97,6 +97,7 @@ public class GUI {
 
         private static ShuffledSource currentSource;
         
+        private static final Font defaultFont = new Font(14);
 	private GUI(){}
         
         // -----
@@ -151,13 +152,10 @@ public class GUI {
         {
             if (newGame || curPuzzle == null || currentSource == null)
             {
-                // retrieve a puzzle from back end
-                // TODO: This method should be called with an argument
-                // being the set of categories,
-                // we can do: p = APIs.picOne(<set of categories>);
                 SourceFile orig = null;
                 try
                 {
+                    // wrap-around to the beginning of the collection
                     if (!puzzlesIter.hasNext())
                         puzzlesIter = puzzles.iterator();
                     curPuzzle = puzzlesIter.next();
@@ -427,16 +425,16 @@ public class GUI {
 	private void printWelcomeMessage(){
 		
 		Text welcomeText = new Text("Welcome to Tokanagrammar, Java Edition! ");
-		welcomeText.setFont(new Font(14));
+		welcomeText.setFont(defaultFont);
 		outputPanel.writeNodes(welcomeText);
 		
 		Text categoryText = new Text("Please select a category ");
-		categoryText.setFont(new Font(14));
+		categoryText.setFont(defaultFont);
 		Image img = new Image(OutputPanel.class.
 				getResourceAsStream("/images/ui/categoryButton_console_display_size.fw.png"));
 		ImageView imgView = new ImageView(img);
 		Text text = new Text(" to continue.");
-		text.setFont(new Font(14));
+		text.setFont(defaultFont);
 		outputPanel.writeNodes(categoryText, imgView, text);
 	}
 	
@@ -496,10 +494,10 @@ public class GUI {
 		Text text3 = new Text("Hint: ");
                 List<Hint> hints = curPuzzle.getHints();
                 String hint = hints.isEmpty()
-                                ? "NO hints available!"
+                                ? "<NO hints available!>"
                                 :curPuzzle.getHints().get(curHint).getHintContent();
                 
-                Label hintText = new Label(" < " + hint + " > ");
+                Label hintText = new Label(hint);
 		hintText.setStyle(style);
 		outputPanel.writeNodes(text, categoryText);
 		outputPanel.writeNodes(text2, difficultyText, difficultyRank);
