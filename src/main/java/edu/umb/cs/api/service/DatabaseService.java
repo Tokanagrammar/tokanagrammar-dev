@@ -163,6 +163,7 @@ public class DatabaseService
      */
     public static boolean addPuzzle(String filePath, String expResult, String catName, List<String> hints)
     {
+        System.out.println("adding to category: " + catName);
         boolean success = false;
         EntityTransaction t = em.getTransaction();
         try

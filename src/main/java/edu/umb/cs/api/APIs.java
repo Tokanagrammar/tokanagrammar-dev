@@ -23,6 +23,7 @@ package edu.umb.cs.api;
 
 import edu.umb.cs.api.service.CategoryDescriptor;
 import edu.umb.cs.api.service.DatabaseService;
+import edu.umb.cs.entity.Category;
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.entity.User;
@@ -35,10 +36,7 @@ import edu.umb.cs.source.ShufflerKind;
 import edu.umb.cs.source.SourceFile;
 import edu.umb.cs.source.std.Utils;
 import java.io.*;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,7 +95,7 @@ public class APIs
             return;
         started = true;
         // redirect stdout to log file
-       System.setOut(logStream);
+        System.setOut(logStream);
         
         System.out.println("\n=================================");
         System.out.println("Application started on: " + new Date());
@@ -113,7 +111,6 @@ public class APIs
        
        for (File f : dir.listFiles())
        {
-           System.out.println("adding files; " + f.getAbsolutePath());
            MetaData meta = null;
             try
             {
@@ -151,9 +148,11 @@ public class APIs
     {
         // TODO: replace this with real call to db-service
         // also keep a map of categorydesc ==> real-category obj ==> set of puzzles
-        return Arrays.asList(new CategoryDescriptor("Category 1"),
-                             new CategoryDescriptor("Category 2"),
-                             new CategoryDescriptor("Category 3"));
+        List<Category> cats = DatabaseService.getAllCategories();
+        List<CategoryDescriptor> ret = new ArrayList<>(cats.size());
+        for (Category cat : cats)  
+            ret.add(new CategoryDescriptor(cat.getName()));
+        return ret;
     }
 
     public static void removeAllRecords()
