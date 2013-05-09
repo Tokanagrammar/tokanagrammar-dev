@@ -230,6 +230,8 @@ TOKEN:
 | < PERCENT: "%" >
 | < PLUS_ASSIGN: "+=" >
 | < STAR: "*" >
+| < LT: "<" >
+| < GE: ">=" >
 }
 
 // Separators (these could be combined with the reserved words)
@@ -607,7 +609,7 @@ memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
             line = block(src, line, count, level)
         )
     |
-        LOOKAHEAD ( (scanBasicType() | scanReferenceType()) <IDENTIFIER> <LPAREN>)
+        LOOKAHEAD ( scanType() <IDENTIFIER> <LPAREN>)
         (
             type(src.get(line), count)
             {
@@ -638,6 +640,12 @@ memberDecl(List<List<SourceToken>> src, int line, int count[], int level) :
             |  
                 line = block(src, line, count, level)
             )
+//            {
+                // append a empty line at the end of each method
+                //++line;
+  //              src.add(emptyLine());
+
+    //        }
         )
     |
         (
@@ -753,6 +761,19 @@ type(List<SourceToken> curLine, int count[]) :
 
 private
 void
+scanType() :
+{
+}
+{
+    LOOKAHEAD ( scanReferenceType() )
+    scanReferenceType()
+|
+    scanBasicType()
+}
+
+
+private
+void
 basicType(List<SourceToken> curLine, int count[]) :
 {
 }
@@ -776,7 +797,7 @@ scanBasicType () :
 private
 void
 scanReferenceType () :
-{
+{   
 }
 {
     scanBasicType() (<LBRACK> <RBRACK>)+
@@ -1002,7 +1023,7 @@ blockStatement (List<List<SourceToken>> src, int line, int count[], int level) :
 }
 {
     (
-        LOOKAHEAD ( (scanBasicType() | scanReferenceType() ) <IDENTIFIER> )
+        LOOKAHEAD ( scanType()  <IDENTIFIER> )
         localVariableDeclarationStatement (cur = new ArrayList<SourceToken>(), count, level)
         {
             src.add(cur);
@@ -1107,6 +1128,9 @@ statement (List<List<SourceToken>> src, int line, int count[], int level) :
             count[0] += 2;
         }
         parExpression(curLine, count)                 // condition
+        {
+            ++line;
+        }
         // consequence
         (
             LOOKAHEAD ( <LCURLY> )
@@ -1393,7 +1417,7 @@ relationalExpression(List<SourceToken> curLine, int count[]):
 {
     additiveExpression(curLine, count)
     [
-        (<GT> | <LE> )
+        (<GT> | <LE> | <GE> | <LT>)
         {
             curLine.add(operator(token.image));
             curLine.add(space());
