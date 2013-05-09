@@ -21,6 +21,7 @@
 
 package edu.umb.cs.api;
 
+import edu.umb.cs.api.service.CategoryDescriptor;
 import edu.umb.cs.api.service.DatabaseService;
 import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
@@ -104,7 +105,7 @@ public class APIs
         // TEMP remoe this when we have the 'real' code
         // for populating the db
         // (For now, just wipe out everything and insert data 
-      removeAllRecords();
+       removeAllRecords();
 
        File dir = new File("puzzles");
        assert dir.isDirectory() : "directory puzzles not exist";
@@ -112,7 +113,7 @@ public class APIs
        for (File f : dir.listFiles())
        {
            System.out.println("adding files; " + f.getAbsolutePath());
-           DatabaseService.addPuzzle(f.getAbsolutePath(), "Expted Result", "Metada");
+           DatabaseService.addPuzzle(f.getAbsolutePath(), "Expted Result", "Metada", "Category");
        }
     }
     
@@ -135,9 +136,9 @@ public class APIs
     {
         // TODO: replace this with real call to db-service
         // also keep a map of categorydesc ==> real-category obj ==> set of puzzles
-        return Arrays.asList(new CategoryDescriptor("Category 1", "desc1"),
-                             new CategoryDescriptor("Category 2", "desc2"),
-                             new CategoryDescriptor("Category 3", "desc3"));
+        return Arrays.asList(new CategoryDescriptor("Category 1"),
+                             new CategoryDescriptor("Category 2"),
+                             new CategoryDescriptor("Category 3"));
     }
 
     public static void removeAllRecords()
@@ -147,9 +148,9 @@ public class APIs
     }
 
 
-    public static void addPuzzle(String filePath, String expResult, String metaD, Hint...hints)
+    public static void addPuzzle(String filePath, String expResult, String metaD, String catName, Hint...hints)
     {
-	DatabaseService.addPuzzle(filePath, expResult, metaD, hints);
+	DatabaseService.addPuzzle(filePath, expResult, metaD, catName, hints);
     }
 
     public static User newUser(String username)

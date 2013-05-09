@@ -21,6 +21,7 @@
 
 package edu.umb.cs.entity;
 
+import edu.umb.cs.api.service.DatabaseService;
 import edu.umb.cs.parser.BracingStyle;
 import edu.umb.cs.parser.ParseException;
 import edu.umb.cs.source.Language;
@@ -56,6 +57,7 @@ public class Puzzle implements Serializable
     
     @Transient
     private SourceFile srcFile;
+    
     @Transient
     private final Language langType = Language.JAVA;  //TODO: Only support JAVA for now
                                                       // This should be settable later
@@ -82,13 +84,15 @@ public class Puzzle implements Serializable
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
     private Set<Hint> hints;
  
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private Category category;
+    
     public Puzzle()
     {
         
     }
     
-    public Puzzle (String path, String expRes, String mdata)
-            throws IOException, ParseException
+    public Puzzle (String path, String expRes, String mdata, String catName) throws IOException, ParseException
     {
         File file = new File(path);
         if (!file.exists())
@@ -100,6 +104,7 @@ public class Puzzle implements Serializable
         metaData = mdata;
         games = new HashSet<>();
         hints = new HashSet<>();
+        category = DatabaseService.findOrCreateCategory(catName);
     }
     
     public SourceFile getSourceFile(BracingStyle style) throws ParseException, FileNotFoundException

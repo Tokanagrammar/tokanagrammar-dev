@@ -22,7 +22,7 @@
 package edu.umb.cs.gui.screens;
 
 import edu.umb.cs.api.APIs;
-import edu.umb.cs.api.CategoryDescriptor;
+import edu.umb.cs.api.service.CategoryDescriptor;
 import edu.umb.cs.gui.GUI;
 import edu.umb.cs.gui.GUI.GameState;
 import java.util.LinkedList;
@@ -106,7 +106,7 @@ public class CategoriesScreen extends SecondaryScreen{
 
 		for(final CategoryDescriptor category: APIs.getCategories()){
 			final CheckBox checkbox = new CheckBox(category.getName());
-			final Label label = new Label(category.getDesc());
+			final Label label = new Label(" "); //Desc no longer exist in category obj
 			categoryNames.add(checkbox);
 			
 			checkbox.setLayoutX(10);
