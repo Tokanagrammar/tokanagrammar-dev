@@ -39,7 +39,7 @@ public class Category
     
     private String name;
     
-    private String description;
+    //private String description; => name should be descriptive so that we don't need description!
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
                fetch = FetchType.EAGER, mappedBy = "categoy")
@@ -50,10 +50,9 @@ public class Category
         
     }
     
-    public Category(String name, String desc)
+    public Category(String name)
     {
         this.name = name.toUpperCase();
-        this.description = desc;
         this.puzzles = new HashSet<>();
     }
     
@@ -61,11 +60,7 @@ public class Category
     {
         return this.name;
     }
-    
-    public String getDescription()
-    {
-        return this.description;
-    }
+
     
     public void addPuzzle(Puzzle p)
     {

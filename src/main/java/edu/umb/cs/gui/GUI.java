@@ -22,7 +22,7 @@
 package edu.umb.cs.gui;
 
 import edu.umb.cs.Tokanagrammar;
-import edu.umb.cs.api.CategoryDescriptor;
+import edu.umb.cs.api.service.CategoryDescriptor;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.gui.screens.SecondaryScreen;
 import edu.umb.cs.parser.BracingStyle;

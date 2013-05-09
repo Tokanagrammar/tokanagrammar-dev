@@ -161,15 +161,14 @@ public class DatabaseService
      * @param metaData meta data
      * @return true if the source file can be found and added correctly
      */
-    public static boolean addPuzzle(String filePath, String expResult, String metaData, Hint... hints)
+    public static boolean addPuzzle(String filePath, String expResult, String metaData, String catName, Hint... hints)
     {
         boolean success = false;
         EntityTransaction t = em.getTransaction();
         try
         {
-            //TODO: take category into account
             t.begin();
-            Puzzle p = new Puzzle(filePath, expResult, metaData);
+            Puzzle p = new Puzzle(filePath, expResult, metaData, catName);
             for (Hint h : hints)
                 p.addHint(h);
             em.persist(p);
@@ -281,5 +280,38 @@ public class DatabaseService
     public static void dropDatabase(String name)
     {
         
+    }
+
+    public static Category findOrCreateCategory(String catName)
+    {
+        Category category = getCategory(catName);
+        
+        if (category == null)
+        {
+            EntityTransaction t = em.getTransaction();
+            t.begin();
+            category = new Category(catName);
+            em.persist(category);
+            t.commit();
+        }
+        
+        return category;
+    }
+    
+    /**
+     * 
+     * @param catName category name
+     * @return a category of the given name if exists; null otherwise.
+     */
+    public static Category getCategory(String catName)
+    {
+        List<Category> exist = em.createQuery("SELECT c FROM Category c WHERE c.name = :name", Category.class)
+                       .setParameter("name", catName)
+                       .getResultList();
+        
+        if (exist.size() > 0)
+            return exist.get(0);
+        else 
+            return null;
     }
 }
