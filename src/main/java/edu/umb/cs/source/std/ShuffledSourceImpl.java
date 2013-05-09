@@ -35,12 +35,16 @@ public class ShuffledSourceImpl implements ShuffledSource
     private final SourceFile original;
     private final SourceFile shuffled;
     private final List<SourceToken> removed;
-    
-    public ShuffledSourceImpl(SourceFile original, SourceFile shuffled, List<SourceToken> removed)
+    private final int removable;
+    public ShuffledSourceImpl(SourceFile original,
+                              SourceFile shuffled,
+                              List<SourceToken> removed,
+                              int removable)
     {
         this.original = original;
         this.shuffled = shuffled;
         this.removed = removed;
+        this.removable = removable;
     }
 
     @Override
@@ -59,5 +63,15 @@ public class ShuffledSourceImpl implements ShuffledSource
     public List<SourceToken> getRemovedTokens()
     {
         return removed;
+    }
+    
+    public int totalRemovable()
+    {
+        return removable;
+    }
+    
+    public int removedCount()
+    {
+        return removed.size();
     }
 }

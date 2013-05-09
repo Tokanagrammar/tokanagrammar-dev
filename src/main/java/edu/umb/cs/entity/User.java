@@ -42,7 +42,7 @@ public class User   implements Serializable
     
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.PERSIST}, 
                           fetch = FetchType.EAGER, mappedBy = "user")
-    private HashSet<Game> games;
+    private Set<Game> games;
     
     public User()
     {

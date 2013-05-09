@@ -34,4 +34,8 @@ public interface ShuffledSource
     SourceFile getShuffledSource();
 
     List<SourceToken> getRemovedTokens();
+    
+    public int totalRemovable();
+    
+    public int removedCount();
 }
