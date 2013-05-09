@@ -292,11 +292,11 @@ public class GameBoard {
 			}
 		}
 		
-//		if(!tooLargeForLine.isEmpty()){
-//			tokenBayStartPosition = TOKENBAY_BUFFERSIZE;
-//			tokenBayCurrentRow++;
-//			settleTokenBay(tooLargeForLine);
-//		}
+		if(!tooLargeForLine.isEmpty()){
+			tokenBayStartPosition = TOKENBAY_BUFFERSIZE;
+			tokenBayCurrentRow++;
+			settleTokenBay(tooLargeForLine);
+		}
 
 	}
 	
