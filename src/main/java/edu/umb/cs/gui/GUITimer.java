@@ -68,7 +68,7 @@ public class GUITimer {
 						String minuteString = pad(2, '0', minute.toString());
 						String secondString = pad(2, '0', second.toString());
 						String msString  = pad(2, '0', milliseconds % 100 + "");
-						label.setText(" Time:\t\t " + hourString + ":" + minuteString + ":" + secondString);// + ":" + msString);
+						label.setText(hourString + ":" + minuteString + ":" + secondString);// + ":" + msString);
 						
 						milliseconds++;
 					}

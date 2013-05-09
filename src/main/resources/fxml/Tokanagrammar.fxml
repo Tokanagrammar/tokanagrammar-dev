@@ -17,7 +17,7 @@
         <Tooltip text="Run Source" fx:id="run_toolTip" />
       </tooltip>
     </Button>
-    <Button fx:id="stopButton" layoutX="145.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#stopFired" prefHeight="50.0" prefWidth="50.0" styleClass="stopButton">
+    <Button fx:id="stopButton" layoutX="145.0" layoutY="40.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#stopFired" prefHeight="50.0" prefWidth="50.0" styleClass="stopButton" visible="false">
       <tooltip>
         <Tooltip text="Stop Compilation" fx:id="stop_tooltip" />
       </tooltip>
@@ -45,9 +45,13 @@
     <Pane id="outputPane" fx:id="outputPanel" layoutX="54.0" layoutY="530.0" maxHeight="117.0" maxWidth="545.0" minHeight="117.0" minWidth="545.0" prefHeight="117.0" prefWidth="545.0" styleClass="outputPane" />
     <Button fx:id="logoButton" layoutX="638.0" layoutY="571.0" mnemonicParsing="false" onAction="#logoFired" prefHeight="50.0" prefWidth="218.0" styleClass="logoButton" />
     <Accordion layoutX="107.0" layoutY="50.0" />
-    <Pane fx:id="timer" layoutX="639.0" layoutY="529.0" prefHeight="40.0" prefWidth="218.0" />
+    <Pane fx:id="timer" layoutX="710.0" layoutY="529.0" prefHeight="33.0" prefWidth="110.0" />
     <Pane fx:id="difficultyPane" layoutX="709.0" layoutY="45.0" minHeight="40.0" minWidth="64.0" />
-    <Button fx:id="settingsButton" onAction="#settingsFired"  layoutX="834.0" layoutY="631.0" prefHeight="25.0" prefWidth="25.0" styleClass="settingsButton"/>
+    <Button fx:id="settingsButton" layoutX="834.0" layoutY="631.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" onAction="#settingsFired" prefHeight="25.0" prefWidth="25.0" styleClass="settingsButton">
+      <stylesheets>
+        <URL value="@../styles/backgroundAndButtons.css" />
+      </stylesheets>
+    </Button>
   </children>
   <stylesheets>
     <URL value="@../styles/backgroundAndButtons.css" />

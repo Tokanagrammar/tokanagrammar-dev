@@ -445,61 +445,48 @@ public class GUI {
 		 * Message to user	"Category <categories> has been selected on difficulty <difficulty>
 		 * 					 Hints: <hints>
 		 */
-		StringBuilder concatCategories = new StringBuilder();
-		
-		Text text;
+		String concatCategories = "";
 
-		String style = "-fx-font-size: 18; -fx-text-fill: rgb(0, 178, 45);";
-		
+		String style = "-fx-font-size: 12; -fx-text-fill: rgb(0, 0, 255);";
+
+		Label text;
+
 		if(curCategories.size() > 1)
-			text = new Text("Categories: ");
+			text = new Label("Categories: ");
 		else
-			text = new Text("Category: ");
-		for(int i=0; i< curCategories.size(); i++)
-                    concatCategories.append(' ').append(curCategories.get(i)).append(',');
-                Label categoryText;
-                // chop off the last comma
-                int len = concatCategories.length();
-                if (len != 0
-                        && concatCategories.charAt(len - 1) == ',')
-                    categoryText = new Label(concatCategories.substring(0, len -1));
-                else
-                    categoryText = new Label(concatCategories.toString());
+			text = new Label("Category: ");
 
+		text.setStyle(style);
+
+		for(int i=0; i< curCategories.size(); i++)
+			concatCategories += (curCategories.get(i) + " ");
+
+		Label categoryText = new Label(concatCategories);
 		categoryText.setStyle(style);
-		Text text2 = new Text("Difficulty: ");
-		
+
+		Label text2 = new Label("Difficulty: ");
+		text2.setStyle(style);
+
 		Label difficultyText = new Label(curDifficulty + "");
 		Label difficultyRank = new Label("");
-		
-		if(curDifficulty >= 0 && curDifficulty <= 32){
-			difficultyRank.setText("(EASY)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		else if(curDifficulty >= 33 && curDifficulty <= 64){
-			difficultyRank.setText("(MEDIUM)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		else if(curDifficulty >= 65 && curDifficulty <= 90){
-			difficultyRank.setText("(HARD)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		else if(curDifficulty >= 91 && curDifficulty <= 100){
-			difficultyRank.setText("(INSANE)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		
-		Text text3 = new Text("Hint: ");
-                List<Hint> hints = curPuzzle.getHints();
-                String hint = hints.isEmpty()
-                                ? "NO hints available!"
-                                :curPuzzle.getHints().get(curHint).getHintContent();
-                
-                Label hintText = new Label(" < " + hint + " > ");
+
+		difficultyRank.setStyle(style);
+		difficultyText.setStyle(style);
+
+		if(curDifficulty >= 0 && curDifficulty <= 32)
+			difficultyRank.setText(" (EASY)");
+		else if(curDifficulty >= 33 && curDifficulty <= 64)
+			difficultyRank.setText(" (MEDIUM)");
+		else if(curDifficulty >= 65 && curDifficulty <= 90)
+			difficultyRank.setText(" (HARD)");
+		else if(curDifficulty >= 91 && curDifficulty <= 100)
+			difficultyRank.setText(" (INSANE)");
+
+		Label text3 = new Label("Hint: ");
+		text3.setStyle(style);
+		//		String hint = curPuzzle.getHints().get(0);                
+		String hint = "NO HINT available";
+		Label hintText = new Label(" < " + hint + " > ");				//TODO grab from db
 		hintText.setStyle(style);
 		outputPanel.writeNodes(text, categoryText);
 		outputPanel.writeNodes(text2, difficultyText, difficultyRank);

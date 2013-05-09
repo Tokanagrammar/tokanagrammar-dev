@@ -121,7 +121,6 @@ public class SettingsScreen extends SecondaryScreen{
 		//---Allman
 		rbAllman.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-				//rbAllman.setSelected(true);
 				rbKR.setSelected(false);
 			}
 		});
@@ -141,7 +140,6 @@ public class SettingsScreen extends SecondaryScreen{
 		//---KR
 		rbKR.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-				//rbKR.setSelected(true);
 				rbAllman.setSelected(false);
 			}
 		});
@@ -160,48 +158,3 @@ public class SettingsScreen extends SecondaryScreen{
 
 	}
 }
-
-
-//code removed from gui
-//private static BracingStyle getBracingStyle()
-//{
-//    // allman
-//    JRadioButton allman = new JRadioButton("ALLMAN");
-//    allman.addActionListener(new AllmanListener());
-//    
-//    // K&R
-//    JRadioButton kr = new JRadioButton("K&R");
-//    kr.addActionListener(new KRListener());;
-//
-//    ButtonGroup group = new ButtonGroup();
-//    group.add(allman);
-//    group.add(kr);
-//    group.setSelected(allman.getModel(), true);
-//    style = BracingStyle.ALLMAN;
-//    final JComponent[] ops = new JComponent[]
-//    {
-//        allman,
-//        kr
-//    };
-//    
-//    javax.swing.JOptionPane.showMessageDialog(null, ops, "Choose a bracing style", JOptionPane.PLAIN_MESSAGE);
-//    return style;
-//}
-//
-//private static class AllmanListener implements ActionListener
-//{
-//    @Override
-//    public void actionPerformed(ActionEvent e)
-//    {
-//        style = BracingStyle.ALLMAN;
-//    }   
-//}
-//
-//private static class KRListener implements ActionListener
-//{
-//    @Override
-//    public void actionPerformed(ActionEvent e)
-//    {
-//        style = BracingStyle.K_AND_R;
-//    }   
-//}
