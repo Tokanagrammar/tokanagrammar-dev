@@ -210,17 +210,7 @@ public class APIs
     {
         return Utils.compile(src, name);
     }
-    
-    // temp
-    // should be remove!
-    private static int n = 0;
-    public static Puzzle getRandomPuzzle() throws Exception
-    {
-        int next = n % getPuzzles().size();
-        ++n;
-        // TODO: let user decide what style they 
-        return getPuzzles().get(next);
-    }
+
     /**
      * 
      * @return a list of available puzzles
