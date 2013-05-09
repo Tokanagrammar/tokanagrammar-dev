@@ -1,0 +1,32 @@
+package testing;
+import java.lang.System;
+
+// @author Vy Thao Nguyen
+public class Foo
+{
+    
+    static final double z = 3;
+
+    private Foo()
+    {
+        ++z;
+    }
+
+    Foo(int x)
+    {
+        char ch = 'a';
+        String str = "Hello, World";
+        System.out.print(ch);
+    }
+
+    void bar()
+    {
+        double b = z = 3 + 4 * 5 + 6;
+}
+
+    public static int bar2(double y)
+    {
+        int b = 2 * 2;
+        return 2 + 3;
+    }
+}

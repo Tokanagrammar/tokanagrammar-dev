@@ -279,6 +279,15 @@ TOKEN:
 }
 
 
+// Meta data 
+TOKEN:
+{
+  // a block of meta data consists of 3 lines (3 meta_data_tags)
+  < META_DATA: <META_DATA_TAG> <META_DATA_TAG> <META_DATA_TAG> >
+|
+  < #META_DATA_TAG: "#" (~["\n","\r"])* ("\n"|"\r"|"\r\n") >
+}
+
 // For anything else, we return an ERROR token. Without this 
 // definition the TokenManager will throw an Error when a lexical 
 // error occurs, making it impossible to recover from it. So we 
@@ -311,6 +320,8 @@ parseJava(BracingStyle style):
     List<SourceToken> curLine = null;
 }
 {
+    // ignored
+    [<META_DATA>]
     [
         <PACKAGE>
         {
