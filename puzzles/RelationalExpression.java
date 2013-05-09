@@ -1,4 +1,4 @@
-# relational expression
+# relational
 # Expected-TODO
 # This program prints a series of boolean expressions
 
