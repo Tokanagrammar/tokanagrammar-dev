@@ -81,7 +81,7 @@ public class Puzzle implements Serializable
                           fetch = FetchType.EAGER, mappedBy = "puzzle")
     private Set<Hint> hints;
  
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Category category;
     
     public Puzzle()
@@ -101,6 +101,7 @@ public class Puzzle implements Serializable
         games = new HashSet<>();
         hints = new HashSet<>();
         category = DatabaseService.findOrCreateCategory(catName);
+        category.addPuzzle(this);
     }
     
     public SourceFile getSourceFile(BracingStyle style) throws ParseException, FileNotFoundException

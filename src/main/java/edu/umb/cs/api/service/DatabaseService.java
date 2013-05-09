@@ -115,9 +115,11 @@ public class DatabaseService
         try
         {
             t.begin();
+            em.createQuery("DELETE FROM Hint h").executeUpdate();
             em.createQuery("DELETE FROM Puzzle p").executeUpdate();
-            em.createQuery("DELETE FROM User u").executeUpdate();
+            em.createQuery("DELETE FROM Category c").executeUpdate();
             em.createQuery("DELETE FROM Game g").executeUpdate();
+            em.createQuery("DELETE FROM User u").executeUpdate();
             success = true;
         }
         finally

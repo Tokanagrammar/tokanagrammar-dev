@@ -66,7 +66,7 @@ public class SimpleShuffler implements Shuffler
                                                  src.getStyle(),
                                                  src.getClassName());
 
-        return new ShuffledSourceImpl(src, shuffled, removed);
+        return new ShuffledSourceImpl(src, shuffled, removed, removable.size());
     }
 
     @Override

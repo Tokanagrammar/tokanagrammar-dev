@@ -39,8 +39,6 @@ public class Category
     
     private String name;
     
-    //private String description; => name should be descriptive so that we don't need description!
-    
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
                fetch = FetchType.EAGER, mappedBy = "category")
     private Set<Puzzle> puzzles;
@@ -67,6 +65,11 @@ public class Category
         this.puzzles.add(p);
     }
     
+    public int puzzlesCount()
+    {
+        return puzzles.size();
+    }
+
     public Set<Puzzle> getPuzzles()
     {
         return Collections.unmodifiableSet(puzzles);
@@ -87,5 +90,10 @@ public class Category
         
         Category catOther = (Category) obj;
         return name.equals(catOther.name);
+    }
+    
+    public String toString()
+    {
+        return getName();
     }
 }
