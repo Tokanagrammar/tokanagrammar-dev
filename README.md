@@ -6,6 +6,11 @@ This is the development branch of `tokanagrammar`. For stable, well tested code,
 This is a jigsaw-like puzzle game, except each piece is token from a source file, and the 'complete picture' is the program.
 
 
+Adding puzzles to the game
+====================
+See instructions <a href="https://github.com/Tokanagrammar/tokanagrammar-dev/wiki/Source-File-(for-Puzzle)-formats">here</a>.
+
+
 Set up Development Environment
 =============
 
@@ -50,6 +55,11 @@ This is a `maven` project, and  build phase requires every source file to have a
 
 `mvn clean package`
 
+This will produce an executable `jar` file in `<project root dir>/target/`.
+
+The `jar` can be run anywhere, but it needs to have the `config` and the `puzzles` directory.
+
+
 4) To run all unit tests
 
 `mvn clean test`
@@ -67,12 +77,14 @@ This is a `maven` project, and  build phase requires every source file to have a
 7) To build Apple OSX executable app
 
 `./build_binaries.sh macosx`
-  
-  
-  
+
+
+
 Directory Structures
 ====================
 Please follow the conventions and put things in the right place.
 See <a href="https://github.com/Tokanagrammar/tokanagrammar-dev/blob/master/README.txt">this</a>
+
+
 
 
