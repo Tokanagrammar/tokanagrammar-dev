@@ -1,5 +1,5 @@
 # Simple
-# Hello, World
+# Hello, world
 
 import java.lang.System;
 

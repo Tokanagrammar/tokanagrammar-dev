@@ -67,8 +67,7 @@ public class GUITimer {
 						String hourString   = pad(2, '0', hour.toString());
 						String minuteString = pad(2, '0', minute.toString());
 						String secondString = pad(2, '0', second.toString());
-						String msString  = pad(2, '0', milliseconds % 100 + "");
-						label.setText(" Time:\t\t " + hourString + ":" + minuteString + ":" + secondString);// + ":" + msString);
+						label.setText("       \t " + hourString + ":" + minuteString + ":" + secondString);// + ":" + msString);
 						
 						milliseconds++;
 					}
@@ -79,7 +78,7 @@ public class GUITimer {
 		digitalTime.setCycleCount(Animation.INDEFINITE);
 		
 		
-		label.setStyle(			"-fx-font-size: 20;" +
+		label.setStyle(			"-fx-font-size: 25;" +
 			    				"-fx-base: rgb(153, 153, 50);" +
 			    				"-fx-text-fill: rgb(255, 255, 90);" );
 		
