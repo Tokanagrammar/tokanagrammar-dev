@@ -144,6 +144,11 @@ public class Puzzle implements Serializable
         return cachedHints;
     }
     
+    public String getExpectedOutput()
+    {
+        return expectedResult;
+    }
+
     @Override
     public String toString()
     {

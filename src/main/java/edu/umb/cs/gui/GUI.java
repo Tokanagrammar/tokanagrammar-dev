@@ -28,10 +28,7 @@ import edu.umb.cs.entity.Hint;
 import edu.umb.cs.entity.Puzzle;
 import edu.umb.cs.gui.screens.SecondaryScreen;
 import edu.umb.cs.parser.BracingStyle;
-import edu.umb.cs.source.Output;
-import edu.umb.cs.source.ShuffledSource;
-import edu.umb.cs.source.SourceFile;
-import edu.umb.cs.source.SourceToken;
+import edu.umb.cs.source.*;
 import java.util.*;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -334,7 +331,9 @@ public class GUI {
                 final StringBuilder bd = new StringBuilder();
                 for (LHSIconizedToken tk : tokenList)
                 {
-                    bd.append(tk.getSourceToken().image());
+                    SourceToken srcTk = tk.getSourceToken();
+                    if (srcTk.kind() != SourceTokenKind.EMPTY)
+                        bd.append(tk.getSourceToken().image());
                 }
                 enableStopButton();
                 
@@ -365,10 +364,17 @@ public class GUI {
                     }
                     else
                     {
-                        outputPanel.infoMessage("Congratulations! You have successfully solved the puzzle!");
-                        outputPanel.infoMessage("The output is:\n-----");
-                        outputPanel.outputText(out.getOuput());
-                        outputPanel.infoMessage("-----");
+                        if (out.getOuput().equals(curPuzzle.getExpectedOutput()))
+                        {
+                            outputPanel.infoMessage("Congratulations! You have successfully solved the puzzle!");
+                            outputPanel.infoMessage("The output is:\n-----");
+                            outputPanel.outputText(out.getOuput());
+                            outputPanel.infoMessage("-----");
+                        }
+                        else
+                        {
+                            outputPanel.compilerMessage("Your program's output does NOT match the expected! Please try again");
+                        }
                         // TODO: record score
                         timer.stop();
                     }
@@ -444,15 +450,6 @@ public class GUI {
 		 * 					 Hints: <hints>
 		 */
 		StringBuilder concatCategories = new StringBuilder();
-		
-		Text text;
-
-		String style = "-fx-font-size: 18; -fx-text-fill: rgb(0, 178, 45);";
-		
-		if(curCategories.size() > 1)
-			text = new Text("Categories: ");
-		else
-			text = new Text("Category: ");
 		for(int i=0; i< curCategories.size(); i++)
                     concatCategories.append(' ').append(curCategories.get(i)).append(',');
                 Label categoryText;
@@ -463,45 +460,30 @@ public class GUI {
                     categoryText = new Label(concatCategories.substring(0, len -1));
                 else
                     categoryText = new Label(concatCategories.toString());
-
-		categoryText.setStyle(style);
-		Text text2 = new Text("Difficulty: ");
-		
-		Label difficultyText = new Label(curDifficulty + "");
-		Label difficultyRank = new Label("");
-		
-		if(curDifficulty >= 0 && curDifficulty <= 32){
-			difficultyRank.setText("(EASY)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		else if(curDifficulty >= 33 && curDifficulty <= 64){
-			difficultyRank.setText("(MEDIUM)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		else if(curDifficulty >= 65 && curDifficulty <= 90){
-			difficultyRank.setText("(HARD)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		else if(curDifficulty >= 91 && curDifficulty <= 100){
-			difficultyRank.setText("(INSANE)");
-			difficultyRank.setStyle(style);
-			difficultyText.setStyle(style);
-		}
-		
-		Text text3 = new Text("Hint: ");
-                List<Hint> hints = curPuzzle.getHints();
-                String hint = hints.isEmpty()
-                                ? "<NO hints available!>"
-                                :curPuzzle.getHints().get(curHint).getHintContent();
+                outputPanel.infoMessage((categories.size() > 1
+                                            ? "Categories: "
+                                            : "Category")
+                                        +concatCategories);
                 
-                Label hintText = new Label(hint);
-		hintText.setStyle(style);
-		outputPanel.writeNodes(text, categoryText);
-		outputPanel.writeNodes(text2, difficultyText, difficultyRank);
-		outputPanel.writeNodes(text3, hintText);
+                StringBuilder diffBd = new StringBuilder("Difficulty: ");
+                diffBd.append(curDifficulty);
+                if(curDifficulty >= 0 && curDifficulty <= 32)
+                    diffBd.append("(EASY)");
+		else if(curDifficulty >= 33 && curDifficulty <= 64)
+                    diffBd.append("(MEDIUM)");
+		else if(curDifficulty >= 65 && curDifficulty <= 90)
+                    diffBd.append("(HARD)");
+		else if(curDifficulty >= 91 && curDifficulty <= 100)
+                    diffBd.append("(INSANE)");
+                outputPanel.infoMessage(diffBd.toString());
+		
+                StringBuilder hintsBd = new StringBuilder("Hint: ");
+                
+                List<Hint> hints = curPuzzle.getHints();
+                hintsBd.append(hints.isEmpty()
+                                 ? "<NO hints available!>"
+                                 :curPuzzle.getHints().get(curHint).getHintContent());
+                outputPanel.infoMessage(hintsBd.toString());
 	}
 
 	

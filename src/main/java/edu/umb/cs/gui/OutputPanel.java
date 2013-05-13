@@ -122,7 +122,7 @@ public class OutputPanel{
         }
         public void infoMessage (String str)
         {
-            plainMessage(str, Color.BLUE);
+            plainMessage(str, Color.BLACK);
         }
 
 	/**
