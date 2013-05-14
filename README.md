@@ -1,4 +1,4 @@
-tokanagrammar- Development Branch.
+tokanagrammar- Development Branch. (Release 1.0)
 =============
 
 This is the development branch of `tokanagrammar`. For stable, well tested code, see `tokanagrammar/tokanagrammar`
